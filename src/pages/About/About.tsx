@@ -1,10 +1,3 @@
-
-import "./about.scss";
-
 export const About = () => {
-  return (
-    <div>
-
-    </div>
-  );
+	return <div></div>;
 };

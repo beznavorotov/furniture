@@ -1,0 +1,24 @@
+// utils
+@import './scss/utils/variables';
+@import './scss/utils/mixins';
+@import './scss/utils/functions';
+
+// base
+@import './scss/global';
+@import './scss/fonts';
+
+// components
+@import './components/Bestsellers/bestsellers';
+@import './components/Collection/collection';
+@import './components/Footer/footer';
+@import './components/Header/header';
+@import './components/Sale/sale';
+@import './components/Sidebar/sidebar';
+@import './components/Slider/slider';
+@import './components/Static/static';
+
+// pages
+@import './pages/About/about';
+@import './pages/Contact/contact';
+@import './pages/Home/home';
+@import './Pages/Product/product';

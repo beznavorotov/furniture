@@ -1,7 +1,3 @@
-import "./bestsellers.scss"
-
 export const Bestsellers = () => {
-  return (
-    <div>Bestsellers</div>
-  )
-}
+	return <div>Bestsellers</div>;
+};
