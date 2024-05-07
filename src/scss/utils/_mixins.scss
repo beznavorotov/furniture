@@ -1,10 +1,15 @@
-@mixin flex($justify-content, $align-items) {
+// layout
+@mixin flex($justify-content: center, $align-items: center) {
 	display: flex;
 	justify-content: $justify-content;
 	align-items: $align-items;
 }
 
-@mixin flex-column($justify-content, $align-items, $column) {
+@mixin flex-column(
+	$justify-content: center,
+	$align-items: center,
+	$column: column
+) {
 	display: flex;
 	flex-direction: $column;
 	justify-content: $justify-content;
@@ -15,4 +20,26 @@
 	display: grid;
 	grid-template-columns: $columns;
 	grid-template-rows: $rows;
+}
+
+// media
+$mobile-width: 390px;
+$tablet-width: 960px;
+$desktop-width: 1280px;
+
+@mixin mobile {
+	@media only screen and (max-width: $mobile-width) {
+		@content;
+	}
+}
+@mixin tablet {
+	@media only screen and (max-width: $tablet-width) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media only screen and (max-width: $desktop-width) {
+		@content;
+	}
 }

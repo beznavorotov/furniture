@@ -1,9 +1,11 @@
 body {
 	@include flex-column(flex-start, center, column);
+	font-family: $font-family-montserrat;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 20px;
 	font-style: normal;
 	color: $color-black;
 	background-color: $color-white-bg;
+	overflow-x: hidden;
 }
