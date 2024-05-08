@@ -1,4 +1,18 @@
 .header {
+	margin-bottom: 16px;
+
+	// main logo
+	.logo__main {
+		@include flex();
+		padding: 0;
+		margin-right: 20px;
+	}
+
+	.navbar {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
 	&__navigation--list {
 		width: 100%;
 		justify-content: center;
@@ -13,13 +27,12 @@
 			font-size: 16px;
 			line-height: 20px;
 			color: $color-grey;
-			padding: 0;
-			padding-top: 12px;
-			padding-bottom: 12px;
+			padding: 12px 0 !important;
 		}
 
 		.nav-link.active {
 			color: $color-black;
+			font-weight: 400;
 		}
 	}
 
@@ -40,13 +53,15 @@
 			@include flex(space-between);
 			padding: 7px 10px;
 			color: $color-grey;
-			border-radius: 0 !important;
 		}
 
 		input[type='search'] {
+			color: $color-grey;
+			line-height: 20px;
 			border: none;
+			border-radius: 0 !important;
+			padding: 0 !important;
 			background-color: $color-white-bg;
-			padding: 0;
 		}
 
 		.btn__search {
