@@ -85,9 +85,8 @@
 				}
 			}
 		}
-
-		.category-list__item:hover .category-list__hidden-column {
-			display: flex;
-		}
+	}
+	.category-list__item:hover .category-list__hidden-column {
+		display: flex;
 	}
 }
