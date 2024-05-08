@@ -1,23 +1,51 @@
 .sale {
-	@include grid(2fr repeat(2, 1fr), repeat(2, 1fr));
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-	.collection {
-		background-color: #5b03ff;
-		padding: 10px;
-		border-radius: 10px;
-		border: 1px solid rgb(247, 0, 0);
-		.box-1 {
-			grid-area: 1 / 1 / 3 / 2;
-		}
-		.box-2 {
-			grid-area: 1 / 2 / 2 / 3;
-		}
-		.box-3 {
-			grid-area: 1 / 3 / 3 / 4;
-		}
-		.box-4 {
-			grid-area: 2 / 2 / 3 / 3;
-		}
-	}
-}
+	display: grid; 
+ 
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	
+	gap: 5px;
+	height: 100%;
+
+ }
+   
+ #item-0 {
+ 
+	background-color: #B6BE7D; 
+	grid-row-start: 1;
+	grid-column-start: 1;
+ 
+	grid-row-end: 3;
+	grid-column-end: 3;
+	
+ }
+ #item-1 {
+ 
+	background-color: #9D6AC7; 
+	grid-row-start: 1;
+	grid-column-start: 3;
+ 
+	grid-row-end: 2;
+	grid-column-end: 4;
+	
+ }
+ #item-2 {
+ 
+	background-color: #FE6756; 
+	grid-row-start: 2;
+	grid-column-start: 3;
+ 
+	grid-row-end: 3;
+	grid-column-end: 4;
+	
+ }
+ #item-3 {
+ 
+	background-color: #9FA789; 
+	grid-row-start: 1;
+	grid-column-start: 4;
+ 
+	grid-row-end: 3;
+	grid-column-end: 5;
+	
+ }
