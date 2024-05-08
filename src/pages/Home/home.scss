@@ -1,12 +1,13 @@
 .grid_home {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 5px;
+  display: flex;
+
   .sidebar {
     width: 300px;
   }
-  .slider {
-  }
-  .static {
+}
+
+@media screen and (max-width: 376px) {
+  .sidebar {
+    display: none;
   }
 }
