@@ -2,11 +2,13 @@ import delivery from "../../assets/delivery.svg";
 import wallet from "../../assets/wallet.svg";
 import mark from "../../assets/mark.svg";
 import question from "../../assets/question.svg";
+import "./static.scss";
 
 export const Static = () => {
   return (
+    <>
     <div className="static row">
-      <div className="col-12 col-md-3 static_bloc">
+      <div className="col-12 col-md-3 static_bloc free">
         <img src={delivery} alt="delivery" />
         <h3>Безкоштовна доставка</h3>
         <span>Від 2000 гривень</span>
@@ -27,5 +29,7 @@ export const Static = () => {
         <span>Швидке вирішення питань</span>
       </div>
     </div>
+    </>
+    
   );
 };

@@ -1,8 +1,11 @@
 .grid_home {
   display: flex;
-
+  justify-content: space-between;
   .sidebar {
     width: 300px;
+  }
+  .slider {
+  
   }
 }
 

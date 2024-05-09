@@ -1,0 +1,10 @@
+.carousel {
+  display: flex;
+  .carousel-inner {
+    .carousel-item img {
+      max-width: 925px;
+      max-height: 594px;
+
+    }
+  }
+}
