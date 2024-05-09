@@ -26,6 +26,9 @@
     .carousel-item img {
       max-width: 925px;
       max-height: 594px;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
     .carousel-caption {
