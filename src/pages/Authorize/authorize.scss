@@ -1,0 +1,86 @@
+body:has(.page-authorize) .footer,
+body:has(.page-authorize) .copyright {
+  display: none;
+}
+
+.page-authorize {
+  .form__authorize--heading {
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+
+  .new-user {
+    width: 100%;
+    text-align: center;
+    * {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    a {
+      color: $color-blue;
+    }
+  }
+}
+
+.authorize__img-block {
+  max-width: 925px;
+  width: 100%;
+}
+
+.authorize__functional-block {
+  @include flex-column();
+  max-width: 300px;
+  width: 100%;
+  align-self: flex-end;
+  gap: 144px;
+
+  .wrapper {
+    width: 100%;
+  }
+}
+
+.form__authorize {
+  @include flex-column();
+
+  input {
+    font-family: $font-family-inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    border: 1px solid $color-grey-light;
+    border-radius: 5px;
+    background-color: $color-white-bg;
+    color: $color-gray-input;
+    max-width: 295px;
+    width: 100%;
+    padding: 13px 12px;
+  }
+  input + input {
+    margin-top: 8px;
+  }
+
+  &--heading {
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 500;
+    margin-top: 34px;
+    margin-bottom: 34px;
+    text-align: center;
+  }
+
+  .btn {
+    max-width: 295px;
+    width: 100%;
+  }
+
+  .password__lost {
+    align-self: flex-end;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    font-size: 12px;
+    line-height: 14px;
+    color: $color-blue;
+  }
+}

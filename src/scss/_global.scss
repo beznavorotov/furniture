@@ -10,6 +10,10 @@ body {
   overflow-x: hidden;
 }
 
+#root {
+  width: 100%;
+}
+
 // reset
 a {
   font-size: 16px;
@@ -20,6 +24,7 @@ a {
 
 // buttons
 .btn {
+  @include flex();
   background-color: $color-blue;
   font-size: 16px;
   line-height: 20px;
@@ -27,5 +32,62 @@ a {
   padding: 10px;
   height: 40px;
   font-family: $font-family-montserrat;
-	border-radius: 3px;
+  border-radius: 3px;
+  &:hover {
+    background-color: $color-white-bg;
+    color: $color-blue;
+    border: 1px solid $color-blue;
+  }
+}
+
+.btn__white {
+  background-color: $color-white-bg;
+  color: $color-blue;
+  border: 1px solid $color-blue;
+  &:hover {
+    background-color: $color-blue;
+    color: $color-white;
+  }
+}
+
+.btn__black {
+  background-color: $color-white-bg;
+  color: $color-black;
+  border: 1px solid $color-black;
+  &:hover {
+    background-color: $color-blue;
+    color: $color-white;
+  }
+}
+
+.btn__social {
+  @include flex();
+  gap: 4px;
+  font-family: $font-family-inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  height: 44px;
+  border: 1px solid #e3e0e0;
+  color: #fffbfb;
+  background-color: $color-blue;
+
+  // google btn
+  &.btn__google {
+    background-color: $color-red;
+  }
+  &.btn__google:hover {
+    background-color: $color-blue;
+    color: $color-white;
+  }
+
+  // fb btn
+  &.btn__fb:hover {
+    background-color: $color-red;
+    color: $color-white;
+  }
+
+  & + .btn__social {
+    margin-top: 8px;
+  }
 }

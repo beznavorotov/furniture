@@ -12,6 +12,8 @@
 @import './components/Collection/collection';
 @import './components/Footer/footer';
 @import './components/Header/header';
+@import './components/LogIn/login';
+@import './components/SignUp/signup';
 @import './components/Sale/sale';
 @import './components/Sidebar/sidebar';
 @import './components/Slider/slider';
@@ -19,7 +21,9 @@
 
 // pages
 @import './pages/About/about';
+@import './pages/Authorize/authorize';
 @import './pages/Contact/contact';
+@import './pages/Delivery/delivery';
 @import './pages/Home/home';
 @import './Pages/Product/product';
-
+@import './Pages/Promotions/promotions';

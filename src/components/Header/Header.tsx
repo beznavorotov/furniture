@@ -8,6 +8,7 @@ export const Header = () => {
   const setLinkActive = ({ isActive }) => (isActive ? 'active' : '');
 
   return (
+    <div className="container">
     <header className="header" data-bs-theme="light">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container">
@@ -142,13 +143,13 @@ export const Header = () => {
                 </label>
               </form>
               <nav className="user__actions">
-                <Link to="/">
+                <Link to="/cart">
                   <img src={cart} alt="cart icon" />
                 </Link>
-                <Link to="/">
+                <Link to="/favorites">
                   <img src={heart} alt="heart icon" />
                 </Link>
-                <Link to="/">
+                <Link to="/authorize">
                   <img src={user} alt="user icon" />
                 </Link>
               </nav>
@@ -156,6 +157,6 @@ export const Header = () => {
           </div>
         </div>
       </nav>
-    </header>
+    </header></div>
   );
 };

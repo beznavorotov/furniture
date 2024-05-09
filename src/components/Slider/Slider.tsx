@@ -19,8 +19,8 @@ const Slider: React.FC = () => {
     <div
       id="carouselExampleControls"
       className="carousel slide"
-      // data-bs-ride="carousel"
-      data-bs-ride="true"
+      data-bs-ride="carousel"
+      // data-bs-ride="true"
     >
       <div className="carousel-indicators">
         {items.map((_, index) => (
