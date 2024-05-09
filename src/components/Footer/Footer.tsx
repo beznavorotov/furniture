@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
-export const Footer = () => {
+const Footer = () => {
+  const catalogLinks = [
+    { title: "Передпокій", path: "/" },
+    { title: "Вітальні", path: "/" },
+    { title: "Спальні", path: "/" },
+    { title: "Кухоні меблі", path: "/" },
+    { title: "Дитячі меблі", path: "/" },
+    { title: "Офісні меблі", path: "/" },
+    { title: "Вана кімната", path: "/" },
+    { title: "Гардеробні", path: "/" }
+  ];
+
   return (
     <div>
       <footer className="footer row">
@@ -17,25 +28,20 @@ export const Footer = () => {
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <h4>Каталог</h4>
-          <Link to={"/"} className="text">Передпокій</Link>
-          <Link to={"/"} className="text">Вітальні</Link>
-          <Link to={"/"} className="text">Спальні</Link>
-          <Link to={"/"} className="text">Кухоні меблі</Link>
-          <Link to={"/"} className="text">Дитячі меблі</Link>
-          <Link to={"/"} className="text">Офісні меблі</Link>
-          <Link to={"/"} className="text">Вана кімната</Link>
-          <Link to={"/"} className="text">Гардеробні</Link>
+          {catalogLinks.map((link, index) => (
+            <Link key={index} to={link.path} className="text">{link.title}</Link>
+          ))}
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <div className="phone">
             <h4>Контакти</h4>
-            <Link to="support@furniture.store" className="text">support@furniture.store</Link>
-            <Link to="+380991234567" className="text">+38 099 1234567</Link>
+            <a href="mailto:support@furniture.store" className="contacts">support@furniture.store</a>
+            <a href="tel:+380991234567" className="contacts">+38 099 1234567</a>
           </div>
           <div className="social">
             <h4>Соціальні мережі</h4>
-            <Link to={"/"} className="text">Instagram</Link>
-            <Link to={"/"} className="text">Facebook</Link>
+            <Link to={"/"} className="contacts">Instagram</Link>
+            <Link to={"/"} className="contacts">Facebook</Link>
           </div>
         </div>
       </footer>
@@ -48,3 +54,5 @@ export const Footer = () => {
     </div>
   );
 };
+
+export default Footer;

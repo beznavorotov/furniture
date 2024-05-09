@@ -1,11 +1,10 @@
-@import "../../scss/utils/_variables.scss";
+@import '../../scss/utils/_variables.scss';
 
 .footer {
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
   border-bottom: 1px solid $color-black;
-  
 
   h4 {
     font-weight: 500;
@@ -25,11 +24,28 @@
     padding: 0;
     padding-bottom: 10px;
     padding-left: 10px;
-    
+
     .text {
       font-weight: 400;
       font-size: 18px;
       color: $color-black;
+
+      &:hover {
+        cursor: pointer;
+        color: $color-blue;
+        padding-left: 20px;
+      }
+    }
+
+    .contacts {
+      font-weight: 400;
+      font-size: 18px;
+      color: $color-black;
+
+      &:hover {
+        cursor: pointer;
+        color: $color-blue;
+      }
     }
 
     .phone {
