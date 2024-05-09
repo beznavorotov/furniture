@@ -1,19 +1,31 @@
 body {
-	@include flex-column(flex-start, center, column);
-	font-family: $font-family-montserrat;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
-	font-style: normal;
-	color: $color-black;
-	background-color: $color-white-bg;
-	overflow-x: hidden;
+  @include flex-column(flex-start, center, column);
+  font-family: $font-family-montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  font-style: normal;
+  color: $color-black;
+  background-color: $color-white-bg;
+  overflow-x: hidden;
 }
 
 // reset
 a {
-	font-size: 16px;
-	font-weight: 400;
-	color: $color-black;
-	text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: $color-black;
+  text-decoration: none;
+}
+
+// buttons
+.btn {
+  background-color: $color-blue;
+  font-size: 16px;
+  line-height: 20px;
+  color: $color-white;
+  padding: 10px;
+  height: 40px;
+  font-family: $font-family-montserrat;
+	border-radius: 3px;
 }

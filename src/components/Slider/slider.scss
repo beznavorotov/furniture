@@ -1,10 +1,49 @@
 .carousel {
   display: flex;
+  max-width: 925px;
+  border-radius: 3px;
+  overflow: hidden;
+  // стилізація індикаторів слайдеру
+  &-indicators {
+    @include flex();
+    gap: 22px;
+    .indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 3px solid $color-blue;
+      opacity: 1;
+      background-clip: border-box;
+
+      &.active {
+        background-color: $color-blue;
+      }
+    }
+  }
+
   .carousel-inner {
     .carousel-item img {
       max-width: 925px;
       max-height: 594px;
+    }
 
+    .carousel-caption {
+      @include flex-column(center, flex-end);
+      max-width: 530px;
+      right: 12px;
+      left: initial;
+      text-align: right;
+      padding-bottom: 40px;
+
+      .carousel-caption__title {
+        font-size: 60px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 74px;
+        margin-bottom: 12px;
+        word-break: break-word;
+      }
     }
   }
 }
