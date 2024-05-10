@@ -1,25 +1,68 @@
 @import '../../scss/utils/_variables.scss';
 
 .bestsellers {
+  border-bottom: 1px solid $color-black;
+  padding-bottom: 10px;
+
   .name {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     border-bottom: 1px solid $color-black;
-    padding-bottom: 5px;
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+    }
+    .link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: #757575;
+      &:hover {
+        transform: scale(1.05);
+        color: $color-blue;
+      }
+    }
   }
   .bloc_card {
-    padding: 10px ;
+    padding: 20px 10px;
     .card {
-      .chair {
-        position: relative;
+      position: relative;
 
-      }
       .heart {
         position: absolute;
-        padding-top: 10px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+    .text_card {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      padding-top: 10px;
+    }
+    .stars {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .card_price {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
 
-
+      .price {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: $color-blue;
+      }
+      .cart {
+        width: 32px;
+        height: 32px;
       }
     }
   }

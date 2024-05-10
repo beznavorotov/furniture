@@ -1,51 +1,76 @@
-.sale {
-	display: grid; 
- 
-	grid-template-rows: 1fr 1fr;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	
-	gap: 5px;
-	height: 100%;
+@import '../../scss/utils/_variables.scss';
 
- }
-   
- #item-0 {
- 
-	background-color: #B6BE7D; 
-	grid-row-start: 1;
-	grid-column-start: 1;
- 
-	grid-row-end: 3;
-	grid-column-end: 3;
-	
- }
- #item-1 {
- 
-	background-color: #9D6AC7; 
-	grid-row-start: 1;
-	grid-column-start: 3;
- 
-	grid-row-end: 2;
-	grid-column-end: 4;
-	
- }
- #item-2 {
- 
-	background-color: #FE6756; 
-	grid-row-start: 2;
-	grid-column-start: 3;
- 
-	grid-row-end: 3;
-	grid-column-end: 4;
-	
- }
- #item-3 {
- 
-	background-color: #9FA789; 
-	grid-row-start: 1;
-	grid-column-start: 4;
- 
-	grid-row-end: 3;
-	grid-column-end: 5;
-	
- }
+.sale {
+  border-bottom: 1px solid $color-black;
+  padding-bottom: 10px;
+
+  .name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $color-black;
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+    }
+    .link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: #757575;
+      &:hover {
+        transform: scale(1.05);
+        color: $color-blue;
+      }
+    }
+  }
+  .bloc_card {
+    padding: 20px 10px;
+    .card {
+      position: relative;
+
+      .heart {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+    .text_card {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      padding-top: 10px;
+    }
+    .stars {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .card_price {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      .price {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: $color-blue;
+        text-decoration: line-through;
+      }
+      .action {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: $color-red;
+      }
+      .cart {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}

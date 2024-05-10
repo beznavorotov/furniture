@@ -5,7 +5,7 @@ import { Contact } from './pages/Contact/Contact';
 import { Promotions } from './pages/Promotions/Promotions';
 import { Delivery } from './pages/Delivery/Delivery';
 import { Header } from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import { Footer }  from './components/Footer/Footer';
 import { Authorize } from './pages/Authorize/Authorize';
 
 
@@ -39,7 +39,7 @@ function App() {
 					element={<Authorize />}
 				/>
 			</Routes>
-			<Footer />
+			<Footer/>
 		</>
 	);
 }
