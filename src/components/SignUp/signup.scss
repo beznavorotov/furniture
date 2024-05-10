@@ -1,0 +1,30 @@
+.singup {
+  @include flex();
+  gap: 20px;
+
+  .policy-confirm {
+    @include flex(flex-start, flex-start);
+    gap: 8px;
+    max-width: 295px;
+    margin: 8px auto 24px;
+
+    * {
+      font-size: 12px;
+      line-height: 14px;
+      color: $color-black;
+    }
+    input[type='checkbox'] {
+      max-width: 20px;
+      width: 100%;
+      height: 20px;
+
+      &:checked {
+        accent-color: $color-blue;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
