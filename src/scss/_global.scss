@@ -97,6 +97,9 @@ a {
   }
 
   // fb btn
+  &.btn__fb {
+    border-color: $color-blue;
+  }
   &.btn__fb:hover {
     background-color: $color-lightblue;
     color: $color-white;

@@ -37,7 +37,7 @@ export const LogIn = () => {
                 Авторизуватися
               </button>
             </form>
-            <h2 className="form__authorize--heading">або</h2>
+            <h2 className="form__authorize--heading t-small">або</h2>
             <a href="/" className="btn btn__social btn__fb">
               <svg
                 width="24"
