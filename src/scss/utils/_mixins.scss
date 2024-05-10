@@ -24,8 +24,8 @@
 
 // media
 $mobile-width: 390px;
-$tablet-width: 960px;
-$desktop-width: 1280px;
+$tablet-width: 992px;
+$desktop-width: 1200px;
 
 @mixin mobile {
   @media only screen and (max-width: $mobile-width) {
