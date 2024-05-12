@@ -1,0 +1,120 @@
+@import '../../../scss/utils/variables';
+
+.orders {
+  font-family: Montserrat;
+  margin-left: 20px;
+  h1 {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: $color-black;
+  }
+  .state {
+    margin-left: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #757575;
+    .btn_state {
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-black;
+      padding: 10px;
+      &.active {
+        font-weight: 700;
+        color: $color-blue;
+      }
+    }
+  }
+
+  .orders_group {
+    padding-left: 10px;
+    padding-top: 10px;
+    .orders_list {
+      background-color: #eff4ff;
+
+      .order {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 5px solid #fff;
+
+        .order_number {
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid black;
+          width: 184px;
+          padding: 5px;
+        }
+        .order_total {
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid black;
+          width: 184px;
+        }
+        .order_quantity {
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid black;
+          width: 184px;
+        }
+        .order_status {
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid black;
+          width: 184px;
+        }
+        .order_date {
+          display: flex;
+          flex-direction: column;
+          width: 184px;
+        }
+
+        .order_details {
+
+            width: 100%;
+          h2 {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 400;
+           
+            color: $color-black;
+          }
+          .orders_details {
+            
+            .product_details {
+              display: flex;
+              justify-content: space-between;
+              .img_name {
+                display: flex;
+
+                .icon_product {
+                }
+                .name_product {
+                  display: flex;
+                  flex-direction: column;
+                  padding: 5px;
+                  text-align: left;
+                  h3 {
+                    font-size: 14px;
+                    font-weight: 500;
+                  }
+                  .color_product {
+                  }
+                  .quantity_ordered {
+                  }
+                }
+              }
+
+              .order_price {
+                margin-left: auto;
+                align-self:center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

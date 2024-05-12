@@ -1,0 +1,68 @@
+@import '../../../scss/utils/variables';
+
+.page {
+  display: flex;
+  justify-content: space-between;
+  .sidebarMenu {
+    width: 294px;
+    .data {
+      display: flex;
+      padding: 10px;
+      .photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icon_user {
+          width: 45px;
+          height: 45px;
+        }
+      }
+
+      .name {
+        padding-left: 10px;
+        .name_user {
+          font-family: Montserrat;
+          font-size: 18px;
+          font-weight: 700;
+          color: $color-black;
+          margin: 2px;
+        }
+        .email_user {
+          font-family: Montserrat;
+          font-size: 14px;
+          font-weight: 400;
+          color: $color-black;
+        }
+      }
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      .btn_menu {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 5px;
+        list-style: none;
+        height: 60px;
+        margin: 5px 0;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-weight: 600;
+        color: $color-black;
+        box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+        &.active {
+          color: $color-blue;
+        }
+        .arrow {
+          margin-left: auto;
+          padding-right: 15px;
+        }
+      }
+    }
+  }
+  .content {
+    flex-grow: 1;
+    width: 100%;
+  }
+}
