@@ -1,7 +1,49 @@
 import { Link } from 'react-router-dom';
 import login from '../../assets/authorize/login__bg.webp';
+import { useState } from 'react';
 
 export const LogIn = () => {
+  const serverLoginUrl = 'http://3.75.92.220:8000/users/get-token/';
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+
+  const data = { username: userEmail, password: userPassword };
+
+  // login test subject
+  // id: 15
+  // name: mr.Test
+  // nameSecond: Testinson
+  // email: mrtest@test.io
+  // pass: someVerySmartHardPass
+
+  async function userLogin() {
+    try {
+      const response = await fetch(serverLoginUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error('----- Something goes wrong -----');
+      console.error(error);
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // userLogin();
+
+    // clear state
+    setUserEmail('');
+    setUserPassword('');
+    console.log(data);
+  };
+
   return (
     <div className="page-authorize container">
       <section className="login">
@@ -13,8 +55,8 @@ export const LogIn = () => {
           <div className="wrapper">
             <form
               className="form__authorize form__login"
-              action=""
               method="post"
+              onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Авторизуватися</h2>
 
@@ -23,12 +65,18 @@ export const LogIn = () => {
                 name="email"
                 id="loginEmail"
                 placeholder="Електрона адреса"
+                required
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
               />
               <input
                 type="password"
                 name="password"
                 id="loginPassword"
                 placeholder="Пароль"
+                required
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
               />
               <a className="password__lost" href="/">
                 Забули пароль?
