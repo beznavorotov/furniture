@@ -1,0 +1,21 @@
+@import '../../../scss/utils/variables';
+
+.data {
+  font-family: Montserrat;
+  padding: 10px;
+  .data_header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $color-black;
+    .data_title {
+      font-size: 20px;
+      font-weight: 500;
+      color: $color-black;
+    }
+  }
+  .input_name {
+    display: flex;
+  }
+  .input_info {
+    display: flex;
+  }
+}
