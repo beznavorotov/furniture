@@ -5,7 +5,7 @@ import heart from '../../assets/icons/heart.svg';
 import user from '../../assets/icons/user.svg';
 
 export const Header = () => {
-  const setLinkActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active' : '');
+  const setLinkActive = ({ isActive }: { isActive }) => (isActive ? 'active' : '');
 
   return (
     <div className="container">

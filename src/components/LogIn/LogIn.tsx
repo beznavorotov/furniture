@@ -35,8 +35,8 @@ export const LogIn = () => {
   }
 
   console.log(userLogin);
-  
-  const handleSubmit = (event: React.FormEvent) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     // userLogin();
 
