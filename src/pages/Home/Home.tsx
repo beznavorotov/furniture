@@ -10,12 +10,8 @@ export const Home = () => {
   return (
     <div className="container">
       <div className="grid_home">
-        <div className="sidebar">
-          <Sidebar />
-        </div>
-        <div className="slider">
-          <Slider />
-        </div>
+        <Sidebar />
+        <Slider />
       </div>
       <Static />
       <Bestsellers />
