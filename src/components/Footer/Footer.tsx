@@ -30,6 +30,9 @@ export const Footer = () => {
           <Link to={'/delivery'} className="text">
             Доставка і оплата
           </Link>
+          <Link to={'/profile'} className="text">
+            Кабінет (тимчасово)
+          </Link>
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <h4>Каталог</h4>
