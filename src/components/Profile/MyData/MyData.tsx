@@ -1,5 +1,5 @@
 import './myData.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const MyData = () => {
   const [formData, setFormData] = useState({
@@ -14,9 +14,9 @@ export const MyData = () => {
     confirmPassword: '',
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -24,7 +24,7 @@ export const MyData = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length === 0) {
@@ -44,8 +44,8 @@ export const MyData = () => {
     }
   };
 
-  const validateForm = (data) => {
-    const errors = {};
+  const validateForm = (data: typeof formData) => {
+    const errors: { [key: string]: string } = {};
     if (!data.firstName.trim()) {
       errors.firstName = "Ім'я є обов'язковим полем";
     }
@@ -79,10 +79,11 @@ export const MyData = () => {
         <form onSubmit={handleSubmit}>
           <div className="input_name">
             <div className="form-row row">
-              <label htmlFor="">Ім'я</label>
+              <label htmlFor="firstName">Ім'я</label>
               <input
                 type="text"
                 name="firstName"
+                id="firstName"
                 value={formData.firstName}
                 onChange={handleInputChange}
                 placeholder="Ім'я"
@@ -93,10 +94,11 @@ export const MyData = () => {
               )}
             </div>
             <div className="form-row row ">
-              <label htmlFor="">Прізвище</label>
+              <label htmlFor="lastName">Прізвище</label>
               <input
                 type="text"
                 name="lastName"
+                id="lastName"
                 value={formData.lastName}
                 onChange={handleInputChange}
                 placeholder="Прізвище"
@@ -110,10 +112,11 @@ export const MyData = () => {
 
           <div className="input_info">
             <div className="form-row row">
-              <label htmlFor="">Телефон</label>
+              <label htmlFor="phone">Телефон</label>
               <input
                 type="tel"
                 name="phone"
+                id="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="+380"
@@ -122,10 +125,11 @@ export const MyData = () => {
               {errors.phone && <span className="error">{errors.phone}</span>}
             </div>
             <div className="form-row row">
-              <label htmlFor="">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 name="email"
+                id="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Email"
@@ -136,10 +140,11 @@ export const MyData = () => {
           </div>
 
           <div className="form-row ">
-            <label htmlFor="">Дата народження</label>
+            <label htmlFor="birthday">Дата народження</label>
             <input
               type="number"
               name="day"
+              id="day"
               value={formData.day}
               onChange={handleInputChange}
               placeholder="День"
@@ -150,6 +155,7 @@ export const MyData = () => {
             <input
               type="number"
               name="month"
+              id="month"
               value={formData.month}
               onChange={handleInputChange}
               placeholder="Місяць"
@@ -160,6 +166,7 @@ export const MyData = () => {
             <input
               type="number"
               name="year"
+              id="year"
               value={formData.year}
               onChange={handleInputChange}
               placeholder="Рік"
@@ -177,10 +184,11 @@ export const MyData = () => {
           </div>
 
           <div className="form-row">
-            <label htmlFor="">Новий пароль</label>
+            <label htmlFor="password">Новий пароль</label>
             <input
               type="password"
               name="password"
+              id="password"
               value={formData.password}
               onChange={handleInputChange}
               placeholder="Новий пароль"
@@ -189,10 +197,11 @@ export const MyData = () => {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
-            <label htmlFor="">Підтвердити пароль</label>
+            <label htmlFor="confirmPassword">Підтвердити пароль</label>
             <input
               type="password"
               name="confirmPassword"
+              id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
               placeholder="Підтвердити пароль"
@@ -211,3 +220,6 @@ export const MyData = () => {
     </>
   );
 };
+
+
+

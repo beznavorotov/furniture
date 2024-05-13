@@ -31,7 +31,7 @@ export const SignUp = () => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     userRegistration();
 

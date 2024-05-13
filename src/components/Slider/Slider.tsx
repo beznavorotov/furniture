@@ -3,13 +3,14 @@ import furniture1 from '../../assets/1.png';
 import furniture2 from '../../assets/2.png';
 import furniture3 from '../../assets/3.png';
 
+
 interface ICarousel {
   img: string;
   text: string;
 }
 
-const Slider: React.FC = () => {
-  const [items, setItems] = useState<ICarousel[]>([
+export const Slider: React.FC = () => {
+  const [items] = useState<ICarousel[]>([
     { img: furniture1, text: 'Нове надходження' },
     { img: furniture2, text: 'Гарячий розпродаж' },
     { img: furniture3, text: 'Дуже Дуже Гарячий розпродаж' },
@@ -57,5 +58,3 @@ const Slider: React.FC = () => {
     </div>
   );
 };
-
-export default Slider;

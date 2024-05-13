@@ -119,19 +119,19 @@ export const Orders = () => {
   ];
 
   const [orders, setOrders] = useState(ordersData);
-  const [selectedOrder, setSelectedOrder] = useState(null);
-  const [activeButton, setActiveButton] = useState('Всі');
+  const [selectedOrder, setSelectedOrder] = useState<any>(null); // Явно вказано тип для selectedOrder
+  const [activeButton, setActiveButton] = useState<string>('Всі'); // Явно вказано тип для activeButton
 
-  const sortOrdersByStatus = (status) => {
+  const sortOrdersByStatus = (status: string) => { // Явно вказано тип для параметра status
     setActiveButton(status);
     const sortedOrders =
       status === 'Всі'
         ? ordersData
-        : ordersData.filter((order) => order.status === status);
+        : ordersData.filter((order) => order.status === status); // Явно вказано тип для параметра order
     setOrders(sortedOrders);
   };
 
-  const showOrderDetails = (order) => {
+  const showOrderDetails = (order: any) => { // Явно вказано тип для параметра order
     setSelectedOrder(selectedOrder === order ? null : order);
   };
 
@@ -172,7 +172,7 @@ export const Orders = () => {
       </div>
       <div className="orders_group">
         <div className="orders_list">
-          {orders.map((order) => (
+          {orders.map((order: any) => ( // Явно вказано тип для параметра order
             <div
               key={order.id}
               className="order"
@@ -197,7 +197,7 @@ export const Orders = () => {
                 <div className="order_details">
                   <h2>Деталі замовлення</h2>
                   <div className="orders_details">
-                    {order.products.map((product) => (
+                    {order.products.map((product: any) => ( // Явно вказано тип для параметра product
                       <div key={product.id} className="product_details">
                         <div className="img_name">
                           <div className="icon_product">

@@ -62,7 +62,7 @@ export const Footer = () => {
       </footer>
       <div className="copyright">
         <p>
-          © 2024 <Link to="/">Furniture</Link> - інтернет-магазин меблів. All
+          © 2024 <Link to="/">UrbanHome</Link> - інтернет-магазин меблів. All
           rights reserved.
         </p>
       </div>
