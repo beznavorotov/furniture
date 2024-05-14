@@ -34,11 +34,11 @@ export const LogIn = () => {
     }
   }
 
-  console.log(userLogin);
+  // console.log(userLogin);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // userLogin();
+    userLogin();
 
     // clear state
     setUserEmail('');

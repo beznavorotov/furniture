@@ -3,9 +3,11 @@ import logo from '../../assets/logo.svg';
 import cart from '../../assets/icons/cart.svg';
 import heart from '../../assets/icons/heart.svg';
 import user from '../../assets/icons/user.svg';
+import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 
 export const Header = () => {
-  const setLinkActive = ({ isActive }: { isActive }) => (isActive ? 'active' : '');
+  const setLinkActive = ({ isActive }: { isActive }) =>
+    isActive ? 'active' : '';
 
   return (
     <div className="container">
@@ -26,7 +28,6 @@ export const Header = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-
             <div
               className="flex-column collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -160,6 +161,7 @@ export const Header = () => {
                   </Link>
                 </nav>
               </div>
+              <CatalogMenu />
             </div>
           </div>
         </nav>

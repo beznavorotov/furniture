@@ -9,6 +9,7 @@ import { Footer } from './components/Footer/Footer';
 import { LogIn } from './components/LogIn/LogIn';
 import { SignUp } from './components/SignUp/SignUp';
 import { Profile } from './pages/Profile/Profile';
+import { Cart } from './pages/Cart/Cart';
 
 function Layout() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="favorites" element={<Profile />} />
+        <Route path="cart" element={<Cart />} />
       </Route>
     </Routes>
   );

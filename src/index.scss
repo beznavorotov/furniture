@@ -20,14 +20,16 @@
 @import './components/Profile/Reviews/reviews';
 @import './components/Sale/sale';
 @import './components/Sidebar/sidebar';
+@import './components/CatalogMenu/catalogMenu';
 @import './components/SignUp/signup';
-@import './components/Slider/slider';
+@import './components/Carousel/carousel';
 @import './components/Static/static';
 
 // pages
 @import './pages/About/about';
 @import './pages/Authorize/authorize';
 @import './pages/Contact/contact';
+@import './pages/Cart/cart';
 @import './pages/Delivery/delivery';
 @import './pages/Home/home';
 @import './pages/Product/product';

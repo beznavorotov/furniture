@@ -23,6 +23,9 @@
   }
 
   .carousel-inner {
+    max-width: 925px;
+    min-height: 525px;
+
     .carousel-item {
       height: 100%;
     }
@@ -48,6 +51,11 @@
         line-height: 74px;
         margin-bottom: 12px;
         word-break: break-word;
+
+        @include tablet {
+          font-size: 30px;
+          line-height: 36px;
+        }
       }
     }
   }

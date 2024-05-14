@@ -1,92 +1,9 @@
 .sidebar {
-	width: 300px;
-	padding: 20px;
-	padding-left: 0;
-	padding-top: 0;
-
-	h1 {
-		font-weight: 700;
-		font-size: 20px;
-		color: $color-blue;
-	}
-
-	.category-list {
-		@include flex-column();
-		list-style: none;
-		padding: 0;
-		counter-reset: list;
-		gap: 25px;
-
-		.category-list__item {
-			position: relative;
-			@include flex(flex-start);
-			gap: 24px;
-			cursor: pointer;
-			border-bottom: 1px solid $color-black;
-			font-size: 16px;
-			font-weight: 400;
-			padding: 10px;
-			width: 100%;
-
-			// нумерація меню
-			&::before {
-				content: counter(list, decimal-leading-zero) ' ';
-				counter-increment: list;
-			}
-
-			&:hover,
-			&:hover .category-list__link {
-				color: $color-blue;
-				font-weight: 600;
-				border-bottom-color: $color-blue;
-			}
-
-			.category-list__link {
-				font-size: 16px;
-				font-weight: 400;
-				color: $color-black;
-				text-decoration: none;
-			}
-		}
-	}
-
-	// підкатегорії
-	.category-list__hidden-column {
-		display: none;
-		transform: translate(275px, 0px);
-		gap: 8px;
-		top: -15px;
-		right: 0;
-		position: absolute;
-		max-width: 295px;
-		width: 100%;
-		z-index: 10;
-		padding: 8px 24px;
-		background-color: $color-white-bg;
-		box-shadow: 0px 3px 3px 0px rgba(4, 72, 173, 0.25);
-
-		.subcategory-list {
-			@include flex-column(flex-start);
-			list-style: none;
-			padding: 0;
-
-			li {
-				padding: 10px;
-				width: 100%;
-
-				.subcategory-list__link {
-					font-size: 14px;
-					line-height: 18px;
-				}
-
-				&:hover a {
-					color: $color-blue;
-					font-weight: 600;
-				}
-			}
-		}
-	}
-	.category-list__item:hover .category-list__hidden-column {
-		display: flex;
-	}
+  width: 300px;
+  padding: 20px;
+  padding-left: 0;
+  padding-top: 0;
+  @include tablet {
+    display: none;
+  }
 }
