@@ -63,16 +63,17 @@ export const SignUp = () => {
               onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Створити аккаунт</h2>
-
-              <input
-                type="text"
-                name="name"
-                id="userNameInput"
-                placeholder="Ім’я"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-              />
+              <span className="input__required m-bottom">
+                <input
+                  type="text"
+                  name="name"
+                  id="userNameInput"
+                  placeholder="Ім’я"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
+                />
+              </span>
               <input
                 type="text"
                 name="userSurname"
@@ -81,32 +82,39 @@ export const SignUp = () => {
                 value={userSurname}
                 onChange={(e) => setUserSurname(e.target.value)}
               />
-              <input
-                type="email"
-                name="email"
-                id="loginEmail"
-                placeholder="Електрона адреса"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                name="newPassword"
-                id="newPasswordInput"
-                placeholder="Пароль"
-                value={userPassword}
-                onChange={(e) => setUserPassword(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPasswordInput"
-                placeholder="Підтвердити пароль"
-                value={userPasswordConfirm}
-                onChange={(e) => setUserPasswordConfirm(e.target.value)}
-              />
+              <span className="input__required m-top">
+                <input
+                  type="email"
+                  name="email"
+                  id="loginEmail"
+                  placeholder="Електронна адреса"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  required
+                />
+              </span>
+
+              <span className="input__required">
+                <input
+                  type="password"
+                  name="newPassword"
+                  id="newPasswordInput"
+                  placeholder="Пароль"
+                  value={userPassword}
+                  onChange={(e) => setUserPassword(e.target.value)}
+                  required
+                />
+              </span>
+              <span className="input__required">
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPasswordInput"
+                  placeholder="Підтвердити пароль"
+                  value={userPasswordConfirm}
+                  onChange={(e) => setUserPasswordConfirm(e.target.value)}
+                />
+              </span>
               <div className="policy-confirm">
                 <input
                   type="checkbox"

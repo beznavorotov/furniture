@@ -26,7 +26,7 @@ export const Reset = () => {
               onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Скинути пароль</h2>
-              <p className='form__authorize--text'>
+              <p className="form__authorize--text">
                 Будь ласка, введіть електронну адресу свого облікового запису,
                 на яку ви отримаєте електронний лист для зміни пароля.
               </p>
@@ -34,7 +34,7 @@ export const Reset = () => {
                 type="email"
                 name="email"
                 id="resetEmail"
-                placeholder="Електрона адреса"
+                placeholder="Електронна адреса"
                 value={resetEmail}
                 onChange={(e) => setResetEmail(e.target.value)}
                 required

@@ -27,8 +27,6 @@ export const LogIn = () => {
   // email: subject12@test.io
   // pass: subject123
 
-
-
   async function userLogin() {
     try {
       // send data to server
@@ -45,6 +43,7 @@ export const LogIn = () => {
       setAccessToken(responseData.access);
       localStorage.setItem('accessToken', responseData.access);
       Cookies.set('refreshToken', responseData.refresh, { httpOnly: true });
+      console.log(accessToken);
       // redirect user to ...
       navigate('/profile');
     } catch (error) {
@@ -82,25 +81,28 @@ export const LogIn = () => {
               onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Авторизуватися</h2>
-
-              <input
-                type="email"
-                name="email"
-                id="loginEmail"
-                placeholder="Електрона адреса"
-                required
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                name="password"
-                id="loginPassword"
-                placeholder="Пароль"
-                required
-                value={userPassword}
-                onChange={(e) => setUserPassword(e.target.value)}
-              />
+              <span className="input__required">
+                <input
+                  type="email"
+                  name="email"
+                  id="loginEmail"
+                  placeholder="Електронна адреса"
+                  required
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                />
+              </span>
+              <span className="input__required">
+                <input
+                  type="password"
+                  name="password"
+                  id="loginPassword"
+                  placeholder="Пароль"
+                  required
+                  value={userPassword}
+                  onChange={(e) => setUserPassword(e.target.value)}
+                />
+              </span>
               <Link className="password__lost" to="/reset">
                 Забули пароль?
               </Link>

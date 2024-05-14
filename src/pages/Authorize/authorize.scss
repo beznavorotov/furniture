@@ -44,7 +44,29 @@ body:has(.page-authorize) .copyright {
 
 .form__authorize {
   @include flex-column();
+  .input__required {
+    position: relative;
+    max-width: 295px;
+    width: 100%;
+    z-index: 1;
+    &.m-top {
+      margin-top: 8px;
+    }
+    &.m-bottom {
+      margin-bottom: 8px;
+    }
 
+    &::after {
+      @include flex();
+      position: absolute;
+      content: url("data:image/svg+xml,%3Csvg width='25' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.32489 19.7449L8.56489 14.4335L4.44189 10.8626L9.87289 10.3927L11.9999 5.38324L14.1269 10.3917L19.5569 10.8616L15.4339 14.4325L16.6749 19.7439L11.9999 16.9248L7.32489 19.7449Z' fill='%23E7E7E7'/%3E%3C/svg%3E%0A");
+      top: 18px;
+      right: 16px;
+      width: 16px;
+      height: 16px;
+      z-index: 10;
+    }
+  }
   input {
     font-family: $font-family-inter;
     font-size: 16px;
@@ -57,12 +79,20 @@ body:has(.page-authorize) .copyright {
     max-width: 295px;
     width: 100%;
     padding: 13px 12px;
+
+    &[type='email'],
+    &[type='name'],
+    &[type='password'] {
+      padding-right: 35px;
+    }
+
     &:active,
     &:focus {
       color: $color-black;
     }
   }
-  input + input {
+  input + input,
+  .input__required + .input__required {
     margin-top: 8px;
   }
 
