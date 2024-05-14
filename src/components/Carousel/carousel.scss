@@ -25,6 +25,7 @@
   .carousel-inner {
     max-width: 925px;
     min-height: 525px;
+    background-color: #357DFD;
 
     .carousel-item {
       height: 100%;
@@ -34,6 +35,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
+      border-radius: 0% 100% 100% 0% / 0% 0% 100% 0%;
     }
 
     .carousel-caption {

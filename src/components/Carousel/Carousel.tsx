@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import furniture1 from '../../assets/1.png';
-import furniture2 from '../../assets/2.png';
-import furniture3 from '../../assets/3.png';
+import furniture1 from '../../assets/1.webp';
+import furniture2 from '../../assets/2.webp';
+import furniture3 from '../../assets/3.webp';
 
 
 interface ICarousel {
