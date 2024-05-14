@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { Orders } from '../Orders/Orders';
 import { MyData } from '../MyData/MyData';
 import { Favorites } from '../Favorites/Favorites';
@@ -8,6 +10,7 @@ import arrow from '../../../assets/arrow.svg';
 
 export const Menu = () => {
   const [MenuItem, setMenuItem] = useState('orders');
+  const navigate = useNavigate();
 
   const renderComponent = () => {
     switch (MenuItem) {
@@ -63,6 +66,16 @@ export const Menu = () => {
               onClick={() => setMenuItem('reviews')}
             >
               Мої відгуки <img src={arrow} alt="" className="arrow" />
+            </li>
+            <li
+              className={`btn_menu btn__logout`}
+              onClick={() => {
+                Cookies.remove('refreshToken');
+                localStorage.clear();
+                navigate('/login');
+              }}
+            >
+              Вихід
             </li>
           </ul>
         </div>

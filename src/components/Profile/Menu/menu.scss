@@ -46,9 +46,11 @@
         margin: 5px 0;
         font-family: Montserrat;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 400;
+        line-height: 22px;
         color: $color-black;
         box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+        cursor: pointer;
         &.active {
           color: $color-blue;
         }

@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
-import singup from '../../assets/authorize/signup__bg.webp';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import singup from '../../assets/authorize/signup__bg.webp';
 
 export const SignUp = () => {
   const [userName, setUserName] = useState('');
@@ -8,6 +9,7 @@ export const SignUp = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordConfirm, setUserPasswordConfirm] = useState('');
+  const navigate = useNavigate();
 
   const serverSignUpUrl = 'http://3.75.92.220:8000/users/create-user/';
 
@@ -24,6 +26,7 @@ export const SignUp = () => {
       });
 
       const responseData = await response.json();
+      navigate('/profile');
       console.log(responseData);
     } catch (error) {
       console.error('----- Something goes wrong -----');

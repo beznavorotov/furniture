@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import login from '../../assets/authorize/login__bg.webp';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
   const serverLoginUrl = 'http://3.75.92.220:8000/users/get-token/';
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const navigate = useNavigate();
 
   const data = { username: userEmail, password: userPassword };
 
@@ -16,8 +20,18 @@ export const LogIn = () => {
   // email: mrtest@test.io
   // pass: someVerySmartHardPass
 
+  // login test subject #2
+  // id: 20
+  // name: subject12
+  // nameSecond: Smith
+  // email: subject12@test.io
+  // pass: subject123
+
+
+
   async function userLogin() {
     try {
+      // send data to server
       const response = await fetch(serverLoginUrl, {
         method: 'POST',
         headers: {
@@ -27,14 +41,17 @@ export const LogIn = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData);
+      // save data from server to localStorage and cookies
+      setAccessToken(responseData.access);
+      localStorage.setItem('accessToken', responseData.access);
+      Cookies.set('refreshToken', responseData.refresh, { httpOnly: true });
+      // redirect user to ...
+      navigate('/profile');
     } catch (error) {
       console.error('----- Something goes wrong -----');
       console.error(error);
     }
   }
-
-  // console.log(userLogin);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,8 +60,12 @@ export const LogIn = () => {
     // clear state
     setUserEmail('');
     setUserPassword('');
-    console.log(data);
   };
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      navigate('/profile');
+    }
+  });
 
   return (
     <div className="page-authorize container">
