@@ -7,16 +7,20 @@
 @import './scss/fonts';
 @import './scss/global';
 
-
 // components
 @import './components/Bestsellers/bestsellers';
 @import './components/Collection/collection';
 @import './components/Footer/footer';
 @import './components/Header/header';
 @import './components/LogIn/login';
-@import './components/SignUp/signup';
+@import './components/Profile/Favorites/favorites';
+@import './components/Profile/Menu/menu';
+@import './components/Profile/MyData/myData';
+@import './components/Profile/Orders/orders';
+@import './components/Profile/Reviews/reviews';
 @import './components/Sale/sale';
 @import './components/Sidebar/sidebar';
+@import './components/SignUp/signup';
 @import './components/Slider/slider';
 @import './components/Static/static';
 

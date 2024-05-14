@@ -1,4 +1,3 @@
-import './sale.scss';
 import lamp from '../../assets/lamp.jpg';
 import heart from '../../assets/heart.svg';
 import starEmpty from '../../assets/star_empty.svg';

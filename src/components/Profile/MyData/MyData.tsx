@@ -1,4 +1,3 @@
-import './myData.scss';
 import React, { useState } from 'react';
 
 export const MyData = () => {

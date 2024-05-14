@@ -1,4 +1,3 @@
-import './menu.scss';
 import { useState } from 'react';
 import { Orders } from '../Orders/Orders';
 import { MyData } from '../MyData/MyData';
