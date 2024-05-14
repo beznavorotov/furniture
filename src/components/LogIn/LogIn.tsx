@@ -101,9 +101,9 @@ export const LogIn = () => {
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
               />
-              <a className="password__lost" href="/">
+              <Link className="password__lost" to="/reset">
                 Забули пароль?
-              </a>
+              </Link>
               <button type="submit" className="btn btn__white">
                 Авторизуватися
               </button>

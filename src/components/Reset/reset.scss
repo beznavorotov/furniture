@@ -1,0 +1,8 @@
+.reset {
+  @include flex();
+  gap: 20px;
+
+  input[type='email'] {
+    margin-bottom: 16px;
+  }
+}

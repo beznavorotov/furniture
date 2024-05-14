@@ -57,6 +57,10 @@ body:has(.page-authorize) .copyright {
     max-width: 295px;
     width: 100%;
     padding: 13px 12px;
+    &:active,
+    &:focus {
+      color: $color-black;
+    }
   }
   input + input {
     margin-top: 8px;
@@ -69,6 +73,14 @@ body:has(.page-authorize) .copyright {
     margin-top: 34px;
     margin-bottom: 34px;
     text-align: center;
+  }
+
+  &--text {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
   }
 
   .btn {

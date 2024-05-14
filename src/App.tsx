@@ -10,6 +10,7 @@ import { LogIn } from './components/LogIn/LogIn';
 import { SignUp } from './components/SignUp/SignUp';
 import { Profile } from './pages/Profile/Profile';
 import { Cart } from './pages/Cart/Cart';
+import { Reset } from './components/Reset/Reset';
 
 function Layout() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="reset" element={<Reset />} />
         <Route path="profile" element={<Profile />} />
         <Route path="favorites" element={<Profile />} />
         <Route path="cart" element={<Cart />} />
