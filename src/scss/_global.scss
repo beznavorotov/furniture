@@ -114,3 +114,13 @@ a {
 #root .btn__logout {
   color: $color-red;
 }
+
+#root .btn__cart {
+  width: 44px;
+  height: 44px;
+  .icon__svg-cart {
+    path {
+      fill: $color-white;
+    }
+  }
+}
