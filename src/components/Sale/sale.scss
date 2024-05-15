@@ -1,6 +1,8 @@
 .sale {
   border-bottom: 1px solid $color-black;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 
   .name {
     display: flex;
@@ -25,7 +27,11 @@
     }
   }
   .bloc_card {
+    width: 320px;
     padding: 20px 10px;
+    margin: 5px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 60, 166, 0.15);
+    border-radius: 5px;
     .card {
       position: relative;
 
@@ -62,12 +68,26 @@
       .action {
         font-family: 'Inter', sans-serif;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 24px;
         color: $color-red;
       }
-      .cart {
-        width: 32px;
-        height: 32px;
+      .bg_cart {
+        border-radius: 5px;
+        border: 1px solid $color-blue;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+        .cart {
+          width: 32px;
+          height: 32px;
+          position: absolute;
+          top: 5px;
+          right: 7px;
+        }
       }
     }
   }

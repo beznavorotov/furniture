@@ -3,7 +3,7 @@ import chair from '../../assets/chair.png';
 import heart from '../../assets/heart.svg';
 import starEmpty from '../../assets/star_empty.svg';
 import starFull from '../../assets/star_full.svg';
-import cart from '../../assets/icons/cart.svg';
+import cartWhite from '../../assets/icons/cart_white.svg';
 import { Link } from 'react-router-dom';
 
 export const Bestsellers = () => {
@@ -40,7 +40,10 @@ export const Bestsellers = () => {
           <div className="card_price">
             <span className="price">{product.price}</span>
             <Link to="/">
-              <img src={cart} alt="cart icon" className="cart" />
+              <div className="bg_cart">
+                <img src={cartWhite} alt="cart icon" className="cart" />
+              </div>
+              {/* <img src={cartBlue} alt="cart icon" className="cart" /> */}
             </Link>
           </div>
         </div>

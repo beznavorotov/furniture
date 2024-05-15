@@ -40,7 +40,9 @@ export const Sale = () => {
             <span className="price">{product.price}</span>
             <span className="action">{product.action}</span>
             <Link to="/">
-              <img src={cart} alt="cart icon" className="cart" />
+              <div className="bg_cart">
+                <img src={cart} alt="cart icon" className="cart" />
+              </div>
             </Link>
           </div>
         </div>

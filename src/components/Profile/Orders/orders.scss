@@ -44,30 +44,43 @@
           border-right: 1px solid black;
           width: 184px;
           padding: 5px;
+
         }
         .order_total {
           display: flex;
           flex-direction: column;
           border-right: 1px solid black;
           width: 184px;
+
         }
         .order_quantity {
           display: flex;
           flex-direction: column;
           border-right: 1px solid black;
           width: 184px;
+
         }
         .order_status {
           display: flex;
           flex-direction: column;
           border-right: 1px solid black;
           width: 184px;
+
         }
         .order_date {
           display: flex;
           flex-direction: column;
           width: 184px;
+
+
         }
+
+.details_button {
+background-color: #fff;
+width: 100%;
+text-align: left;
+
+}
 
         .order_details {
           width: 100%;

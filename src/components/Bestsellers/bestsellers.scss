@@ -3,7 +3,8 @@
 .bestsellers {
   border-bottom: 1px solid $color-black;
   padding-bottom: 10px;
-
+  display: flex;
+  justify-content: space-between;
   .name {
     display: flex;
     justify-content: space-between;
@@ -27,8 +28,14 @@
     }
   }
   .bloc_card {
+  
+    width: 320px;
     padding: 20px 10px;
+    margin: 5px;
+    box-shadow: 3px 3px 3px 3px rgba(0, 60, 166, 0.15);
+    border-radius: 5px;
     .card {
+
       position: relative;
 
       .heart {
@@ -60,9 +67,24 @@
         font-size: 18px;
         color: $color-blue;
       }
-      .cart {
-        width: 32px;
-        height: 32px;
+      .bg_cart {
+        background-color: $color-blue;
+        border-radius: 5px;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+        .cart {
+          width: 32px;
+          height: 32px;
+          position: absolute;
+          top: 5px;
+          right: 7px;
+
+        }
       }
     }
   }
