@@ -1,94 +1,9 @@
 .sale {
+  @include flex(space-between, flex-start);
   border-bottom: 1px solid $color-black;
   padding-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-
-  .name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid $color-black;
-
-    h1 {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 36px;
-    }
-    .link {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 24px;
-      color: #757575;
-      &:hover {
-        transform: scale(1.05);
-        color: $color-blue;
-      }
-    }
-  }
-  .bloc_card {
-    width: 320px;
-    padding: 20px 10px;
-    margin: 5px;
-    box-shadow: 3px 3px 3px 3px rgba(0, 60, 166, 0.15);
-    border-radius: 5px;
-    .card {
-      position: relative;
-
-      .heart {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-      }
-    }
-    .text_card {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      padding-top: 10px;
-    }
-    .stars {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: flex-start;
-    }
-    .card_price {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-
-      .price {
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        font-size: 18px;
-        color: $color-blue;
-        text-decoration: line-through;
-      }
-      .action {
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        font-size: 24px;
-        color: $color-red;
-      }
-      .bg_cart {
-        border-radius: 5px;
-        border: 1px solid $color-blue;
-        width: 44px;
-        height: 44px;
-        position: relative;
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.05);
-        }
-        .cart {
-          width: 32px;
-          height: 32px;
-          position: absolute;
-          top: 5px;
-          right: 7px;
-        }
-      }
-    }
+  @include tablet {
+    justify-content: center;
+    gap: 16px;
   }
 }

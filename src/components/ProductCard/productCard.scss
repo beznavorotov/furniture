@@ -1,0 +1,94 @@
+.product-card {
+  position: relative;
+  @include flex-column(flex-start, center);
+  gap: 8px;
+
+  max-width: 320px;
+  width: 100%;
+  padding: 0;
+  margin: 5px;
+
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    box-shadow: 3px 3px 3px 3px rgba(0, 60, 166, 0.15);
+  }
+  * {
+    font-family: $font-family-inter;
+  }
+  // card main img
+  &__img {
+    border-radius: 3px;
+    overflow: hidden;
+    width: 100%;
+    img {
+      transition: all 0.3s linear;
+      width: 100%;
+      // transform: scale(0.9);
+    }
+    &:hover img {
+      transform: scale(1.1);
+    }
+  }
+  .heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+  }
+  // card info block
+  &__info {
+    @include flex-column(center, flex-start);
+    gap: 8px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .text_card {
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 0;
+    height: 42px;
+  }
+  .stars {
+    @include flex(flex-start);
+    margin: 0;
+    padding: 0;
+  }
+  .card_price {
+    @include flex(flex-start, center);
+    width: 100%;
+    gap: 16px;
+    .price {
+      color: $color-blue;
+      font-weight: 700;
+      font-size: 18px;
+
+      &.price--sale {
+        text-decoration: line-through;
+      }
+      &.price--new {
+        color: $color-red;
+      }
+    }
+    .btn__buy {
+      margin-left: auto;
+    }
+
+    .bg_cart {
+      border-radius: 5px;
+      border: 1px solid $color-blue;
+      width: 44px;
+      height: 44px;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+      .cart {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

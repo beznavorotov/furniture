@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
-import './footer.scss';
 
 export const Footer = () => {
   const catalogLinks = [

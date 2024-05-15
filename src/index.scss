@@ -14,14 +14,17 @@
 @import './components/Footer/footer';
 @import './components/Header/header';
 @import './components/LogIn/login';
+
 @import './components/Profile/Favorites/favorites';
 @import './components/Profile/Menu/menu';
 @import './components/Profile/MyData/myData';
 @import './components/Profile/Orders/orders';
 @import './components/Profile/Reviews/reviews';
-@import './components/Sale/sale';
+
+@import './components/ProductCard/productCard';
 @import './components/Sidebar/sidebar';
 @import './components/CatalogMenu/catalogMenu';
+@import './components/Sale/sale';
 @import './components/SignUp/signup';
 @import './components/Reset/reset';
 @import './components/Carousel/carousel';

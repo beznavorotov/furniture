@@ -1,53 +1,44 @@
-import lamp from '../../assets/lamp.jpg';
-import heart from '../../assets/heart.svg';
-import starEmpty from '../../assets/star_empty.svg';
-import starFull from '../../assets/star_full.svg';
-import cart from '../../assets/icons/cart.svg';
 import { Link } from 'react-router-dom';
+import ProductCard from '../ProductCard/ProductCard';
+import lamp from '../../assets/lamp.jpg';
 
 export const Sale = () => {
   const products = [
-    { name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
-    { name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
-    { name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
-    { name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
+    { id: 0o1, name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
+    { id: 0o2, name: 'Лампа дуже чорна', price: '1000 грн', action: '800 грн' },
+    {
+      id: 0o3,
+      name: 'Лампа не така вже й чорна',
+      price: '1000 грн',
+      action: '800 грн',
+    },
+    {
+      id: 0o4,
+      name: 'Лампа чорна, але могла бути й чорніша',
+      price: '1000 грн',
+      action: '800 грн',
+    },
   ];
 
   return (
-    <div className="sale row">
-      <div className="name">
-        <h1>Розпродаж</h1>
-        <Link to="/" className="link">
+    <section className="sale row">
+      <div className="name section__heading">
+        <h1 className="section__heading--title">Розпродаж</h1>
+        <Link to="/sale" className="section__heading--link">
           Усі пропозиції
         </Link>
       </div>
 
-      {products.map((product, index) => (
-        <div key={index} className="col-12 col-md-3 bloc_card">
-          <div className="card">
-            <img src={lamp} alt="chair" className="chair" />
-            <img src={heart} alt="heart" className="heart" />
-          </div>
-          <p className="text_card">{product.name}</p>
-          <span className="stars">
-            <img src={starFull} alt="starFull" />
-            <img src={starFull} alt="starFull" />
-            <img src={starFull} alt="starFull" />
-            <img src={starFull} alt="starFull" />
-            <img src={starEmpty} alt="starEmpty" />
-          </span>
-          <div className="card_price">
-            <span className="price">{product.price}</span>
-            <span className="action">{product.action}</span>
-
-            <Link to="/">
-              <div className="bg_cart">
-                <img src={cart} alt="cart icon" className="cart" />
-              </div>
-            </Link>
-          </div>
-        </div>
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          name={product.name}
+          price={product.price}
+          newPrice={product.action}
+          img={lamp}
+          index={''}
+        />
       ))}
-    </div>
+    </section>
   );
 };

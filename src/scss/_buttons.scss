@@ -91,12 +91,39 @@
   color: $color-red;
 }
 
+// PRODUCT CARD CART BTN
 #root .btn__cart {
+  border: 1px solid $color-blue;
   width: 44px;
   height: 44px;
+  margin-left: auto;
+  background-color: transparent;
+
+  // svg icon states
   .icon__svg-cart {
-    path {
-      fill: $color-white;
+    fill: $color-blue;
+  }
+
+  // btn states
+  &:hover {
+    border-color: $color-lightblue;
+    background-color: transparent;
+    & .icon__svg-cart {
+      fill: $color-lightblue;
+    }
+  }
+  &:active {
+    border-color: $color-darkblue;
+    background-color: transparent;
+    & .icon__svg-cart {
+      fill: $color-darkblue;
+    }
+  }
+  &:focus {
+    border-color: $color-lightblue-border;
+    background-color: transparent;
+    & .icon__svg-cart {
+      fill: $color-lightblue-border;
     }
   }
 }
