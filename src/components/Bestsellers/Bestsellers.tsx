@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 export const Bestsellers = () => {
   const products = [
     { name: 'Крісло Дюна', price: '3000 грн' },
-    { name: 'Крісло Дюна', price: '3000 грн' },
-    { name: 'Крісло Дюна', price: '3000 грн' },
-    { name: 'Крісло Дюна', price: '3000 грн' },
+    { name: 'Крісло Месія Дюни', price: '3000 грн' },
+    { name: 'Крісло Діти Дюни', price: '3000 грн' },
+    { name: 'Крісло Бог Імператор Дюни', price: '3000 грн' },
   ];
 
   return (
