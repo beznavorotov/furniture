@@ -1,0 +1,102 @@
+// buttons
+#root .btn {
+  @include flex();
+  background-color: $color-blue;
+  border: 1px solid $color-blue;
+  border-radius: 3px;
+  color: $color-white;
+  font-family: $font-family-montserrat;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 10px;
+  height: 40px;
+
+  // стани кнопок
+  &:hover {
+    background-color: $color-lightblue;
+    border-color: $color-lightblue;
+  }
+
+  &:active {
+    background-color: $color-darkblue;
+    border-color: $color-darkblue;
+  }
+
+  &:focus {
+    border: 2px solid $color-lightblue-border;
+    background-color: $color-darkblue;
+  }
+}
+
+#root .btn__white {
+  background-color: $color-white-bg;
+  color: $color-blue;
+  border: 1px solid $color-blue;
+
+  &:hover {
+    background-color: $color-white-bg;
+    border-color: $color-lightblue;
+    color: $color-lightblue;
+  }
+  &:active {
+    background-color: $color-white-bg;
+    border-color: $color-darkblue;
+    color: $color-darkblue;
+  }
+  &:focus {
+    border: 2px solid $color-lightblue-border;
+    background-color: $color-white-bg;
+    color: $color-blue;
+  }
+}
+
+#root .btn__social {
+  @include flex();
+  gap: 4px;
+  font-family: $font-family-inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  height: 44px;
+  border: 1px solid #e3e0e0;
+  color: #fffbfb;
+  background-color: $color-blue;
+
+  // google btn
+  &.btn__google {
+    background-color: $color-red;
+    border-color: $color-red;
+  }
+
+  &.btn__google:hover {
+    opacity: 0.8;
+  }
+
+  // fb btn
+  &.btn__fb {
+    border-color: $color-blue;
+  }
+  &.btn__fb:hover {
+    background-color: $color-lightblue;
+    color: $color-white;
+    border-color: $color-lightblue;
+  }
+
+  & + .btn__social {
+    margin-top: 8px;
+  }
+}
+
+#root .btn__logout {
+  color: $color-red;
+}
+
+#root .btn__cart {
+  width: 44px;
+  height: 44px;
+  .icon__svg-cart {
+    path {
+      fill: $color-white;
+    }
+  }
+}
