@@ -27,6 +27,15 @@ export const LogIn = () => {
   // email: subject12@test.io
   // pass: subject123
 
+  // login test subject #3
+  // id: 20
+  // name: Java
+  // nameSecond: Script
+  // email: js@html.css
+  // pass: helloworld
+
+
+
   async function userLogin() {
     try {
       // send data to server
@@ -44,6 +53,8 @@ export const LogIn = () => {
       localStorage.setItem('accessToken', responseData.access);
       Cookies.set('refreshToken', responseData.refresh, { httpOnly: true });
       console.log(accessToken);
+      console.log(responseData);
+      console.log(Cookies.get('refreshToken'))
       // redirect user to ...
       navigate('/profile');
     } catch (error) {

@@ -13,7 +13,12 @@ export const SignUp = () => {
 
   const serverSignUpUrl = 'http://3.75.92.220:8000/users/create-user/';
 
-  const data = { name: userName, email: userEmail, password: userPassword };
+  const data = {
+    first_name: userName,
+    last_name: userSurname,
+    email: userEmail,
+    password: userPassword,
+  };
 
   async function userRegistration() {
     try {
