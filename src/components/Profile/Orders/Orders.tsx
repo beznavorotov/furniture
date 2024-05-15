@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import sofa from '../../../assets/seater-sofa.png';
+import arrowDown from '../../../assets/icons/arrow_down.svg';
 
 export const Orders = () => {
   const ordersData = [
     {
       id: 1,
       number: 19857363,
-      total: 24000,
+      total: 100000,
       quantity: 4,
       status: 'Доставлений',
       date: '20/03/24',
@@ -17,6 +18,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 25000,
         },
         {
@@ -25,6 +27,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 25000,
         },
         {
@@ -33,6 +36,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 25000,
         },
         {
@@ -41,6 +45,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 25000,
         },
       ],
@@ -59,6 +64,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 14000,
         },
       ],
@@ -66,7 +72,7 @@ export const Orders = () => {
     {
       id: 3,
       number: 19857364,
-      total: 14000,
+      total: 42000,
       quantity: 3,
       status: 'У процесі',
       date: '22/03/24',
@@ -77,6 +83,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 14000,
         },
         {
@@ -85,6 +92,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 14000,
         },
         {
@@ -93,6 +101,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 14000,
         },
       ],
@@ -111,6 +120,7 @@ export const Orders = () => {
           image: sofa,
           color: 'Чорний',
           quantity: 1,
+          article: 9567,
           price: 14000,
         },
       ],
@@ -134,38 +144,95 @@ export const Orders = () => {
     setSelectedOrder(selectedOrder === order ? null : order);
   };
 
+  const getStatusColorClass = (status) => {
+    switch (status.toLowerCase()) {
+      case 'доставлений':
+        return 'order-status-green';
+      case 'у процесі':
+        return 'order-status-yellow';
+      case 'скасовано':
+        return 'order-status-red';
+      default:
+        return 'order-status-black';
+    }
+  };
+
   return (
     <div className="orders">
       <h1>Мої замовлення</h1>
       <div className="state">
-        <span className={`btn_state ${activeButton === 'Всі' ? 'active' : ''}`} onClick={() => sortOrdersByStatus('Всі')}>Всі</span>
-        <span className={`btn_state ${activeButton === 'Доставлений' ? 'active' : ''}`} onClick={() => sortOrdersByStatus('Доставлений')}>Доставлені</span>
-        <span className={`btn_state ${activeButton === 'У процесі' ? 'active' : ''}`} onClick={() => sortOrdersByStatus('У процесі')}>У процесі</span>
-        <span className={`btn_state ${activeButton === 'Скасовано' ? 'active' : ''}`} onClick={() => sortOrdersByStatus('Скасовано')}>Скасовані</span>
+        <span
+          className={`btn_state ${activeButton === 'Всі' ? 'active' : ''}`}
+          onClick={() => sortOrdersByStatus('Всі')}
+        >
+          Всі
+        </span>
+        <span
+          className={`btn_state ${
+            activeButton === 'Доставлений' ? 'active' : ''
+          }`}
+          onClick={() => sortOrdersByStatus('Доставлений')}
+        >
+          Доставлені
+        </span>
+        <span
+          className={`btn_state ${
+            activeButton === 'У процесі' ? 'active' : ''
+          }`}
+          onClick={() => sortOrdersByStatus('У процесі')}
+        >
+          У процесі
+        </span>
+        <span
+          className={`btn_state ${
+            activeButton === 'Скасовано' ? 'active' : ''
+          }`}
+          onClick={() => sortOrdersByStatus('Скасовано')}
+        >
+          Скасовані
+        </span>
       </div>
       <div className="orders_group">
         <div className="orders_list">
           {orders.map((order: any) => (
-            <div key={order.id} className="order" onClick={() => showOrderDetails(order)}>
+            <div
+              key={order.id}
+              className="order"
+              onClick={() => showOrderDetails(order)}
+            >
               <div className="order_number">
-                <span>Номер замовлення:</span> {order.number}
+                <span>Номер замовлення:</span>
+                <span className="order_bold">{order.number}</span>
               </div>
               <div className="order_total">
-                <span>Загальна сума:</span> {order.total}
+                <span>Загальна сума:</span>
+                <span className="order_bold">{order.total} грн</span>
               </div>
               <div className="order_quantity">
-                <span>Кількість товарів:</span> {order.quantity}
+                <span>Кількість товарів:</span>
+                <span className="order_bold">{order.quantity}</span>
               </div>
               <div className="order_status">
-                <span>Статус:</span> {order.status}
+                <span>Статус:</span>
+                <span className={getStatusColorClass(order.status)}>
+                  {order.status}
+                </span>
               </div>
               <div className="order_date">
-                <span>Дата замовлення:</span> {order.date}
+                <span>Дата замовлення:</span>
+                <span className="order_bold">{order.date}</span>
               </div>
-              <div className="details_button" onClick={(e) => { e.stopPropagation(); showOrderDetails(order); }}>Детальніше</div>
+              <div
+                className="details_button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showOrderDetails(order);
+                }}
+              >
+                Детальніше <img src={arrowDown} alt="arrowDown" />
+              </div>
               {selectedOrder === order && (
                 <div className="order_details">
-                  
                   <div className="orders_details">
                     {order.products.map((product: any) => (
                       <div key={product.id} className="product_details">
@@ -184,7 +251,12 @@ export const Orders = () => {
                           </div>
                         </div>
                         <div className="order_price">
-                          <span>{product.price} грн</span>
+                          <span className="order_article">
+                            Код товару: {product.article}{' '}
+                          </span>
+                          <span className="order_product_price">
+                            {product.price} грн
+                          </span>
                         </div>
                       </div>
                     ))}

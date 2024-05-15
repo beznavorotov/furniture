@@ -27,8 +27,6 @@
     padding-left: 10px;
     padding-top: 10px;
     .orders_list {
-      background-color: #eff4ff;
-
       .order {
         display: flex;
         flex-wrap: wrap;
@@ -37,42 +35,51 @@
         text-align: center;
         padding: 10px;
         border-bottom: 5px solid #fff;
-
+        .order_bold {
+          padding: 10px;
+          font-size: 16px;
+          font-weight: 600;
+        }
         .order_number {
           display: flex;
           flex-direction: column;
-          border-right: 1px solid black;
+          border-right: 1px solid rgba(0, 60, 166, 0.15);;
           width: 184px;
           padding: 5px;
         }
         .order_total {
           display: flex;
           flex-direction: column;
-          border-right: 1px solid black;
+          border-right: 1px solid rgba(0, 60, 166, 0.15);;
           width: 184px;
+          padding: 5px;
         }
         .order_quantity {
           display: flex;
           flex-direction: column;
-          border-right: 1px solid black;
+          border-right: 1px solid rgba(0, 60, 166, 0.15);;
           width: 184px;
+          padding: 5px;
         }
         .order_status {
           display: flex;
           flex-direction: column;
-          border-right: 1px solid black;
+          border-right: 1px solid rgba(0, 60, 166, 0.15);;
           width: 184px;
+          padding: 5px;
         }
         .order_date {
           display: flex;
           flex-direction: column;
           width: 184px;
+          padding: 5px;
         }
 
         .details_button {
-          background-color: #fff;
           width: 100%;
           text-align: left;
+          font-size: 14px;
+          font-weight: 400;
         }
 
         .order_details {
@@ -96,22 +103,42 @@
                 .name_product {
                   display: flex;
                   flex-direction: column;
-                  padding: 5px;
+                  padding: 5px 0px 10px 20px;
                   text-align: left;
                   h3 {
                     font-size: 14px;
                     font-weight: 500;
                   }
                   .color_product {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: $color-grey;
                   }
                   .quantity_ordered {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: $color-grey;
                   }
                 }
               }
 
               .order_price {
+                display: flex;
+                flex-direction: column;
                 margin-left: auto;
                 align-self: center;
+                .order_article {
+                  font-size: 12px;
+                  font-weight: 400;
+                  color: $color-grey;
+                  padding-bottom: 10px;
+                }
+                .order_product_price {
+                  font-family: Montserrat;
+                  font-size: 18px;
+                  font-weight: 500;
+                  color: $color-blue;
+                }
               }
             }
           }
@@ -119,4 +146,32 @@
       }
     }
   }
+}
+
+.order-status-green {
+  color: green;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-status-yellow {
+  color: rgb(2, 2, 225);
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-status-red {
+  color: red;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-status-black {
+  color: black;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
 }
