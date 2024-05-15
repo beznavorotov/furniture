@@ -1,7 +1,6 @@
 import heart from '../../assets/heart.svg';
 import starEmpty from '../../assets/star_empty.svg';
 import starFull from '../../assets/star_full.svg';
-import cart from '../../assets/icons/cart.svg';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ index, img, name, price, newPrice }) => {
