@@ -62,7 +62,7 @@
   // підкатегорії
   .category-list__hidden-column {
     display: none;
-    transform: translate(275px, 0px);
+    transform: translate(255px, 0px);
     gap: 8px;
     top: -15px;
     right: 0;
@@ -73,6 +73,10 @@
     padding: 8px 24px;
     background-color: $color-white-bg;
     box-shadow: 0px 3px 3px 0px rgba(4, 72, 173, 0.25);
+
+    @include tablet {
+      
+    }
 
     .subcategory-list {
       @include flex-column(flex-start);
