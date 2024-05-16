@@ -1,14 +1,12 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
-import cart from '../../assets/icons/cart.svg';
-import heart from '../../assets/icons/heart.svg';
-import user from '../../assets/icons/user.svg';
 import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 
 export const Header = () => {
-  const setLinkActive = ({ isActive }: { isActive }) =>
-    isActive ? 'active' : '';
-
+  const { pathname } = useLocation();
+  const setLinkActive = ({ isActive }) => {
+    return ['/login', '/reset', '/signup'].includes(pathname) ? 'active' : '';
+  };
   return (
     <div className="container">
       <header className="header" data-bs-theme="light">
@@ -34,7 +32,7 @@ export const Header = () => {
             >
               <ul className="header__navigation--list navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <NavLink className={`nav-link ${setLinkActive}`} to="/">
+                  <NavLink className="nav-link" to="/">
                     Головна
                   </NavLink>
                 </li>
@@ -92,27 +90,18 @@ export const Header = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <NavLink
-                    className={`nav-link ${setLinkActive}`}
-                    to="/promotions"
-                  >
+                  <NavLink className="nav-link" to="/promotions">
                     Акції
                   </NavLink>
                 </li>
 
                 <li className="nav-item">
-                  <NavLink
-                    className={`nav-link ${setLinkActive}`}
-                    to="/delivery"
-                  >
+                  <NavLink className="nav-link" to="/delivery">
                     Доставка і оплата
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink
-                    className={`nav-link ${setLinkActive}`}
-                    to="/contact"
-                  >
+                  <NavLink className="nav-link" to="/contact">
                     Контакти
                   </NavLink>
                 </li>
@@ -151,7 +140,7 @@ export const Header = () => {
                 </form>
 
                 <nav className="user__actions">
-                  <NavLink to="/cart" className={setLinkActive}>
+                  <NavLink to="/cart">
                     <svg
                       width="24"
                       height="24"
@@ -165,7 +154,7 @@ export const Header = () => {
                       />
                     </svg>
                   </NavLink>
-                  <NavLink to="/favorites" className={setLinkActive}>
+                  <NavLink to="/favorites">
                     <svg
                       width="24"
                       height="24"
