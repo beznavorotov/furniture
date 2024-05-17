@@ -5,10 +5,11 @@ import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 export const Header = () => {
   const { pathname } = useLocation();
   const setLinkActive = () => {
-    return ['/login', '/reset', '/signup'].includes(pathname) ? 'active' : '';
+    return ['/profile', '/login', '/reset', '/signup'].includes(pathname)
+      ? 'active'
+      : '';
   };
   return (
-    
     <div className="container">
       <header className="header" data-bs-theme="light">
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
