@@ -1,4 +1,4 @@
-import React from 'react';
+
 import sofa from '../../../assets/seater-sofa.png';
 import starEmpty from '../../../assets/star_empty.svg';
 import starFull from '../../../assets/star_full.svg';

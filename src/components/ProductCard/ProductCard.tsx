@@ -3,7 +3,7 @@ import starEmpty from '../../assets/star_empty.svg';
 import starFull from '../../assets/star_full.svg';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ index, img, name, price, newPrice }) => {
+const ProductCard = ({ img, name, price, newPrice }) => {
   return (
     <div className="col-12 col-md-3 product-card">
       <img src={heart} alt="heart" className="heart" />
