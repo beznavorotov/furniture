@@ -1,0 +1,82 @@
+.reviews {
+  font-family: $font-family-montserrat;
+  margin-left: 20px;
+  margin-bottom: 50px;
+  .title_reviews {
+    border-bottom: 1px solid black;
+
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      color: black;
+    }
+  }
+  .reviews_details {
+    box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+    margin-top: 10px;
+    padding: 5px 10px;
+    .reviews_info {
+      display: flex;
+      justify-content: space-between;
+
+      .img_name {
+        display: flex;
+        .name_product {
+          display: flex;
+          flex-direction: column;
+          padding: 5px 0px 10px 20px;
+          text-align: left;
+          h3 {
+            font-size: 14px;
+            font-weight: 500;
+          }
+          .color_product {
+            font-size: 12px;
+            font-weight: 400;
+            color: $color-grey;
+          }
+          .order_product_price {
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 400;
+            color: $color-blue;
+          }
+        }
+      }
+      .reviews_price {
+        display: flex;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        .reviews_article {
+          font-size: 12px;
+          font-weight: 400;
+          color: $color-grey;
+          padding-bottom: 10px;
+        }
+      }
+    }
+    .feedback {
+      display: flex;
+      justify-content: space-between;
+      .stars {
+        @include flex(flex-start);
+        margin: 0;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+      }
+      .feedback_date {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+    .feedback_text {
+      margin-top: 10px;
+      .text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}

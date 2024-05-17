@@ -1,19 +1,109 @@
 .data {
   font-family: Montserrat;
   padding: 10px;
+  margin: 10px;
   .data_header {
     padding-bottom: 10px;
-    border-bottom: 1px solid $color-black;
+    border-bottom: 1px solid black;
     .data_title {
       font-size: 20px;
       font-weight: 500;
-      color: $color-black;
+      color: black;
     }
   }
-  .input_name {
-    display: flex;
+  .form_data {
+    .input__required {
+      max-width: 320px;
+      width: 100%;
+      margin-right: 10px;
+      &.m-top {
+        margin-top: 8px;
+      }
+      &.m-bottom {
+        margin-bottom: 8px;
+      }
+
+      &::after {
+        top: 18px;
+        right: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+    .form-row + .form-row{
+      margin-left: 20px;
+    }
+    label {
+      font-family: Montserrat;
+font-size: 16px;
+font-weight: 500;
+
+
+    }
+    input {
+      font-family: $font-family-inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      border: 1px solid $color-grey-light;
+      border-radius: 5px;
+      background-color: $color-white-input-bg;
+      color: $color-gray-input;
+      max-width: 295px;
+      width: 100%;
+      padding: 13px 12px;
+
+      &:active,
+      &:focus {
+        color: $color-black;
+      }
+      
+    }
+    .input_bd {
+      font-family: $font-family-inter;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      border: 1px solid $color-grey-light;
+      border-radius: 5px;
+      background-color: $color-white-input-bg;
+      color: $color-gray-input;
+      max-width: 95px;
+      width: 100%;
+      padding: 13px 12px;
+      margin-right: 5px;
+
+      &:active,
+      &:focus {
+        color: $color-black;
+      }
+    }
+        .input + .input,
+    .input__required + .input__required {
+      margin-top: 8px;
+    }
+
+
+    &--heading {
+      font-size: 25px;
+      line-height: 30px;
+      font-weight: 500;
+      margin-top: 34px;
+      margin-bottom: 34px;
+      text-align: center;
+    }
+
+    &--text {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+    }
   }
-  .input_info {
-    display: flex;
+  .btn {
+    max-width: 130px;
+    width: 100%;
+    margin-right: 20px;
   }
 }
