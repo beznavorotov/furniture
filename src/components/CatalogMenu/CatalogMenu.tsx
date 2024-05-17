@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRooms } from '../../store/slices/roomsSlice';
+import { RootState } from '../../store'; 
 
-export const CatalogMenu = () => {
+export const CatalogMenu: React.FC = () => {
   const dispatch = useDispatch();
-  const room = useSelector((state) => state.rooms.items);
-  const roomStatus = useSelector((state) => state.rooms.status);
+  const rooms = useSelector((state: RootState) => state.rooms.items);
+  const roomStatus = useSelector((state: RootState) => state.rooms.status);
 
   useEffect(() => {
     if (roomStatus === 'idle') {
@@ -15,7 +16,7 @@ export const CatalogMenu = () => {
 
   return (
     <div className="catalog__menu">
-      {room.map((item) => console.log(item))}
+      {rooms.map((item) => console.log(item))}
       <h1>Каталог товарів</h1>
       <ul className="category-list">
         <li className="category-list__item">
