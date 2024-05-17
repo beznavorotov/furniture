@@ -36,7 +36,6 @@ export const Sale = () => {
           price={product.price}
           newPrice={product.action}
           img={lamp}
-          index={''}
         />
       ))}
     </section>

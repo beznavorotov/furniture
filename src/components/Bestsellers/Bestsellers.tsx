@@ -26,7 +26,6 @@ export const Bestsellers = () => {
           price={product.price}
           newPrice={''}
           img={chair}
-          index={''}
         />
       ))}
     </div>
