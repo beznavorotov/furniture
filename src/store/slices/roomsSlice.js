@@ -1,15 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchRooms = createAsyncThunk('rooms/fetchAllRooms', async () => {
-  const response = await fetch('http://3.75.92.220:8000/items/room/');
+export const fetchRooms = createAsyncThunk(
+  'rooms/fetchRooms',
+  // eslint-disable-next-line
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('http://3.75.92.220:8000/items/room/');
 
-  if (!response.ok) {
-    throw new Error('Sorry. Response is not ok...');
-  }
+      if (!response.ok) {
+        throw new Error('Sorry. Response is not ok...');
+      }
 
-  const data = await response.json();
-  return data;
-});
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 const roomsSlice = createSlice({
   name: 'rooms',
