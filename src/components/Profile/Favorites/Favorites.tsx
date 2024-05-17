@@ -24,7 +24,7 @@ export const Favorites = () => {
       <div className="title_favorites">
         <h1>Список обраного </h1>
       </div>
-      <div className="favorites_product col-md-4">
+      <div className="favorites_product col col-md-4">
         {products.map((product) => (
           <ProductCard
             key={product.id}

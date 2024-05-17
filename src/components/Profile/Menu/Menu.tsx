@@ -24,7 +24,7 @@ export const Menu = () => {
         return <Reviews />;
       default:
         return null;
-    }
+    } 
   };
 
   return (

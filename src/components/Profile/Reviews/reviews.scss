@@ -80,3 +80,13 @@
     }
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  .reviews {
+display: flex;
+flex-direction: column;
+margin: 0;
+padding: 0;
+  }
+}

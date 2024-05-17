@@ -30,15 +30,13 @@
         height: 16px;
       }
     }
-    .form-row + .form-row{
+    .form-row + .form-row {
       margin-left: 20px;
     }
     label {
       font-family: Montserrat;
-font-size: 16px;
-font-weight: 500;
-
-
+      font-size: 16px;
+      font-weight: 500;
     }
     input {
       font-family: $font-family-inter;
@@ -57,7 +55,6 @@ font-weight: 500;
       &:focus {
         color: $color-black;
       }
-      
     }
     .input_bd {
       font-family: $font-family-inter;
@@ -78,11 +75,10 @@ font-weight: 500;
         color: $color-black;
       }
     }
-        .input + .input,
+    .input + .input,
     .input__required + .input__required {
       margin-top: 8px;
     }
-
 
     &--heading {
       font-size: 25px;
@@ -101,9 +97,70 @@ font-weight: 500;
       font-weight: 400;
     }
   }
-  .btn {
-    max-width: 130px;
-    width: 100%;
-    margin-right: 20px;
+  .mob {
+    display: flex;
+    margin-top: 14px;
   }
+  .mob_bt {
+    display: flex;
+    margin-top: 14px;
+    .btn {
+      max-width: 130px;
+      width: 100%;
+      margin-right: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .data {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    .form_data {
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        .input__required {
+          display: flex;
+          flex-direction: column;
+
+          .input {
+            min-width: 350px;
+          }
+          .input_bd {
+            min-width: 350px;
+          }
+        }
+      }
+      .mob {
+        display: flex;
+        flex-direction: column;
+        .form-row {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          .input__required {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            .input {
+              min-width: 350px;
+            }
+          }
+        }
+      }
+      .form-row {
+        display: flex;
+      }
+    }
+  }
+ .btn {
+
+  min-width: 350px;
+  width: 100%;
+  margin-top: 10px;
+ }
 }

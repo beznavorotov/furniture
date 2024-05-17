@@ -76,7 +76,7 @@ export const MyData = () => {
           <span className="data_title">Персональні дані</span>
         </div>
         <form className="form_data" onSubmit={handleSubmit}>
-          <div className="d-flex mt-3">
+          <div className="mob">
             <div className="form-row ">
               <div className="row mb-1">
                 <label htmlFor="firstName">Ім'я</label>
@@ -118,7 +118,7 @@ export const MyData = () => {
               </span>
             </div>
           </div>
-          <div className="d-flex mt-3">
+          <div className="mob">
             <div className="form-row">
               <div className="row mb-1">
                 <label htmlFor="phone">Телефон</label>
@@ -211,56 +211,60 @@ export const MyData = () => {
           <div className="data_header mt-3">
             <span className="data_title">Пароль</span>
           </div>
-          <div className="d-flex mt-3">
-            <div className="form-row">
-              <div className="row mb-1">
-                <label htmlFor="password">Новий пароль</label>
-              </div>
 
-              <span className="input__required">
-                <input
-                className='input'
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  placeholder="Новий пароль"
-                  required
-                />
-                {errors.password && (
-                  <span className="error">{errors.password}</span>
-                )}
-              </span>
+          
+            <div className="mob">
+              <div className="form-row">
+                <div className="row mb-1">
+                  <label htmlFor="password">Новий пароль</label>
+                </div>
+                <span className="input__required">
+                  <input
+                    className="input"
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    placeholder="Новий пароль"
+                    required
+                  />
+                  {errors.password && (
+                    <span className="error">{errors.password}</span>
+                  )}
+                </span>
               </div>
-            <div className="form-row">
-              <div className="row mb-1">
-                <label htmlFor="confirmPassword">Підтвердити пароль</label>
-              </div>
+              <div className="form-row">
+                <div className="row mb-1">
+                  <label htmlFor="confirmPassword">Підтвердити пароль</label>
+                </div>
 
-              <span className="input__required">
-                <input
-                className='input'
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  placeholder="Підтвердити пароль"
-                  required
-                />
-                {errors.confirmPassword && (
-                  <span className="error">{errors.confirmPassword}</span>
-                )}
-              </span>
+                <span className="input__required">
+                  <input
+                    className="input"
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    placeholder="Підтвердити пароль"
+                    required
+                  />
+                  {errors.confirmPassword && (
+                    <span className="error">{errors.confirmPassword}</span>
+                  )}
+                </span>
+              </div>
             </div>
-          </div>
+          
 
-          <div className="form-row d-flex mt-3">
-
-          <button className='btn' type="button">Відміна</button>
-            <button className='btn btn__white' type="submit">Зберегти</button>
-
+          <div className="form-row mob_bt">
+            <button className="btn" type="button">
+              Відміна
+            </button>
+            <button className="btn btn__white" type="submit">
+              Зберегти
+            </button>
           </div>
         </form>
       </div>

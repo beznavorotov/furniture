@@ -88,7 +88,7 @@ const Review = ({ review }) => (
 export const Reviews = () => (
   <div className="reviews">
     <div className="title_reviews">
-      <h1>Мої замовлення</h1>
+      <h1>Мої відгуки</h1>
     </div>
     {reviewsData.map((review) => (
       <Review key={review.id} review={review} />

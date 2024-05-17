@@ -14,7 +14,7 @@ export const Bestsellers = () => {
     <div className="bestsellers row">
       <div className="name section__heading">
         <h1 className="section__heading--title">Бестселери</h1>
-        <Link to="/sale" className="section__heading--link">
+        <Link to="/sale" className=" section__heading--link">
           Усі пропозиції
         </Link>
       </div>

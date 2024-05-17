@@ -66,3 +66,15 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .page {
+    flex-direction: column;
+    .sidebarMenu {
+      width: 100%;
+    }
+    .content {
+      margin-top: 20px;
+    }
+  }
+}
