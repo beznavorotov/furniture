@@ -22,21 +22,19 @@ export const Favorites = () => {
   return (
     <div className="favorites">
       <div className="title_favorites">
-        <h1>Список обраного</h1>
+        <h1>Список обраного </h1>
       </div>
       <div className="favorites_product col-md-4">
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          newPrice={product.action}
-          img={lamp}
-          index={''}
-        />
-      ))}
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            newPrice={product.action}
+            img={lamp}
+          />
+        ))}
       </div>
-     
     </div>
   );
 };
