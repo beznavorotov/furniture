@@ -13,6 +13,8 @@ export const LogIn = () => {
 
   const data = { username: userEmail, password: userPassword };
 
+// http -> https mixed content
+
   // login test subject
   // id: 15
   // name: mr.Test
