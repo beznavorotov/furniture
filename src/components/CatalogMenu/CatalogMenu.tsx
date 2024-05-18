@@ -16,13 +16,15 @@ export const CatalogMenu: React.FC = () => {
 
   return (
     <div className="catalog__menu">
-      <h1>Каталог товарів</h1>
+      <h1 className="catalog__menu--title">Каталог товарів</h1>
       <ul className="category-list">
         {rooms.map((room) => (
           <li key={room.id} className="category-list__item">
-            <a className="category-list__link" href="/">
-              {room.title}
-            </a>
+            <div className="category-list__heading">
+              <a className="category-list__link" href="/">
+                {room.title}
+              </a>
+            </div>
 
             <div className="category-list__hidden-column">
               <ul className="subcategory-list">

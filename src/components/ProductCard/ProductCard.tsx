@@ -29,7 +29,7 @@ const ProductCard = ({ img, name, price, newPrice }) => {
 
           <span className="price price--new">{newPrice}</span>
 
-          <Link className="btn btn__cart" to="/">
+          <Link className="button button__cart" to="/">
             <svg
               width="24"
               height="24"

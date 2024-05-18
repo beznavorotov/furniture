@@ -121,7 +121,7 @@ export const Header = () => {
                       aria-describedby="button-addon2"
                     />
                     <button
-                      className="btn__search"
+                      className="button__search"
                       type="button"
                       id="button-addon2"
                     >

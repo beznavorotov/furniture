@@ -48,31 +48,31 @@ export const Menu = () => {
 
           <ul>
             <li
-              className={`btn_menu ${menuItem === 'orders' ? 'active' : ''}`}
+              className={`button_menu ${menuItem === 'orders' ? 'active' : ''}`}
               onClick={() => setMenuItem('orders')}
             >
               Мої замовлення <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${menuItem === 'myData' ? 'active' : ''}`}
+              className={`button_menu ${menuItem === 'myData' ? 'active' : ''}`}
               onClick={() => setMenuItem('myData')}
             >
               Персональні дані <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${menuItem === 'favorites' ? 'active' : ''}`}
+              className={`button_menu ${menuItem === 'favorites' ? 'active' : ''}`}
               onClick={() => setMenuItem('favorites')}
             >
               Список обраного <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${menuItem === 'reviews' ? 'active' : ''}`}
+              className={`button_menu ${menuItem === 'reviews' ? 'active' : ''}`}
               onClick={() => setMenuItem('reviews')}
             >
               Мої відгуки <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu btn__logout`}
+              className={`button_menu button__logout`}
               onClick={() => {
                 dispatch(logout());
                 navigate('/login');

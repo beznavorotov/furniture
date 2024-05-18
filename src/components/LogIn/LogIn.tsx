@@ -93,7 +93,7 @@ export const LogIn = () => {
               </Link>
               <button
                 type="submit"
-                className="btn btn__white"
+                className="button button__white"
                 disabled={authStatus === 'loading'}
               >
                 {authStatus === 'loading' ? 'Авторизуємось' : 'Авторизуватися'}
@@ -101,7 +101,7 @@ export const LogIn = () => {
               {authStatus === 'failed' && <p>Помилка: {authError}</p>}
             </form>
             <h2 className="form__authorize--heading t-small">або</h2>
-            <a href="/" className="btn btn__social btn__fb">
+            <a href="/" className="button button__social button__fb">
               <svg
                 width="24"
                 height="24"
@@ -116,7 +116,7 @@ export const LogIn = () => {
               </svg>
               Facebook
             </a>
-            <a href="/" className="btn btn__social btn__google">
+            <a href="/" className="button button__social button__google">
               <svg
                 width="24"
                 height="24"

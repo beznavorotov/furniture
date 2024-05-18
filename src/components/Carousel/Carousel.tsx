@@ -48,7 +48,7 @@ export const Slider: React.FC = () => {
             />
             <div className="carousel-caption">
               <h1 className="carousel-caption__title">{item.text}</h1>
-              <a className="btn" href="/">
+              <a className="button" href="/">
                 Переглянути
               </a>
             </div>

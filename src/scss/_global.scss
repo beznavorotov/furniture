@@ -24,7 +24,7 @@ a {
 
 // section
 .section {
-  
+
   &__heading {
     @include flex(space-between, center);
     font-family: $font-family-inter;
@@ -33,6 +33,10 @@ a {
     padding-left: 0;
     padding-right: 0;
     border-bottom: 1px solid $color-black;
+    @include tablet {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
     * {
       font-family: $font-family-inter;
     }
@@ -49,6 +53,9 @@ a {
       color: $color-grey;
       font-size: 24px;
       line-height: 30px;
+      @include tablet{
+        font-size: 16px;
+      }
       &:hover {
         color: $color-blue;
       }

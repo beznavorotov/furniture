@@ -212,7 +212,7 @@ export const MyData = () => {
             <span className="data_title">Пароль</span>
           </div>
 
-          
+
             <div className="mob">
               <div className="form-row">
                 <div className="row mb-1">
@@ -256,13 +256,13 @@ export const MyData = () => {
                 </span>
               </div>
             </div>
-          
+
 
           <div className="form-row mob_bt">
-            <button className="btn" type="button">
+            <button className="button" type="button">
               Відміна
             </button>
-            <button className="btn btn__white" type="submit">
+            <button className="button button__white" type="submit">
               Зберегти
             </button>
           </div>

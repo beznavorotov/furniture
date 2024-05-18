@@ -40,7 +40,7 @@ export const Reset = () => {
                 required
               />
 
-              <button type="submit" className="btn">
+              <button type="submit" className="button">
                 Скинути
               </button>
             </form>

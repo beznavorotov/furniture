@@ -133,7 +133,7 @@ export const SignUp = () => {
                   </a>
                 </span>
               </div>
-              <button type="submit" className="btn">
+              <button type="submit" className="button">
                 Зареєструватися
               </button>
             </form>

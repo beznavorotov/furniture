@@ -11,7 +11,7 @@
     margin-left: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #757575;
-    .btn_state {
+    .button_state {
       font-size: 14px;
       font-weight: 400;
       color: $color-black;
@@ -75,7 +75,7 @@
           flex-direction: column;
           min-width: 184px;
           padding: 5px;
-          
+
         }
 
         .details_button {
@@ -191,7 +191,7 @@
       .order_number {
         width: 100%;
         border-right: 1px solid white;
-        
+
       }
       .order_total {
         width: 100%;
@@ -208,11 +208,11 @@
       .order_date {
         width: 100%;
       }
-  
+
     }
 
   }
 
 
-  
+
 }

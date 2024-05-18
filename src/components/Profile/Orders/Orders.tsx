@@ -162,13 +162,13 @@ export const Orders = () => {
       <h1>Мої замовлення</h1>
       <div className="state">
         <span
-          className={`btn_state ${activeButton === 'Всі' ? 'active' : ''}`}
+          className={`button_state ${activeButton === 'Всі' ? 'active' : ''}`}
           onClick={() => sortOrdersByStatus('Всі')}
         >
           Всі
         </span>
         <span
-          className={`btn_state ${
+          className={`button_state ${
             activeButton === 'Доставлений' ? 'active' : ''
           }`}
           onClick={() => sortOrdersByStatus('Доставлений')}
@@ -176,7 +176,7 @@ export const Orders = () => {
           Доставлені
         </span>
         <span
-          className={`btn_state ${
+          className={`button_state ${
             activeButton === 'У процесі' ? 'active' : ''
           }`}
           onClick={() => sortOrdersByStatus('У процесі')}
@@ -184,7 +184,7 @@ export const Orders = () => {
           У процесі
         </span>
         <span
-          className={`btn_state ${
+          className={`button_state ${
             activeButton === 'Скасовано' ? 'active' : ''
           }`}
           onClick={() => sortOrdersByStatus('Скасовано')}
