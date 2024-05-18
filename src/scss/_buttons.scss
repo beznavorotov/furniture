@@ -11,12 +11,6 @@
   padding: 10px;
   height: 40px;
 
-  @media screen and (max-width: 480px) {
-    .button {
-      max-width: none !important;
-    }
-  }
-
   // стани кнопок
   &:hover {
     background-color: $color-lightblue;
@@ -113,13 +107,6 @@
   height: 44px;
   margin-left: auto;
   background-color: transparent;
-
-  @include mobile {
-    max-width: 44px !important;
-  }
-  @include tablet {
-    max-width: 44px !important;
-  }
 
   // svg icon states
   .icon__svg-cart {
