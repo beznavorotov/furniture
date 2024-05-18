@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import login from '../../assets/authorize/login__bg.webp';
+import loginImg from '../../assets/authorize/login__bg.webp';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../store/slices/authSlice';
+import { RootState } from '../../store';
 
 export const LogIn = () => {
-  const serverLoginUrl = 'http://3.75.92.220:8000/users/get-token/';
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [accessToken, setAccessToken] = useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const data = { username: userEmail, password: userPassword };
-
-// http -> https mixed content
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const authStatus = useSelector((state: RootState) => state.auth.status);
+  const authError = useSelector((state: RootState) => state.auth.error);
 
   // login test subject
   // id: 15
@@ -36,43 +35,16 @@ export const LogIn = () => {
   // email: js@html.css
   // pass: helloworld
 
-
-
-  async function userLogin() {
-    try {
-      // send data to server
-      const response = await fetch(serverLoginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const responseData = await response.json();
-      // save data from server to localStorage and cookies
-      setAccessToken(responseData.access);
-      localStorage.setItem('accessToken', responseData.access);
-      Cookies.set('refreshToken', responseData.refresh, { httpOnly: true });
-      console.log(accessToken);
-      console.log(responseData);
-      console.log(Cookies.get('refreshToken'))
-      // redirect user to ...
-      navigate('/profile');
-    } catch (error) {
-      console.error('----- Something goes wrong -----');
-      console.error(error);
-    }
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    userLogin();
+    const credentials = { username, password };
+    dispatch(login(credentials));
 
-    // clear state
-    setUserEmail('');
-    setUserPassword('');
+    // clear form state
+    setUsername('');
+    setPassword('');
   };
+
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       navigate('/profile');
@@ -83,7 +55,7 @@ export const LogIn = () => {
     <div className="page-authorize container">
       <section className="login">
         <div className="authorize__img-block">
-          <img src={login} alt="login bg" />
+          <img src={loginImg} alt="login bg" />
         </div>
 
         <div className="authorize__functional-block">
@@ -101,8 +73,8 @@ export const LogIn = () => {
                   id="loginEmail"
                   placeholder="Електронна адреса"
                   required
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </span>
               <span className="input__required">
@@ -112,16 +84,21 @@ export const LogIn = () => {
                   id="loginPassword"
                   placeholder="Пароль"
                   required
-                  value={userPassword}
-                  onChange={(e) => setUserPassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </span>
               <Link className="password__lost" to="/reset">
                 Забули пароль?
               </Link>
-              <button type="submit" className="btn btn__white">
-                Авторизуватися
+              <button
+                type="submit"
+                className="btn btn__white"
+                disabled={authStatus === 'loading'}
+              >
+                {authStatus === 'loading' ? 'Авторизуємось' : 'Авторизуватися'}
               </button>
+              {authStatus === 'failed' && <p>Помилка: {authError}</p>}
             </form>
             <h2 className="form__authorize--heading t-small">або</h2>
             <a href="/" className="btn btn__social btn__fb">

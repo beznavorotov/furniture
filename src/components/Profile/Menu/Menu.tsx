@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import { Orders } from '../Orders/Orders';
 import { MyData } from '../MyData/MyData';
 import { Favorites } from '../Favorites/Favorites';
 import { Reviews } from '../Reviews/Reviews';
 import photoUser from '../../../assets/photo_user.png';
 import arrow from '../../../assets/arrow.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../store/slices/authSlice';
+import { RootState } from '../../../store/';
 
 export const Menu = () => {
-  const [MenuItem, setMenuItem] = useState('orders');
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const [menuItem, setMenuItem] = useState('orders');
   const navigate = useNavigate();
 
   const renderComponent = () => {
-    switch (MenuItem) {
+    switch (menuItem) {
       case 'orders':
         return <Orders />;
       case 'myData':
@@ -24,7 +28,7 @@ export const Menu = () => {
         return <Reviews />;
       default:
         return null;
-    } 
+    }
   };
 
   return (
@@ -38,31 +42,31 @@ export const Menu = () => {
 
             <div className="name">
               <h2 className="name_user">Ім'я Прізвище</h2>
-              <a href="mailto:emailprofile@gmail.com">emailprofile@gmail.com</a>
+              <a href="/">{user ? user : 'Авторизуйтесь'}</a>
             </div>
           </div>
 
           <ul>
             <li
-              className={`btn_menu ${MenuItem === 'orders' ? 'active' : ''}`}
+              className={`btn_menu ${menuItem === 'orders' ? 'active' : ''}`}
               onClick={() => setMenuItem('orders')}
             >
               Мої замовлення <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${MenuItem === 'myData' ? 'active' : ''}`}
+              className={`btn_menu ${menuItem === 'myData' ? 'active' : ''}`}
               onClick={() => setMenuItem('myData')}
             >
               Персональні дані <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${MenuItem === 'favorites' ? 'active' : ''}`}
+              className={`btn_menu ${menuItem === 'favorites' ? 'active' : ''}`}
               onClick={() => setMenuItem('favorites')}
             >
               Список обраного <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`btn_menu ${MenuItem === 'reviews' ? 'active' : ''}`}
+              className={`btn_menu ${menuItem === 'reviews' ? 'active' : ''}`}
               onClick={() => setMenuItem('reviews')}
             >
               Мої відгуки <img src={arrow} alt="" className="arrow" />
@@ -70,8 +74,7 @@ export const Menu = () => {
             <li
               className={`btn_menu btn__logout`}
               onClick={() => {
-                Cookies.remove('refreshToken');
-                localStorage.clear();
+                dispatch(logout());
                 navigate('/login');
               }}
             >
