@@ -11,6 +11,8 @@ import { SignUp } from './components/SignUp/SignUp';
 import { Profile } from './pages/Profile/Profile';
 import { Cart } from './pages/Cart/Cart';
 import { Reset } from './components/Reset/Reset';
+import { Product } from './pages/Product/Product';
+import { Catalog } from './pages/Catalog/Catalog';
 
 function Layout() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="favorites" element={<Profile />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="product" element={<Catalog />} />
+        <Route path="product/:id" element={<Product />} />
       </Route>
     </Routes>
   );
