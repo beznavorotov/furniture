@@ -1,3 +1,9 @@
+import { CartShop } from '../../components/CartShop/CartShop';
+
 export const Cart = () => {
-  return <div>Cart</div>;
+  return (
+    <div className="container">
+      <CartShop />
+    </div>
+  );
 };
