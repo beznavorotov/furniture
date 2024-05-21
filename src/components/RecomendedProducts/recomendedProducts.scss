@@ -1,0 +1,25 @@
+.recomended-products {
+  width: 100%;
+  padding-bottom: 36px;
+
+  &__heading {
+    @include flex(flex-start);
+    gap: 4px;
+    width: 100%;
+    border-bottom: 1px solid $color-black;
+    margin-bottom: 36px;
+    margin-top: 36px;
+  }
+
+  &__title {
+    font-size: 25px;
+    color: $color-black;
+    line-height: 30px;
+    margin-bottom: 16px;
+  }
+
+  &__list {
+    @include flex(space-between);
+    gap: 20px;
+  }
+}

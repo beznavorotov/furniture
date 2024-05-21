@@ -5,6 +5,7 @@
 }
 .product {
   width: 100%;
+  margin-top: 16px;
 
   &__gallery {
     @include grid(repeat(2, 1fr), auto auto);
@@ -28,21 +29,147 @@
     flex: 1;
   }
 
+  &__heading {
+    @include flex(space-between);
+    width: 100%;
+    &--title {
+      font-size: 25px;
+      font-weight: 500;
+      line-height: 30px;
+    }
+    &--code {
+      color: $color-grey;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+
+  &__rating {
+    @include flex(flex-start);
+    gap: 7px;
+    color: $color-grey;
+    line-height: 17px;
+    margin-top: 16px;
+    margin-bottom: 18px;
+
+    &--stars {
+      margin-right: 6px;
+    }
+  }
+
+  &__addition-info {
+    width: 100%;
+    p {
+      @extend %font-basic;
+      color: $color-grey;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__price {
+    width: 100%;
+    border-top: 1px solid $color-grey;
+    border-bottom: 1px solid $color-grey;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    &--price {
+      font-size: 21px;
+      line-height: 26px;
+      font-weight: 500;
+      color: $color-blue;
+      padding-left: 8px;
+    }
+
+    &--buttons {
+      @include flex(flex-start);
+      margin-top: 32px;
+      gap: 20px;
+      .button {
+        max-width: 190px;
+        width: 100%;
+      }
+    }
+  }
+
   &__materials {
+    p {
+      @extend %font-basic;
+      color: $color-grey;
+      margin-bottom: 20px;
+    }
+
     &-samples {
       @include flex(flex-start);
       gap: 12px;
       span {
         width: 78px;
         height: 39px;
-        background-color: $color-grey;
+        background-color: #d9d9d9;
         border-radius: 3px;
+        &.active {
+          border: 2px solid $color-blue;
+        }
       }
     }
   }
 
   &__info {
     width: 100%;
-    flex: 1;
+    padding-top: 90px;
+
+    &--tabs {
+      .tablist {
+        @include flex(flex-start);
+        gap: 40px;
+        border-bottom: 1px solid $color-grey;
+        margin-bottom: 30px;
+        padding-left: 18px;
+        padding-right: 18px;
+
+        .tab {
+          font-size: 20px;
+          line-height: 24px;
+          font-weight: 400;
+          border: none;
+          border-bottom: 1px solid transparent;
+          padding: 10px;
+          background: transparent;
+
+          &.active {
+            font-weight: 600;
+            color: $color-blue;
+            border-color: $color-blue;
+          }
+
+          &--content {
+            padding: 32px 100px;
+          }
+        }
+
+        .tab__description {
+          p {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 24px;
+            margin-bottom: 20px;
+          }
+          &--content {
+          }
+        }
+
+        .tab__specs {
+          &--content {
+          }
+        }
+
+        .tab__reviews {
+          &--content {
+          }
+        }
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
 .data {
-  font-family: Montserrat;
   padding: 10px;
   margin: 10px;
   .data_header {
@@ -34,7 +33,6 @@
       margin-left: 20px;
     }
     label {
-      font-family: Montserrat;
       font-size: 16px;
       font-weight: 500;
     }
@@ -157,10 +155,9 @@
       }
     }
   }
- .btn {
-
-  min-width: 350px;
-  width: 100%;
-  margin-top: 10px;
- }
+  .button {
+    min-width: 350px;
+    width: 100%;
+    margin-top: 10px;
+  }
 }

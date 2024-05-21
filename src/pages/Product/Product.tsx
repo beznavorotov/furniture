@@ -1,3 +1,6 @@
+import { RecomendedProducts } from '../../components/RecomendedProducts/RecomendedProducts';
+import emptyStar from '../../assets/star_empty.svg';
+
 export const Product = () => {
   return (
     <section className="page-section container">
@@ -12,8 +15,9 @@ export const Product = () => {
       </div>
 
       {/* блок на майбутнє для інших сторінок */}
+      {/* TODO: винести обгортку в окремий компонент */}
       {/* <div className="page-section__heading">
-				<h1 className="page-section__title">Умовний Кошик</h1>
+				<h1 className="page-section--title">Умовний Кошик</h1>
 			</div> */}
 
       <div className="product product--container">
@@ -42,7 +46,14 @@ export const Product = () => {
           </div>
 
           <div className="product__rating">
-            <span className="product__rating--stars">*****</span>
+            {/* TODO: винести рейтинг в окремий компонент */}
+            <span className="product__rating--stars">
+              <img src={emptyStar} alt="empty star" />
+              <img src={emptyStar} alt="empty star" />
+              <img src={emptyStar} alt="empty star" />
+              <img src={emptyStar} alt="empty star" />
+              <img src={emptyStar} alt="empty star" />
+            </span>
             <span className="product__rating--count">0 відгуків</span>
             <span className="product__rating--devider">|</span>
             <span className="product__rating--add">Написати відгук</span>
@@ -54,8 +65,7 @@ export const Product = () => {
           </div>
 
           <div className="product__price">
-            {/* змінити amount на щось логічніше */}
-            <h3 className="product__price--amount">25 000 грн.</h3>
+            <h3 className="product__price--price">25 000 грн.</h3>
             <div className="product__price--buttons">
               <button className="button button__white">У кошик</button>
               <button className="button">Оплата частинами</button>
@@ -79,7 +89,7 @@ export const Product = () => {
           <div className="product__materials">
             <p>Матеріал:</p>
             <div className="product__materials-samples">
-              <span></span>
+              <span className="active"></span>
               <span></span>
               <span></span>
               <span></span>
@@ -90,12 +100,14 @@ export const Product = () => {
         <div className="product__info">
           <div className="product__info--tabs">
             <div className="tablist">
-              <button className="tablist__tab">Опис товару</button>
-              <button className="tablist__tab">Характеристики</button>
-              <button className="tablist__tab">Відгуки</button>
+              <button className="tab tab__description active">
+                Опис товару
+              </button>
+              <button className="tab tab__specs">Характеристики</button>
+              <button className="tab tab__reviews">Відгуки</button>
             </div>
 
-            <div className="tablist__tab--content">
+            <div className="tab--content tab__description--content">
               <p>
                 Диван-ліжко 3-х і 2-х місний розмір з водо- та
                 брудовідштовхувальної тканини. Диван EDGAR доступний у багатьох
@@ -115,10 +127,12 @@ export const Product = () => {
                 приміщень, де переважає природне натхнення
               </p>
             </div>
-            <div className="tablist__tab--content"></div>
-            <div className="tablist__tab--content"></div>
+            <div className="tab--content tab__specs--content"></div>
+            <div className="tab--content tab__reviews--content"></div>
           </div>
         </div>
+
+        <RecomendedProducts />
       </div>
     </section>
   );
