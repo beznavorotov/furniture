@@ -75,7 +75,6 @@
           flex-direction: column;
           min-width: 184px;
           padding: 5px;
-
         }
 
         .details_button {
@@ -179,9 +178,7 @@
   font-weight: 600;
 }
 
-
 @media screen and (max-width: 480px) {
-
   .orders {
     width: 100%;
     margin: 0;
@@ -191,7 +188,6 @@
       .order_number {
         width: 100%;
         border-right: 1px solid white;
-
       }
       .order_total {
         width: 100%;
@@ -208,11 +204,6 @@
       .order_date {
         width: 100%;
       }
-
     }
-
   }
-
-
-
 }

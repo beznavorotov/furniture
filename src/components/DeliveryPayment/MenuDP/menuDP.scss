@@ -1,0 +1,45 @@
+.pageDP {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-family-montserrat;
+  .sidebarMenu {
+    min-width: 294px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      .button_menu {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 5px;
+        list-style: none;
+        height: 60px;
+        margin: 5px 0;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 22px;
+        color: $color-black;
+        box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+        cursor: pointer;
+        &.active {
+          color: $color-blue;
+        }
+        .arrow {
+          margin-left: auto;
+          padding-right: 15px;
+        }
+      }
+    }
+  }
+  .content {
+    flex-grow: 1;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+.pageDP{
+  display: flex;
+  flex-direction: column;
+}}

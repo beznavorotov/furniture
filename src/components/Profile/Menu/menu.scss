@@ -69,9 +69,12 @@
 
 @media screen and (max-width: 480px) {
   .page {
+    display: flex;
     flex-direction: column;
     .sidebarMenu {
       width: 100%;
+      .data {
+      }
     }
     .content {
       margin-top: 20px;

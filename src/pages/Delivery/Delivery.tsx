@@ -1,3 +1,5 @@
+import { MenuDP } from "../../components/DeliveryPayment/MenuDP/MenuDP";
+
 export const Delivery = () => {
-	return <div>Delivery</div>;
+	return <MenuDP />;
 };

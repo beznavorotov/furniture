@@ -30,6 +30,10 @@
 @import './components/Carousel/carousel';
 @import './components/Static/static';
 
+@import './components/DeliveryPayment/MenuDP/menuDP';
+@import './components/DeliveryPayment/Delivery/delivery';
+@import './components/DeliveryPayment/Payment/payment';
+
 // pages
 @import './pages/About/about';
 @import './pages/Authorize/authorize';
