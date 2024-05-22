@@ -3,7 +3,7 @@ import logo from '../../assets/logo.svg';
 
 export const Footer = () => {
   const catalogLinks = [
-    { title: 'Передпокій', path: '/' },
+    { title: 'Передпокій', path: '/product' },
     { title: 'Вітальні', path: '/' },
     { title: 'Спальні', path: '/' },
     { title: 'Кухоні меблі', path: '/' },
