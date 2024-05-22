@@ -1,7 +1,34 @@
 import { RecomendedProducts } from '../../components/RecomendedProducts/RecomendedProducts';
 import emptyStar from '../../assets/star_empty.svg';
+import { useState } from 'react';
 
 export const Product = () => {
+  const [activeTab, setActiveTab] = useState('description');
+
+  const handleTabClick = (tabName: string) => setActiveTab(tabName);
+  const changeActiveTab = (tabName: string) => {
+    return activeTab === tabName ? 'active' : null;
+  };
+
+  const getDate = () => {
+    const date = new Date();
+
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  };
+
+  const tableTmpData = [
+    ['Наповнення', 'ППУ'],
+    ['Щільність набивки', '345'],
+    ['Висота', '60'],
+    ['Ширина', '270'],
+    ['Глибина', '100'],
+    ['Висота посадки', '50'],
+    ['Глибина сидіння', '90'],
+    ['Захист від кігтів', 'Так'],
+    ['Колекція', 'Базова'],
+    ['Виробник', 'Super'],
+  ];
+
   return (
     <section className="page-section container">
       <div className="page-section__breadcrumbs">
@@ -15,7 +42,6 @@ export const Product = () => {
       </div>
 
       {/* блок на майбутнє для інших сторінок */}
-      {/* TODO: винести обгортку в окремий компонент */}
       {/* <div className="page-section__heading">
 				<h1 className="page-section--title">Умовний Кошик</h1>
 			</div> */}
@@ -46,7 +72,6 @@ export const Product = () => {
           </div>
 
           <div className="product__rating">
-            {/* TODO: винести рейтинг в окремий компонент */}
             <span className="product__rating--stars">
               <img src={emptyStar} alt="empty star" />
               <img src={emptyStar} alt="empty star" />
@@ -100,35 +125,112 @@ export const Product = () => {
         <div className="product__info">
           <div className="product__info--tabs">
             <div className="tablist">
-              <button className="tab tab__description active">
+              <button
+                onClick={() => handleTabClick('description')}
+                className={`tab tab__description ${changeActiveTab(
+                  'description',
+                )}`}
+              >
                 Опис товару
               </button>
-              <button className="tab tab__specs">Характеристики</button>
-              <button className="tab tab__reviews">Відгуки</button>
+              <button
+                onClick={() => handleTabClick('specs')}
+                className={`tab tab__specs ${changeActiveTab('specs')}`}
+              >
+                Характеристики
+              </button>
+              <button
+                onClick={() => handleTabClick('reviews')}
+                className={`tab tab__reviews ${changeActiveTab('reviews')}`}
+              >
+                Відгуки
+              </button>
             </div>
 
-            <div className="tab--content tab__description--content">
-              <p>
-                Диван-ліжко 3-х і 2-х місний розмір з водо- та
-                брудовідштовхувальної тканини. Диван EDGAR доступний у багатьох
-                кольорах і різних розмірах, щоб задовольнити всі потреби
-                простору та дизайну. Диван-ліжко 100% Made in Italy.
-              </p>
-              <p>
-                З його сучасними лініями, які ніколи не залишаються поза часом,
-                він оснащений брудовідштовхувальним водонепроникним чохлом, який
-                також можна прати при 30°.
-              </p>
-              <p>
-                Оснащений відділенням для подушок у спинці, ніжки дивана
-                заввишки 13 см і оптимальні пропорції підлокітників пропонують
-                поєднання легкості та елегантності. Ідеально підходить не тільки
-                для сучасних і сучасних інтер’єрів, але також для житлових
-                приміщень, де переважає природне натхнення
-              </p>
+            <div
+              className={`tab--content tab__description--content ${changeActiveTab(
+                'description',
+              )}`}
+            >
+              <div className="tab__description--text">
+                <p>
+                  Диван-ліжко 3-х і 2-х місний розмір з водо- та
+                  брудовідштовхувальної тканини. Диван EDGAR доступний у
+                  багатьох кольорах і різних розмірах, щоб задовольнити всі
+                  потреби простору та дизайну. Диван-ліжко 100% Made in Italy.
+                </p>
+                <p>
+                  З його сучасними лініями, які ніколи не залишаються поза
+                  часом, він оснащений брудовідштовхувальним водонепроникним
+                  чохлом, який також можна прати при 30°.
+                </p>
+                <p>
+                  Оснащений відділенням для подушок у спинці, ніжки дивана
+                  заввишки 13 см і оптимальні пропорції підлокітників пропонують
+                  поєднання легкості та елегантності. Ідеально підходить не
+                  тільки для сучасних і сучасних інтер’єрів, але також для
+                  житлових приміщень, де переважає природне натхнення
+                </p>
+              </div>
             </div>
-            <div className="tab--content tab__specs--content"></div>
-            <div className="tab--content tab__reviews--content"></div>
+            <div
+              className={`tab--content tab__specs--content ${changeActiveTab(
+                'specs',
+              )}`}
+            >
+              <div className="tab__specs--table">
+                <table>
+                  <tbody>
+                    {tableTmpData.map((element, index) => (
+                      <tr key={index}>
+                        <th>{element[0]}</th>
+                        <td>{element[1]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              className={`tab--content tab__reviews--content ${changeActiveTab(
+                'reviews',
+              )}`}
+            >
+              <ul className="reviews-list">
+                <li className="review">
+                  <div className="review__heading">
+                    <h3>Софія</h3>
+                    <span>{getDate()}</span>
+                  </div>
+
+                  <div className="product__rating">
+                    <span className="product__rating--stars">
+                      <img src={emptyStar} alt="empty star" />
+                      <img src={emptyStar} alt="empty star" />
+                      <img src={emptyStar} alt="empty star" />
+                      <img src={emptyStar} alt="empty star" />
+                      <img src={emptyStar} alt="empty star" />
+                    </span>
+                  </div>
+                  <p className="review__text">
+                    Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
+                    sit id bibendum elit duis viverra purus. Commodo sed
+                    adipiscing velit non curabitur vestibulum.
+                  </p>
+                  <div className="review__proscons">
+                    <p className="review__pros">
+                      Переваги: <span>відсутні ;(</span>
+                    </p>
+                    <p className="review__cons">
+                      Недоліки: <span>також відсутні :)</span>
+                    </p>
+                  </div>
+                </li>
+                <button type="button" className="button">
+                  Написати відгук
+                </button>
+              </ul>
+            </div>
           </div>
         </div>
 

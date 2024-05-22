@@ -139,34 +139,85 @@
           background: transparent;
 
           &.active {
-            font-weight: 600;
             color: $color-blue;
             border-color: $color-blue;
           }
-
-          &--content {
-            padding: 32px 100px;
-          }
         }
+      }
 
-        .tab__description {
-          p {
-            font-size: 20px;
+      .tab--content {
+        padding: 32px 100px;
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      .tab__description {
+        &--text {
+          padding-left: 12px;
+          border-left: 1px solid $color-blue;
+        }
+        p {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 24px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .tab__specs {
+        &--table {
+          table {
+            width: 100%;
+          }
+          th,
+          td {
+            font-size: 16px;
+            color: $color-grey;
+            line-height: 20px;
+            padding: 10px;
             font-weight: 400;
-            line-height: 24px;
-            margin-bottom: 20px;
-          }
-          &--content {
+            border: 1px solid $color-grey;
           }
         }
+      }
 
-        .tab__specs {
-          &--content {
-          }
+      .reviews-list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        .button {
+          margin-top: 36px;
         }
 
-        .tab__reviews {
-          &--content {
+        .review {
+          border: 1px solid $color-lightblue-border;
+          border-radius: 3px;
+          padding: 8px;
+          padding-right: 16px;
+          &__heading {
+            @include flex(space-between);
+
+            h3 {
+              font-size: 20px;
+              line-height: 25px;
+              font-weight: 700;
+              margin-bottom: 0;
+            }
+          }
+
+          &__text,
+          &__proscons {
+            font-size: 20px;
+            line-height: 25px;
+            font-weight: 500;
+          }
+
+          &__proscons {
+            font-size: 16px;
           }
         }
       }
