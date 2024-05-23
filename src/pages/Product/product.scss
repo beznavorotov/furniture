@@ -57,11 +57,14 @@
       font-size: 25px;
       font-weight: 500;
       line-height: 30px;
+      margin-bottom: 0;
     }
     &--code {
       color: $color-grey;
       font-size: 14px;
       line-height: 17px;
+      @include tablet {
+      }
     }
   }
 
@@ -104,21 +107,34 @@
     padding-top: 12px;
     padding-bottom: 12px;
 
+    &--heading {
+      @include flex(space-between);
+    }
+
     &--price {
       font-size: 21px;
       line-height: 26px;
       font-weight: 500;
       color: $color-blue;
       padding-left: 8px;
+      margin-bottom: 0;
     }
 
     &--buttons {
       @include flex(flex-start);
       margin-top: 32px;
       gap: 20px;
+
+      @include tablet {
+        gap: 8px;
+      }
       .button {
         max-width: 190px;
         width: 100%;
+
+        @include tablet {
+          font-size: 15px !important;
+        }
       }
     }
   }
@@ -157,6 +173,9 @@
   &__info {
     width: 100%;
     padding-top: 90px;
+    @include tablet {
+      padding-top: 30px;
+    }
 
     &--tabs {
       .tablist {
@@ -168,8 +187,10 @@
         padding-right: 18px;
 
         @include tablet {
-          flex-direction: column;
-          justify-content: center;
+          justify-content: space-between;
+          gap: 8px;
+          padding-left: 0;
+          padding-right: 0;
         }
 
         .tab {
@@ -184,6 +205,11 @@
           &.active {
             color: $color-blue;
             border-color: $color-blue;
+          }
+
+          @include tablet {
+            font-size: 14px;
+            line-height: 17px;
           }
         }
       }

@@ -89,10 +89,8 @@ export const Product = () => {
           </div>
 
           <div className="product__price">
-            <h3 className="product__price--price">25 000 грн.</h3>
-            <div className="product__price--buttons">
-              <button className="button button__white">У кошик</button>
-              <button className="button">Оплата частинами</button>
+            <div className="product__price--heading">
+              <h3 className="product__price--price">25 000 грн.</h3>
               <span>
                 <svg
                   width="32"
@@ -107,6 +105,10 @@ export const Product = () => {
                   />
                 </svg>
               </span>
+            </div>
+            <div className="product__price--buttons">
+              <button className="button button__white">У кошик</button>
+              <button className="button">Оплата частинами</button>
             </div>
           </div>
 
