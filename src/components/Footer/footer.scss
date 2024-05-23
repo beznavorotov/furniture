@@ -1,10 +1,10 @@
 .footer {
-  @include flex(space-between);
+  display: flex;
+  justify-content: space-between;
   margin-top: 36px;
   padding: 36px 10px 16px;
   border-top: 1px solid $color-black;
   border-bottom: 1px solid $color-black;
-  gap: 10px;
   @include tablet {
     flex-wrap: wrap;
     align-items: flex-start;
