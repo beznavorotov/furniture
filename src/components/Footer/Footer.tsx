@@ -14,7 +14,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div className='container'>
+    <div className="container">
       <footer className="footer row">
         <div className="col-12 col-md-3 logo">
           <Link to="/">
@@ -31,6 +31,9 @@ export const Footer = () => {
           </Link>
           <Link to={'/profile'} className="text">
             Кабінет (тимчасово)
+          </Link>
+          <Link to={'/product/1'} className="text">
+            Продукт (теж тимчасово)
           </Link>
         </div>
         <div className="col-12 col-md-3 footer_groups">
@@ -71,5 +74,3 @@ export const Footer = () => {
     </div>
   );
 };
-
-

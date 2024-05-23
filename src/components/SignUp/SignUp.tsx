@@ -11,7 +11,7 @@ export const SignUp = () => {
   const [userPasswordConfirm, setUserPasswordConfirm] = useState('');
   const navigate = useNavigate();
 
-  const serverSignUpUrl = 'http://3.75.92.220:8000/users/create-user/';
+  const serverSignUpUrl = 'https://furnishop-back.pp.ua/users/create-user/';
 
   const data = {
     first_name: userName,

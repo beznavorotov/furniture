@@ -6,13 +6,16 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       // send data to server
-      const response = await fetch('http://3.75.92.220:8000/users/get-token/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://furnishop-back.pp.ua/users/get-token/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(credentials),
         },
-        body: JSON.stringify(credentials),
-      });
+      );
       console.log(credentials);
 
       if (!response.ok) {

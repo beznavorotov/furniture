@@ -5,7 +5,7 @@ export const fetchRooms = createAsyncThunk(
   // eslint-disable-next-line
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://3.75.92.220:8000/items/room/');
+      const response = await fetch('https://furnishop-back.pp.ua/items/room/');
 
       if (!response.ok) {
         throw new Error('Sorry. Response is not ok...');
