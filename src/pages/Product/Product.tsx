@@ -1,14 +1,17 @@
-import { RecomendedProducts } from '../../components/RecomendedProducts/RecomendedProducts';
+import { RecommendedProducts } from '../../components/RecommendedProducts/RecommendedProducts';
 import emptyStar from '../../assets/star_empty.svg';
 import { useState } from 'react';
 
 export const Product = () => {
   const [activeTab, setActiveTab] = useState('description');
+  const [activeMaterial, setActiveMaterial] = useState(0);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
   const changeActiveTab = (tabName: string) => {
     return activeTab === tabName ? 'active' : null;
   };
+
+  const handleMaterialClick = (index) => setActiveMaterial(index);
 
   const getDate = () => {
     const date = new Date();
@@ -114,10 +117,27 @@ export const Product = () => {
           <div className="product__materials">
             <p>Матеріал:</p>
             <div className="product__materials-samples">
-              <span className="active"></span>
-              <span></span>
-              <span></span>
-              <span></span>
+              {[
+                'wood',
+                'gold',
+                'silver',
+                'titanium',
+                'stone',
+                'cloth',
+                'leather',
+              ].map((item, index) => (
+                <span
+                  key={index}
+                  className={`material-sample ${
+                    activeMaterial === index ? 'active' : null
+                  }`}
+                  onClick={() => {
+                    handleMaterialClick(index);
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -233,9 +253,8 @@ export const Product = () => {
             </div>
           </div>
         </div>
-
-        <RecomendedProducts />
       </div>
+      <RecommendedProducts />
     </section>
   );
 };

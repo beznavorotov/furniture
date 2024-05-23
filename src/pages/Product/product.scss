@@ -103,12 +103,17 @@
 
     &-samples {
       @include flex(flex-start);
+      flex-wrap: wrap;
       gap: 12px;
-      span {
-        width: 78px;
-        height: 39px;
+      max-width: 450px;
+      .material-sample {
+        @include flex;
+        width: 80px;
+        height: 40px;
         background-color: #d9d9d9;
         border-radius: 3px;
+        border: 2px solid #d9d9d9;
+        cursor: pointer;
         &.active {
           border: 2px solid $color-blue;
         }
