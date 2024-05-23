@@ -51,21 +51,15 @@ export const Product = () => {
 
       <div className="product product--container">
         <div className="product__gallery">
-          <img
-            className="product__gallery--item1"
-            src="https://picsum.photos/715/447"
-            alt=""
-          />
-          <img
-            className="product__gallery--item2"
-            src="https://picsum.photos/400/271"
-            alt=""
-          />
-          <img
-            className="product__gallery--item3"
-            src="https://picsum.photos/295/271"
-            alt=""
-          />
+          <div className="product__gallery--item item1">
+            <img src="https://picsum.photos/715/447" alt="" />
+          </div>
+          <div className="product__gallery--item item2">
+            <img src="https://picsum.photos/400/271" alt="" />
+          </div>
+          <div className="product__gallery--item item3">
+            <img src="https://picsum.photos/295/271" alt="" />
+          </div>
         </div>
 
         <div className="product__order">
@@ -82,9 +76,11 @@ export const Product = () => {
               <img src={emptyStar} alt="empty star" />
               <img src={emptyStar} alt="empty star" />
             </span>
-            <span className="product__rating--count">0 відгуків</span>
-            <span className="product__rating--devider">|</span>
-            <span className="product__rating--add">Написати відгук</span>
+            <div className="product__rating--reviews">
+              <span className="product__rating--count">0 відгуків</span>
+              <span className="product__rating--devider">|</span>
+              <span className="product__rating--add">Написати відгук</span>
+            </div>
           </div>
 
           <div className="product__addition-info">
