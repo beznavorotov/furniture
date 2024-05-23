@@ -38,59 +38,7 @@ export const Header = () => {
                     Головна
                   </NavLink>
                 </li>
-                <li className="nav-item dropdown d-block d-sm-none">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Каталог товарів
-                  </Link>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Передпокій
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Вітальні
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Спальні
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Кухоні мебелі
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Дитячі мебелі
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Офісні мебелі
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Ванна кімната
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Гардеробні
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
+
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/promotions">
                     Акції
