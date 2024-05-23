@@ -1,21 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
+import { BACKEND_LOGIN_URL } from '../../constants';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
       // send data to server
-      const response = await fetch(
-        'https://furnishop-back.pp.ua/users/get-token/',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(credentials),
+      const response = await fetch(BACKEND_LOGIN_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(credentials),
+      });
       console.log(credentials);
 
       if (!response.ok) {

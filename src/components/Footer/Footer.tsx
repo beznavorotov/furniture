@@ -9,7 +9,7 @@ export const Footer = () => {
     { title: 'Кухоні меблі', path: '/' },
     { title: 'Дитячі меблі', path: '/' },
     { title: 'Офісні меблі', path: '/' },
-    { title: 'Вана кімната', path: '/' },
+    { title: 'Ванна кімната', path: '/' },
     { title: 'Гардеробні', path: '/' },
   ];
 
@@ -30,10 +30,10 @@ export const Footer = () => {
             Доставка і оплата
           </Link>
           <Link to={'/profile'} className="text">
-            Кабінет (тимчасово)
+            Кабінет (tmp)
           </Link>
           <Link to={'/product/1'} className="text">
-            Продукт (теж тимчасово)
+            Продукт (tmp)
           </Link>
         </div>
         <div className="col-12 col-md-3 footer_groups">

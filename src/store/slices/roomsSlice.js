@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { BACKEND_CATEGORIES_URL } from '../../constants';
 
 export const fetchRooms = createAsyncThunk(
   'rooms/fetchRooms',
   // eslint-disable-next-line
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('https://furnishop-back.pp.ua/items/room/');
+      const response = await fetch(BACKEND_CATEGORIES_URL);
 
       if (!response.ok) {
         throw new Error('Sorry. Response is not ok...');

@@ -9,6 +9,10 @@
     border-bottom: 1px solid $color-black;
     margin-bottom: 36px;
     margin-top: 36px;
+    @include tablet {
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
   }
 
   &__title {
@@ -16,6 +20,11 @@
     color: $color-black;
     line-height: 30px;
     margin-bottom: 16px;
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 8px;
+    }
   }
 
   &__list {
