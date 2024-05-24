@@ -11,7 +11,3 @@
 - винести обгортку `page-section` в окремий компонент
 - винести рейтинг `product__rating` в окремий компонент
 - переробити функціонал з табами `tablist`
-
-## Header
-
-- клік на `category-list__item` => `category-list__hidden-column active`
