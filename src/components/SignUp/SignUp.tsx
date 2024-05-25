@@ -68,7 +68,7 @@ export const SignUp = () => {
               onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Створити аккаунт</h2>
-              <span className="input__required m-bottom">
+              <span className="input__required">
                 <input
                   type="text"
                   name="name"
@@ -79,15 +79,18 @@ export const SignUp = () => {
                   required
                 />
               </span>
-              <input
-                type="text"
-                name="userSurname"
-                id="userSurnameInput"
-                placeholder="Прізвище"
-                value={userSurname}
-                onChange={(e) => setUserSurname(e.target.value)}
-              />
-              <span className="input__required m-top">
+              <span className="input__required">
+                <input
+                  type="text"
+                  name="userSurname"
+                  id="userSurnameInput"
+                  placeholder="Прізвище"
+                  value={userSurname}
+                  onChange={(e) => setUserSurname(e.target.value)}
+                  required
+                />
+              </span>
+              <span className="input__required">
                 <input
                   type="email"
                   name="email"
