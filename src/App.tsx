@@ -13,10 +13,12 @@ import { Cart } from './pages/Cart/Cart';
 import { Reset } from './components/Reset/Reset';
 import { Product } from './pages/Product/Product';
 import { Catalog } from './pages/Catalog/Catalog';
+import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 
 function Layout() {
   return (
     <>
+      <AddToCartModalWindow />
       <Header />
       <Outlet />
       <Footer />

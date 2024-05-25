@@ -10,8 +10,8 @@ export const AddToCartModalWindow = () => {
 
   return (
     <>
-      <div className={`modal--overlay ${isModalOpen ? 'show' : 'hide'}`}></div>
-      <section className={`add-to-cart-modal ${isModalOpen ? 'show' : 'hide'}`}>
+      <div className={`modal--overlay ${isModalOpen ? 'show' : ''}`}></div>
+      <section className={`add-to-cart-modal ${isModalOpen ? 'show' : ''}`}>
         <div className="modal__heading">
           <h2 className="modal__title">Додати в кошик</h2>
           <span
