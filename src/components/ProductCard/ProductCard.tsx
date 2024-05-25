@@ -1,9 +1,11 @@
 import heart from '../../assets/heart.svg';
 import starEmpty from '../../assets/star_empty.svg';
 import starFull from '../../assets/star_full.svg';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setShowModal } from '../../store/slices/modalSlice';
 
 const ProductCard = ({ img, name, price, newPrice }) => {
+  const dispatch = useDispatch();
   return (
     <div className="col-12 col-md-3 product-card">
       <img src={heart} alt="heart" className="heart" />
@@ -29,7 +31,10 @@ const ProductCard = ({ img, name, price, newPrice }) => {
 
           <span className="price price--new">{newPrice}</span>
 
-          <Link className="button button__cart" to="/">
+          <button
+            className="button button__cart"
+            onClick={() => dispatch(setShowModal(true))}
+          >
             <svg
               width="24"
               height="24"
@@ -43,7 +48,7 @@ const ProductCard = ({ img, name, price, newPrice }) => {
                 fill=""
               />
             </svg>
-          </Link>
+          </button>
         </div>
       </div>
     </div>

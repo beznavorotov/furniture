@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import sofaGreen from '../../assets/sofa_green.jpg';
 import close from '../../assets/icons/close.svg';
 
@@ -104,7 +104,9 @@ export const CartShop = () => {
       {cartProducts.length === 0 ? (
         <div className="empty_cart_message">
           <h1>Ваш кошик порожній</h1>
-          <Link to="/" className="button">До покупок</Link>
+          <Link to="/" className="button">
+            До покупок
+          </Link>
         </div>
       ) : (
         <div className="cart_content">
@@ -122,15 +124,21 @@ export const CartShop = () => {
                         Код товару: <span>{product.article}</span>
                       </span>
                       <span className="order_product_price">
-                        <span className="product_price">{product.price} грн</span>
+                        <span className="product_price">
+                          {product.price} грн
+                        </span>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="quantity_controls">
-                  <button onClick={() => decrementQuantity(product.id)}>-</button>
+                  <button onClick={() => decrementQuantity(product.id)}>
+                    -
+                  </button>
                   <span>{product.quantity}</span>
-                  <button onClick={() => incrementQuantity(product.id)}>+</button>
+                  <button onClick={() => incrementQuantity(product.id)}>
+                    +
+                  </button>
                 </div>
                 <div className="order_price">
                   <span className="total_price">
@@ -186,7 +194,9 @@ export const CartShop = () => {
                 <span>{getTotalPrice() - discount} грн</span>
               </div>
             </div>
-            <button className="button button__order">Оформити замовлення</button>
+            <button className="button button__order">
+              Оформити замовлення
+            </button>
           </div>
         </div>
       )}
