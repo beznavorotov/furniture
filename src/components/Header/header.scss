@@ -67,42 +67,23 @@
       padding: 0 !important;
       background-color: $color-white-bg;
     }
-
-   
-  }
-
-  .user__actions {
-    @include flex();
-    gap: 30px;
-
-    a {
-      @include flex();
-      width: 24px;
-      height: 24px;
-
-      & path {
-        fill: $color-blue;
-      }
-
-      &.active {
-        path {
-          fill: $color-black;
-        }
-      }
-    }
   }
 
   @include tablet {
-    .header__navigation--list,
-    .user__actions {
+    .header__navigation--list {
       display: none;
     }
     .header__search {
+      flex-direction: column;
+      gap: 24px;
       width: 100%;
       margin-top: 24px;
       margin-bottom: 24px;
       .form--search {
         width: 100%;
+      }
+      .user__actions {
+        margin-left: auto;
       }
     }
   }

@@ -1,0 +1,20 @@
+.user__actions {
+  @include flex();
+  gap: 30px;
+
+  a {
+    @include flex();
+    width: 24px;
+    height: 24px;
+
+    & path {
+      fill: $color-blue;
+    }
+
+    &.active {
+      path {
+        fill: $color-black;
+      }
+    }
+  }
+}
