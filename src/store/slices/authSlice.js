@@ -14,7 +14,6 @@ export const login = createAsyncThunk(
         },
         body: JSON.stringify(credentials),
       });
-      console.log(credentials);
 
       if (!response.ok) {
         throw new Error('Something goes wrong with log in');
@@ -31,6 +30,8 @@ export const login = createAsyncThunk(
   },
 );
 
+export const refreshToken = createAsyncThunk('auth/resresh', async () => {});
+
 export const logout = createAsyncThunk('auth/logout', async () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('user');
@@ -41,10 +42,11 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: localStorage.getItem('user') || null,
-    accessToken: localStorage.getItem('accessToken') || null,
+    user: null,
+    accessToken: null,
     status: 'idle',
     error: null,
+    isAuth: false,
   },
 
   reducers: {
@@ -59,6 +61,9 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state) => {
         state.status = 'succeeded';
+        state.isAuth = true;
+        state.user = localStorage.getItem('user');
+        state.accessToken = localStorage.getItem('accessToken');
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
@@ -67,7 +72,8 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.status = 'idle';
         state.user = null;
-        state.token = null;
+        state.accessToken = null;
+        state.isAuth = false;
       });
   },
 });

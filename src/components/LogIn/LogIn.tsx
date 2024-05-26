@@ -13,6 +13,7 @@ export const LogIn = () => {
   const [password, setPassword] = useState('');
   const authStatus = useSelector((state: RootState) => state.auth.status);
   const authError = useSelector((state: RootState) => state.auth.error);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   // login test subject
   // id: 15
@@ -46,9 +47,7 @@ export const LogIn = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
-      navigate('/profile');
-    }
+    if (isAuth) navigate('/profile');
   });
 
   return (

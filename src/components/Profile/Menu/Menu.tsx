@@ -12,7 +12,7 @@ import { RootState } from '../../../store/';
 
 export const Menu = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const [menuItem, setMenuItem] = useState('orders');
   const navigate = useNavigate();
 
@@ -42,7 +42,9 @@ export const Menu = () => {
 
             <div className="name">
               <h2 className="name_user">Ім'я Прізвище</h2>
-              <a href="/">{user ? user : 'Авторизуйтесь'}</a>
+              <a href="/">
+                {isAuth ? localStorage.getItem('user') : 'Авторизуйтесь'}
+              </a>
             </div>
           </div>
 
@@ -60,13 +62,17 @@ export const Menu = () => {
               Персональні дані <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`button_menu ${menuItem === 'favorites' ? 'active' : ''}`}
+              className={`button_menu ${
+                menuItem === 'favorites' ? 'active' : ''
+              }`}
               onClick={() => setMenuItem('favorites')}
             >
               Список обраного <img src={arrow} alt="" className="arrow" />
             </li>
             <li
-              className={`button_menu ${menuItem === 'reviews' ? 'active' : ''}`}
+              className={`button_menu ${
+                menuItem === 'reviews' ? 'active' : ''
+              }`}
               onClick={() => setMenuItem('reviews')}
             >
               Мої відгуки <img src={arrow} alt="" className="arrow" />
