@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRooms } from '../../store/slices/roomsSlice';
 import { RootState } from '../../store';
@@ -8,6 +8,7 @@ export const CatalogMenu: React.FC = () => {
   const rooms = useSelector((state: RootState) => state.rooms.items);
   const roomStatus = useSelector((state: RootState) => state.rooms.status);
   const [isVisible, setIsVisible] = useState('');
+  const categoryListRef = useRef(null);
 
   const toggleVisibility = (id) => {
     setIsVisible((prevState) => (prevState === id ? null : id));
@@ -19,10 +20,26 @@ export const CatalogMenu: React.FC = () => {
     }
   }, [roomStatus, dispatch]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        categoryListRef.current &&
+        !categoryListRef.current.contains(event.target)
+      ) {
+        setIsVisible(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="catalog__menu">
       <h1 className="catalog__menu--title">Каталог товарів</h1>
-      <ul className="category-list">
+      <ul className="category-list" ref={categoryListRef}>
         {rooms.map((room) => (
           <li
             key={room.id}

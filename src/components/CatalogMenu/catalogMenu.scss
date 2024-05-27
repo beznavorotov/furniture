@@ -1,12 +1,12 @@
 .header .catalog__menu {
   display: none;
   @include tablet {
-    @include flex-column();
+    @include flex-column;
     width: 100%;
   }
 }
 .catalog__menu {
-  overflow-y: scroll;
+  // overflow-y: scroll;
   max-height: 574px;
   transition: all 0.5s ease-out;
   @include tablet {
@@ -23,7 +23,8 @@
   }
 
   .category-list {
-    @include flex-column();
+    @include flex-column;
+    position: relative;
     list-style: none;
     padding: 0;
     counter-reset: list;
@@ -34,7 +35,7 @@
     }
 
     .category-list__item {
-      position: relative;
+      // position: relative;
       @include flex-column(flex-start, flex-start);
       gap: 24px;
       cursor: pointer;
@@ -66,12 +67,12 @@
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          width: 16px;
-          height: 16px;
+          width: 12px;
+          height: 12px;
           margin-left: auto;
-
-          &.rotate {
-            transform: rotate(180deg);
+          transform: rotate(270deg);
+          @include tablet {
+            transform: rotate(0);
           }
         }
       }
@@ -87,14 +88,32 @@
 
   // підкатегорії
   .category-list__hidden-column {
+    position: absolute;
     display: none;
     gap: 8px;
-    // max-width: 295px;
+    max-width: 295px;
     width: 100%;
+    top: 0;
+    left: 100%;
+    height: 100%;
+
     z-index: 10;
     padding: 8px 24px;
+    padding-top: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     background-color: $color-white-bg;
-    box-shadow: 0px 3px 3px 0px rgba(4, 72, 173, 0.25);
+
+    @include tablet {
+      position: static;
+      transform: none;
+      max-width: 100%;
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 0;
+      margin-bottom: 20px;
+      box-shadow: 0px 3px 3px 0px rgba(4, 72, 173, 0.25);
+    }
 
     .subcategory-list {
       @include flex-column(flex-start);
@@ -117,7 +136,14 @@
       }
     }
   }
+  // .category-list__item:hover .category-list__hidden-column,
   .category-list__hidden-column.show {
     display: flex;
+  }
+
+  @include tablet {
+    .category-list__item:hover .category-list__hidden-column {
+      // display: none;
+    }
   }
 }
