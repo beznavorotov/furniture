@@ -25,10 +25,16 @@
 // media
 $mobile-width: 390px;
 $tablet-width: 992px;
+$tablet-sm-width: 640px;
 $desktop-width: 1200px;
 
 @mixin mobile {
   @media only screen and (max-width: $mobile-width) {
+    @content;
+  }
+}
+@mixin tablet-sm {
+  @media only screen and (max-width: $tablet-sm-width) {
     @content;
   }
 }
@@ -37,7 +43,6 @@ $desktop-width: 1200px;
     @content;
   }
 }
-
 @mixin desktop {
   @media only screen and (max-width: $desktop-width) {
     @content;

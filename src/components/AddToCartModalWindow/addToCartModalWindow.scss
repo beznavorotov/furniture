@@ -17,7 +17,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 1140px;
+  max-width: 960px;
   width: 100%;
   background-color: $color-white-bg;
   padding: 16px;
@@ -27,6 +27,14 @@
     display: block;
   }
 
+  @include tablet {
+    max-width: 720px;
+  }
+  @include tablet-sm {
+    max-width: 100%;
+    height: 100%;
+  }
+
   .modal__heading {
     @include flex(space-between);
     border-bottom: 1px solid $color-grey;
@@ -34,9 +42,8 @@
     margin-bottom: 24px;
 
     @include tablet {
-      padding-bottom: 14px;
-      border-bottom: none;
-      margin-bottom: 0;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
     }
 
     .modal__title {
@@ -54,6 +61,110 @@
 
     .modal__close {
       cursor: pointer;
+    }
+  }
+
+  .modal__content {
+    @include flex(space-between);
+    gap: 40px;
+
+    @include tablet-sm {
+      flex-direction: column;
+      gap: 25px;
+      height: calc(100% - 38px);
+      justify-content: flex-start;
+    }
+
+    .modal__details {
+      @include flex;
+      gap: 20px;
+      max-width: 358px;
+      width: 100%;
+
+      .modal__media {
+        max-width: 85px;
+        width: 100%;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .modal__details-list {
+        @include flex-column(center, flex-start);
+        list-style: none;
+        margin-bottom: 0;
+        padding-left: 0;
+        gap: 10px;
+        @extend %font-basic;
+
+        .details-list__title {
+          font-weight: 500;
+        }
+        .details-list__color,
+        .details-list__code {
+          font-size: 12px;
+          line-height: 14px;
+          color: $color-grey;
+        }
+        .details-list__price {
+          font-weight: 500;
+          color: $color-blue;
+        }
+      }
+    }
+
+    .modal__actions {
+      @include flex;
+      width: 120px;
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 600;
+
+      button {
+        @include flex;
+        border: none;
+        color: $color-blue;
+        width: 30px;
+        height: 30px;
+        font-size: 26px;
+        line-height: 30px;
+        border-radius: 3px;
+        background-color: $color-grey-light;
+        &:active {
+          color: $color-lightblue-border;
+        }
+      }
+
+      input {
+        width: 50px;
+        text-align: center;
+        border: none;
+        background-color: $color-white-bg;
+      }
+    }
+
+    .modal__total-info {
+      @extend %font-basic;
+      max-width: 358px;
+      width: 100%;
+
+      @include tablet-sm {
+        margin-top: auto;
+      }
+
+      .modal__total-info--item {
+        @include flex(space-between);
+        font-weight: 500;
+      }
+      .modal__total-info--total-sum {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+      .button__white {
+        margin-top: 8px;
+      }
     }
   }
 }

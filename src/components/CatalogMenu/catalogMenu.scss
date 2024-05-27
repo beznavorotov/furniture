@@ -6,7 +6,6 @@
   }
 }
 .catalog__menu {
-  // overflow-y: scroll;
   max-height: 574px;
   transition: all 0.5s ease-out;
   @include tablet {
@@ -35,7 +34,6 @@
     }
 
     .category-list__item {
-      // position: relative;
       @include flex-column(flex-start, flex-start);
       gap: 24px;
       cursor: pointer;
@@ -136,14 +134,7 @@
       }
     }
   }
-  // .category-list__item:hover .category-list__hidden-column,
   .category-list__hidden-column.show {
     display: flex;
-  }
-
-  @include tablet {
-    .category-list__item:hover .category-list__hidden-column {
-      // display: none;
-    }
   }
 }
