@@ -192,6 +192,23 @@ export const Orders = () => {
           Скасовані
         </span>
       </div>
+      <div className="header_orders">
+        <div className="order_header">
+          <span>Номер замовлення:</span>
+        </div>
+        <div className="order_header">
+          <span>Сума замовлення:</span>
+        </div>
+        <div className="order_header">
+          <span>Кількість товарів:</span>
+        </div>
+        <div className="order_header">
+          <span>Статус замовлень:</span>
+        </div>
+        <div className="order_header">
+          <span>Дата замовлення:</span>
+        </div>
+      </div>
       <div className="orders_group">
         <div className="orders_list">
           {orders.map((order: any) => (
@@ -201,25 +218,25 @@ export const Orders = () => {
               onClick={() => showOrderDetails(order)}
             >
               <div className="order_number">
-                <span>Номер замовлення:</span>
-                <span className="order_bold">{order.number}</span>
+                <span className='text_none'>Номер замовлення:</span>
+                <span className="order_bold">№ {order.number}</span>
               </div>
               <div className="order_total">
-                <span>Загальна сума:</span>
+                <span className='text_none'>Загальна сума:</span>
                 <span className="order_bold">{order.total} грн</span>
               </div>
               <div className="order_quantity">
-                <span>Кількість товарів:</span>
-                <span className="order_bold">{order.quantity}</span>
+                <span className='text_none'>Кількість товарів:</span>
+                <span className="order_bold">{order.quantity} шт.</span>
               </div>
               <div className="order_status">
-                <span>Статус:</span>
+                <span className='text_none'>Статус:</span>
                 <span className={getStatusColorClass(order.status)}>
                   {order.status}
                 </span>
               </div>
               <div className="order_date">
-                <span>Дата замовлення:</span>
+                <span className='text_none'>Дата замовлення:</span>
                 <span className="order_bold">{order.date}</span>
               </div>
               <div

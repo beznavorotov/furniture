@@ -21,7 +21,22 @@
       }
     }
   }
-
+  .header_orders {
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+    margin: 10px;
+    padding: 10px;
+    width: 99%;
+    .order_header {
+      font-size: 16px;
+      font-weight: 500;
+      color: $color-black;
+      span {
+        margin-right: 35px;
+      }
+    }
+  }
   .orders_group {
     padding-left: 10px;
     padding-top: 10px;
@@ -36,6 +51,7 @@
         padding: 10px;
         margin-bottom: 5px;
         box-shadow: 0px 3px 3px 0px rgba(0, 60, 166, 0.15);
+
         .order_bold {
           padding: 10px;
           font-size: 16px;
@@ -47,6 +63,9 @@
           border-right: 1px solid rgba(0, 60, 166, 0.15);
           min-width: 184px;
           padding: 5px;
+          .text_none {
+            display: none;
+          }
         }
         .order_total {
           display: flex;
@@ -54,6 +73,9 @@
           border-right: 1px solid rgba(0, 60, 166, 0.15);
           min-width: 184px;
           padding: 5px;
+          .text_none {
+            display: none;
+          }
         }
         .order_quantity {
           display: flex;
@@ -61,6 +83,9 @@
           border-right: 1px solid rgba(0, 60, 166, 0.15);
           min-width: 184px;
           padding: 5px;
+          .text_none {
+            display: none;
+          }
         }
         .order_status {
           display: flex;
@@ -68,12 +93,18 @@
           border-right: 1px solid rgba(0, 60, 166, 0.15);
           min-width: 184px;
           padding: 5px;
+          .text_none {
+            display: none;
+          }
         }
         .order_date {
           display: flex;
           flex-direction: column;
           min-width: 184px;
           padding: 5px;
+          .text_none {
+            display: none;
+          }
         }
 
         .details_button {
@@ -181,26 +212,92 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    .order {
-      font-size: 14px;
-      .order_number {
-        width: 100%;
-        border-right: 1px solid white;
+    .header_orders {
+      display: none;
+      .order_header {
+        display: none;
       }
-      .order_total {
-        width: 100%;
-        border-right: 1px solid white;
-      }
-      .order_quantity {
-        width: 100%;
-        border-right: 1px solid white;
-      }
-      .order_status {
-        width: 100%;
-        border-right: 1px solid white;
-      }
-      .order_date {
-        width: 100%;
+    }
+
+    .orders_group {
+      .orders_list {
+        display: flex;
+        flex-direction: column;
+        .order {
+          display: flex;
+          text-align: left;
+          font-size: 14px;
+
+          .order_number {
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            .text_none {
+              display: flex;
+            }
+          }
+          .order_total {
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            .text_none {
+              display: flex;
+            }
+          }
+          .order_quantity {
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            .text_none {
+              display: flex;
+            }
+          }
+          .order_status {
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            .text_none {
+              display: flex;
+            }
+          }
+          .order_date {
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            .text_none {
+              display: flex;
+            }
+          }
+          .details_button {
+            font-weight: bold;
+          }
+        }
+
       }
     }
   }
