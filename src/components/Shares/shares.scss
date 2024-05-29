@@ -1,0 +1,81 @@
+.shares {
+  font-family: $font-family-montserrat;
+  .share {
+    display: flex;
+    position: relative;
+    margin-bottom: 24px;
+    .banner {
+      max-width: 400px;
+
+      img {
+        width: 100%;
+      }
+    }
+    .proposition {
+      position: relative;
+      padding-left: 20px;
+
+      .text {
+        h2 {
+          font-size: 30px;
+          font-weight: 500;
+          padding-bottom: 10px;
+        }
+        p {
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+      .date {
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        p {
+          font-size: 16px;
+          font-weight: 400;
+          color: $color-blue;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .shares {
+
+    .share {
+      display: flex;
+      flex-direction: column;
+
+      .proposition {
+        padding: 0px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+
+        .text {
+            margin-bottom: 30px;
+          h2 {
+            font-size: 20px;
+            font-weight: 500;
+            padding-bottom: 10px;
+            padding-top: 10px;
+          }
+          p {
+            display: none;
+          }
+        }
+        .date {
+            position: absolute;
+                        top: auto;
+            left:  0px;
+            p {
+              font-size: 16px;
+              font-weight: 400;
+              color: $color-blue;
+            }
+          }
+      }
+    }
+  }
+}
