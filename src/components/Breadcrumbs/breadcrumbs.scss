@@ -1,0 +1,17 @@
+.breadcrumbs {
+  @include flex(flex-start);
+  gap: 4px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 18px;
+  color: $color-grey;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid $color-black;
+  @include tablet {
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 0;
+  }
+}

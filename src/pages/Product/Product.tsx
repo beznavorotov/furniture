@@ -1,6 +1,7 @@
 import { RecommendedProducts } from '../../components/RecommendedProducts/RecommendedProducts';
 import emptyStar from '../../assets/star_empty.svg';
 import { useState } from 'react';
+import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 
 export const Product = () => {
   const [activeTab, setActiveTab] = useState('description');
@@ -33,22 +34,7 @@ export const Product = () => {
   ];
 
   return (
-    <section className="page-section container">
-      <div className="page-section__breadcrumbs">
-        <span>Головна</span>
-        <span>/</span>
-        <span>Вітальні</span>
-        <span>/</span>
-        <span>Дивани</span>
-        <span>/</span>
-        <span>Диван</span>
-      </div>
-
-      {/* блок на майбутнє для інших сторінок */}
-      {/* <div className="page-section__heading">
-				<h1 className="page-section--title">Умовний Кошик</h1>
-			</div> */}
-
+    <PageSectionWrapper title="">
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--item item1">
@@ -253,6 +239,6 @@ export const Product = () => {
         </div>
       </div>
       <RecommendedProducts />
-    </section>
+    </PageSectionWrapper>
   );
 };

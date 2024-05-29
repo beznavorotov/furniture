@@ -1,0 +1,7 @@
+// page section
+.page-section {
+  @include flex-column();
+  &__header{
+    width: 100%;
+  }
+}
