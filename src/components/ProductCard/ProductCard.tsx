@@ -4,17 +4,19 @@ import starFull from '../../assets/star_full.svg';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
 
-const ProductCard = ({ img, name, price, newPrice }) => {
+const ProductCard = ({ img, name, price, newPrice, cardSize, rating }) => {
   const dispatch = useDispatch();
   return (
-    <div className="col-12 col-md-3 product-card">
+    <div className={`col-12 col-md-3 product-card ${cardSize}`}>
       <img src={heart} alt="heart" className="heart" />
       <div className="product-card__img">
         <img src={img} alt="chair" className="chair" />
       </div>
 
       <div className="product-card__info">
-        <p className="text_card">{name}</p>
+        <p className="text_card">
+          {name.length > 24 ? name.slice(0, 25) + '...' : name}
+        </p>
         <span className="stars">
           <img src={starFull} alt="starFull" />
           <img src={starFull} alt="starFull" />
@@ -23,13 +25,14 @@ const ProductCard = ({ img, name, price, newPrice }) => {
           <img src={starEmpty} alt="starEmpty" />
         </span>
         <div className="card_price">
-          {newPrice === '' ? (
-            <span className="price">{price}</span>
+          {newPrice === null ? (
+            <span className="price">{Math.floor(price)} грн</span>
           ) : (
-            <span className="price price--sale">{price}</span>
+            <>
+              <span className="price price--sale">{Math.floor(price)} грн</span>
+              <span className="price price--new">{Math.floor(newPrice)} грн</span>
+            </>
           )}
-
-          <span className="price price--new">{newPrice}</span>
 
           <button
             className="button button__cart"

@@ -1,0 +1,16 @@
+.catalog {
+  width: 100%;
+  @include flex(space-between, stretch);
+  gap: 20px;
+
+  &-sidebar {
+    @include flex-column(flex-start, flex-start);
+    flex: 1;
+    background-color: pink;
+  }
+
+  &-content {
+    @include grid(repeat(5, auto), auto);
+    gap: 20px;
+  }
+}

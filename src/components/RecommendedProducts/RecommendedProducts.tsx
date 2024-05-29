@@ -6,26 +6,26 @@ export const RecommendedProducts = () => {
     {
       id: 0o01,
       name: 'Лампа чорна рекомендована',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
     {
       id: 0o02,
       name: 'Лампа чорна, але виглядає як сіра',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
     {
       id: 0o03,
       name: 'Лампа не така вже й чорна',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
     {
       id: 0o04,
       name: 'Лампа чорна, але могла бути й чорніша',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
   ];
 
@@ -40,8 +40,10 @@ export const RecommendedProducts = () => {
             key={product.id}
             name={product.name}
             price={product.price}
-            newPrice={''}
+            newPrice={null}
+            cardSize={null}
             img={lamp}
+            rating={null}
           />
         ))}
       </div>

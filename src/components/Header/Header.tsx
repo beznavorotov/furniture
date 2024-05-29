@@ -29,6 +29,11 @@ export const Header = () => {
             >
               <ul className="header__navigation--list navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
+                  <NavLink className="nav-link" to="/catalog">
+                    Каталог
+                  </NavLink>
+                </li>
+                <li className="nav-item">
                   <NavLink className="nav-link" to="/">
                     Головна
                   </NavLink>

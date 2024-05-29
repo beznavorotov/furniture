@@ -4,10 +4,10 @@ import chair from '../../assets/chair.png';
 
 export const Bestsellers = () => {
   const products = [
-    { id: 0o11, name: 'Крісло Дюна', price: '3000 грн' },
-    { id: 0o22, name: 'Крісло Месія Дюни', price: '3000 грн' },
-    { id: 0o33, name: 'Крісло Діти Дюни', price: '3000 грн' },
-    { id: 0o44, name: 'Крісло Бог Імператор Дюни', price: '3000 грн' },
+    { id: 0o11, name: 'Крісло Дюна', price: '3000' },
+    { id: 0o22, name: 'Крісло Месія Дюни', price: '3000' },
+    { id: 0o33, name: 'Крісло Діти Дюни', price: '3000' },
+    { id: 0o44, name: 'Крісло Бог Імператор Дюни', price: '3000' },
   ];
 
   return (
@@ -24,8 +24,10 @@ export const Bestsellers = () => {
           key={product.id}
           name={product.name}
           price={product.price}
-          newPrice={''}
+          newPrice={null}
           img={chair}
+          cardSize={null}
+          rating={null}
         />
       ))}
     </div>

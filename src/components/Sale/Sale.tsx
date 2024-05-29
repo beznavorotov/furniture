@@ -4,19 +4,19 @@ import lamp from '../../assets/lamp.jpg';
 
 export const Sale = () => {
   const products = [
-    { id: 0o1, name: 'Лампа чорна', price: '1000 грн', action: '800 грн' },
-    { id: 0o2, name: 'Лампа дуже чорна', price: '1000 грн', action: '800 грн' },
+    { id: 0o1, name: 'Лампа чорна', price: '1000', action: '800' },
+    { id: 0o2, name: 'Лампа дуже чорна', price: '1000', action: '800' },
     {
       id: 0o3,
       name: 'Лампа не така вже й чорна',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
     {
       id: 0o4,
       name: 'Лампа чорна, але могла бути й чорніша',
-      price: '1000 грн',
-      action: '800 грн',
+      price: '1000',
+      action: '800',
     },
   ];
 
@@ -36,6 +36,8 @@ export const Sale = () => {
           price={product.price}
           newPrice={product.action}
           img={lamp}
+          cardSize={null}
+          rating={null}
         />
       ))}
     </section>
