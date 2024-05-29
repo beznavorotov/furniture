@@ -10,7 +10,7 @@ const ProductCard = ({ img, name, price, newPrice, cardSize, rating }) => {
     <div className={`col-12 col-md-3 product-card ${cardSize}`}>
       <img src={heart} alt="heart" className="heart" />
       <div className="product-card__img">
-        <img src={img} alt="chair" className="chair" />
+        <img src={img} alt="chair" className="chair" loading="lazy" />
       </div>
 
       <div className="product-card__info">
@@ -30,7 +30,9 @@ const ProductCard = ({ img, name, price, newPrice, cardSize, rating }) => {
           ) : (
             <>
               <span className="price price--sale">{Math.floor(price)} грн</span>
-              <span className="price price--new">{Math.floor(newPrice)} грн</span>
+              <span className="price price--new">
+                {Math.floor(newPrice)} грн
+              </span>
             </>
           )}
 

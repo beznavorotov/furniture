@@ -4,7 +4,7 @@ import { CatalogContent } from './CatalogContent/CatalogContent';
 
 export const Catalog = () => {
   return (
-    <PageSectionWrapper title="Наш рожевий каталог">
+    <PageSectionWrapper title="Передпокій">
       <div className="catalog">
         <CatalogSidebar />
         <CatalogContent />

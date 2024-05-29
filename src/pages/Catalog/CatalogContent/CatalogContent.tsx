@@ -29,6 +29,7 @@ export const CatalogContent = () => {
           price={item.price}
           newPrice={null}
           cardSize="small"
+          rating={null}
         />
       ))}
     </div>
