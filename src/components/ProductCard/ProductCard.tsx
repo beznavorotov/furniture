@@ -25,7 +25,7 @@ const ProductCard = ({ img, name, price, discountPrice, cardSize }) => {
           <img src={starEmpty} alt="starEmpty" />
         </span>
         <div className="card_price">
-          {price === discountPrice  ? (
+          {price === discountPrice ? (
             <span className="price">{Math.floor(price)} грн</span>
           ) : (
             <>

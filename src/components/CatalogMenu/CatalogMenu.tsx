@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRooms } from '../../store/slices/roomsSlice';
 import { RootState } from '../../store';
+import { Link } from 'react-router-dom';
 
 export const CatalogMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,9 +49,9 @@ export const CatalogMenu: React.FC = () => {
           >
             <div className="category-list__heading">
               <span className="category-list__number">0{room.id}</span>
-              <a className="category-list__link" href="/">
+              <Link to={`/catalog/${room.id}`} className="category-list__link">
                 {room.title}
-              </a>
+              </Link>
               <span
                 className={`category-list__direction-arrow ${
                   isVisible === room.id ? 'rotate' : ''

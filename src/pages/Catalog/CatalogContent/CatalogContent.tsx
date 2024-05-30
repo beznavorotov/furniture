@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BACKEND_CATEGORIES_PRODUCTS_URL } from '../../../constants';
 import ProductCard from '../../../components/ProductCard/ProductCard';
+import fetchData from '../../../utils/fetchData';
 
-export const CatalogContent = () => {
+export const CatalogContent = ({ pageId = 1 }) => {
   const [demoData, setDemoData] = useState([]);
 
   async function getDemoData() {
     try {
-      const response = await fetch(`${BACKEND_CATEGORIES_PRODUCTS_URL}1`);
-      const data = await response.json();
-      setDemoData(data);
+      const result = await fetchData(
+        `${BACKEND_CATEGORIES_PRODUCTS_URL}${pageId}`,
+      );
+      setDemoData(result);
     } catch (error) {
       console.error('demoData: ', error);
     }

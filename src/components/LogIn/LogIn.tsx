@@ -45,7 +45,6 @@ export const LogIn = () => {
     setUsername('');
     setPassword('');
   };
-
   useEffect(() => {
     if (isAuth) navigate('/profile');
   });

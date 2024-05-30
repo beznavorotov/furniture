@@ -1,9 +1,11 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 import { UserActionsNav } from '../UserActionsNav/UserActionsNav';
 
 export const Header = () => {
+  const { pathname } = useLocation();
+
   return (
     <div className="container">
       <header className="header" data-bs-theme="light">
@@ -29,7 +31,12 @@ export const Header = () => {
             >
               <ul className="header__navigation--list navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/catalog">
+                  <NavLink
+                    className={`nav-link ${
+                      pathname.includes('catalog') ? 'active' : ''
+                    }`}
+                    to="/catalog/1"
+                  >
                     Каталог
                   </NavLink>
                 </li>
