@@ -4,7 +4,7 @@ import starFull from '../../assets/star_full.svg';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
 
-const ProductCard = ({ img, name, price, newPrice, cardSize }) => {
+const ProductCard = ({ img, name, price, newPrice, cardSize, rating }) => {
   const dispatch = useDispatch();
   return (
     <div className={`col-12 col-md-3 product-card ${cardSize}`}>
