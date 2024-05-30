@@ -22,5 +22,8 @@ export const BACKEND_ALL_PRODUCTS_URL =
 export const BACKEND_BESTSELLERS_URL =
   'https://furnishop-back.pp.ua/items/room/category/items/bestsellers';
 
+  export const BACKEND_SEARCH =
+  "https://furnishop-back.pp.ua/items/room/category/items/search/";
+
 // MESSAGES
 export const REQUIRED_INPUT_MSG = "Це поле обов'язкове для заповнення";

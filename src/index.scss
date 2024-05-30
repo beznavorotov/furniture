@@ -36,10 +36,12 @@
 @import './components/Static/static';
 @import './components/CartShop/cartShop';
 @import './components/Shares/shares';
+@import './components/SearchPage/searchPage';
 
 @import './components/DeliveryPayment/MenuDP/menuDP';
 @import './components/DeliveryPayment/Delivery/delivery';
 @import './components/DeliveryPayment/Payment/payment';
+
 
 // pages
 @import './pages/About/about';
@@ -51,3 +53,4 @@
 @import './pages/Home/home';
 @import './pages/Product/product';
 @import './pages/Promotions/promotions';
+@import './pages/Search/search';

@@ -14,6 +14,7 @@ import { Reset } from './components/Reset/Reset';
 import { Product } from './pages/Product/Product';
 import { Catalog } from './pages/Catalog/Catalog';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
+import { Search } from './pages/Search/Search';
 
 function Layout() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="catalog" element={<Catalog />} />
         <Route path="product/:id" element={<Product />} />
+        <Route path="search" element={<Search />} />
       </Route>
     </Routes>
   );
