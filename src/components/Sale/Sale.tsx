@@ -37,7 +37,7 @@ export const Sale = () => {
           newPrice={product.action}
           img={lamp}
           cardSize={null}
-          rating={null}
+          // rating={null}
         />
       ))}
     </section>

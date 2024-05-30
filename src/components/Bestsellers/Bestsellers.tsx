@@ -27,7 +27,7 @@ export const Bestsellers = () => {
           newPrice={null}
           img={chair}
           cardSize={null}
-          rating={null}
+          // rating={null}
         />
       ))}
     </div>

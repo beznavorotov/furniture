@@ -43,7 +43,7 @@ export const RecommendedProducts = () => {
             newPrice={null}
             cardSize={null}
             img={lamp}
-            rating={null}
+            // rating={null}
           />
         ))}
       </div>

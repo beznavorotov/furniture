@@ -88,7 +88,8 @@ export const SearchPage = () => {
                 name={item.title}
                 price={item.price}
                 newPrice={null}
-                rating={null}
+                cardSize="medium"
+                // rating={null}
               />
             ))}
           </div>
