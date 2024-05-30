@@ -15,13 +15,20 @@ export const CatalogSidebar = () => {
               min="0"
               max="100000"
             />
-            <input type="text" name="minPrice" id="minPrice" placeholder="0" />
-            <input
-              type="text"
-              name="maxPrice"
-              id="maxPrice"
-              placeholder="100000"
-            />
+            <div className="filter__input-wrapper">
+              <input
+                type="number"
+                name="minPrice"
+                id="minPrice"
+                placeholder="0"
+              />
+              <input
+                type="number"
+                name="maxPrice"
+                id="maxPrice"
+                placeholder="100000"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -214,13 +221,20 @@ export const CatalogSidebar = () => {
               min="0"
               max="100000"
             />
-            <input type="text" name="minPrice" id="minPrice" placeholder="0" />
-            <input
-              type="text"
-              name="maxPrice"
-              id="maxPrice"
-              placeholder="100000"
-            />
+            <div className="filter__input-wrapper">
+              <input
+                type="number"
+                name="minLength"
+                id="minLength"
+                placeholder="0"
+              />
+              <input
+                type="number"
+                name="maxLength"
+                id="maxLength"
+                placeholder="100000"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -239,13 +253,20 @@ export const CatalogSidebar = () => {
               min="0"
               max="100000"
             />
-            <input type="text" name="minPrice" id="minPrice" placeholder="0" />
-            <input
-              type="text"
-              name="maxPrice"
-              id="maxPrice"
-              placeholder="100000"
-            />
+            <div className="filter__input-wrapper">
+              <input
+                type="number"
+                name="minWidth"
+                id="minWidth"
+                placeholder="0"
+              />
+              <input
+                type="number"
+                name="maxWidth"
+                id="maxWidth"
+                placeholder="100000"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -264,13 +285,20 @@ export const CatalogSidebar = () => {
               min="0"
               max="100000"
             />
-            <input type="text" name="minPrice" id="minPrice" placeholder="0" />
-            <input
-              type="text"
-              name="maxPrice"
-              id="maxPrice"
-              placeholder="100000"
-            />
+            <div className="filter__input-wrapper">
+              <input
+                type="number"
+                name="minHeight"
+                id="minHeight"
+                placeholder="0"
+              />
+              <input
+                type="number"
+                name="maxHeight"
+                id="maxHeight"
+                placeholder="100000"
+              />
+            </div>
           </div>
         </div>
       </div>

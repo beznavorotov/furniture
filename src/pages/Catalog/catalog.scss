@@ -40,16 +40,32 @@
       margin-bottom: 20px;
     }
 
-    input[type='text'] {
-      width: 40%;
-      display: inline-block;
+    .filter__input-wrapper {
+      @include flex(space-between);
     }
 
-    input[name='maxPrice'] {
-      margin-left: 20%;
+    // hide input number arrows
+    /* Chrome, Safari, Edge, Opera */
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    input[type='number'] {
+      width: 75px;
+      border:1px solid $color-blue;
+      color: $color-black;
+      border-radius: 3px;
+      text-align: center;
     }
   }
-  
+
   &__check-list {
     @include flex-column(center, flex-start);
     gap: 10px;
