@@ -23,11 +23,11 @@ export const CatalogContent = () => {
     <div className="catalog-content">
       {demoData?.map((item) => (
         <ProductCard
-          key={item.id}
+          key={item.article_code}
           img={item.photo[0]}
           name={item.title}
           price={item.price}
-          newPrice={null}
+          discountPrice={item.discount}
           cardSize="small"
           // rating={null}
         />

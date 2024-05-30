@@ -4,7 +4,7 @@ import starFull from '../../assets/star_full.svg';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
 
-const ProductCard = ({ img, name, price, newPrice, cardSize }) => {
+const ProductCard = ({ img, name, price, discountPrice, cardSize }) => {
   const dispatch = useDispatch();
   return (
     <div className={`col-12 col-md-3 product-card ${cardSize}`}>
@@ -25,13 +25,13 @@ const ProductCard = ({ img, name, price, newPrice, cardSize }) => {
           <img src={starEmpty} alt="starEmpty" />
         </span>
         <div className="card_price">
-          {newPrice === null ? (
+          {price === discountPrice  ? (
             <span className="price">{Math.floor(price)} грн</span>
           ) : (
             <>
               <span className="price price--sale">{Math.floor(price)} грн</span>
               <span className="price price--new">
-                {Math.floor(newPrice)} грн
+                {Math.floor(discountPrice)} грн
               </span>
             </>
           )}

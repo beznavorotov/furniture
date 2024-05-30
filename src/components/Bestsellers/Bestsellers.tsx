@@ -24,7 +24,7 @@ export const Bestsellers = () => {
           key={product.id}
           name={product.name}
           price={product.price}
-          newPrice={null}
+          discountPrice={product.price}
           img={chair}
           cardSize={null}
           // rating={null}

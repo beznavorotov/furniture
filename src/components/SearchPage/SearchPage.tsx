@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { BACKEND_SEARCH } from '../../constants';
 import ProductCard from '../ProductCard/ProductCard';
 
-
 export const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Усі категорії');
@@ -18,7 +17,7 @@ export const SearchPage = () => {
     'назва категорії',
     'назва кімнати',
     'назва колекції',
-    'назва виробника'
+    'назва виробника',
   ];
 
   const handleSearch = async () => {
@@ -36,25 +35,25 @@ export const SearchPage = () => {
   return (
     <div className="search-page">
       <div className="search-form">
-        <div className='search_input'>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Що ти шукаєш?"
-        />
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+        <div className="search_input">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Що ти шукаєш?"
+          />
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
-        
+
         <div className="checkboxes">
           <label>
             <input
@@ -73,7 +72,9 @@ export const SearchPage = () => {
             Пошук у підкатегоріях
           </label>
         </div>
-        <button className='button' onClick={handleSearch}>Пошук</button>
+        <button className="button" onClick={handleSearch}>
+          Пошук
+        </button>
       </div>
 
       <div className="search-results">
@@ -87,7 +88,7 @@ export const SearchPage = () => {
                 img={item.photo[0]}
                 name={item.title}
                 price={item.price}
-                newPrice={null}
+                discountPrice={item.discount}
                 cardSize="medium"
                 // rating={null}
               />

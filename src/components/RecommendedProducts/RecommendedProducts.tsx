@@ -40,7 +40,7 @@ export const RecommendedProducts = () => {
             key={product.id}
             name={product.name}
             price={product.price}
-            newPrice={null}
+            discountPrice={product.action}
             cardSize={null}
             img={lamp}
             // rating={null}

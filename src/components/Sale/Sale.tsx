@@ -34,7 +34,7 @@ export const Sale = () => {
           key={product.id}
           name={product.name}
           price={product.price}
-          newPrice={product.action}
+          discountPrice={product.action}
           img={lamp}
           cardSize={null}
           // rating={null}
