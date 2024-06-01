@@ -1,10 +1,20 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 import { UserActionsNav } from '../UserActionsNav/UserActionsNav';
 
 export const Header = () => {
   const { pathname } = useLocation();
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
 
   return (
     <div className="container">
@@ -65,21 +75,17 @@ export const Header = () => {
               </ul>
 
               <div className="header__search">
-                <form className="d-flex form--search" role="search">
+                <form className="d-flex form--search" role="search" onSubmit={handleSearch}>
                   <label className="input-group" htmlFor="searchInput">
                     <input
-                      id="searchInput"
                       type="search"
-                      className="form-control"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Пошук"
                       aria-label="Пошук"
                       aria-describedby="button-addon2"
                     />
-                    <button
-                      className="button__search"
-                      type="button"
-                      id="button-addon2"
-                    >
+                    <button className="button__search" type="submit" id="button-addon2">
                       <svg
                         width="16"
                         height="16"

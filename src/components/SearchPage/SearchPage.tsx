@@ -1,16 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { BACKEND_SEARCH } from '../../constants';
 import ProductCard from '../ProductCard/ProductCard';
 
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
 export const SearchPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Усі категорії');
+  const query = useQuery();
+  const initialSearchQuery = query.get('query') || '';
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
+  const [selectedCategory, setSelectedCategory] = useState('назва товару');
   const [searchInDescription, setSearchInDescription] = useState(false);
   const [searchInSubcategories, setSearchInSubcategories] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
+  useEffect(() => {
+    if (initialSearchQuery) {
+      handleSearch();
+    }
+  }, [initialSearchQuery]);
+
   const categories = [
-    'Усі категорії',
     'назва товару',
     'артикул товару',
     'слова в описі товару',
@@ -21,7 +33,15 @@ export const SearchPage = () => {
   ];
 
   const handleSearch = async () => {
-    const query = `${BACKEND_SEARCH}?search=${searchQuery}`;
+    let query = `${BACKEND_SEARCH}?search=${searchQuery}`;
+
+    if (searchInDescription) {
+      query += `,${searchQuery}`;
+    }
+
+    if (searchInSubcategories) {
+      query += `&subcategories=true`;
+    }
 
     try {
       const response = await fetch(query);
@@ -40,7 +60,7 @@ export const SearchPage = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Що ти шукаєш?"
+            placeholder="Пошук..."
           />
           <select
             value={selectedCategory}
@@ -84,14 +104,16 @@ export const SearchPage = () => {
           <div className="results-row">
             {searchResults.map((item) => (
               <ProductCard
-                key={item.id}
-                img={item.photo[0]}
-                name={item.title}
-                price={item.price}
-                discountPrice={item.discount}
-                cardSize="medium"
-                // rating={null}
-              />
+            key={item.article_code}
+            img={item.photo[0]}
+            name={item.title}
+            price={item.price}
+            discountPrice={item.discount}
+            cardSize="medium"
+            id={item.article_code}
+            stateType='category'
+            // rating={null}
+          />
             ))}
           </div>
         )}
@@ -99,3 +121,5 @@ export const SearchPage = () => {
     </div>
   );
 };
+
+export default SearchPage;
