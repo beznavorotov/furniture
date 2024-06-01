@@ -104,16 +104,16 @@ export const SearchPage = () => {
           <div className="results-row">
             {searchResults.map((item) => (
               <ProductCard
-            key={item.article_code}
-            img={item.photo[0]}
-            name={item.title}
-            price={item.price}
-            discountPrice={item.discount}
-            cardSize="medium"
-            id={item.article_code}
-            stateType='category'
-            // rating={null}
-          />
+                key={item.article_code}
+                img={item.photo[0]}
+                name={item.title}
+                price={item.price}
+                discountPrice={item.discount}
+                cardSize="small"
+                id={item.article_code}
+                stateType="category"
+                // rating={null}
+              />
             ))}
           </div>
         )}
