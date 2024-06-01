@@ -31,7 +31,7 @@ export const Sale = () => {
             name={item.title}
             price={item.price}
             discountPrice={item.discount}
-            img={item.photo[0]}
+            img={item.photo.find((item) => item.includes('photo_image_0'))}
             cardSize={null}
             id={item.article_code}
             stateType="sale"

@@ -16,13 +16,13 @@ export const CatalogContent = () => {
         category.map((item) => (
           <ProductCard
             key={item.article_code}
-            img={item.photo[0]}
+            img={item.photo.find((item) => item.includes('photo_image_0'))}
             name={item.title}
             price={item.price}
             discountPrice={item.discount}
             cardSize="small"
             id={item.article_code}
-            stateType='category'
+            stateType="category"
             // rating={null}
           />
         ))
