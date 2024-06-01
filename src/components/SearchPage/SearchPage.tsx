@@ -90,6 +90,8 @@ export const SearchPage = () => {
                 price={item.price}
                 discountPrice={item.discount}
                 cardSize="medium"
+                stateType="search"
+                id={item.article_code}
                 // rating={null}
               />
             ))}

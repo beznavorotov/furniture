@@ -6,7 +6,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-type CartItemType = {
+type ProductItemType = {
   room: string;
   item_category: string;
   colour: string;
@@ -35,7 +35,7 @@ export const Product = () => {
     (state: RootState) => state.catalog.bestsellers,
   );
   const sale = useSelector((state: RootState) => state.catalog.sale);
-  const [product, setProduct] = useState({} as CartItemType);
+  const [product, setProduct] = useState({} as ProductItemType);
 
   const selectProductState = (type) => {
     if (type === 'category') {
