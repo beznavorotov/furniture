@@ -1,29 +1,13 @@
-import { useEffect, useState } from 'react';
-import { BACKEND_CATEGORIES_PRODUCTS_URL } from '../../../constants';
+import { useSelector } from 'react-redux';
 import ProductCard from '../../../components/ProductCard/ProductCard';
-import fetchData from '../../../utils/fetchData';
+import { RootState } from '../../../store';
 
-export const CatalogContent = ({ pageId = 1 }) => {
-  const [demoData, setDemoData] = useState([]);
-
-  async function getDemoData() {
-    try {
-      const result = await fetchData(
-        `${BACKEND_CATEGORIES_PRODUCTS_URL}${pageId}`,
-      );
-      setDemoData(result);
-    } catch (error) {
-      console.error('demoData: ', error);
-    }
-  }
-
-  useEffect(() => {
-    getDemoData();
-  }, []);
+export const CatalogContent = () => {
+  const category = useSelector((state: RootState) => state.catalog.category);
 
   return (
     <div className="catalog-content">
-      {demoData?.map((item) => (
+      {category.map((item) => (
         <ProductCard
           key={item.article_code}
           img={item.photo[0]}
@@ -31,6 +15,7 @@ export const CatalogContent = ({ pageId = 1 }) => {
           price={item.price}
           discountPrice={item.discount}
           cardSize="small"
+          id={item.article_code}
           // rating={null}
         />
       ))}

@@ -1,19 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BACKEND_CATEGORIES_URL } from '../../constants';
+import fetchData from '../../utils/fetchData';
 
 export const fetchRooms = createAsyncThunk(
   'rooms/fetchRooms',
   // eslint-disable-next-line
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(BACKEND_CATEGORIES_URL);
-
-      if (!response.ok) {
-        throw new Error('Sorry. Response is not ok...');
-      }
-
-      const data = await response.json();
-      return data;
+      return await fetchData(BACKEND_CATEGORIES_URL);
     } catch (error) {
       return rejectWithValue(error.message);
     }

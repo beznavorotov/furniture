@@ -1,11 +1,17 @@
 .bestsellers {
   @include flex(space-between);
   border-bottom: 1px solid $color-black;
-  padding-bottom: 10px;
+  padding-bottom: 32px;
+  &--wrapper {
+    @include flex(space-between, stretch);
+
+    .product-card {
+      max-height: 534px;
+    }
+  }
 
   @include tablet {
     justify-content: center;
     gap: 16px;
   }
-  
 }

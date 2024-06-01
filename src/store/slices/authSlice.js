@@ -44,9 +44,9 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     accessToken: null,
+    isAuth: false,
     status: 'idle',
     error: null,
-    isAuth: false,
   },
 
   reducers: {

@@ -1,24 +1,20 @@
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
-import lamp from '../../assets/lamp.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useEffect } from 'react';
+import { fetchSale } from '../../store/slices/catalogSlice';
 
 export const Sale = () => {
-  const products = [
-    { id: 0o1, name: 'Лампа чорна', price: '1000', action: '800' },
-    { id: 0o2, name: 'Лампа дуже чорна', price: '1000', action: '800' },
-    {
-      id: 0o3,
-      name: 'Лампа не така вже й чорна',
-      price: '1000',
-      action: '800',
-    },
-    {
-      id: 0o4,
-      name: 'Лампа чорна, але могла бути й чорніша',
-      price: '1000',
-      action: '800',
-    },
-  ];
+  const dispatch = useDispatch();
+  const sale = useSelector((state: RootState) => state.catalog.sale);
+  const saleStatus = useSelector((state: RootState) => state.catalog.status);
+
+  useEffect(() => {
+    if (saleStatus === 'idle') {
+      dispatch(fetchSale());
+    }
+  }, [saleStatus, dispatch]);
 
   return (
     <section className="sale row">
@@ -28,18 +24,20 @@ export const Sale = () => {
           Усі пропозиції
         </Link>
       </div>
-
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          discountPrice={product.action}
-          img={lamp}
-          cardSize={null}
-          // rating={null}
-        />
-      ))}
+      <div className="sale--wrapper">
+        {sale.slice(0, 4).map((item) => (
+          <ProductCard
+            key={item.id}
+            name={item.title}
+            price={item.price}
+            discountPrice={item.discount}
+            img={item.photo[0]}
+            cardSize={null}
+            id={item.article_code}
+            // rating={null}
+          />
+        ))}
+      </div>
     </section>
   );
 };

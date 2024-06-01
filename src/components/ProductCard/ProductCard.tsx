@@ -3,11 +3,15 @@ import starEmpty from '../../assets/star_empty.svg';
 import starFull from '../../assets/star_full.svg';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
+import { Link } from 'react-router-dom';
 
-const ProductCard = ({ img, name, price, discountPrice, cardSize }) => {
+const ProductCard = ({ img, name, price, discountPrice, cardSize, id }) => {
   const dispatch = useDispatch();
   return (
-    <div className={`col-12 col-md-3 product-card ${cardSize}`}>
+    <Link
+      to={`/product/${id}`}
+      className={`col-12 col-md-3 product-card ${cardSize}`}
+    >
       <img src={heart} alt="heart" className="heart" />
       <div className="product-card__img">
         <img src={img} alt="chair" className="chair" loading="lazy" />
@@ -15,7 +19,7 @@ const ProductCard = ({ img, name, price, discountPrice, cardSize }) => {
 
       <div className="product-card__info">
         <p className="text_card">
-          {name.length > 24 ? name.slice(0, 25) + '...' : name}
+          {name?.length > 24 ? name.slice(0, 25) + '...' : name}
         </p>
         <span className="stars">
           <img src={starFull} alt="starFull" />
@@ -56,7 +60,7 @@ const ProductCard = ({ img, name, price, discountPrice, cardSize }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

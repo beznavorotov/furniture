@@ -1,35 +1,47 @@
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
-import chair from '../../assets/chair.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useEffect } from 'react';
+import { fetchBestsellers } from '../../store/slices/catalogSlice';
 
 export const Bestsellers = () => {
-  const products = [
-    { id: 0o11, name: 'Крісло Дюна', price: '3000' },
-    { id: 0o22, name: 'Крісло Месія Дюни', price: '3000' },
-    { id: 0o33, name: 'Крісло Діти Дюни', price: '3000' },
-    { id: 0o44, name: 'Крісло Бог Імператор Дюни', price: '3000' },
-  ];
+  const dispatch = useDispatch();
+  const bestsellers = useSelector(
+    (state: RootState) => state.catalog.bestsellers,
+  );
+  const bestsellersStatus = useSelector(
+    (state: RootState) => state.catalog.status,
+  );
+
+  useEffect(() => {
+    if (bestsellersStatus === 'idle') {
+      dispatch(fetchBestsellers());
+    }
+  }, [bestsellersStatus, dispatch]);
 
   return (
     <div className="bestsellers row">
       <div className="name section__heading">
         <h1 className="section__heading--title">Бестселери</h1>
-        <Link to="/sale" className=" section__heading--link">
+        <Link to="/bestsellers" className="section__heading--link">
           Усі пропозиції
         </Link>
       </div>
-
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          discountPrice={product.price}
-          img={chair}
-          cardSize={null}
-          // rating={null}
-        />
-      ))}
+      <div className="bestsellers--wrapper">
+        {bestsellers.slice(0, 4).map((item) => (
+          <ProductCard
+            key={item.id}
+            name={item.title}
+            price={item.price}
+            discountPrice={item.price}
+            img={item.photo[0]}
+            cardSize={null}
+            id={item.article_code}
+            // rating={null}
+          />
+        ))}
+      </div>
     </div>
   );
 };

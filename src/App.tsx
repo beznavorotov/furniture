@@ -42,7 +42,6 @@ function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="favorites" element={<Profile />} />
         <Route path="cart" element={<Cart />} />
-        {/* <Route path="catalog" element={<Catalog />} /> */}
         <Route path="catalog/:id" element={<Catalog />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="search" element={<Search />} />

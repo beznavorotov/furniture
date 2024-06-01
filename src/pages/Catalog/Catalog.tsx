@@ -2,17 +2,27 @@ import { CatalogSidebar } from './CatalogSidebar/CatalogSidebar';
 import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { CatalogContent } from './CatalogContent/CatalogContent';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { useEffect } from 'react';
+import { fetchCategory } from '../../store/slices/catalogSlice';
 
 export const Catalog = () => {
-  const rooms = useSelector((state: RootState) => state.rooms.items);
+  const dispatch = useDispatch();
   const { id } = useParams();
+  const category = useSelector((state: RootState) => state.catalog.category);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchCategory(+id + 1));
+    }
+  }, [id, dispatch]);
+
   return (
-    <PageSectionWrapper title={rooms[+id - 1].title}>
+    <PageSectionWrapper title={category[+id - 1]?.item_category}>
       <div className="catalog">
         <CatalogSidebar />
-        <CatalogContent pageId={+id} />
+        <CatalogContent />
       </div>
     </PageSectionWrapper>
   );

@@ -1,6 +1,9 @@
 .sale {
   @include flex(space-between, flex-start);
   padding-bottom: 20px;
+  &--wrapper {
+    @include flex(space-between, stretch);
+  }
   @include tablet {
     justify-content: center;
     gap: 16px;
