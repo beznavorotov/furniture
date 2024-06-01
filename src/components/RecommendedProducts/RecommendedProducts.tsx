@@ -43,6 +43,8 @@ export const RecommendedProducts = () => {
             discountPrice={product.action}
             cardSize={null}
             img={lamp}
+            stateType="category"
+            id={product.id}
             // rating={null}
           />
         ))}

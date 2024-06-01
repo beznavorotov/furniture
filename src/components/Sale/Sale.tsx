@@ -34,6 +34,7 @@ export const Sale = () => {
             img={item.photo[0]}
             cardSize={null}
             id={item.article_code}
+            stateType="sale"
             // rating={null}
           />
         ))}

@@ -15,10 +15,12 @@ import { Product } from './pages/Product/Product';
 import { Catalog } from './pages/Catalog/Catalog';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 import { Search } from './pages/Search/Search';
+import ScrollToTop from './utils/ScrollToTop';
 
 function Layout() {
   return (
     <>
+      <ScrollToTop />
       <AddToCartModalWindow />
       <Header />
       <Outlet />

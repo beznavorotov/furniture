@@ -1,9 +1,39 @@
 import { RecommendedProducts } from '../../components/RecommendedProducts/RecommendedProducts';
 import emptyStar from '../../assets/star_empty.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
+import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 export const Product = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const stateType = searchParams.get('from');
+
+  const category = useSelector((state: RootState) => state.catalog.category);
+  const bestsellers = useSelector(
+    (state: RootState) => state.catalog.bestsellers,
+  );
+  const sale = useSelector((state: RootState) => state.catalog.sale);
+  const [product, setProduct] = useState([]);
+
+  const selectProductState = (type) => {
+    if (type === 'category') {
+      return category.find((item) => item.article_code === +id);
+    } else if (type === 'bestsellers') {
+      return bestsellers.find((item) => item.article_code === +id);
+    } else {
+      return sale.find((item) => item.article_code === +id);
+    }
+  };
+
+  useEffect(() => {
+    const result = selectProductState(stateType);
+    setProduct(result);
+  }, [id, stateType]);
+
   const [activeTab, setActiveTab] = useState('description');
   const [activeMaterial, setActiveMaterial] = useState(0);
 
@@ -21,37 +51,36 @@ export const Product = () => {
   };
 
   const tableTmpData = [
-    ['Наповнення', 'ППУ'],
-    ['Щільність набивки', '345'],
-    ['Висота', '60'],
-    ['Ширина', '270'],
-    ['Глибина', '100'],
-    ['Висота посадки', '50'],
+    ['Кімната', product?.room],
+    ['Категорія товару', product?.item_category],
+    ['Матеріал', product?.colour],
+    ['Висота', product?.height],
+    ['Ширина', product?.width],
+    ['Глибина', product?.length],
+    ['Форма', product?.form],
     ['Глибина сидіння', '90'],
-    ['Захист від кігтів', 'Так'],
-    ['Колекція', 'Базова'],
-    ['Виробник', 'Super'],
+    // ['Захист від кігтів', 'Так'],
+    ['Колекція', product?.collection],
+    ['Виробник', product?.manufacturer],
   ];
 
   return (
     <PageSectionWrapper title="">
       <div className="product product--container">
         <div className="product__gallery">
-          <div className="product__gallery--item item1">
-            <img src="https://picsum.photos/715/447" alt="" />
-          </div>
-          <div className="product__gallery--item item2">
-            <img src="https://picsum.photos/400/271" alt="" />
-          </div>
-          <div className="product__gallery--item item3">
-            <img src="https://picsum.photos/295/271" alt="" />
-          </div>
+          {product?.photo?.map((img) => (
+            <div key={img.id} className="product__gallery--item">
+              <img src={img} alt="" />
+            </div>
+          ))}
         </div>
 
         <div className="product__order">
           <div className="product__heading">
-            <h2 className="product__heading--title">Диван Basic</h2>
-            <span className="product__heading--code">Код товару: 9567</span>
+            <h2 className="product__heading--title">{product?.title}</h2>
+            <span className="product__heading--code">
+              Код товару: {product?.article_code}
+            </span>
           </div>
 
           <div className="product__rating">
@@ -70,13 +99,17 @@ export const Product = () => {
           </div>
 
           <div className="product__addition-info">
-            <p>Колекція: Базова</p>
-            <p>Наявність: В наявності</p>
+            <p>Колекція: {product?.collection}</p>
+            <p>
+              Наявність: {product?.avaliability ? 'В наявності' : 'Відсутні'}
+            </p>
           </div>
 
           <div className="product__price">
             <div className="product__price--heading">
-              <h3 className="product__price--price">25 000 грн.</h3>
+              <h3 className="product__price--price">
+                {Math.floor(product?.price)} грн.
+              </h3>
               <span>
                 <svg
                   width="32"
@@ -157,24 +190,7 @@ export const Product = () => {
               )}`}
             >
               <div className="tab__description--text">
-                <p>
-                  Диван-ліжко 3-х і 2-х місний розмір з водо- та
-                  брудовідштовхувальної тканини. Диван EDGAR доступний у
-                  багатьох кольорах і різних розмірах, щоб задовольнити всі
-                  потреби простору та дизайну. Диван-ліжко 100% Made in Italy.
-                </p>
-                <p>
-                  З його сучасними лініями, які ніколи не залишаються поза
-                  часом, він оснащений брудовідштовхувальним водонепроникним
-                  чохлом, який також можна прати при 30°.
-                </p>
-                <p>
-                  Оснащений відділенням для подушок у спинці, ніжки дивана
-                  заввишки 13 см і оптимальні пропорції підлокітників пропонують
-                  поєднання легкості та елегантності. Ідеально підходить не
-                  тільки для сучасних і сучасних інтер’єрів, але також для
-                  житлових приміщень, де переважає природне натхнення
-                </p>
+                <p>{product?.description}</p>
               </div>
             </div>
             <div

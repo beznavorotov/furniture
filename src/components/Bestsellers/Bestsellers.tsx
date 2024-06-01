@@ -38,6 +38,7 @@ export const Bestsellers = () => {
             img={item.photo[0]}
             cardSize={null}
             id={item.article_code}
+            stateType='bestsellers'
             // rating={null}
           />
         ))}
