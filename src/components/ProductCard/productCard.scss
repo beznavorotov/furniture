@@ -8,7 +8,6 @@
   padding: 0;
 
   border-radius: 3px;
-  cursor: pointer;
   background-color: $color-white;
   transition: all 0.2s linear;
 
@@ -29,6 +28,7 @@
     height: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    cursor: pointer;
 
     img {
       transition: all 0.3s linear;
@@ -47,6 +47,7 @@
     top: 10px;
     right: 10px;
     z-index: 100;
+    cursor: pointer;
   }
   // card info block
   &__info {
@@ -61,6 +62,8 @@
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 0;
+    cursor: pointer;
+    width: 100%;
   }
   .stars {
     @include flex(flex-start);

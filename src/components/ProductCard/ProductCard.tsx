@@ -8,19 +8,16 @@ import { Link } from 'react-router-dom';
 const ProductCard = ({ img, name, price, discountPrice, cardSize, id }) => {
   const dispatch = useDispatch();
   return (
-    <Link
-      to={`/product/${id}`}
-      className={`col-12 col-md-3 product-card ${cardSize}`}
-    >
+    <div className={`col-12 col-md-3 product-card ${cardSize}`}>
       <img src={heart} alt="heart" className="heart" />
-      <div className="product-card__img">
+      <Link to={`/product/${id}`} className="product-card__img">
         <img src={img} alt="chair" className="chair" loading="lazy" />
-      </div>
+      </Link>
 
       <div className="product-card__info">
-        <p className="text_card">
+        <Link to={`/product/${id}`} className="text_card">
           {name?.length > 24 ? name.slice(0, 25) + '...' : name}
-        </p>
+        </Link>
         <span className="stars">
           <img src={starFull} alt="starFull" />
           <img src={starFull} alt="starFull" />
@@ -60,7 +57,7 @@ const ProductCard = ({ img, name, price, discountPrice, cardSize, id }) => {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
