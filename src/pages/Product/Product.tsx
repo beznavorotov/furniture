@@ -6,6 +6,24 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
+type CartItemType = {
+  room: string;
+  item_category: string;
+  colour: string;
+  height: number;
+  width: number;
+  length: number;
+  form: string;
+  collection: string;
+  manufacturer: string;
+  photo: [];
+  title: string;
+  article_code: number;
+  avaliability: boolean;
+  price: number;
+  description: string;
+};
+
 export const Product = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -17,7 +35,7 @@ export const Product = () => {
     (state: RootState) => state.catalog.bestsellers,
   );
   const sale = useSelector((state: RootState) => state.catalog.sale);
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({} as CartItemType);
 
   const selectProductState = (type) => {
     if (type === 'category') {
@@ -32,6 +50,7 @@ export const Product = () => {
   useEffect(() => {
     const result = selectProductState(stateType);
     setProduct(result);
+    // eslint-disable-next-line
   }, [id, stateType]);
 
   const [activeTab, setActiveTab] = useState('description');
@@ -69,7 +88,7 @@ export const Product = () => {
       <div className="product product--container">
         <div className="product__gallery">
           {product?.photo?.map((img) => (
-            <div key={img.id} className="product__gallery--item">
+            <div key={img} className="product__gallery--item">
               <img src={img} alt="" />
             </div>
           ))}
