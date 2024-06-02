@@ -28,6 +28,8 @@
     border-bottom-left-radius: 3px;
 
     .nav-link {
+      @include flex;
+      gap: 10px;
       font-size: 16px;
       line-height: 20px;
       color: $color-grey;
@@ -37,6 +39,24 @@
     .nav-link.active {
       color: $color-black;
       font-weight: 400;
+
+      svg path {
+        stroke: $color-black;
+      }
+    }
+    .catalog-link {
+      font-weight: 600;
+      color: $color-blue;
+      svg path {
+        stroke: $color-blue;
+      }
+
+      &:hover {
+        color: $color-lightblue-border;
+        svg path {
+          stroke: $color-lightblue-border;
+        }
+      }
     }
   }
 
@@ -52,7 +72,6 @@
     border-bottom: 1px solid $color-blue;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
- 
 
     label {
       @include flex(space-between);

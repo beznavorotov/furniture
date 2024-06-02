@@ -114,6 +114,9 @@
   // small card
   &.small {
     width: 190px;
+    @include tablet-sm {
+      width: 170px;
+    }
 
     .product-card__img {
       max-height: 160px;
