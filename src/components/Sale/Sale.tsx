@@ -16,6 +16,8 @@ export const Sale = () => {
     }
   }, [saleStatus, dispatch]);
 
+  const shuffleArray = [...sale].sort(() => Math.random() - 0.5).slice(0, 4);
+
   return (
     <section className="sale row">
       <div className="name section__heading">
@@ -25,7 +27,7 @@ export const Sale = () => {
         </Link>
       </div>
       <div className="sale--wrapper">
-        {sale.slice(0, 4).map((item) => (
+        {shuffleArray.map((item) => (
           <ProductCard
             key={item.id}
             name={item.title}
