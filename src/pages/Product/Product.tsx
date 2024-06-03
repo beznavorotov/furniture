@@ -1,4 +1,3 @@
-import { RecommendedProducts } from '../../components/RecommendedProducts/RecommendedProducts';
 import { useEffect, useState } from 'react';
 import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { useLocation, useParams } from 'react-router-dom';
