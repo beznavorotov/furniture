@@ -15,6 +15,8 @@ export const SearchPage = () => {
   const [searchInDescription, setSearchInDescription] = useState(false);
   const [searchInSubcategories, setSearchInSubcategories] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 25;
 
   useEffect(() => {
     if (initialSearchQuery) {
@@ -47,9 +49,23 @@ export const SearchPage = () => {
       const response = await fetch(query);
       const data = await response.json();
       setSearchResults(data);
+      setCurrentPage(1);  // Скинути до першої сторінки після нового пошуку
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
+  };
+
+  // Повертає поточну сторінку результатів
+  const paginatedResults = searchResults.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Кількість сторінок
+  const totalPages = Math.ceil(searchResults.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -98,23 +114,49 @@ export const SearchPage = () => {
       </div>
 
       <div className="search-results">
-        {searchResults.length === 0 ? (
+        {paginatedResults.length === 0 ? (
           <p>Немає товарів, які відповідають критеріям пошуку.</p>
         ) : (
           <div className="results-row">
-            {searchResults.map((item) => (
+            {paginatedResults.map((item) => (
               <ProductCard
                 key={item.article_code}
                 img={item.photo[0]}
                 name={item.title}
                 price={item.price}
                 discountPrice={item.discount}
-                cardSize="small"
+                cardSize="medium"
                 id={item.article_code}
                 stateType="category"
                 // rating={null}
               />
             ))}
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button 
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Попередня
+            </button>
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={currentPage === index + 1 ? 'active' : ''}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Наступна
+            </button>
           </div>
         )}
       </div>
