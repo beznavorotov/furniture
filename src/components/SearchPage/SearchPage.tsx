@@ -16,7 +16,7 @@ export const SearchPage = () => {
   const [searchInSubcategories, setSearchInSubcategories] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 25;
+  const [itemsPerPage] = useState(25);
 
   useEffect(() => {
     if (initialSearchQuery) {
@@ -35,6 +35,11 @@ export const SearchPage = () => {
   ];
 
   const handleSearch = async () => {
+    if (searchQuery.trim() === '') {
+      setSearchResults([]); // Clear search results if query is empty
+      return;
+    }
+
     let query = `${BACKEND_SEARCH}?search=${searchQuery}`;
 
     if (searchInDescription) {
@@ -49,23 +54,20 @@ export const SearchPage = () => {
       const response = await fetch(query);
       const data = await response.json();
       setSearchResults(data);
-      setCurrentPage(1);  // Скинути до першої сторінки після нового пошуку
+      setCurrentPage(1); // Reset to first page on new search
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
   };
 
-  // Повертає поточну сторінку результатів
-  const paginatedResults = searchResults.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  // Кількість сторінок
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(searchResults.length / itemsPerPage);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -114,51 +116,49 @@ export const SearchPage = () => {
       </div>
 
       <div className="search-results">
-        {paginatedResults.length === 0 ? (
+        {currentItems.length === 0 ? (
           <p>Немає товарів, які відповідають критеріям пошуку.</p>
         ) : (
           <div className="results-row">
-            {paginatedResults.map((item) => (
+            {currentItems.map((item) => (
               <ProductCard
-                key={item.article_code}
-                img={item.photo.find((item) => item.includes('photo_image_0'))}
-                name={item.title}
-                price={item.price}
-                discountPrice={item.discount}
-                cardSize="medium"
-                id={item.article_code}
-                stateType="category"
-                rating={item.review}
+              key={item.id}
+              name={item.title}
+              price={item.price}
+              discountPrice={item.price}
+              img={item.photo.find((item) => item.includes('photo_image_0'))}
+              cardSize={null}
+              id={item.article_code}
+              stateType="category"
+              rating={item.review}
               />
             ))}
           </div>
         )}
+      </div>
 
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button 
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Попередня
-            </button>
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                className={currentPage === index + 1 ? 'active' : ''}
-              >
-                {index + 1}
-              </button>
-            ))}
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Наступна
-            </button>
-          </div>
-        )}
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Попередня
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={currentPage === index + 1 ? 'active' : ''}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Наступна
+        </button>
       </div>
     </div>
   );
