@@ -36,8 +36,8 @@
     }
 
     &--collection {
-      @include grid(repeat(7, 1fr), minmax(46px, 96px));
-      column-gap: 16px;
+      @include grid(repeat(5, 1fr), repeat(2, 1fr));
+      gap: 16px;
     }
 
     &--item {

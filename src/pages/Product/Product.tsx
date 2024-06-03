@@ -107,9 +107,9 @@ export const Product = () => {
           </div>
           <div
             className="product__gallery--collection"
-            style={{
-              gridTemplateColumns: `repeat(${product?.photo.length}, 1fr)`,
-            }}
+            // style={{
+            //   gridTemplateColumns: `repeat(${product?.photo.length}, 1fr)`,
+            // }}
           >
             {product?.photo?.map((img, index) => (
               <div
