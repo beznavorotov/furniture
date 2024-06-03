@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.webp';
 import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 import { UserActionsNav } from '../UserActionsNav/UserActionsNav';
 

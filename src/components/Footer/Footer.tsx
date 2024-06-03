@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.webp';
 
 export const Footer = () => {
   const catalogLinks = [
@@ -17,7 +17,7 @@ export const Footer = () => {
     <div className="container">
       <footer className="footer row">
         <div className="col-12 col-md-3 logo">
-          <Link to="/">
+          <Link to="/" className='footer-logo'>
             <img src={logo} className="img-fluid d-block " alt="furniture" />
           </Link>
         </div>
