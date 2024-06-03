@@ -1,9 +1,8 @@
 import heart from '../../assets/heart.svg';
-import starEmpty from '../../assets/star_empty.svg';
-import starFull from '../../assets/star_full.svg';
 import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
 import { Link } from 'react-router-dom';
+import { StarsRating } from '../StarsRating/StarsRating';
 
 const ProductCard = ({
   img,
@@ -13,8 +12,10 @@ const ProductCard = ({
   cardSize,
   id,
   stateType,
+  rating,
 }) => {
   const dispatch = useDispatch();
+
   return (
     <div className={`col-12 col-md-3 product-card ${cardSize}`}>
       <img src={heart} alt="heart" className="heart" />
@@ -29,13 +30,7 @@ const ProductCard = ({
         <Link to={`/product/${id}?from=${stateType}`} className="text_card">
           {name?.length > 24 ? name.slice(0, 25) + '...' : name}
         </Link>
-        <span className="stars">
-          <img src={starFull} alt="starFull" />
-          <img src={starFull} alt="starFull" />
-          <img src={starFull} alt="starFull" />
-          <img src={starFull} alt="starFull" />
-          <img src={starEmpty} alt="starEmpty" />
-        </span>
+        <StarsRating ratingNumber={rating} />
         <div className="card_price">
           {price === discountPrice ? (
             <span className="price">{Math.floor(price)} грн</span>

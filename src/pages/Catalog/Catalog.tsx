@@ -19,7 +19,7 @@ export const Catalog = () => {
   }, [id, dispatch]);
 
   return (
-    <PageSectionWrapper title={category[+id - 1]?.item_category}>
+    <PageSectionWrapper title={category[+id]?.item_category}>
       <div className="catalog">
         <CatalogSidebar />
         <CatalogContent />

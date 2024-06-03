@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const Breadcrumbs = () => {
   return (
     <div className="breadcrumbs">
-      <span>Головна</span>
+      <Link to='/'>Головна</Link>
       <span>/</span>
       <span>Вітальні</span>
       <span>/</span>

@@ -1,0 +1,9 @@
+.stars {
+  @include flex(flex-start);
+  margin: 0;
+  padding: 0;
+  img {
+    height: 20px;
+    width: 20px;
+  }
+}

@@ -23,7 +23,7 @@ export const CatalogContent = () => {
             cardSize="small"
             id={item.article_code}
             stateType="category"
-            // rating={null}
+            rating={item.review}
           />
         ))
       )}

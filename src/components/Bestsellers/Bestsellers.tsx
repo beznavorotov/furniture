@@ -39,7 +39,7 @@ export const Bestsellers = () => {
             cardSize={null}
             id={item.article_code}
             stateType="bestsellers"
-            // rating={null}
+            rating={item.review}
           />
         ))}
       </div>
