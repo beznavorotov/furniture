@@ -22,9 +22,6 @@ export const Sale = () => {
     <section className="sale row">
       <div className="name section__heading">
         <h1 className="section__heading--title">Розпродаж</h1>
-        <Link to="/sale" className="section__heading--link">
-          Усі пропозиції
-        </Link>
       </div>
       <div className="sale--wrapper">
         {shuffleArray.map((item) => (

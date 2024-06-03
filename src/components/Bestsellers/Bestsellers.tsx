@@ -28,9 +28,6 @@ export const Bestsellers = () => {
     <div className="bestsellers row">
       <div className="name section__heading">
         <h1 className="section__heading--title">Бестселери</h1>
-        <Link to="/bestsellers" className="section__heading--link">
-          Усі пропозиції
-        </Link>
       </div>
       <div className="bestsellers--wrapper">
         {shuffleArray.map((item) => (

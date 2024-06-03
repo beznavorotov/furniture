@@ -49,9 +49,7 @@ export const CatalogMenu: React.FC = () => {
           >
             <div className="category-list__heading">
               <span className="category-list__number">0{room.id}</span>
-              <Link to={`/catalog/${room.id}`} className="category-list__link">
-                {room.title}
-              </Link>
+              <span className="category-list__link">{room.title}</span>
               <span
                 className={`category-list__direction-arrow ${
                   isVisible === room.id ? 'rotate' : ''

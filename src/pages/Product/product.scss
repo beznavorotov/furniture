@@ -12,7 +12,7 @@
   margin-top: 16px;
 
   &__gallery {
-    @include grid(repeat(3, 1fr), auto auto);
+    @include grid(repeat(7, 1fr), auto auto);
     gap: 16px;
     max-width: 715px;
     width: 100%;
@@ -24,10 +24,11 @@
       max-width: 100%;
     }
     &--item {
+      background-color: $color-white;
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     &--item:first-child {
@@ -289,6 +290,45 @@
           }
         }
       }
+    }
+  }
+}
+
+.recommended-products {
+  width: 100%;
+  padding-bottom: 36px;
+
+  &__heading {
+    @include flex(flex-start);
+    gap: 4px;
+    width: 100%;
+    border-bottom: 1px solid $color-black;
+    margin-bottom: 36px;
+    margin-top: 36px;
+    @include tablet {
+      margin-bottom: 16px;
+      margin-top: 16px;
+    }
+  }
+
+  &__title {
+    font-size: 25px;
+    color: $color-black;
+    line-height: 30px;
+    margin-bottom: 16px;
+    @include tablet {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__list {
+    @include flex(space-between, stretch);
+    flex-wrap: wrap;
+    gap: 20px;
+    @include tablet {
+      justify-content: center;
     }
   }
 }

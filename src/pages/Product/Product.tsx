@@ -5,6 +5,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { StarsRating } from '../../components/StarsRating/StarsRating';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 type ProductItemType = {
   room: string;
@@ -21,6 +22,7 @@ type ProductItemType = {
   article_code: number;
   avaliability: boolean;
   price: number;
+  discount: number;
   description: string;
   review: number;
 };
@@ -37,13 +39,17 @@ export const Product = () => {
   );
   const sale = useSelector((state: RootState) => state.catalog.sale);
   const [product, setProduct] = useState({} as ProductItemType);
+  const [recommended, setRecommended] = useState([]);
 
   const selectProductState = (type) => {
     if (type === 'category') {
+      setRecommended(category);
       return category.find((item) => item.article_code === +id);
     } else if (type === 'bestsellers') {
+      setRecommended(bestsellers);
       return bestsellers.find((item) => item.article_code === +id);
     } else {
+      setRecommended(sale);
       return sale.find((item) => item.article_code === +id);
     }
   };
@@ -51,7 +57,6 @@ export const Product = () => {
   useEffect(() => {
     const result = selectProductState(stateType);
     setProduct(result);
-    // eslint-disable-next-line
   }, [id, stateType]);
 
   const [activeTab, setActiveTab] = useState('description');
@@ -66,11 +71,10 @@ export const Product = () => {
 
   const getDate = () => {
     const date = new Date();
-
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   };
 
-  const tableTmpData = [
+  const specTableData = [
     ['Кімната', product?.room],
     ['Категорія товару', product?.item_category],
     ['Матеріал', product?.colour],
@@ -83,6 +87,10 @@ export const Product = () => {
     ['Колекція', product?.collection],
     ['Виробник', product?.manufacturer],
   ];
+
+  const shuffleArray = [...recommended]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
 
   return (
     <PageSectionWrapper title="">
@@ -217,7 +225,7 @@ export const Product = () => {
               <div className="tab__specs--table">
                 <table>
                   <tbody>
-                    {tableTmpData.map((element, index) => (
+                    {specTableData.map((element, index) => (
                       <tr key={index}>
                         <th>{element[0]}</th>
                         <td>{element[1]}</td>
@@ -266,7 +274,27 @@ export const Product = () => {
           </div>
         </div>
       </div>
-      <RecommendedProducts />
+
+      <section className="recommended-products">
+        <div className="recommended-products__heading">
+          <h1 className="recommended-products__title">Рекомендовані товари</h1>
+        </div>
+        <div className="recommended-products__list">
+          {shuffleArray.map((item) => (
+            <ProductCard
+              key={item.article_code}
+              name={item?.title}
+              price={item.price}
+              discountPrice={item.discount}
+              cardSize={null}
+              img={item.photo.find((img) => img.includes('photo_image_0'))}
+              stateType={stateType}
+              id={item.article_code}
+              rating={item.review}
+            />
+          ))}
+        </div>
+      </section>
     </PageSectionWrapper>
   );
 };
