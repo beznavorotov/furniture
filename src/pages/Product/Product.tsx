@@ -105,12 +105,7 @@ export const Product = () => {
           <div className="product__gallery--main">
             <img src={product?.photo[galleryImgIndex]} alt="main img" />
           </div>
-          <div
-            className="product__gallery--collection"
-            // style={{
-            //   gridTemplateColumns: `repeat(${product?.photo.length}, 1fr)`,
-            // }}
-          >
+          <div className="product__gallery--collection">
             {product?.photo?.map((img, index) => (
               <div
                 key={`galImg${index}`}

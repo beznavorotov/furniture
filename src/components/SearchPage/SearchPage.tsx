@@ -122,15 +122,15 @@ export const SearchPage = () => {
           <div className="results-row">
             {currentItems.map((item) => (
               <ProductCard
-              key={item.id}
-              name={item.title}
-              price={item.price}
-              discountPrice={item.price}
-              img={item.photo.find((item) => item.includes('photo_image_0'))}
-              cardSize={null}
-              id={item.article_code}
-              stateType="category"
-              rating={item.review}
+                key={item.id}
+                name={item.title}
+                price={item.price}
+                discountPrice={item.price}
+                img={item.photo.find((item) => item.includes('photo_image_0'))}
+                cardSize={null}
+                id={item.article_code}
+                stateType="search"
+                rating={item.review}
               />
             ))}
           </div>
