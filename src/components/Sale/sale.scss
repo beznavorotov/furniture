@@ -3,6 +3,11 @@
   padding-bottom: 20px;
   &--wrapper {
     @include flex(space-between, stretch);
+    flex-wrap: wrap;
+    gap: 20px;
+    @include tablet {
+      justify-content: center;
+    }
   }
   @include tablet {
     justify-content: center;

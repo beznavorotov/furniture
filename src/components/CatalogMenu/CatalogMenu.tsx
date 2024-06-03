@@ -75,9 +75,12 @@ export const CatalogMenu: React.FC = () => {
               <ul className="subcategory-list">
                 {room.categories.map((item) => (
                   <li key={room.id + '' + item.id}>
-                    <a className="subcategory-list__link" href="/">
+                    <Link
+                      className="subcategory-list__link"
+                      to={`/catalog/${item.id - 1}`}
+                    >
                       {item.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

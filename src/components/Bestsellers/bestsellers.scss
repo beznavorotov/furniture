@@ -4,6 +4,11 @@
   padding-bottom: 32px;
   &--wrapper {
     @include flex(space-between, stretch);
+    flex-wrap: wrap;
+    gap: 20px;
+    @include tablet {
+      justify-content: center;
+    }
 
     .product-card {
       max-height: 534px;

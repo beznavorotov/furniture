@@ -65,15 +65,6 @@
     cursor: pointer;
     width: 100%;
   }
-  .stars {
-    @include flex(flex-start);
-    margin: 0;
-    padding: 0;
-    img {
-      height: 20px;
-      width: 20px;
-    }
-  }
   .card_price {
     @include flex(flex-start, center);
     width: 100%;
@@ -114,6 +105,9 @@
   // small card
   &.small {
     width: 190px;
+    @include tablet-sm {
+      width: 170px;
+    }
 
     .product-card__img {
       max-height: 160px;

@@ -45,7 +45,7 @@ export const RecommendedProducts = () => {
             img={lamp}
             stateType="category"
             id={product.id}
-            // rating={null}
+            rating='3'
           />
         ))}
       </div>

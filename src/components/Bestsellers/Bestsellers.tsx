@@ -20,6 +20,10 @@ export const Bestsellers = () => {
     }
   }, [bestsellersStatus, dispatch]);
 
+  const shuffleArray = [...bestsellers]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
+
   return (
     <div className="bestsellers row">
       <div className="name section__heading">
@@ -29,17 +33,17 @@ export const Bestsellers = () => {
         </Link>
       </div>
       <div className="bestsellers--wrapper">
-        {bestsellers.slice(0, 4).map((item) => (
+        {shuffleArray.map((item) => (
           <ProductCard
             key={item.id}
             name={item.title}
             price={item.price}
             discountPrice={item.price}
-            img={item.photo[0]}
+            img={item.photo.find((item) => item.includes('photo_image_0'))}
             cardSize={null}
             id={item.article_code}
-            stateType='bestsellers'
-            // rating={null}
+            stateType="bestsellers"
+            rating={item.review}
           />
         ))}
       </div>

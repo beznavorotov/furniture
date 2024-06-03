@@ -121,14 +121,14 @@ export const SearchPage = () => {
             {paginatedResults.map((item) => (
               <ProductCard
                 key={item.article_code}
-                img={item.photo[0]}
+                img={item.photo.find((item) => item.includes('photo_image_0'))}
                 name={item.title}
                 price={item.price}
                 discountPrice={item.discount}
                 cardSize="medium"
                 id={item.article_code}
                 stateType="category"
-                // rating={null}
+                rating={item.review}
               />
             ))}
           </div>

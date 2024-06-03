@@ -1,10 +1,10 @@
 import { RecommendedProducts } from '../../components/RecommendedProducts/RecommendedProducts';
-import emptyStar from '../../assets/star_empty.svg';
 import { useEffect, useState } from 'react';
 import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { StarsRating } from '../../components/StarsRating/StarsRating';
 
 type ProductItemType = {
   room: string;
@@ -22,6 +22,7 @@ type ProductItemType = {
   avaliability: boolean;
   price: number;
   description: string;
+  review: number;
 };
 
 export const Product = () => {
@@ -103,13 +104,9 @@ export const Product = () => {
           </div>
 
           <div className="product__rating">
-            <span className="product__rating--stars">
-              <img src={emptyStar} alt="empty star" />
-              <img src={emptyStar} alt="empty star" />
-              <img src={emptyStar} alt="empty star" />
-              <img src={emptyStar} alt="empty star" />
-              <img src={emptyStar} alt="empty star" />
-            </span>
+            <div className="product__rating--stars">
+              <StarsRating ratingNumber={product?.review} />
+            </div>
             <div className="product__rating--reviews">
               <span className="product__rating--count">0 відгуків</span>
               <span className="product__rating--devider">|</span>
@@ -244,11 +241,7 @@ export const Product = () => {
 
                   <div className="product__rating">
                     <span className="product__rating--stars">
-                      <img src={emptyStar} alt="empty star" />
-                      <img src={emptyStar} alt="empty star" />
-                      <img src={emptyStar} alt="empty star" />
-                      <img src={emptyStar} alt="empty star" />
-                      <img src={emptyStar} alt="empty star" />
+                      <StarsRating ratingNumber="2" />
                     </span>
                   </div>
                   <p className="review__text">
