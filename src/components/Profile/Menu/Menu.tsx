@@ -41,7 +41,7 @@ export const Menu = () => {
             </div>
 
             <div className="name">
-              <h2 className="name_user">Ім'я Прізвище</h2>
+              <h2 className="name_user">Користувач</h2>
               <a href="/">
                 {isAuth ? localStorage.getItem('user') : 'Авторизуйтесь'}
               </a>
