@@ -47,7 +47,11 @@ export const CatalogMenu: React.FC = () => {
             className="category-list__item"
             onClick={() => toggleVisibility(room.id)}
           >
-            <div className="category-list__heading">
+            <div
+              className={`category-list__heading ${
+                isVisible === room.id ? 'active' : ''
+              }`}
+            >
               <span className="category-list__number">0{room.id}</span>
               <span className="category-list__link">{room.title}</span>
               <span

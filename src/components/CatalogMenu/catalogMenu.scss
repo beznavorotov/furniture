@@ -34,6 +34,7 @@
     }
 
     .category-list__item {
+      position: relative;
       @include flex-column(flex-start, flex-start);
       gap: 24px;
       cursor: pointer;
@@ -57,8 +58,18 @@
       .category-list__heading {
         @include flex;
         width: 100%;
+
         .category-list__number {
           margin-right: 24px;
+        }
+
+        &.active {
+          .category-list__number,
+          .category-list__link {
+            color: $color-blue;
+            font-weight: 600;
+            border-bottom-color: $color-blue;
+          }
         }
 
         .category-list__direction-arrow {
@@ -69,8 +80,12 @@
           height: 12px;
           margin-left: auto;
           transform: rotate(270deg);
+
           @include tablet {
             transform: rotate(0);
+            &.rotate {
+              transform: rotate(180deg);
+            }
           }
         }
       }
@@ -116,12 +131,14 @@
       @include flex-column(flex-start);
       list-style: none;
       padding: 0;
+      width: 100%;
 
       li {
         padding: 10px;
         width: 100%;
 
         .subcategory-list__link {
+          display: block;
           font-size: 14px;
           line-height: 18px;
         }
