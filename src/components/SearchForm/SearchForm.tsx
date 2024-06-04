@@ -11,10 +11,15 @@ export const SearchForm = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(fetchSearch(searchQuery));
-    navigate(`/catalog/search?query=${searchQuery}`);
-    setSearchQuery('');
+    if (searchQuery.trim() === '') {
+      alert('Введіть коректний пошуковий запит');
+    } else {
+      dispatch(fetchSearch(searchQuery));
+      navigate(`/catalog/search?query=${searchQuery}`);
+      setSearchQuery('');
+    }
   };
+  
   return (
     <div className="header__search">
       <form
