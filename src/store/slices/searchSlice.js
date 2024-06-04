@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import fetchData from '../../utils/fetchData';
 import { BACKEND_SEARCH } from '../../constants';
 
-export const makeSearch = createAsyncThunk(
+export const fetchSearch = createAsyncThunk(
   'search/getData',
   // eslint-disable-next-line
   async (query, { rejectWithValue }) => {
@@ -17,23 +17,23 @@ export const makeSearch = createAsyncThunk(
 const searchSlice = createSlice({
   name: 'search',
   initialState: {
-    data: [],
+    searchResults: [],
     status: 'idle',
     error: null,
   },
   reducers: {
-    setSearchData: (state, action) => (state.data = action.payload),
+    setSearchData: (state, action) => (state.searchResults = action.payload),
   },
   extraReducers: (builder) => {
     builder
-      .addCase(makeSearch.pending, (state) => {
+      .addCase(fetchSearch.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(makeSearch.fulfilled, (state, action) => {
+      .addCase(fetchSearch.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.searchResults = action.payload;
       })
-      .addCase(makeSearch.rejected, (state, action) => {
+      .addCase(fetchSearch.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

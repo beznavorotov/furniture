@@ -37,6 +37,7 @@ export const Product = () => {
     (state: RootState) => state.catalog.bestsellers,
   );
   const sale = useSelector((state: RootState) => state.catalog.sale);
+  const search = useSelector((state: RootState) => state.search.searchResults);
 
   const [product, setProduct] = useState({} as ProductItemType);
   const [recommended, setRecommended] = useState([]);
@@ -49,9 +50,12 @@ export const Product = () => {
     } else if (type === 'bestsellers') {
       setRecommended(bestsellers);
       return bestsellers.find((item) => item.article_code === +id);
-    } else {
+    } else if (type === 'sale') {
       setRecommended(sale);
       return sale.find((item) => item.article_code === +id);
+    } else {
+      setRecommended(search);
+      return search.find((item) => item.article_code === +id);
     }
   };
 
