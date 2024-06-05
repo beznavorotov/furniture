@@ -129,7 +129,7 @@ export const SearchPage = () => {
               img={item.photo.find((item) => item.includes('photo_image_0'))}
               cardSize={null}
               id={item.article_code}
-              stateType="category"
+              stateType="search"
               rating={item.review}
               />
             ))}
