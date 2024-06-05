@@ -1,43 +1,60 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
-import { BACKEND_LOGIN_URL } from '../../constants';
+import { BACKEND_CREATE_USER_URL, BACKEND_LOGIN_URL } from '../../constants';
+import fetchData from '../../utils/fetchData';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
       // send data to server
-      const response = await fetch(BACKEND_LOGIN_URL, {
+      const response = await fetchData(BACKEND_LOGIN_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials),
+        body: credentials,
       });
 
-      if (!response.ok) {
-        throw new Error('Something goes wrong with log in');
-      }
-
-      const data = await response.json();
+      const data = response;
       // save data from server to localStorage and cookies
       localStorage.setItem('accessToken', data.access);
       localStorage.setItem('user', credentials.username);
       Cookies.set('refreshToken', data.refresh, { httpOnly: true });
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   },
 );
 
-export const refreshToken = createAsyncThunk('auth/resresh', async () => {});
+export const signup = createAsyncThunk(
+  'auth/signup',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await fetchData(BACKEND_CREATE_USER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: credentials,
+      });
+      console.log(response)
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('user');
   Cookies.remove('refreshToken');
   return {};
 });
+
+export const refreshToken = createAsyncThunk('auth/resresh', async () => {});
 
 const authSlice = createSlice({
   name: 'auth',

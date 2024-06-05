@@ -37,8 +37,11 @@ export const Product = () => {
     (state: RootState) => state.catalog.bestsellers,
   );
   const sale = useSelector((state: RootState) => state.catalog.sale);
+  const search = useSelector((state: RootState) => state.search.searchResults);
+
   const [product, setProduct] = useState({} as ProductItemType);
   const [recommended, setRecommended] = useState([]);
+  const [galleryImgIndex, setGalleryImgIndex] = useState(0);
 
   const selectProductState = (type) => {
     if (type === 'category') {
@@ -47,9 +50,12 @@ export const Product = () => {
     } else if (type === 'bestsellers') {
       setRecommended(bestsellers);
       return bestsellers.find((item) => item.article_code === +id);
-    } else {
+    } else if (type === 'sale') {
       setRecommended(sale);
       return sale.find((item) => item.article_code === +id);
+    } else {
+      setRecommended(search);
+      return search.find((item) => item.article_code === +id);
     }
   };
 
@@ -65,8 +71,8 @@ export const Product = () => {
   const changeActiveTab = (tabName: string) => {
     return activeTab === tabName ? 'active' : null;
   };
-
-  const handleMaterialClick = (index) => setActiveMaterial(index);
+  const handleMaterialClick = (index: number) => setActiveMaterial(index);
+  const handleGalleryImgClick = (index: number) => setGalleryImgIndex(index);
 
   const getDate = () => {
     const date = new Date();
@@ -91,15 +97,29 @@ export const Product = () => {
     .sort(() => Math.random() - 0.5)
     .slice(0, 4);
 
+  if (!product || !product.photo || product.photo.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <PageSectionWrapper title="">
       <div className="product product--container">
+        {/* here */}
         <div className="product__gallery">
-          {product?.photo?.map((img) => (
-            <div key={img} className="product__gallery--item">
-              <img src={img} alt="" />
-            </div>
-          ))}
+          <div className="product__gallery--main">
+            <img src={product?.photo[galleryImgIndex]} alt="main img" />
+          </div>
+          <div className="product__gallery--collection">
+            {product?.photo?.map((img, index) => (
+              <div
+                key={`galImg${index}`}
+                onClick={() => handleGalleryImgClick(index)}
+                className="product__gallery--item"
+              >
+                <img src={img} alt="" />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="product__order">
