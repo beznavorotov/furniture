@@ -27,11 +27,13 @@
   // content
   &-content {
     @include grid(repeat(5, auto), auto);
+    max-width: 1020px;
+    width: 100%;
+    position: relative;
     gap: 20px;
 
     @include tablet {
       grid-template-columns: repeat(3, auto);
-
       gap: 10px;
     }
 

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { StarsRating } from '../../components/StarsRating/StarsRating';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { IsLoading } from '../../components/IsLoading/IsLoading';
 
 type ProductItemType = {
   room: string;
@@ -98,7 +99,7 @@ export const Product = () => {
     .slice(0, 4);
 
   if (!product || !product.photo || product.photo.length === 0) {
-    return <div>Loading...</div>;
+    return <IsLoading text="Заждіть секунду..." />;
   }
 
   return (

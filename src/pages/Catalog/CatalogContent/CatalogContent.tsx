@@ -3,6 +3,7 @@ import ProductCard from '../../../components/ProductCard/ProductCard';
 import { RootState } from '../../../store';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { IsLoading } from '../../../components/IsLoading/IsLoading';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -40,8 +41,8 @@ export const CatalogContent = () => {
 
   return (
     <div className="catalog-content">
-      {categoryStatus === 'loading' || searchStatus == 'loading' ? (
-        <p>Loading</p>
+      {categoryStatus === 'loading' || searchStatus === 'loading' ? (
+        <IsLoading text="Заждіть секунду..." />
       ) : (
         properState?.map((item) => (
           <ProductCard
