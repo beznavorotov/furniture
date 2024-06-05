@@ -15,6 +15,7 @@ export const Catalog = () => {
 
   useEffect(() => {
     if (id !== 'search') {
+      console.log(id);
       dispatch(fetchCategory(+id + 1));
     }
   }, [id, dispatch]);

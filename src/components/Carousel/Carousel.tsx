@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
 import furniture1 from '../../assets/1.webp';
 import furniture2 from '../../assets/2.webp';
 import furniture3 from '../../assets/3.webp';
-
-
-interface ICarousel {
-  img: string;
-  text: string;
-}
+import { Link } from 'react-router-dom';
 
 export const Slider: React.FC = () => {
-  const [items] = useState<ICarousel[]>([
-    { img: furniture1, text: 'Нове надходження' },
-    { img: furniture2, text: 'Гарячий розпродаж' },
-    { img: furniture3, text: 'Дуже Дуже Гарячий розпродаж' },
-  ]);
+  const sliderItems = [
+    { img: furniture1, text: 'Нове надходження', link: '/catalog/1' },
+    { img: furniture2, text: 'Гарячий розпродаж', link: '/catalog/sale' },
+    { img: furniture3, text: 'Дуже Дуже Гарячий розпродаж', link: '/catalog/bestsellers' },
+  ];
 
   return (
     <div
@@ -24,7 +18,7 @@ export const Slider: React.FC = () => {
       // data-bs-ride="true"
     >
       <div className="carousel-indicators">
-        {items.map((_, index) => (
+        {sliderItems.map((_, index) => (
           <button
             key={index}
             type="button"
@@ -36,7 +30,7 @@ export const Slider: React.FC = () => {
         ))}
       </div>
       <div className="carousel-inner">
-        {items.map((item, index) => (
+        {sliderItems.map((item, index) => (
           <div
             key={index}
             className={`carousel-item ${index === 0 ? 'active' : ''}`}
@@ -48,9 +42,9 @@ export const Slider: React.FC = () => {
             />
             <div className="carousel-caption">
               <h1 className="carousel-caption__title">{item.text}</h1>
-              <a className="button" href="/">
+              <Link className="button" to={item.link}>
                 Переглянути
-              </a>
+              </Link>
             </div>
           </div>
         ))}

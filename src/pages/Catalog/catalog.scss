@@ -26,19 +26,71 @@
 
   // content
   &-content {
-    @include grid(repeat(5, auto), auto);
     max-width: 1020px;
-    width: 100%;
     position: relative;
-    gap: 20px;
+    width: 100%;
 
-    @include tablet {
-      grid-template-columns: repeat(3, auto);
-      gap: 10px;
+    &__wrapper {
+      @include grid(repeat(5, auto), auto);
+      width: 100%;
+      gap: 20px;
+      @include tablet {
+        grid-template-columns: repeat(3, auto);
+        gap: 10px;
+      }
+
+      @include tablet-sm {
+        grid-template-columns: repeat(2, auto);
+      }
     }
 
-    @include tablet-sm {
-      grid-template-columns: repeat(2, auto);
+    // paggination
+    .pagination {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      gap: 10px;
+
+      &.show {
+        display: flex;
+      }
+    }
+
+    .pagination button {
+      background-color: $color-blue;
+      border: 1px solid $color-blue;
+      border-radius: 3px;
+      color: $color-white;
+      font-family: $font-family-montserrat;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 10px;
+      height: 40px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      min-width: 40px;
+    }
+
+    .pagination button:hover {
+      background-color: $color-lightblue;
+      border-color: $color-lightblue;
+    }
+
+    .pagination button:disabled {
+      background-color: $color-white-bg;
+      color: $color-grey;
+      border: 1px solid $color-grey;
+      cursor: not-allowed;
+    }
+
+    .pagination button.active {
+      background-color: $color-darkblue;
+      font-weight: 700;
+    }
+
+    .pagination button.active:hover {
+      background-color: $color-lightblue;
     }
   }
 }

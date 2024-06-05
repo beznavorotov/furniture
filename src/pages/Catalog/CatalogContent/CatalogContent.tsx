@@ -20,18 +20,10 @@ export const CatalogContent = () => {
   const searchStatus = useSelector((state: RootState) => state.search.status);
   const [properState, setProperState] = useState([]);
   const [properCardType, setProperCardType] = useState('');
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(25);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(query.get('query'));
-
-  // pagination
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
-  // const totalPages = Math.ceil(searchResults.length / itemsPerPage);
-  // const handlePageChange = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
+  // console.log(query.get('query'));
 
   useEffect(() => {
     pathname.includes('/search')
@@ -39,27 +31,44 @@ export const CatalogContent = () => {
       : (setProperState(category), setProperCardType('category'));
   }, [pathname, search, category]);
 
+  // pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = properState.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(properState.length / itemsPerPage);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="catalog-content">
-      {categoryStatus === 'loading' || searchStatus === 'loading' ? (
-        <IsLoading text="Заждіть секунду..." />
-      ) : (
-        properState?.map((item) => (
-          <ProductCard
-            key={item.article_code}
-            img={item.photo.find((item) => item.includes('photo_image_0'))}
-            name={item.title}
-            price={item.price}
-            discountPrice={item.discount}
-            cardSize="small"
-            id={item.article_code}
-            stateType={properCardType}
-            rating={item.review}
-          />
-        ))
-      )}
+      <div className="catalog-content__wrapper">
+        {categoryStatus === 'loading' || searchStatus === 'loading' ? (
+          <IsLoading text="Заждіть секунду..." />
+        ) : (
+          currentItems?.map((item) => (
+            <ProductCard
+              key={item.article_code}
+              img={item.photo.find((item) => item.includes('photo_image_0'))}
+              name={item.title}
+              price={item.price}
+              discountPrice={item.discount}
+              cardSize="small"
+              id={item.article_code}
+              stateType={properCardType}
+              rating={item.review}
+            />
+          ))
+        )}
+      </div>
 
-      {/* <div className="pagination">
+      <div
+        className={`pagination ${
+          categoryStatus === 'succeeded' || searchStatus === 'succeeded'
+            ? 'show'
+            : ''
+        }`}
+      >
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -81,7 +90,7 @@ export const CatalogContent = () => {
         >
           Наступна
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
