@@ -122,17 +122,6 @@ export const SearchPage = () => {
           <div className="results-row">
             {currentItems.map((item) => (
               <ProductCard
-<<<<<<< HEAD
-              key={item.id}
-              name={item.title}
-              price={item.price}
-              discountPrice={item.price}
-              img={item.photo.find((item) => item.includes('photo_image_0'))}
-              cardSize={null}
-              id={item.article_code}
-              stateType="search"
-              rating={item.review}
-=======
                 key={item.id}
                 name={item.title}
                 price={item.price}
@@ -142,7 +131,6 @@ export const SearchPage = () => {
                 id={item.article_code}
                 stateType="search"
                 rating={item.review}
->>>>>>> 03272815c360adbb0fbad87f2366c65f0a5b80bd
               />
             ))}
           </div>
