@@ -38,9 +38,9 @@ export const CatalogMenu: React.FC = () => {
   }, []);
 
   return (
-    <div className="catalog__menu">
+    <div className="catalog__menu" ref={categoryListRef}>
       <h1 className="catalog__menu--title">Каталог товарів</h1>
-      <ul className="category-list" ref={categoryListRef}>
+      <ul className="category-list">
         {rooms.map((room) => (
           <li
             key={room.id}

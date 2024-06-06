@@ -2,9 +2,37 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.webp';
 import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
 import { SearchForm } from '../SearchForm/SearchForm';
+import { useEffect, useRef, useState } from 'react';
+import { setShowOverlay } from '../../store/slices/modalSlice';
+import { useDispatch } from 'react-redux';
 
 export const Header = () => {
-  const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
+  const catalogDropDown = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        catalogDropDown.current &&
+        !catalogDropDown.current.contains(event.target)
+      ) {
+        setShowMenu(false);
+        dispatch(setShowOverlay(false));
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowMenu(false);
+    dispatch(setShowOverlay(false));
+  }, [location]);
 
   return (
     <div className="container">
@@ -30,13 +58,19 @@ export const Header = () => {
               id="navbarSupportedContent"
             >
               <ul className="header__navigation--list navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
+                <li
+                  className={`nav-item catalog-menu__dropdown ${
+                    showMenu ? 'show' : ''
+                  }`}
+                  ref={catalogDropDown}
+                >
                   {/* !!! dropDown menu */}
-                  <NavLink
-                    className={`nav-link catalog-link ${
-                      pathname.includes('catalog') ? 'active' : ''
-                    }`}
-                    to="/catalog/1"
+                  <button
+                    className="catalog-link"
+                    onClick={() => (
+                      setShowMenu(!showMenu),
+                      dispatch(setShowOverlay(!showMenu))
+                    )}
                   >
                     Каталог
                     <svg
@@ -53,7 +87,9 @@ export const Header = () => {
                         strokeLinejoin="round"
                       />
                     </svg>
-                  </NavLink>
+                  </button>
+
+                  <CatalogMenu />
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">

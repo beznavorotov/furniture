@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 export const AddToCartModalWindow = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state: RootState) => state.modal.showModal);
+  const isOverlayOpen = useSelector(
+    (state: RootState) => state.modal.showOverlay,
+  );
   const [itemsQuantity, setItemsQuantity] = useState(1);
   const [demoTotalPrice, setDemoTotalPrice] = useState(0);
 
@@ -41,7 +44,9 @@ export const AddToCartModalWindow = () => {
   return (
     <>
       <div
-        className={`modal--overlay ${isModalOpen ? 'show' : ''}`}
+        className={`modal--overlay ${
+          isModalOpen || isOverlayOpen ? 'show' : ''
+        }`}
         onClick={closeModal}
       ></div>
       <section className={`add-to-cart-modal ${isModalOpen ? 'show' : ''}`}>
