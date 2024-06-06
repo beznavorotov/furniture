@@ -4,6 +4,7 @@ import authSlice from './slices/authSlice';
 import modalSlice from './slices/modalSlice';
 import catalogSlice from './slices/catalogSlice';
 import searchSlice from './slices/searchSlice';
+import filterCatalogSlice from './slices/filterCatalogSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     modal: modalSlice,
     catalog: catalogSlice,
     search: searchSlice,
+    filter: filterCatalogSlice,
   },
 });

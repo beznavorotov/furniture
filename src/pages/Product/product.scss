@@ -40,10 +40,10 @@
     }
 
     &--collection {
-      @include grid(repeat(5, 1fr), repeat(2, 1fr));
+      @include grid(repeat(7, 1fr), repeat(1, 1fr));
       gap: 16px;
       @include tablet {
-        @include grid(repeat(8, 1fr), repeat(1, 1fr));
+        @include grid(repeat(5, 1fr), repeat(1, 2fr));
       }
     }
 
