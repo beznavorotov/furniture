@@ -23,7 +23,7 @@ export const CatalogContent = () => {
   const [itemsPerPage] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // console.log(query.get('query'));
+  console.log(query.get('query'));
 
   useEffect(() => {
     pathname.includes('/search')

@@ -27,11 +27,13 @@ export const Header = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     setShowMenu(false);
     dispatch(setShowOverlay(false));
+    // eslint-disable-next-line
   }, [location]);
 
   return (
