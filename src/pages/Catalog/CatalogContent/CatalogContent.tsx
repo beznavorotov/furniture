@@ -49,7 +49,7 @@ export const CatalogContent = () => {
           currentItems?.map((item) => (
             <ProductCard
               key={item.article_code}
-              img={item.photo.find((item) => item.includes('photo_image_0'))}
+              img={item.photo.find((item) => item.includes('MAIN_photo_image_'))}
               name={item.title}
               price={item.price}
               discountPrice={item.discount}

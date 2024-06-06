@@ -307,7 +307,7 @@ export const Product = () => {
               price={item.price}
               discountPrice={item.discount}
               cardSize={null}
-              img={item.photo.find((img) => img.includes('photo_image_0'))}
+              img={item.photo.find((img) => img.includes('MAIN_photo_image_'))}
               stateType={stateType}
               id={item.article_code}
               rating={item.review}
