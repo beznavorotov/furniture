@@ -12,8 +12,6 @@ export const CatalogSidebar = () => {
     (state: RootState) => state.filter.collections,
   );
 
-  console.log(rooms.length);
-
   return (
     <aside className="catalog-sidebar">
       {/* Ціна */}

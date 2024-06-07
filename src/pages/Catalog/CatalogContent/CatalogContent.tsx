@@ -1,14 +1,17 @@
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import { RootState } from '../../../store';
 import { IsLoading } from '../../../components/IsLoading/IsLoading';
 import ScrollToTop from '../../../utils/ScrollToTop';
+import { useLocation } from 'react-router-dom';
 
 export const CatalogContent = ({ data, type }) => {
+  const { pathname } = useLocation();
   const categoryStatus = useSelector(
     (state: RootState) => state.catalog.status,
   );
+
   const searchStatus = useSelector((state: RootState) => state.search.status);
 
   const [itemsPerPage] = useState(25);
@@ -28,6 +31,10 @@ export const CatalogContent = ({ data, type }) => {
     });
     setCurrentPage(pageNumber);
   };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pathname]);
 
   return (
     <div className="catalog-content">
