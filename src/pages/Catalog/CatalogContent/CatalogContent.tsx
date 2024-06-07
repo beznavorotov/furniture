@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import { RootState } from '../../../store';
