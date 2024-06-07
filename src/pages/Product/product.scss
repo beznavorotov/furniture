@@ -275,15 +275,18 @@
       }
 
       .reviews-list {
+        @include flex-column;
         list-style: none;
         padding-left: 0;
         margin-bottom: 0;
+        gap: 16px;
 
         .button {
           margin-top: 36px;
-        }
+          }
 
-        .review {
+          .review {
+          width: 100%;
           border: 1px solid $color-lightblue-border;
           border-radius: 3px;
           padding: 8px;

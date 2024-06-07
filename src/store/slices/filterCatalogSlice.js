@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const getUniqueValues = (array, key) => {
-  return [...new Set(array.map((item) => item[key]))];
+  return [...new Set(array.map((item) => item[key]))].sort();
 };
 
 const filterCatalogSlice = createSlice({
@@ -11,6 +11,10 @@ const filterCatalogSlice = createSlice({
     rooms: [],
     manufacturers: [],
     collections: [],
+    sortBy: null,
+    filterQuery: {},
+    status: 'idle',
+    error: null,
   },
   reducers: {
     getUniqueCategories: (state, action) => {

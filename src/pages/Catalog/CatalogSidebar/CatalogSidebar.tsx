@@ -1,4 +1,19 @@
+import { IsLoading } from '../../../components/IsLoading/IsLoading';
+import { RootState } from '../../../store';
+import { useSelector } from 'react-redux';
+
 export const CatalogSidebar = () => {
+  const categories = useSelector((state: RootState) => state.filter.categories);
+  const rooms = useSelector((state: RootState) => state.filter.rooms);
+  const manufacturers = useSelector(
+    (state: RootState) => state.filter.manufacturers,
+  );
+  const collections = useSelector(
+    (state: RootState) => state.filter.collections,
+  );
+
+  console.log(rooms.length);
+
   return (
     <aside className="catalog-sidebar">
       {/* Ціна */}
@@ -33,6 +48,28 @@ export const CatalogSidebar = () => {
         </div>
       </div>
 
+      {/* Кімнати */}
+
+      <div className="catalog-sidebar__section">
+        <div className="catalog-sidebar__heading">
+          <h4 className="catalog-sidebar__title">Кімнати</h4>
+        </div>
+        <div className="catalog-sidebar__content">
+          <div className="filter filter__check-list">
+            {!rooms ? (
+              <IsLoading text="..." />
+            ) : (
+              rooms.map((item, index) => (
+                <label key={index}>
+                  <input type="checkbox" name="checkbox-rooms" />
+                  {item}
+                </label>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Категорії */}
       <div className="catalog-sidebar__section">
         <div className="catalog-sidebar__heading">
@@ -40,22 +77,58 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Дивани
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Крісла
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Столи
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Тумби
-            </label>
+            {!categories ? (
+              <IsLoading text="..." />
+            ) : (
+              categories.map((item, index) => (
+                <label key={index}>
+                  <input type="checkbox" name="checkbox-categories" />
+                  {item}
+                </label>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Колекції */}
+      <div className="catalog-sidebar__section">
+        <div className="catalog-sidebar__heading">
+          <h4 className="catalog-sidebar__title">Колекції</h4>
+        </div>
+        <div className="catalog-sidebar__content">
+          <div className="filter filter__check-list">
+            {!collections ? (
+              <IsLoading text="..." />
+            ) : (
+              collections.map((item, index) => (
+                <label key={index}>
+                  <input type="checkbox" name="checkbox-collections" />
+                  {item}
+                </label>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Виробник */}
+      <div className="catalog-sidebar__section">
+        <div className="catalog-sidebar__heading">
+          <h4 className="catalog-sidebar__title">Виробник</h4>
+        </div>
+        <div className="catalog-sidebar__content">
+          <div className="filter filter__check-list">
+            {!manufacturers ? (
+              <IsLoading text="..." />
+            ) : (
+              manufacturers.map((item, index) => (
+                <label key={index}>
+                  <input type="checkbox" name="checkbox-manufacturers" />
+                  {item}
+                </label>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -68,31 +141,31 @@ export const CatalogSidebar = () => {
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Ясен Шімо світлий
             </label>
           </div>
@@ -107,101 +180,11 @@ export const CatalogSidebar = () => {
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
             <label>
-              <input type="checkbox" name="chbox-material" />В наявності
+              <input type="checkbox" name="checkbox-material" />В наявності
             </label>
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Відсутні
-            </label>
-          </div>
-        </div>
-      </div>
-
-      {/* Колекції */}
-      <div className="catalog-sidebar__section">
-        <div className="catalog-sidebar__heading">
-          <h4 className="catalog-sidebar__title">Колекції</h4>
-        </div>
-        <div className="catalog-sidebar__content">
-          <div className="filter filter__check-list">
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Модерн Класика
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Скандинавська Затишність
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Лофт Престиж
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Сонячний Інтер'єр
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Елегантний Мінімалізм
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Природна Гармонія
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Ретро Шарм
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Комфортний Урбан
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Гламурна Вишуканість
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Містечкова Ідилія
-            </label>
-          </div>
-        </div>
-      </div>
-
-      {/* Виробник */}
-      <div className="catalog-sidebar__section">
-        <div className="catalog-sidebar__heading">
-          <h4 className="catalog-sidebar__title">Виробник</h4>
-        </div>
-        <div className="catalog-sidebar__content">
-          <div className="filter filter__check-list">
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Меблі Майстер
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Дизайн Комфорт
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Еко Дім
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Вишуканий Інтер'єр
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Модерн Арт
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Затишок Престиж
-            </label>
-            <label>
-              <input type="checkbox" name="chbox-material" />
-              Фабрика Зручності
             </label>
           </div>
         </div>
@@ -311,7 +294,7 @@ export const CatalogSidebar = () => {
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
             <label>
-              <input type="checkbox" name="chbox-material" />
+              <input type="checkbox" name="checkbox-material" />
               Присутній
             </label>
           </div>

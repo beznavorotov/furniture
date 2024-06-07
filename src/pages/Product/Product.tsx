@@ -7,7 +7,7 @@ import { StarsRating } from '../../components/StarsRating/StarsRating';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IsLoading } from '../../components/IsLoading/IsLoading';
 
-type ProductItemType = {
+interface ProductItemType {
   room: string;
   item_category: string;
   colour: string;
@@ -24,8 +24,16 @@ type ProductItemType = {
   price: number;
   discount: number;
   description: string;
-  review: number;
-};
+  rating: number;
+  reviews: Review[];
+}
+
+interface Review {
+  first_name: string;
+  last_name: string;
+  rating: number;
+  id: number;
+}
 
 export const Product = () => {
   const { id } = useParams();
@@ -133,10 +141,12 @@ export const Product = () => {
 
           <div className="product__rating">
             <div className="product__rating--stars">
-              <StarsRating ratingNumber={product?.review} />
+              <StarsRating ratingNumber={product?.rating} />
             </div>
             <div className="product__rating--reviews">
-              <span className="product__rating--count">0 відгуків</span>
+              <span className="product__rating--count">
+                {product.reviews.length} відгуків
+              </span>
               <span className="product__rating--devider">|</span>
               <span className="product__rating--add">Написати відгук</span>
             </div>
@@ -261,31 +271,35 @@ export const Product = () => {
               )}`}
             >
               <ul className="reviews-list">
-                <li className="review">
-                  <div className="review__heading">
-                    <h3>Софія</h3>
-                    <span>{getDate()}</span>
-                  </div>
+                {product?.reviews?.map((item) => (
+                  <li className="review" key={item.last_name + item.id}>
+                    <div className="review__heading">
+                      <h3>
+                        {item.first_name} {item.last_name}
+                      </h3>
+                      <span>{getDate()}</span>
+                    </div>
 
-                  <div className="product__rating">
-                    <span className="product__rating--stars">
-                      <StarsRating ratingNumber="2" />
-                    </span>
-                  </div>
-                  <p className="review__text">
-                    Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
-                    sit id bibendum elit duis viverra purus. Commodo sed
-                    adipiscing velit non curabitur vestibulum.
+                    <div className="product__rating">
+                      <span className="product__rating--stars">
+                        <StarsRating ratingNumber={item.rating} />
+                      </span>
+                    </div>
+                  </li>
+                ))}
+                {/* <p className="review__text">
+                  Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
+                  sit id bibendum elit duis viverra purus. Commodo sed
+                  adipiscing velit non curabitur vestibulum.
+                </p>
+                <div className="review__proscons">
+                  <p className="review__pros">
+                    Переваги: <span>відсутні ;(</span>
                   </p>
-                  <div className="review__proscons">
-                    <p className="review__pros">
-                      Переваги: <span>відсутні ;(</span>
-                    </p>
-                    <p className="review__cons">
-                      Недоліки: <span>також відсутні :)</span>
-                    </p>
-                  </div>
-                </li>
+                  <p className="review__cons">
+                    Недоліки: <span>також відсутні :)</span>
+                  </p>
+                </div> */}
                 <button type="button" className="button">
                   Написати відгук
                 </button>
@@ -310,7 +324,7 @@ export const Product = () => {
               img={item.photo.find((img) => img.includes('MAIN_photo_image_'))}
               stateType={stateType}
               id={item.article_code}
-              rating={item.review}
+              rating={item.rating}
             />
           ))}
         </div>

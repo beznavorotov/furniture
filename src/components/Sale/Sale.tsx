@@ -33,7 +33,7 @@ export const Sale = () => {
             cardSize={null}
             id={item.article_code}
             stateType="sale"
-            rating={item.review}
+            rating={item.rating}
           />
         ))}
       </div>
