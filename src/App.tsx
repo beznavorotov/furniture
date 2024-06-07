@@ -16,6 +16,7 @@ import { Catalog } from './pages/Catalog/Catalog';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 import { Search } from './pages/Search/Search';
 import ScrollToTop from './utils/ScrollToTop';
+import { Order } from './pages/Order/Order';
 
 function Layout() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="catalog/:id" element={<Catalog />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="search" element={<Search />} />
+        <Route path="order" element={<Order />} />
       </Route>
     </Routes>
   );
