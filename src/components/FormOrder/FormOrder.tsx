@@ -230,7 +230,6 @@ export const FormOrder = () => {
                 className="input_comment"
                 name="comment"
                 placeholder="Ваш коментар"
-                rows='4'
               ></textarea>
             </div>
             <div className="form_group row">
