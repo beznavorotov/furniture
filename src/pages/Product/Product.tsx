@@ -6,6 +6,7 @@ import { RootState } from '../../store';
 import { StarsRating } from '../../components/StarsRating/StarsRating';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IsLoading } from '../../components/IsLoading/IsLoading';
+// порядок імпортів
 
 interface ProductItemType {
   room: string;
@@ -51,6 +52,12 @@ export const Product = () => {
   const [product, setProduct] = useState({} as ProductItemType);
   const [recommended, setRecommended] = useState([]);
   const [galleryImgIndex, setGalleryImgIndex] = useState(0);
+
+
+  // category
+  // bestsellers
+  // sale
+  // це можна винести в константи
 
   const selectProductState = (type) => {
     if (type === 'category') {
@@ -101,6 +108,8 @@ export const Product = () => {
     ['Колекція', product?.collection],
     ['Виробник', product?.manufacturer],
   ];
+
+  // specTableData - дивна структура даних, можливо краще використати об'єкт, тоді буде нормальний запис при виведенні даних
 
   const shuffleArray = [...recommended]
     .sort(() => Math.random() - 0.5)
@@ -177,9 +186,11 @@ export const Product = () => {
                     fill="#003CA6"
                   />
                 </svg>
+              {/*  можливо щось придумати щоб svg не було в розмітці */}
               </span>
             </div>
             <div className="product__price--buttons">
+              {/*product__price--buttons - стилі записані всюди по-різному, треба обирати чи БЕМ ЧИ НЕ БЕМ) */}
               <button className="button button__white">У кошик</button>
               <button className="button">Оплата частинами</button>
             </div>
@@ -196,6 +207,7 @@ export const Product = () => {
                 'stone',
                 'cloth',
                 'leather',
+              //   ???????? це можна винести в константи
               ].map((item, index) => (
                 <span
                   key={index}
@@ -203,6 +215,7 @@ export const Product = () => {
                     activeMaterial === index ? 'active' : null
                   }`}
                   onClick={() => {
+                    // для чого дужки ???
                     handleMaterialClick(index);
                   }}
                 >
@@ -315,6 +328,7 @@ export const Product = () => {
         </div>
         <div className="recommended-products__list">
           {shuffleArray.map((item) => (
+            // деструктуризація може бути корисною
             <ProductCard
               key={item.article_code}
               name={item?.title}
@@ -332,3 +346,5 @@ export const Product = () => {
     </PageSectionWrapper>
   );
 };
+
+// складний код, який важко читається, потрібно розділяти логіку компонента з відображенням.

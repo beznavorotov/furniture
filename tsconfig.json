@@ -26,3 +26,5 @@
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
+//це зайве з TS в проекті тільки розширення файлів

@@ -8,6 +8,9 @@ export const UserActionsNav = () => {
       : '';
   };
 
+  // тут про хардкодінг
+  // svg іконки краще винести в окремий компонент
+
   return (
     <nav className="user__actions">
       <NavLink to="/cart">

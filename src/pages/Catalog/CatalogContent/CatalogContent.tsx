@@ -5,6 +5,7 @@ import { RootState } from '../../../store';
 import { IsLoading } from '../../../components/IsLoading/IsLoading';
 import ScrollToTop from '../../../utils/ScrollToTop';
 import { useLocation } from 'react-router-dom';
+// alias - для імпортів
 
 export const CatalogContent = ({ data, type }) => {
   const { pathname } = useLocation();
@@ -13,7 +14,7 @@ export const CatalogContent = ({ data, type }) => {
   );
 
   const searchStatus = useSelector((state: RootState) => state.search.status);
-
+  // 25 - це магічне число, краще винести в константу
   const [itemsPerPage] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -47,9 +48,12 @@ export const CatalogContent = ({ data, type }) => {
           <IsLoading text="Заждіть секунду..." />
         ) : (
           currentItems?.map((item) => (
+            // ES6 - можна використати деструктуризацію
+            //   small - винести в константи чи імпортувати з компонента ProductCard.cardSize.small
             <ProductCard
               key={item.article_code}
               img={item.photo.find((item) =>
+                // MAIN_photo_image_ - це магічне значення, краще винести в константу
                 item.includes('MAIN_photo_image_'),
               )}
               name={item.title}
@@ -66,6 +70,7 @@ export const CatalogContent = ({ data, type }) => {
 
       <div
         className={`pagination ${
+          // succeeded - це магічне значення, краще винести в константу
           categoryStatus === 'succeeded' || searchStatus === 'succeeded'
             ? 'show'
             : ''

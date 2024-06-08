@@ -13,8 +13,10 @@ import { Cart } from './pages/Cart/Cart';
 import { Reset } from './components/Reset/Reset';
 import { Product } from './pages/Product/Product';
 import { Catalog } from './pages/Catalog/Catalog';
+// порядок імпортів
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 import { Search } from './pages/Search/Search';
+// порядок імпортів
 import ScrollToTop from './utils/ScrollToTop';
 import { Order } from './pages/Order/Order';
 

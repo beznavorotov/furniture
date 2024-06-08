@@ -17,6 +17,7 @@ export const MenuDP = () => {
         return null;
     }
   };
+  // renderComponent - краще створити обєкт з компонентами і використовувати його по типу - renderComponent[menuItem]
 
   return (
     <div className="container">

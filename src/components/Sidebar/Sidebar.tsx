@@ -7,3 +7,4 @@ export const Sidebar = () => {
     </div>
   );
 };
+// то Sidebar чи CatalogMenu ????

@@ -41,6 +41,11 @@ export const SignUp = () => {
     }
   };
 
+
+
+  // є бібліотеки для роботи з формами, наприклад react-hook-form
+  // форму потрібно валідувати
+
   return (
     <div className="page-authorize container">
       <section className="singup">
@@ -57,6 +62,7 @@ export const SignUp = () => {
               onSubmit={handleSubmit}
             >
               <h2 className="form__authorize--heading">Створити аккаунт</h2>
+              {/* DRY - не повторюйся */}
               <span className="input__required">
                 <input
                   type="text"

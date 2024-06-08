@@ -30,6 +30,8 @@ export const Static = () => {
   return (
     <div className="static row">
       {advertisements.map((advert, index) => (
+        // index - краще не використовувати як ключ, тут можна, але краще щось інше
+        // ES6 - можна використовувати деструктуризацію
         <div key={index} className="col-12 col-md-3 static_bloc">
           <img src={advert.icon} alt={advert.title} />
           <h3>{advert.title}</h3>

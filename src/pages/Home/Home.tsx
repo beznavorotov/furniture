@@ -6,6 +6,7 @@ import { Slider } from '../../components/Carousel/Carousel';
 import { Static } from '../../components/Static/Static';
 
 export const Home = () => {
+  // return тут зайвий, можна просто повертати JSX
   return (
     <div className="container">
       <div className="grid_home">

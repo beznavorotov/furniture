@@ -12,10 +12,13 @@ import {
   getUniqueManufacturers,
   getUniqueCollections,
 } from '../../store/slices/filterCatalogSlice';
+// порядок імпортів: 1. бібліотеки, 2. компоненти, 3. стилі
 
 const useQuery = () => {
+  // то useQuery чи URLSearchParams ???? Якщо це кастомний хук, його слід винести з цього файлу, назва дивна.
   return new URLSearchParams(useLocation().search);
 };
+
 
 export const Catalog = () => {
   const { id } = useParams();
@@ -28,6 +31,7 @@ export const Catalog = () => {
   const [properCardType, setProperCardType] = useState('');
   const query = useQuery();
 
+  // як це попало на git ?
   console.log('query: ', query.get('query'));
   console.log('id: ', id);
   console.log('pathname: ', pathname);
@@ -52,10 +56,14 @@ export const Catalog = () => {
     dispatch(getUniqueCollections(properState));
   }, [properState, dispatch]);
 
+  // три useEffect в одному компоненті - це погана практика, краще розділити на окремі компоненти
+
   return (
     <PageSectionWrapper
       title={
+        // search - це магічне значення, краще винести в константу
         pathname.includes('search')
+          // Результати пошуку - це магічне значення, краще винести в константу
           ? 'Результати пошуку'
           : category[+id]?.item_category
       }
