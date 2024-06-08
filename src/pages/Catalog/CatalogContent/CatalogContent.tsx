@@ -24,17 +24,20 @@ export const CatalogContent = ({ data, type }) => {
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
     setCurrentPage(1);
   }, [pathname]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }, [currentPage]);
 
   return (
     <div className="catalog-content">
