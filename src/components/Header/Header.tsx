@@ -5,6 +5,7 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { useEffect, useRef, useState } from 'react';
 import { setShowOverlay } from '../../store/slices/modalSlice';
 import { useDispatch } from 'react-redux';
+// порядок імпортів: 1. бібліотеки, 2. компоненти, 3. стилі
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ export const Header = () => {
             <Link className="navbar-brand logo__main" to="/">
               <img src={logo} alt="logo" />
             </Link>
+            {/*що це за така кнопка ???? створити <Button />*/}
             <button
               className="navbar-toggler"
               type="button"
@@ -93,6 +95,7 @@ export const Header = () => {
 
                   <CatalogMenu />
                 </li>
+                {/* винести в константи, дублюється код*/}
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">
                     Головна

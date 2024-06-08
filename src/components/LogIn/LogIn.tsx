@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/slices/authSlice';
 import { RootState } from '../../store';
+// порядок імпортів: 1. бібліотеки, 2. компоненти, 3. стилі
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export const LogIn = () => {
     setUsername('');
     setPassword('');
   };
-  
+
   useEffect(() => {
     if (isAuth) navigate('/profile');
   });
@@ -66,6 +67,7 @@ export const LogIn = () => {
             >
               <h2 className="form__authorize--heading">Авторизуватися</h2>
               <span className="input__required">
+                {/*<input можливо створити компонент <Input/> ?? */}
                 <input
                   type="email"
                   name="email"

@@ -10,6 +10,8 @@ export const Sale = () => {
   const saleStatus = useSelector((state: RootState) => state.catalog.status);
 
   useEffect(() => {
+    // idle - це що ?
+    // idle - в константи
     if (saleStatus === 'idle') {
       dispatch(fetchSale());
     }
@@ -24,6 +26,7 @@ export const Sale = () => {
       </div>
       <div className="sale--wrapper">
         {shuffleArray.map((item) => (
+          // ES6 - можна використовувати деструктуризацію
           <ProductCard
             key={item.id}
             name={item.title}

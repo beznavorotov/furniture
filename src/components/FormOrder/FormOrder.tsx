@@ -74,6 +74,8 @@ export const FormOrder = () => {
             },
             body: JSON.stringify({
               apiKey: '04e501840a9ae41b4928dd19683747f5',
+              // 04e501840a9ae41b4928dd19683747f5 - це що таке ? є env змінні
+              // винести функцію fetch в окремий файл, для чого вона в useEffect
               modelName: 'Address',
               calledMethod: 'getWarehouses',
               methodProperties: { CityRef: selectedCity },

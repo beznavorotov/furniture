@@ -3,17 +3,18 @@ import { useDispatch } from 'react-redux';
 import { setShowModal } from '../../store/slices/modalSlice';
 import { Link } from 'react-router-dom';
 import { StarsRating } from '../StarsRating/StarsRating';
+// порядок імпортів: 1. бібліотеки, 2. компоненти, 3. стилі
 
 const ProductCard = ({
-  img,
-  name,
-  price,
-  discountPrice,
-  cardSize,
-  id,
-  stateType,
-  rating,
-}) => {
+                       img,
+                       name,
+                       price,
+                       discountPrice,
+                       cardSize,
+                       id,
+                       stateType,
+                       rating,
+                     }) => {
   const dispatch = useDispatch();
 
   return (
@@ -66,5 +67,7 @@ const ProductCard = ({
     </div>
   );
 };
+// {/*/product/${id}?from=${stateType}*/} - складно виглядає, дублюється, може функцію зробити
+// <img src={img} alt="chair" className="chair" loading="lazy" /> точно тільки стільці ?
 
 export default ProductCard;

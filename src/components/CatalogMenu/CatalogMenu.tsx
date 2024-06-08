@@ -22,6 +22,7 @@ export const CatalogMenu: React.FC = () => {
   }, [roomStatus, dispatch]);
 
   useEffect(() => {
+    // handleClickOutside - краще створити окремою функцією
     const handleClickOutside = (event) => {
       if (
         categoryListRef.current &&
@@ -42,6 +43,7 @@ export const CatalogMenu: React.FC = () => {
       <h1 className="catalog__menu--title">Каталог товарів</h1>
       <ul className="category-list">
         {rooms.map((room) => (
+          // ES6 - краще використовувати деструктуризацію
           <li
             key={room.id}
             className="category-list__item"

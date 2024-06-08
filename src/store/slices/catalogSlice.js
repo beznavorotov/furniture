@@ -7,6 +7,8 @@ import {
 } from '../../constants';
 import fetchData from '../../utils/fetchData';
 
+// Дублюються функції це надлишковий код
+
 export const fetchCategory = createAsyncThunk(
   'catalog/category',
   // eslint-disable-next-line

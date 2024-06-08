@@ -3,6 +3,7 @@
   justify-content: space-between;
   .sidebar {
     width: 300px;
+    //нічого спільного з Home.tsx, як дізнатись що є .sidebar ?
   }
 }
 
@@ -11,3 +12,4 @@
     display: none;
   }
 }
+

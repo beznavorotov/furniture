@@ -5,6 +5,7 @@ const getUniqueValues = (array, key) => {
 };
 
 const filterCatalogSlice = createSlice({
+  // filter - винести в константи
   name: 'filter',
   initialState: {
     categories: [],
@@ -31,6 +32,12 @@ const filterCatalogSlice = createSlice({
     },
   },
 });
+
+// item_category
+// room
+// manufacturer
+// collection
+// винести в константи
 
 export const {
   getUniqueCategories,

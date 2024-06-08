@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect } from 'react';
 import { fetchBestsellers } from '../../store/slices/catalogSlice';
+// порядок імпортів: 1. бібліотеки, 2. компоненти, 3. стилі
 
 export const Bestsellers = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export const Bestsellers = () => {
   );
 
   useEffect(() => {
+    // idle - краще використовувати константи, дублювання коду по всьому проекту
     if (bestsellersStatus === 'idle') {
       dispatch(fetchBestsellers());
     }
@@ -30,6 +32,7 @@ export const Bestsellers = () => {
       </div>
       <div className="bestsellers--wrapper">
         {shuffleArray.map((item) => (
+          // item - ES6 - краще використовувати деструктуризацію
           <ProductCard
             key={item.id}
             name={item.title}

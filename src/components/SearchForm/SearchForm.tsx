@@ -3,6 +3,7 @@ import { UserActionsNav } from '../UserActionsNav/UserActionsNav';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchSearch } from '../../store/slices/searchSlice';
+// порядок імпортів: спочатку бібліотеки, потім стилі, потім файли проекту
 
 export const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,7 +20,7 @@ export const SearchForm = () => {
       setSearchQuery('');
     }
   };
-  
+
   return (
     <div className="header__search">
       <form
