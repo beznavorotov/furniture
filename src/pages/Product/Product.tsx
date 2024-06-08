@@ -26,6 +26,8 @@ interface ProductItemType {
   description: string;
   rating: number;
   reviews: Review[];
+  hard_body: BodyType[];
+  soft_body: BodyType[];
 }
 
 interface Review {
@@ -33,6 +35,25 @@ interface Review {
   last_name: string;
   rating: number;
   id: number;
+}
+
+interface BodyType {
+  material_type: string;
+  manufacturer: string;
+  title: string;
+  colour: string;
+  photo: string;
+  filler: string;
+  body_material: BodyMaterial[];
+  tabletop_material: BodyMaterial[];
+}
+
+interface BodyMaterial {
+  material_type: string;
+  manufacturer: string;
+  title: string;
+  colour: string;
+  photo: string;
 }
 
 export const Product = () => {
@@ -74,13 +95,13 @@ export const Product = () => {
   }, [id, stateType]);
 
   const [activeTab, setActiveTab] = useState('description');
-  const [activeMaterial, setActiveMaterial] = useState(0);
+  // const [activeMaterial, setActiveMaterial] = useState(0);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
   const changeActiveTab = (tabName: string) => {
     return activeTab === tabName ? 'active' : null;
   };
-  const handleMaterialClick = (index: number) => setActiveMaterial(index);
+  // const handleMaterialClick = (index: number) => setActiveMaterial(index);
   const handleGalleryImgClick = (index: number) => setGalleryImgIndex(index);
 
   const getDate = () => {
@@ -113,7 +134,6 @@ export const Product = () => {
   return (
     <PageSectionWrapper title="">
       <div className="product product--container">
-        {/* here */}
         <div className="product__gallery">
           <div className="product__gallery--main">
             <img src={product?.photo[galleryImgIndex]} alt="main img" />
@@ -145,7 +165,7 @@ export const Product = () => {
             </div>
             <div className="product__rating--reviews">
               <span className="product__rating--count">
-                {product.reviews.length} відгуків
+                Відгуків: {product.reviews.length}
               </span>
               <span className="product__rating--devider">|</span>
               <span className="product__rating--add">Написати відгук</span>
@@ -188,27 +208,26 @@ export const Product = () => {
           <div className="product__materials">
             <p>Матеріал:</p>
             <div className="product__materials-samples">
-              {[
-                'wood',
-                'gold',
-                'silver',
-                'titanium',
-                'stone',
-                'cloth',
-                'leather',
-              ].map((item, index) => (
+              {/* f**k ts */}
+              {/* {product?.hard_body?.map((item, index) => (
                 <span
                   key={crypto.randomUUID()}
                   className={`material-sample ${
-                    activeMaterial === index ? 'active' : null
+                    activeMaterial === index ? 'active' : ''
                   }`}
                   onClick={() => {
                     handleMaterialClick(index);
                   }}
                 >
-                  {item}
+                  {item.body_material.map((materialItem) => (
+                    <img
+                      key={crypto.randomUUID()}
+                      src={materialItem.photo}
+                      alt={materialItem.title}
+                    />
+                  ))}
                 </span>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
