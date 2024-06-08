@@ -6,11 +6,9 @@ export const StarsRating = ({ ratingNumber }) => {
 
   return (
     <div className="stars">
-      {emptyRating
-        .fill(fullStar, 0, Math.floor(ratingNumber))
-        .map((item, index) => (
-          <img key={index} src={item} alt="stars rating" />
-        ))}
+      {emptyRating.fill(fullStar, 0, Math.floor(ratingNumber)).map((item) => (
+        <img key={crypto.randomUUID()} src={item} alt="stars rating" />
+      ))}
     </div>
   );
 };

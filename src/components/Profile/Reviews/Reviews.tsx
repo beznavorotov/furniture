@@ -1,4 +1,3 @@
-
 import sofa from '../../../assets/seater-sofa.png';
 import starEmpty from '../../../assets/star_empty.svg';
 import starFull from '../../../assets/star_full.svg';
@@ -46,13 +45,15 @@ const reviewsData = [
 ];
 
 const StarRating = ({ rating }) => {
-  const stars = Array(5).fill(0).map((_, index) => (
-    <img
-      key={index}
-      src={index < rating ? starFull : starEmpty}
-      alt={index < rating ? 'starFull' : 'starEmpty'}
-    />
-  ));
+  const stars = Array(5)
+    .fill(0)
+    .map((_, index) => (
+      <img
+        key={crypto.randomUUID()}
+        src={index < rating ? starFull : starEmpty}
+        alt="raiting"
+      />
+    ));
   return <span className="stars">{stars}</span>;
 };
 
@@ -68,11 +69,15 @@ const Review = ({ review }) => (
           <span className="color_product">
             Колір: <span>{review.product.color}</span>
           </span>
-          <span className="order_product_price">{review.product.price} грн</span>
+          <span className="order_product_price">
+            {review.product.price} грн
+          </span>
         </div>
       </div>
       <div className="reviews_price">
-        <span className="reviews_article">Код товару: {review.product.article}</span>
+        <span className="reviews_article">
+          Код товару: {review.product.article}
+        </span>
       </div>
     </div>
     <div className="feedback">
@@ -91,7 +96,7 @@ export const Reviews = () => (
       <h1>Мої відгуки</h1>
     </div>
     {reviewsData.map((review) => (
-      <Review key={review.id} review={review} />
+      <Review key={crypto.randomUUID()} review={review} />
     ))}
   </div>
 );

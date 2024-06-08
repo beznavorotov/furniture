@@ -38,8 +38,8 @@ const sharesData = [
 export const Shares = () => {
   return (
     <div className="shares">
-      {sharesData.map((share, index) => (
-        <div key={index} className="share">
+      {sharesData.map((share) => (
+        <div key={crypto.randomUUID()} className="share">
           <div className="banner">
             <img src={share.banner} alt="banner" />
           </div>

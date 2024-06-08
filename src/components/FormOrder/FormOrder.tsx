@@ -196,8 +196,11 @@ export const FormOrder = () => {
                 <option value="" disabled selected>
                   Оберіть відділення Нової Пошти
                 </option>
-                {departments.map((department, index) => (
-                  <option key={index} value={department.Description}>
+                {departments.map((department) => (
+                  <option
+                    key={crypto.randomUUID()}
+                    value={department.Description}
+                  >
                     {department.Description}
                   </option>
                 ))}

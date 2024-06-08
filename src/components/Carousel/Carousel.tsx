@@ -7,7 +7,11 @@ export const Slider: React.FC = () => {
   const sliderItems = [
     { img: furniture1, text: 'Нове надходження', link: '/catalog/1' },
     { img: furniture2, text: 'Гарячий розпродаж', link: '/catalog/sale' },
-    { img: furniture3, text: 'Дуже Дуже Гарячий розпродаж', link: '/catalog/bestsellers' },
+    {
+      img: furniture3,
+      text: 'Дуже Дуже Гарячий розпродаж',
+      link: '/catalog/bestsellers',
+    },
   ];
 
   return (
@@ -20,7 +24,7 @@ export const Slider: React.FC = () => {
       <div className="carousel-indicators">
         {sliderItems.map((_, index) => (
           <button
-            key={index}
+            key={crypto.randomUUID()}
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide-to={index}
@@ -32,7 +36,7 @@ export const Slider: React.FC = () => {
       <div className="carousel-inner">
         {sliderItems.map((item, index) => (
           <div
-            key={index}
+            key={crypto.randomUUID()}
             className={`carousel-item ${index === 0 ? 'active' : ''}`}
           >
             <img

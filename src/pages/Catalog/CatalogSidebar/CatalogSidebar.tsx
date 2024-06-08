@@ -57,8 +57,8 @@ export const CatalogSidebar = () => {
             {!rooms ? (
               <IsLoading text="..." />
             ) : (
-              rooms.map((item, index) => (
-                <label key={index}>
+              rooms.map((item) => (
+                <label key={crypto.randomUUID()}>
                   <input type="checkbox" name="checkbox-rooms" />
                   {item}
                 </label>
@@ -78,8 +78,8 @@ export const CatalogSidebar = () => {
             {!categories ? (
               <IsLoading text="..." />
             ) : (
-              categories.map((item, index) => (
-                <label key={index}>
+              categories.map((item) => (
+                <label key={crypto.randomUUID()}>
                   <input type="checkbox" name="checkbox-categories" />
                   {item}
                 </label>
@@ -99,8 +99,8 @@ export const CatalogSidebar = () => {
             {!collections ? (
               <IsLoading text="..." />
             ) : (
-              collections.map((item, index) => (
-                <label key={index}>
+              collections.map((item) => (
+                <label key={crypto.randomUUID()}>
                   <input type="checkbox" name="checkbox-collections" />
                   {item}
                 </label>
@@ -120,8 +120,8 @@ export const CatalogSidebar = () => {
             {!manufacturers ? (
               <IsLoading text="..." />
             ) : (
-              manufacturers.map((item, index) => (
-                <label key={index}>
+              manufacturers.map((item) => (
+                <label key={crypto.randomUUID()}>
                   <input type="checkbox" name="checkbox-manufacturers" />
                   {item}
                 </label>

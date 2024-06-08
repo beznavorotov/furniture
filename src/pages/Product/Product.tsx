@@ -121,7 +121,7 @@ export const Product = () => {
           <div className="product__gallery--collection">
             {product?.photo?.map((img, index) => (
               <div
-                key={`galImg${index}`}
+                key={crypto.randomUUID()}
                 onClick={() => handleGalleryImgClick(index)}
                 className="product__gallery--item"
               >
@@ -198,7 +198,7 @@ export const Product = () => {
                 'leather',
               ].map((item, index) => (
                 <span
-                  key={index}
+                  key={crypto.randomUUID()}
                   className={`material-sample ${
                     activeMaterial === index ? 'active' : null
                   }`}
@@ -255,8 +255,8 @@ export const Product = () => {
               <div className="tab__specs--table">
                 <table>
                   <tbody>
-                    {specTableData.map((element, index) => (
-                      <tr key={index}>
+                    {specTableData.map((element) => (
+                      <tr key={crypto.randomUUID()}>
                         <th>{element[0]}</th>
                         <td>{element[1]}</td>
                       </tr>
@@ -272,7 +272,7 @@ export const Product = () => {
             >
               <ul className="reviews-list">
                 {product?.reviews?.map((item) => (
-                  <li className="review" key={item.last_name + item.id}>
+                  <li className="review" key={crypto.randomUUID()}>
                     <div className="review__heading">
                       <h3>
                         {item.first_name} {item.last_name}
