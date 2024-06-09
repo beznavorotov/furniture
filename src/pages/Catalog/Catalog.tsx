@@ -11,6 +11,7 @@ import {
   getUniqueRooms,
   getUniqueManufacturers,
   getUniqueCollections,
+  getUniqueColors,
 } from '../../store/slices/filterCatalogSlice';
 
 const useQuery = () => {
@@ -34,7 +35,6 @@ export const Catalog = () => {
 
   useEffect(() => {
     if (id !== 'search') {
-      console.log(id);
       dispatch(fetchCategory(+id + 1));
     }
   }, [id, dispatch]);
@@ -50,6 +50,7 @@ export const Catalog = () => {
     dispatch(getUniqueRooms(properState));
     dispatch(getUniqueManufacturers(properState));
     dispatch(getUniqueCollections(properState));
+    dispatch(getUniqueColors(properState));
   }, [properState, dispatch]);
 
   return (
@@ -59,6 +60,7 @@ export const Catalog = () => {
           ? 'Результати пошуку'
           : category[+id]?.item_category
       }
+      breadcrumbs={[category[+id]?.room, category[+id]?.item_category]}
     >
       <div className="catalog">
         <CatalogSidebar />

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect } from 'react';
 import { fetchBestsellers } from '../../store/slices/catalogSlice';
+import { useLocation } from 'react-router-dom';
 
 export const Bestsellers = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const bestsellers = useSelector(
     (state: RootState) => state.catalog.bestsellers,
   );
@@ -17,7 +19,7 @@ export const Bestsellers = () => {
     if (bestsellersStatus === 'idle') {
       dispatch(fetchBestsellers());
     }
-  }, [bestsellersStatus, dispatch]);
+  }, [bestsellersStatus, dispatch, pathname]);
 
   const shuffleArray = [...bestsellers]
     .sort(() => Math.random() - 0.5)

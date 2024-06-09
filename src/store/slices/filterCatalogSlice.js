@@ -11,6 +11,7 @@ const filterCatalogSlice = createSlice({
     rooms: [],
     manufacturers: [],
     collections: [],
+    сolor: [],
     sortBy: null,
     filterQuery: {},
     status: 'idle',
@@ -29,6 +30,9 @@ const filterCatalogSlice = createSlice({
     getUniqueCollections: (state, action) => {
       state.collections = getUniqueValues(action.payload, 'collection');
     },
+    getUniqueColors: (state, action) => {
+      state.сolor = getUniqueValues(action.payload, 'colour');
+    },
   },
 });
 
@@ -37,5 +41,6 @@ export const {
   getUniqueRooms,
   getUniqueManufacturers,
   getUniqueCollections,
+  getUniqueColors,
 } = filterCatalogSlice.actions;
 export default filterCatalogSlice.reducer;

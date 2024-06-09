@@ -58,6 +58,7 @@ export const fetchAllProducts = createAsyncThunk(
 const catalogSlice = createSlice({
   name: 'catalog',
   initialState: {
+    activeState: null,
     category: [],
     bestsellers: [],
     sale: [],
@@ -70,6 +71,7 @@ const catalogSlice = createSlice({
     setBestsellers: (state, action) => (state.bestsellers = action.payload),
     setSale: (state, action) => (state.sale = action.payload),
     setAllProducts: (state, action) => (state.allProducts = action.payload),
+    setActiveState: (state, action) => (state.activeState = action.payload),
   },
   extraReducers: (builder) => {
     builder
@@ -127,6 +129,11 @@ const catalogSlice = createSlice({
   },
 });
 
-export const { setCategory, setBestsellers, setSale, setAllProducts } =
-  catalogSlice.actions;
+export const {
+  setCategory,
+  setBestsellers,
+  setSale,
+  setAllProducts,
+  setActiveState,
+} = catalogSlice.actions;
 export default catalogSlice.reducer;

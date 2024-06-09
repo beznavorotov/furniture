@@ -11,6 +11,9 @@ export const CatalogSidebar = () => {
   const collections = useSelector(
     (state: RootState) => state.filter.collections,
   );
+  const сolor = useSelector(
+    (state: RootState) => state.filter.сolor,
+  );
 
   return (
     <aside className="catalog-sidebar">
@@ -59,7 +62,7 @@ export const CatalogSidebar = () => {
             ) : (
               rooms.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="checkbox-rooms" />
+                  <input type="checkbox" name="rooms" value={item} />
                   {item}
                 </label>
               ))
@@ -80,7 +83,7 @@ export const CatalogSidebar = () => {
             ) : (
               categories.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="checkbox-categories" />
+                  <input type="checkbox" name="categories" value={item} />
                   {item}
                 </label>
               ))
@@ -101,7 +104,7 @@ export const CatalogSidebar = () => {
             ) : (
               collections.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="checkbox-collections" />
+                  <input type="checkbox" name="collections" value={item} />
                   {item}
                 </label>
               ))
@@ -122,7 +125,7 @@ export const CatalogSidebar = () => {
             ) : (
               manufacturers.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="checkbox-manufacturers" />
+                  <input type="checkbox" name="manufacturers" value={item} />
                   {item}
                 </label>
               ))
@@ -134,38 +137,20 @@ export const CatalogSidebar = () => {
       {/* Матеріал */}
       <div className="catalog-sidebar__section">
         <div className="catalog-sidebar__heading">
-          <h4 className="catalog-sidebar__title">Матеріал</h4>
+          <h4 className="catalog-sidebar__title">Колір</h4>
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
-            <label>
-              <input type="checkbox" name="checkbox-material" />
-              Ясен Шімо світлий
-            </label>
+          {!сolor ? (
+              <IsLoading text="..." />
+            ) : (
+              сolor.map((item) => (
+                <label key={crypto.randomUUID()}>
+                  <input type="checkbox" name="colour" value={item} />
+                  {item}
+                </label>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -178,10 +163,10 @@ export const CatalogSidebar = () => {
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
             <label>
-              <input type="checkbox" name="checkbox-material" />В наявності
+              <input type="checkbox" name="availability" />В наявності
             </label>
             <label>
-              <input type="checkbox" name="checkbox-material" />
+              <input type="checkbox" name="availability" />
               Відсутні
             </label>
           </div>
