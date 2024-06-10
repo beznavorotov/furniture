@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../store';
-import { fetchRooms } from '../../store/slices/roomsSlice';
-import { STATUS_IDLE } from '../../constants';
+import { RootState } from '@/store';
+import { fetchRooms } from '@/store/slices/roomsSlice';
+import { STATUS_IDLE } from '@/constants';
 
 export const CatalogMenu = () => {
   const dispatch = useDispatch();

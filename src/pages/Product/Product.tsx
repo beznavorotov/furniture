@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
-import { StarsRating } from '../../components/StarsRating/StarsRating';
-import ProductCard from '../../components/ProductCard/ProductCard';
-import { IsLoading } from '../../components/IsLoading/IsLoading';
+import { RootState } from '@/store';
+import { PageSectionWrapper } from '@/components/PageSectionWrapper/PageSectionWrapper';
+import { StarsRating } from '@/components/StarsRating/StarsRating';
+import ProductCard from '@/components/ProductCard/ProductCard';
+import { IsLoading } from '@/components/IsLoading/IsLoading';
 
 interface ProductItemType {
   room: string;

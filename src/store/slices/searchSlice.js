@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import fetchData from '../../utils/fetchData';
+import fetchData from '@/utils/fetchData';
 import {
   BACKEND_SEARCH,
   STATUS_FAILD,
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
-} from '../../constants';
+} from '@/constants';
 
 export const fetchSearch = createAsyncThunk(
   'search/getData',

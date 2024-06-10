@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import ProductCard from '../ProductCard/ProductCard';
-import { fetchBestsellers } from '../../store/slices/catalogSlice';
-import { STATUS_IDLE } from '../../constants';
+import { RootState } from '@/store';
+import ProductCard from '@/components/ProductCard/ProductCard';
+import { fetchBestsellers } from '@/store/slices/catalogSlice';
+import { STATUS_IDLE } from '@/constants';
 
 export const Bestsellers = () => {
   const dispatch = useDispatch();

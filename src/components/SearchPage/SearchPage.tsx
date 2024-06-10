@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { BACKEND_SEARCH } from '../../constants';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from '@/components/ProductCard/ProductCard';
+import { BACKEND_SEARCH } from '@/constants';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

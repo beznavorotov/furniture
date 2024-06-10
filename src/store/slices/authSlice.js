@@ -7,8 +7,8 @@ import {
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
-} from '../../constants';
-import fetchData from '../../utils/fetchData';
+} from '@/constants';
+import fetchData from '@/utils/fetchData';
 
 export const login = createAsyncThunk(
   'auth/login',

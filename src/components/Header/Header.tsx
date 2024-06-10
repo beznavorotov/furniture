@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
-import { SearchForm } from '../SearchForm/SearchForm';
-import { setShowOverlay } from '../../store/slices/modalSlice';
-import logo from '../../assets/logo.webp';
+import { CatalogMenu } from '@/components/CatalogMenu/CatalogMenu';
+import { SearchForm } from '@/components/SearchForm/SearchForm';
+import { setShowOverlay } from '@/store/slices/modalSlice';
+import logo from '@/assets/logo.webp';
 
 export const Header = () => {
   const dispatch = useDispatch();

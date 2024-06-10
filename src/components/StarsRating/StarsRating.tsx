@@ -1,5 +1,5 @@
-import emptyStar from '../../assets/star_empty.svg';
-import fullStar from '../../assets/star_full.svg';
+import emptyStar from '@/assets/star_empty.svg';
+import fullStar from '@/assets/star_full.svg';
 
 export const StarsRating = ({ ratingNumber }) => {
   const emptyRating = [emptyStar, emptyStar, emptyStar, emptyStar, emptyStar];

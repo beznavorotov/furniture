@@ -1,9 +1,9 @@
-import furniture1 from '../../assets/1.webp';
-import furniture2 from '../../assets/2.webp';
-import furniture3 from '../../assets/3.webp';
 import { Link } from 'react-router-dom';
+import furniture1 from '@/assets/1.webp';
+import furniture2 from '@/assets/2.webp';
+import furniture3 from '@/assets/3.webp';
 
-export const Slider: React.FC = () => {
+export const Slider = () => {
   const sliderItems = [
     { img: furniture1, text: 'Нове надходження', link: '/catalog/1' },
     { img: furniture2, text: 'Гарячий розпродаж', link: '/catalog/sale' },
@@ -19,7 +19,6 @@ export const Slider: React.FC = () => {
       id="carouselExampleControls"
       className="carousel slide"
       data-bs-ride="carousel"
-      // data-bs-ride="true"
     >
       <div className="carousel-indicators">
         {sliderItems.map((_, index) => (

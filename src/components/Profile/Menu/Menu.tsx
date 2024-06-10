@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Orders } from '../Orders/Orders';
-import { MyData } from '../MyData/MyData';
-import { Favorites } from '../Favorites/Favorites';
-import { Reviews } from '../Reviews/Reviews';
-import photoUser from '../../../assets/photo_user.png';
-import arrow from '../../../assets/arrow.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../store/slices/authSlice';
-import { RootState } from '../../../store/';
+import { RootState } from '@/store/';
+import { Orders } from '@/components/Profile/Orders/Orders';
+import { MyData } from '@/components/Profile/MyData/MyData';
+import { Favorites } from '@/components/Profile/Favorites/Favorites';
+import { Reviews } from '@/components/Profile/Reviews/Reviews';
+import photoUser from '@/assets/photo_user.png';
+import arrow from '@/assets/arrow.svg';
+import { logout } from '@/store/slices/authSlice';
 
 export const Menu = () => {
   const dispatch = useDispatch();

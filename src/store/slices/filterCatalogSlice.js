@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { STATUS_IDLE } from '../../constants';
+import { STATUS_IDLE } from '@/constants';
 
 const getUniqueValues = (array, key) => {
   return [...new Set(array.map((item) => item[key]))].sort();

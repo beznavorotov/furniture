@@ -1,8 +1,7 @@
 import { useState } from 'react';
-
-import { Delivery } from '../Delivery/Delivery';
-import { Payment } from '../Payment/Payment';
-import arrow from '../../../assets/arrow.svg';
+import { Delivery } from '@/components/DeliveryPayment/Delivery/Delivery';
+import { Payment } from '@/components/DeliveryPayment/Payment/Payment';
+import arrow from '@/assets/arrow.svg';
 
 export const MenuDP = () => {
   const [menuItem, setMenuItem] = useState('delivery');

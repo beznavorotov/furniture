@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import singupImg from '../../assets/authorize/signup__bg.webp';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { signup } from '../../store/slices/authSlice';
+import { RootState } from '@/store';
+import { signup } from '@/store/slices/authSlice';
+import singupImg from '@/assets/authorize/signup__bg.webp';
 
 export const SignUp = () => {
   const [firstName, setFirstName] = useState('');

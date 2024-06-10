@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import sofa from '../../../assets/seater-sofa.png';
-import arrowDown from '../../../assets/icons/arrow_down.svg';
+import sofa from '@/assets/seater-sofa.png';
+import arrowDown from '@/assets/icons/arrow_down.svg';
 
 export const Orders = () => {
   const ordersData = [
@@ -218,25 +218,25 @@ export const Orders = () => {
               onClick={() => showOrderDetails(order)}
             >
               <div className="order_number">
-                <span className='text_none'>Номер замовлення:</span>
+                <span className="text_none">Номер замовлення:</span>
                 <span className="order_bold">№ {order.number}</span>
               </div>
               <div className="order_total">
-                <span className='text_none'>Загальна сума:</span>
+                <span className="text_none">Загальна сума:</span>
                 <span className="order_bold">{order.total} грн</span>
               </div>
               <div className="order_quantity">
-                <span className='text_none'>Кількість товарів:</span>
+                <span className="text_none">Кількість товарів:</span>
                 <span className="order_bold">{order.quantity} шт.</span>
               </div>
               <div className="order_status">
-                <span className='text_none'>Статус:</span>
+                <span className="text_none">Статус:</span>
                 <span className={getStatusColorClass(order.status)}>
                   {order.status}
                 </span>
               </div>
               <div className="order_date">
-                <span className='text_none'>Дата замовлення:</span>
+                <span className="text_none">Дата замовлення:</span>
                 <span className="order_bold">{order.date}</span>
               </div>
               <div

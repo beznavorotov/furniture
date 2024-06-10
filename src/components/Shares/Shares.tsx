@@ -1,7 +1,7 @@
-import banner1 from '../../assets/shares/1.jpg';
-import banner2 from '../../assets/shares/2.jpg';
-import banner3 from '../../assets/shares/3.jpg';
-import banner4 from '../../assets/shares/4.jpg';
+import banner1 from '@/assets/shares/1.jpg';
+import banner2 from '@/assets/shares/2.jpg';
+import banner3 from '@/assets/shares/3.jpg';
+import banner4 from '@/assets/shares/4.jpg';
 
 const sharesData = [
   {
@@ -38,18 +38,18 @@ const sharesData = [
 export const Shares = () => {
   return (
     <div className="shares">
-      {sharesData.map((share) => (
+      {sharesData.map(({ banner, title, description, date }) => (
         <div key={crypto.randomUUID()} className="share">
           <div className="banner">
-            <img src={share.banner} alt="banner" />
+            <img src={banner} alt="banner" />
           </div>
           <div className="proposition">
             <div className="text">
-              <h2>{share.title}</h2>
-              <p>{share.description}</p>
+              <h2>{title}</h2>
+              <p>{description}</p>
             </div>
             <div className="date">
-              <p>{share.date}</p>
+              <p>{date}</p>
             </div>
           </div>
         </div>

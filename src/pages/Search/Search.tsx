@@ -1,4 +1,4 @@
-import { SearchPage } from '../../components/SearchPage/SearchPage';
+import { SearchPage } from '@/components/SearchPage/SearchPage';
 
 export const Search = () => {
   return (

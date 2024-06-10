@@ -1,7 +1,7 @@
 // import { useState } from 'react';
-import { IsLoading } from '../../../components/IsLoading/IsLoading';
-import { RootState } from '../../../store';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { IsLoading } from '@/components/IsLoading/IsLoading';
 
 export const CatalogSidebar = () => {
   const categories = useSelector((state: RootState) => state.filter.categories);

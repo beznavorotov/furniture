@@ -1,4 +1,4 @@
-import { Shares } from '../../components/Shares/Shares';
+import { Shares } from '@/components/Shares/Shares';
 
 export const Promotions = () => {
   return (
