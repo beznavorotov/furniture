@@ -1,10 +1,10 @@
-export default function scrollToTop(behavior) {
+const scrollToTop = (behavior) => {
   return window.scrollTo({
     top: 0,
     left: 0,
     behavior: behavior,
   });
-}
+};
 
 // import { useEffect } from 'react';
 // import { useLocation } from 'react-router-dom';
@@ -20,3 +20,4 @@ export default function scrollToTop(behavior) {
 //     });
 //   }, [pathname]);
 // }
+export default scrollToTop;

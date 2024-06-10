@@ -92,12 +92,12 @@ export const Product = () => {
     article_code,
     avaliability,
     price,
-    discount,
+    // discount,
     description,
     rating,
     reviews,
-    hard_body,
-    soft_body,
+    // hard_body,
+    // soft_body,
   } = product;
   const [recommended, setRecommended] = useState([]);
   const [galleryImgIndex, setGalleryImgIndex] = useState(0);
