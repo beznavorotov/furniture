@@ -29,11 +29,11 @@ const advertisements = [
 export const Static = () => {
   return (
     <div className="static row">
-      {advertisements.map((advert) => (
+      {advertisements.map(({ icon, title, description }) => (
         <div key={crypto.randomUUID()} className="col-12 col-md-3 static_bloc">
-          <img src={advert.icon} alt={advert.title} />
-          <h3>{advert.title}</h3>
-          <span>{advert.description}</span>
+          <img src={icon} alt={title} />
+          <h3>{title}</h3>
+          <span>{description}</span>
         </div>
       ))}
     </div>

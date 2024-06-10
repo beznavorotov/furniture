@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import ProductCard from '../../../components/ProductCard/ProductCard';
-import { RootState } from '../../../store';
-import { IsLoading } from '../../../components/IsLoading/IsLoading';
-import ScrollToTop from '../../../utils/ScrollToTop';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import ProductCard from '../../../components/ProductCard/ProductCard';
+import { IsLoading } from '../../../components/IsLoading/IsLoading';
+import { STATUS_LOADING, STATUS_SUCCEEDED } from '../../../constants';
+import scrollToTop from '../../../utils/scrollToTop';
 
 export const CatalogContent = ({ data, type }) => {
   const { pathname } = useLocation();
+  const ITEMS_PER_PAGE = 25;
   const categoryStatus = useSelector(
     (state: RootState) => state.catalog.status,
   );
 
   const searchStatus = useSelector((state: RootState) => state.search.status);
-
-  const [itemsPerPage] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
 
   // pagination
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -32,41 +32,38 @@ export const CatalogContent = ({ data, type }) => {
   }, [pathname]);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    scrollToTop('smooth');
   }, [currentPage]);
 
   return (
     <div className="catalog-content">
-      <ScrollToTop />
       <div className="catalog-content__wrapper">
-        {categoryStatus === 'loading' || searchStatus === 'loading' ? (
+        {categoryStatus === STATUS_LOADING ||
+        searchStatus === STATUS_LOADING ? (
           <IsLoading text="Заждіть секунду..." />
         ) : (
-          currentItems?.map((item) => (
-            <ProductCard
-              key={item.article_code}
-              img={item.photo.find((item) =>
-                item.includes('MAIN_photo_image_'),
-              )}
-              name={item.title}
-              price={item.price}
-              discountPrice={item.discount}
-              cardSize="small"
-              id={item.article_code}
-              stateType={type}
-              rating={item.rating}
-            />
-          ))
+          currentItems?.map(
+            ({ article_code, photo, title, price, discount, rating }) => (
+              <ProductCard
+                key={article_code}
+                img={photo.find((item) => item.includes('MAIN_photo_image_'))}
+                name={title}
+                price={price}
+                discountPrice={discount}
+                cardSize="small"
+                id={article_code}
+                stateType={type}
+                rating={rating}
+              />
+            ),
+          )
         )}
       </div>
 
       <div
         className={`pagination ${
-          categoryStatus === 'succeeded' || searchStatus === 'succeeded'
+          categoryStatus === STATUS_SUCCEEDED ||
+          searchStatus === STATUS_SUCCEEDED
             ? 'show'
             : ''
         }`}

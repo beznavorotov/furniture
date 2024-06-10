@@ -31,6 +31,7 @@ export const Reset = () => {
                 на яку ви отримаєте електронний лист для зміни пароля.
               </p>
               <input
+                className="input__email"
                 type="email"
                 name="email"
                 id="resetEmail"

@@ -1,10 +1,10 @@
-import { CatalogSidebar } from './CatalogSidebar/CatalogSidebar';
-import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
-import { CatalogContent } from './CatalogContent/CatalogContent';
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { useEffect, useState } from 'react';
+import { CatalogSidebar } from './CatalogSidebar/CatalogSidebar';
+import { CatalogContent } from './CatalogContent/CatalogContent';
+import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { fetchCategory } from '../../store/slices/catalogSlice';
 import {
   getUniqueCategories,
@@ -13,10 +13,6 @@ import {
   getUniqueCollections,
   getUniqueColors,
 } from '../../store/slices/filterCatalogSlice';
-
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
 
 export const Catalog = () => {
   const { id } = useParams();
@@ -27,11 +23,6 @@ export const Catalog = () => {
 
   const [properState, setProperState] = useState([]);
   const [properCardType, setProperCardType] = useState('');
-  const query = useQuery();
-
-  console.log('query: ', query.get('query'));
-  console.log('id: ', id);
-  console.log('pathname: ', pathname);
 
   useEffect(() => {
     if (id !== 'search') {

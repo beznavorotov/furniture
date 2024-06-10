@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import loginImg from '../../assets/authorize/login__bg.webp';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/slices/authSlice';
 import { RootState } from '../../store';
+import { login } from '../../store/slices/authSlice';
+import loginImg from '../../assets/authorize/login__bg.webp';
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ export const LogIn = () => {
     setUsername('');
     setPassword('');
   };
-  
+
   useEffect(() => {
     if (isAuth) navigate('/profile');
   });

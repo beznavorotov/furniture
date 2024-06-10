@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { STATUS_IDLE } from '../../constants';
 
 const getUniqueValues = (array, key) => {
   return [...new Set(array.map((item) => item[key]))].sort();
@@ -14,7 +15,7 @@ const filterCatalogSlice = createSlice({
     сolor: [],
     sortBy: null,
     filterQuery: {},
-    status: 'idle',
+    status: STATUS_IDLE,
     error: null,
   },
   reducers: {

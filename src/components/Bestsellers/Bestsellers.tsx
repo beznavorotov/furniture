@@ -1,9 +1,10 @@
-import ProductCard from '../ProductCard/ProductCard';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { useEffect } from 'react';
+import ProductCard from '../ProductCard/ProductCard';
 import { fetchBestsellers } from '../../store/slices/catalogSlice';
-import { useLocation } from 'react-router-dom';
+import { STATUS_IDLE } from '../../constants';
 
 export const Bestsellers = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const Bestsellers = () => {
   );
 
   useEffect(() => {
-    if (bestsellersStatus === 'idle') {
+    if (bestsellersStatus === STATUS_IDLE) {
       dispatch(fetchBestsellers());
     }
   }, [bestsellersStatus, dispatch, pathname]);
@@ -31,19 +32,21 @@ export const Bestsellers = () => {
         <h1 className="section__heading--title">Бестселери</h1>
       </div>
       <div className="bestsellers--wrapper">
-        {shuffleArray.map((item) => (
-          <ProductCard
-            key={item.id}
-            name={item.title}
-            price={item.price}
-            discountPrice={item.price}
-            img={item.photo.find((item) => item.includes('MAIN_photo_image_'))}
-            cardSize={null}
-            id={item.article_code}
-            stateType="bestsellers"
-            rating={item.rating}
-          />
-        ))}
+        {shuffleArray.map(
+          ({ id, title, price, photo, article_code, rating }) => (
+            <ProductCard
+              key={id}
+              name={title}
+              price={price}
+              discountPrice={price}
+              img={photo.find((item) => item.includes('MAIN_photo_image_'))}
+              cardSize={null}
+              id={article_code}
+              stateType="bestsellers"
+              rating={rating}
+            />
+          ),
+        )}
       </div>
     </div>
   );
