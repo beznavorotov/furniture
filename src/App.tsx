@@ -19,6 +19,7 @@ import { Reset } from './components/Reset/Reset';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 import scrollToTop from './utils/scrollToTop';
 
+
 function Layout() {
   return (
     <>
