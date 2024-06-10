@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import { IsLoading } from '../../../components/IsLoading/IsLoading';
 import { RootState } from '../../../store';
 import { useSelector } from 'react-redux';
@@ -11,9 +12,16 @@ export const CatalogSidebar = () => {
   const collections = useSelector(
     (state: RootState) => state.filter.collections,
   );
-  const сolor = useSelector(
-    (state: RootState) => state.filter.сolor,
-  );
+  const сolor = useSelector((state: RootState) => state.filter.сolor);
+
+  // const [tmpFilterData, setTmpFilterData] = useState([]);
+
+  const handleChange = (arg) => {
+    console.log('value: ', arg.value);
+    console.log('isChecked: ', arg.checked);
+    // setTmpFilterData((prevState) => [...prevState, arg.value]);
+    // console.log(tmpFilterData);
+  };
 
   return (
     <aside className="catalog-sidebar">
@@ -83,7 +91,14 @@ export const CatalogSidebar = () => {
             ) : (
               categories.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="categories" value={item} />
+                  <input
+                    type="checkbox"
+                    name="categories"
+                    value={item}
+                    onChange={(e) => {
+                      handleChange(e.target);
+                    }}
+                  />
                   {item}
                 </label>
               ))
@@ -104,7 +119,14 @@ export const CatalogSidebar = () => {
             ) : (
               collections.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="collections" value={item} />
+                  <input
+                    type="checkbox"
+                    name="collections"
+                    value={item}
+                    onChange={(e) => {
+                      handleChange(e.target);
+                    }}
+                  />
                   {item}
                 </label>
               ))
@@ -141,7 +163,7 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-          {!сolor ? (
+            {!сolor ? (
               <IsLoading text="..." />
             ) : (
               сolor.map((item) => (

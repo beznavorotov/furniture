@@ -6,6 +6,11 @@
   padding-bottom: 16px;
   margin-bottom: 16px;
   border-bottom: 1px solid $color-black;
+  .breadcrumbs-devider{
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
   a,
   span {
     font-size: 14px;

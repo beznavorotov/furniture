@@ -5,10 +5,10 @@ const Breadcrumbs = ({ breadcrumbs = [] }) => {
     <div className="breadcrumbs">
       <Link to="/">Головна</Link>
       {breadcrumbs.map((item) => (
-        <>
-          <span>/</span>
+        <span key={crypto.randomUUID()}>
+          <span className="breadcrumbs-devider">/</span>
           <span>{item}</span>
-        </>
+        </span>
       ))}
     </div>
   );
