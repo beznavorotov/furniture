@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect } from 'react';
 import { fetchSale } from '../../store/slices/catalogSlice';
+import { useLocation } from 'react-router-dom';
 
 export const Sale = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const sale = useSelector((state: RootState) => state.catalog.sale);
   const saleStatus = useSelector((state: RootState) => state.catalog.status);
 
@@ -13,7 +15,7 @@ export const Sale = () => {
     if (saleStatus === 'idle') {
       dispatch(fetchSale());
     }
-  }, [saleStatus, dispatch]);
+  }, [saleStatus, dispatch, pathname]);
 
   const shuffleArray = [...sale].sort(() => Math.random() - 0.5).slice(0, 4);
 
@@ -33,7 +35,7 @@ export const Sale = () => {
             cardSize={null}
             id={item.article_code}
             stateType="sale"
-            rating={item.review}
+            rating={item.rating}
           />
         ))}
       </div>

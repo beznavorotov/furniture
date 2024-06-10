@@ -17,7 +17,7 @@ export const Footer = () => {
     <div className="container">
       <footer className="footer row">
         <div className="col-12 col-md-3 logo">
-          <Link to="/" className='footer-logo'>
+          <Link to="/" className="footer-logo">
             <img src={logo} className="img-fluid d-block " alt="furniture" />
           </Link>
         </div>
@@ -35,8 +35,8 @@ export const Footer = () => {
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <h4>Каталог</h4>
-          {catalogLinks.map((link, index) => (
-            <Link key={index} to={link.path} className="text">
+          {catalogLinks.map((link) => (
+            <Link key={crypto.randomUUID()} to={link.path} className="text">
               {link.title}
             </Link>
           ))}

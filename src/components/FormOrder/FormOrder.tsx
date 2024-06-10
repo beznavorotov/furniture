@@ -253,6 +253,7 @@ export const FormOrder = () => {
                   <option value="" disabled>
                     Оберіть місто
                   </option>
+<<<<<<< HEAD
                   {cities.map((city) => (
                     <option key={city.Ref} value={city.Ref}>
                       {city.Description}
@@ -269,6 +270,22 @@ export const FormOrder = () => {
                 >
                   <option value="" disabled>
                     Оберіть відділення Нової Пошти
+=======
+                ))}
+              </select>
+            </div>
+            <div className="form_group">
+              <select className="input_np" disabled={!selectedCity}>
+                <option value="" disabled selected>
+                  Оберіть відділення Нової Пошти
+                </option>
+                {departments.map((department) => (
+                  <option
+                    key={crypto.randomUUID()}
+                    value={department.Description}
+                  >
+                    {department.Description}
+>>>>>>> f1d12e955a7511d2dfec394721e9435b2c42909b
                   </option>
                   {departments.map((department, index) => (
                     <option key={index} value={department.Description}>

@@ -7,7 +7,7 @@ import { StarsRating } from '../../components/StarsRating/StarsRating';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IsLoading } from '../../components/IsLoading/IsLoading';
 
-type ProductItemType = {
+interface ProductItemType {
   room: string;
   item_category: string;
   colour: string;
@@ -24,8 +24,37 @@ type ProductItemType = {
   price: number;
   discount: number;
   description: string;
-  review: number;
-};
+  rating: number;
+  reviews: Review[];
+  hard_body: BodyType[];
+  soft_body: BodyType[];
+}
+
+interface Review {
+  first_name: string;
+  last_name: string;
+  rating: number;
+  id: number;
+}
+
+interface BodyType {
+  material_type: string;
+  manufacturer: string;
+  title: string;
+  colour: string;
+  photo: string;
+  filler: string;
+  body_material: BodyMaterial[];
+  tabletop_material: BodyMaterial[];
+}
+
+interface BodyMaterial {
+  material_type: string;
+  manufacturer: string;
+  title: string;
+  colour: string;
+  photo: string;
+}
 
 export const Product = () => {
   const { id } = useParams();
@@ -63,16 +92,17 @@ export const Product = () => {
   useEffect(() => {
     const result = selectProductState(stateType);
     setProduct(result);
+    // eslint-disable-next-line
   }, [id, stateType]);
 
   const [activeTab, setActiveTab] = useState('description');
-  const [activeMaterial, setActiveMaterial] = useState(0);
+  // const [activeMaterial, setActiveMaterial] = useState(0);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
   const changeActiveTab = (tabName: string) => {
     return activeTab === tabName ? 'active' : null;
   };
-  const handleMaterialClick = (index: number) => setActiveMaterial(index);
+  // const handleMaterialClick = (index: number) => setActiveMaterial(index);
   const handleGalleryImgClick = (index: number) => setGalleryImgIndex(index);
 
   const getDate = () => {
@@ -103,9 +133,11 @@ export const Product = () => {
   }
 
   return (
-    <PageSectionWrapper title="">
+    <PageSectionWrapper
+      title=""
+      breadcrumbs={[product.room, product.item_category, product.title]}
+    >
       <div className="product product--container">
-        {/* here */}
         <div className="product__gallery">
           <div className="product__gallery--main">
             <img src={product?.photo[galleryImgIndex]} alt="main img" />
@@ -113,7 +145,7 @@ export const Product = () => {
           <div className="product__gallery--collection">
             {product?.photo?.map((img, index) => (
               <div
-                key={`galImg${index}`}
+                key={crypto.randomUUID()}
                 onClick={() => handleGalleryImgClick(index)}
                 className="product__gallery--item"
               >
@@ -133,10 +165,12 @@ export const Product = () => {
 
           <div className="product__rating">
             <div className="product__rating--stars">
-              <StarsRating ratingNumber={product?.review} />
+              <StarsRating ratingNumber={product?.rating} />
             </div>
             <div className="product__rating--reviews">
-              <span className="product__rating--count">0 відгуків</span>
+              <span className="product__rating--count">
+                Відгуків: {product.reviews.length}
+              </span>
               <span className="product__rating--devider">|</span>
               <span className="product__rating--add">Написати відгук</span>
             </div>
@@ -178,27 +212,26 @@ export const Product = () => {
           <div className="product__materials">
             <p>Матеріал:</p>
             <div className="product__materials-samples">
-              {[
-                'wood',
-                'gold',
-                'silver',
-                'titanium',
-                'stone',
-                'cloth',
-                'leather',
-              ].map((item, index) => (
+              {/* f**k ts */}
+              {/* {product?.hard_body?.map((item, index) => (
                 <span
-                  key={index}
+                  key={crypto.randomUUID()}
                   className={`material-sample ${
-                    activeMaterial === index ? 'active' : null
+                    activeMaterial === index ? 'active' : ''
                   }`}
                   onClick={() => {
                     handleMaterialClick(index);
                   }}
                 >
-                  {item}
+                  {item.body_material.map((materialItem) => (
+                    <img
+                      key={crypto.randomUUID()}
+                      src={materialItem.photo}
+                      alt={materialItem.title}
+                    />
+                  ))}
                 </span>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
@@ -245,8 +278,8 @@ export const Product = () => {
               <div className="tab__specs--table">
                 <table>
                   <tbody>
-                    {specTableData.map((element, index) => (
-                      <tr key={index}>
+                    {specTableData.map((element) => (
+                      <tr key={crypto.randomUUID()}>
                         <th>{element[0]}</th>
                         <td>{element[1]}</td>
                       </tr>
@@ -261,31 +294,35 @@ export const Product = () => {
               )}`}
             >
               <ul className="reviews-list">
-                <li className="review">
-                  <div className="review__heading">
-                    <h3>Софія</h3>
-                    <span>{getDate()}</span>
-                  </div>
+                {product?.reviews?.map((item) => (
+                  <li className="review" key={crypto.randomUUID()}>
+                    <div className="review__heading">
+                      <h3>
+                        {item.first_name} {item.last_name}
+                      </h3>
+                      <span>{getDate()}</span>
+                    </div>
 
-                  <div className="product__rating">
-                    <span className="product__rating--stars">
-                      <StarsRating ratingNumber="2" />
-                    </span>
-                  </div>
-                  <p className="review__text">
-                    Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
-                    sit id bibendum elit duis viverra purus. Commodo sed
-                    adipiscing velit non curabitur vestibulum.
+                    <div className="product__rating">
+                      <span className="product__rating--stars">
+                        <StarsRating ratingNumber={item.rating} />
+                      </span>
+                    </div>
+                  </li>
+                ))}
+                {/* <p className="review__text">
+                  Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
+                  sit id bibendum elit duis viverra purus. Commodo sed
+                  adipiscing velit non curabitur vestibulum.
+                </p>
+                <div className="review__proscons">
+                  <p className="review__pros">
+                    Переваги: <span>відсутні ;(</span>
                   </p>
-                  <div className="review__proscons">
-                    <p className="review__pros">
-                      Переваги: <span>відсутні ;(</span>
-                    </p>
-                    <p className="review__cons">
-                      Недоліки: <span>також відсутні :)</span>
-                    </p>
-                  </div>
-                </li>
+                  <p className="review__cons">
+                    Недоліки: <span>також відсутні :)</span>
+                  </p>
+                </div> */}
                 <button type="button" className="button">
                   Написати відгук
                 </button>
@@ -310,7 +347,7 @@ export const Product = () => {
               img={item.photo.find((img) => img.includes('MAIN_photo_image_'))}
               stateType={stateType}
               id={item.article_code}
-              rating={item.review}
+              rating={item.rating}
             />
           ))}
         </div>

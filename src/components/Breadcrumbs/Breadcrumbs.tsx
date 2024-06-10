@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ breadcrumbs = [] }) => {
   return (
     <div className="breadcrumbs">
-      <Link to='/'>Головна</Link>
-      <span>/</span>
-      <span>Вітальні</span>
-      <span>/</span>
-      <span>Дивани</span>
-      <span>/</span>
-      <span>Диван</span>
+      <Link to="/">Головна</Link>
+      {breadcrumbs.map((item) => (
+        <span key={crypto.randomUUID()}>
+          <span className="breadcrumbs-devider">/</span>
+          <span>{item}</span>
+        </span>
+      ))}
     </div>
   );
 };

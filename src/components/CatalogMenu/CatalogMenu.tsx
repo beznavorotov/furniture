@@ -76,7 +76,7 @@ export const CatalogMenu: React.FC = () => {
             >
               <ul className="subcategory-list">
                 {room.categories.map((item) => (
-                  <li key={room.id + '' + item.id}>
+                  <li key={crypto.randomUUID()}>
                     <Link
                       className="subcategory-list__link"
                       to={`/catalog/${item.id - 1}`}
