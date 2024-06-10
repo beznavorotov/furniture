@@ -5,27 +5,23 @@ import { CatalogMenu } from '@/components/CatalogMenu/CatalogMenu';
 import { SearchForm } from '@/components/SearchForm/SearchForm';
 import { setShowOverlay } from '@/store/slices/modalSlice';
 import logo from '@/assets/logo.webp';
+import { handleClickOutside } from '@/utils/handleClickOutside';
 
 export const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
-  const catalogDropDown = useRef(null);
+  const catalogDropDownRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        catalogDropDown.current &&
-        !catalogDropDown.current.contains(event.target)
-      ) {
-        setShowMenu(false);
-        dispatch(setShowOverlay(false));
-      }
-    };
+    const handleClick = handleClickOutside(catalogDropDownRef, () => {
+      setShowMenu(false);
+      dispatch(setShowOverlay(false));
+    });
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click', handleClick);
     };
     // eslint-disable-next-line
   }, []);
@@ -64,7 +60,7 @@ export const Header = () => {
                   className={`nav-item catalog-menu__dropdown ${
                     showMenu ? 'show' : ''
                   }`}
-                  ref={catalogDropDown}
+                  ref={catalogDropDownRef}
                 >
                   {/* !!! dropDown menu */}
                   <button

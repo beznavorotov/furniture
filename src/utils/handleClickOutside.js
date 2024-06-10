@@ -1,5 +1,7 @@
-export const handleClickOutside = (event, ref) => {
-  if (ref.current && !ref.current.contains(event.target)) {
-    return true;
-  }
+export const handleClickOutside = (ref, callback) => {
+  return (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      callback();
+    }
+  };
 };

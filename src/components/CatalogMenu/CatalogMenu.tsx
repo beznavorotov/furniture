@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '@/store';
 import { fetchRooms } from '@/store/slices/roomsSlice';
 import { STATUS_IDLE } from '@/constants';
+import { handleClickOutside } from '@/utils/handleClickOutside';
 
 export const CatalogMenu = () => {
   const dispatch = useDispatch();
@@ -23,18 +24,13 @@ export const CatalogMenu = () => {
   }, [roomStatus, dispatch]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        categoryListRef.current &&
-        !categoryListRef.current.contains(event.target)
-      ) {
-        setIsVisible(null);
-      }
-    };
+    const handleClick = handleClickOutside(categoryListRef, () => {
+      setIsVisible(null);
+    });
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click', handleClick);
     };
   }, []);
 
