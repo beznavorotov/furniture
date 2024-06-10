@@ -123,7 +123,9 @@ export const FormOrder = () => {
       email,
       region: regions.find((r) => r.Ref === selectedRegion)?.Description || '',
       city: cities.find((c) => c.Ref === selectedCity)?.Description || '',
-      department: departments.find((d) => d.Description === selectedDepartment)?.Description || '',
+      department:
+        departments.find((d) => d.Description === selectedDepartment)
+          ?.Description || '',
       paymentMethod,
       comment,
       termsAccepted,
@@ -131,7 +133,7 @@ export const FormOrder = () => {
     };
 
     try {
-      const response = await fetch('https://furnishop-back.pp.ua/orders/all/', {
+      const response = await fetch('YOUR_BACKEND_ENDPOINT', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -253,7 +255,6 @@ export const FormOrder = () => {
                   <option value="" disabled>
                     Оберіть місто
                   </option>
-<<<<<<< HEAD
                   {cities.map((city) => (
                     <option key={city.Ref} value={city.Ref}>
                       {city.Description}
@@ -270,22 +271,6 @@ export const FormOrder = () => {
                 >
                   <option value="" disabled>
                     Оберіть відділення Нової Пошти
-=======
-                ))}
-              </select>
-            </div>
-            <div className="form_group">
-              <select className="input_np" disabled={!selectedCity}>
-                <option value="" disabled selected>
-                  Оберіть відділення Нової Пошти
-                </option>
-                {departments.map((department) => (
-                  <option
-                    key={crypto.randomUUID()}
-                    value={department.Description}
-                  >
-                    {department.Description}
->>>>>>> f1d12e955a7511d2dfec394721e9435b2c42909b
                   </option>
                   {departments.map((department, index) => (
                     <option key={index} value={department.Description}>
@@ -375,10 +360,9 @@ export const FormOrder = () => {
             </div>
           </div>
         </form>
-        <div className='basket'>
-        <CartOrder />
+        <div className="basket">
+          <CartOrder />
         </div>
-
       </div>
     </div>
   );
