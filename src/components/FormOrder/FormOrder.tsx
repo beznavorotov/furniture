@@ -3,7 +3,7 @@ import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '../UseNovaPoshtaApi/UseNovaPoshtaApi';
 
 export const FormOrder = () => {
-  const { regions, cities, departments, error } = useNovaPoshtaApi();
+  const { regions, cities, departments } = useNovaPoshtaApi();
 
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
