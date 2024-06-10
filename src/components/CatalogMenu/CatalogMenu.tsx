@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRooms } from '../../store/slices/roomsSlice';
-import { RootState } from '../../store';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../store';
+import { fetchRooms } from '../../store/slices/roomsSlice';
+import { STATUS_IDLE } from '../../constants';
 
-export const CatalogMenu: React.FC = () => {
+export const CatalogMenu = () => {
   const dispatch = useDispatch();
   const rooms = useSelector((state: RootState) => state.rooms.items);
   const roomStatus = useSelector((state: RootState) => state.rooms.status);
@@ -16,7 +17,7 @@ export const CatalogMenu: React.FC = () => {
   };
 
   useEffect(() => {
-    if (roomStatus === 'idle') {
+    if (roomStatus === STATUS_IDLE) {
       dispatch(fetchRooms());
     }
   }, [roomStatus, dispatch]);
@@ -41,22 +42,22 @@ export const CatalogMenu: React.FC = () => {
     <div className="catalog__menu" ref={categoryListRef}>
       <h1 className="catalog__menu--title">Каталог товарів</h1>
       <ul className="category-list">
-        {rooms.map((room) => (
+        {rooms.map(({ id, title, categories }) => (
           <li
-            key={room.id}
+            key={id}
             className="category-list__item"
-            onClick={() => toggleVisibility(room.id)}
+            onClick={() => toggleVisibility(id)}
           >
             <div
               className={`category-list__heading ${
-                isVisible === room.id ? 'active' : ''
+                isVisible === id ? 'active' : ''
               }`}
             >
-              <span className="category-list__number">0{room.id}</span>
-              <span className="category-list__link">{room.title}</span>
+              <span className="category-list__number">0{id}</span>
+              <span className="category-list__link">{title}</span>
               <span
                 className={`category-list__direction-arrow ${
-                  isVisible === room.id ? 'rotate' : ''
+                  isVisible === id ? 'rotate' : ''
                 }`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330">
@@ -71,17 +72,17 @@ export const CatalogMenu: React.FC = () => {
 
             <div
               className={`category-list__hidden-column ${
-                isVisible === room.id ? 'show' : ''
+                isVisible === id ? 'show' : ''
               }`}
             >
               <ul className="subcategory-list">
-                {room.categories.map((item) => (
+                {categories.map(({ id, title }) => (
                   <li key={crypto.randomUUID()}>
                     <Link
                       className="subcategory-list__link"
-                      to={`/catalog/${item.id - 1}`}
+                      to={`/catalog/${id - 1}`}
                     >
-                      {item.title}
+                      {title}
                     </Link>
                   </li>
                 ))}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
 import { StarsRating } from '../../components/StarsRating/StarsRating';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IsLoading } from '../../components/IsLoading/IsLoading';
@@ -57,6 +57,13 @@ interface BodyMaterial {
 }
 
 export const Product = () => {
+  const CATEGORY = 'category';
+  const BESTSELLERS = 'bestsellers';
+  const SALE = 'sale';
+  const DESCRIPTION = 'description';
+  const SPECS = 'specs';
+  const REVIEWS = 'reviews';
+
   const { id } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -70,17 +77,39 @@ export const Product = () => {
   const search = useSelector((state: RootState) => state.search.searchResults);
 
   const [product, setProduct] = useState({} as ProductItemType);
+  const {
+    room,
+    item_category,
+    colour,
+    height,
+    width,
+    length,
+    form,
+    collection,
+    manufacturer,
+    photo,
+    title,
+    article_code,
+    avaliability,
+    price,
+    discount,
+    description,
+    rating,
+    reviews,
+    hard_body,
+    soft_body,
+  } = product;
   const [recommended, setRecommended] = useState([]);
   const [galleryImgIndex, setGalleryImgIndex] = useState(0);
 
   const selectProductState = (type) => {
-    if (type === 'category') {
+    if (type === CATEGORY) {
       setRecommended(category);
       return category.find((item) => item.article_code === +id);
-    } else if (type === 'bestsellers') {
+    } else if (type === BESTSELLERS) {
       setRecommended(bestsellers);
       return bestsellers.find((item) => item.article_code === +id);
-    } else if (type === 'sale') {
+    } else if (type === SALE) {
       setRecommended(sale);
       return sale.find((item) => item.article_code === +id);
     } else {
@@ -95,7 +124,7 @@ export const Product = () => {
     // eslint-disable-next-line
   }, [id, stateType]);
 
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState(DESCRIPTION);
   // const [activeMaterial, setActiveMaterial] = useState(0);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
@@ -111,39 +140,35 @@ export const Product = () => {
   };
 
   const specTableData = [
-    ['Кімната', product?.room],
-    ['Категорія товару', product?.item_category],
-    ['Матеріал', product?.colour],
-    ['Висота', product?.height],
-    ['Ширина', product?.width],
-    ['Глибина', product?.length],
-    ['Форма', product?.form],
-    ['Глибина сидіння', '90'],
-    // ['Захист від кігтів', 'Так'],
-    ['Колекція', product?.collection],
-    ['Виробник', product?.manufacturer],
+    { Кімната: room },
+    { 'Категорія товару': item_category },
+    { Матеріал: colour },
+    { Висота: height },
+    { Ширина: width },
+    { Глибина: length },
+    { Форма: form },
+    // 'Глибина сидіння': '90',
+    // 'Захист від кігтів': 'Так',
+    { Колекція: collection },
+    { Виробник: manufacturer },
   ];
-
   const shuffleArray = [...recommended]
     .sort(() => Math.random() - 0.5)
     .slice(0, 4);
 
-  if (!product || !product.photo || product.photo.length === 0) {
+  if (!product || !photo || photo.length === 0) {
     return <IsLoading text="Заждіть секунду..." />;
   }
 
   return (
-    <PageSectionWrapper
-      title=""
-      breadcrumbs={[product.room, product.item_category, product.title]}
-    >
+    <PageSectionWrapper title="" breadcrumbs={[room, item_category, title]}>
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--main">
-            <img src={product?.photo[galleryImgIndex]} alt="main img" />
+            <img src={photo[galleryImgIndex]} alt="main img" />
           </div>
           <div className="product__gallery--collection">
-            {product?.photo?.map((img, index) => (
+            {photo.map((img, index) => (
               <div
                 key={crypto.randomUUID()}
                 onClick={() => handleGalleryImgClick(index)}
@@ -157,19 +182,19 @@ export const Product = () => {
 
         <div className="product__order">
           <div className="product__heading">
-            <h2 className="product__heading--title">{product?.title}</h2>
+            <h2 className="product__heading--title">{title}</h2>
             <span className="product__heading--code">
-              Код товару: {product?.article_code}
+              Код товару: {article_code}
             </span>
           </div>
 
           <div className="product__rating">
             <div className="product__rating--stars">
-              <StarsRating ratingNumber={product?.rating} />
+              <StarsRating ratingNumber={rating} />
             </div>
             <div className="product__rating--reviews">
               <span className="product__rating--count">
-                Відгуків: {product.reviews.length}
+                Відгуків: {reviews.length}
               </span>
               <span className="product__rating--devider">|</span>
               <span className="product__rating--add">Написати відгук</span>
@@ -177,16 +202,14 @@ export const Product = () => {
           </div>
 
           <div className="product__addition-info">
-            <p>Колекція: {product?.collection}</p>
-            <p>
-              Наявність: {product?.avaliability ? 'В наявності' : 'Відсутні'}
-            </p>
+            <p>Колекція: {collection}</p>
+            <p>Наявність: {avaliability ? 'В наявності' : 'Відсутні'}</p>
           </div>
 
           <div className="product__price">
             <div className="product__price--heading">
               <h3 className="product__price--price">
-                {Math.floor(product?.price)} грн.
+                {Math.floor(price)} грн.
               </h3>
               <span>
                 <svg
@@ -219,9 +242,7 @@ export const Product = () => {
                   className={`material-sample ${
                     activeMaterial === index ? 'active' : ''
                   }`}
-                  onClick={() => {
-                    handleMaterialClick(index);
-                  }}
+                  // onClick={() => handleMaterialClick(index)}
                 >
                   {item.body_material.map((materialItem) => (
                     <img
@@ -240,22 +261,22 @@ export const Product = () => {
           <div className="product__info--tabs">
             <div className="tablist">
               <button
-                onClick={() => handleTabClick('description')}
+                onClick={() => handleTabClick(DESCRIPTION)}
                 className={`tab tab__description ${changeActiveTab(
-                  'description',
+                  DESCRIPTION,
                 )}`}
               >
                 Опис товару
               </button>
               <button
-                onClick={() => handleTabClick('specs')}
-                className={`tab tab__specs ${changeActiveTab('specs')}`}
+                onClick={() => handleTabClick(SPECS)}
+                className={`tab tab__specs ${changeActiveTab(SPECS)}`}
               >
                 Характеристики
               </button>
               <button
-                onClick={() => handleTabClick('reviews')}
-                className={`tab tab__reviews ${changeActiveTab('reviews')}`}
+                onClick={() => handleTabClick(REVIEWS)}
+                className={`tab tab__reviews ${changeActiveTab(REVIEWS)}`}
               >
                 Відгуки
               </button>
@@ -267,12 +288,12 @@ export const Product = () => {
               )}`}
             >
               <div className="tab__description--text">
-                <p>{product?.description}</p>
+                <p>{description}</p>
               </div>
             </div>
             <div
               className={`tab--content tab__specs--content ${changeActiveTab(
-                'specs',
+                SPECS,
               )}`}
             >
               <div className="tab__specs--table">
@@ -280,8 +301,8 @@ export const Product = () => {
                   <tbody>
                     {specTableData.map((element) => (
                       <tr key={crypto.randomUUID()}>
-                        <th>{element[0]}</th>
-                        <td>{element[1]}</td>
+                        <th>{Object.keys(element)}</th>
+                        <td>{Object.values(element)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -290,38 +311,30 @@ export const Product = () => {
             </div>
             <div
               className={`tab--content tab__reviews--content ${changeActiveTab(
-                'reviews',
+                REVIEWS,
               )}`}
             >
               <ul className="reviews-list">
-                {product?.reviews?.map((item) => (
+                {reviews?.map(({ first_name, last_name, rating }) => (
                   <li className="review" key={crypto.randomUUID()}>
                     <div className="review__heading">
                       <h3>
-                        {item.first_name} {item.last_name}
+                        {first_name} {last_name}
                       </h3>
                       <span>{getDate()}</span>
                     </div>
 
                     <div className="product__rating">
                       <span className="product__rating--stars">
-                        <StarsRating ratingNumber={item.rating} />
+                        <StarsRating ratingNumber={rating} />
                       </span>
                     </div>
                   </li>
                 ))}
-                {/* <p className="review__text">
-                  Lorem ipsum dolor sit amet consectetur. Scelerisque lorem
-                  sit id bibendum elit duis viverra purus. Commodo sed
-                  adipiscing velit non curabitur vestibulum.
-                </p>
+                {/* <p className="review__text"></p>
                 <div className="review__proscons">
-                  <p className="review__pros">
-                    Переваги: <span>відсутні ;(</span>
-                  </p>
-                  <p className="review__cons">
-                    Недоліки: <span>також відсутні :)</span>
-                  </p>
+                  <p className="review__pros"></p>
+                  <p className="review__cons"></p>
                 </div> */}
                 <button type="button" className="button">
                   Написати відгук
@@ -337,19 +350,21 @@ export const Product = () => {
           <h1 className="recommended-products__title">Рекомендовані товари</h1>
         </div>
         <div className="recommended-products__list">
-          {shuffleArray.map((item) => (
-            <ProductCard
-              key={item.article_code}
-              name={item?.title}
-              price={item.price}
-              discountPrice={item.discount}
-              cardSize={null}
-              img={item.photo.find((img) => img.includes('MAIN_photo_image_'))}
-              stateType={stateType}
-              id={item.article_code}
-              rating={item.rating}
-            />
-          ))}
+          {shuffleArray.map(
+            ({ article_code, title, price, discount, photo, rating }) => (
+              <ProductCard
+                key={article_code}
+                name={title}
+                price={price}
+                discountPrice={discount}
+                cardSize={null}
+                img={photo.find((img) => img.includes('MAIN_photo_image_'))}
+                stateType={stateType}
+                id={article_code}
+                rating={rating}
+              />
+            ),
+          )}
         </div>
       </section>
     </PageSectionWrapper>

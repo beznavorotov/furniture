@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
-import { BACKEND_CREATE_USER_URL, BACKEND_LOGIN_URL } from '../../constants';
+import {
+  BACKEND_CREATE_USER_URL,
+  BACKEND_LOGIN_URL,
+  STATUS_FAILD,
+  STATUS_IDLE,
+  STATUS_LOADING,
+  STATUS_SUCCEEDED,
+} from '../../constants';
 import fetchData from '../../utils/fetchData';
 
 export const login = createAsyncThunk(
@@ -10,9 +17,6 @@ export const login = createAsyncThunk(
       // send data to server
       const response = await fetchData(BACKEND_LOGIN_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: credentials,
       });
 
@@ -39,7 +43,7 @@ export const signup = createAsyncThunk(
         },
         body: credentials,
       });
-      console.log(response)
+      console.log(response);
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -62,7 +66,7 @@ const authSlice = createSlice({
     user: null,
     accessToken: null,
     isAuth: false,
-    status: 'idle',
+    status: STATUS_IDLE,
     error: null,
   },
 
@@ -74,20 +78,20 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.status = 'loading';
+        state.status = STATUS_LOADING;
       })
       .addCase(login.fulfilled, (state) => {
-        state.status = 'succeeded';
+        state.status = STATUS_SUCCEEDED;
         state.isAuth = true;
         state.user = localStorage.getItem('user');
         state.accessToken = localStorage.getItem('accessToken');
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = STATUS_FAILD;
         state.error = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.status = 'idle';
+        state.status = STATUS_IDLE;
         state.user = null;
         state.accessToken = null;
         state.isAuth = false;

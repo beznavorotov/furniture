@@ -1,8 +1,8 @@
-import heart from '../../assets/heart.svg';
-import { useDispatch } from 'react-redux';
-import { setShowModal } from '../../store/slices/modalSlice';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { StarsRating } from '../StarsRating/StarsRating';
+import { setShowModal } from '../../store/slices/modalSlice';
+import heart from '../../assets/heart.svg';
 
 const ProductCard = ({
   img,
