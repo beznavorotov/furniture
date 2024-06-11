@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { STATUS_IDLE } from '@/constants';
 
-const getUniqueValues = (array, key) => {
-  return [...new Set(array.map((item) => item[key]))].sort();
-};
-
 const filterCatalogSlice = createSlice({
   name: 'filter',
   initialState: {
@@ -12,36 +8,37 @@ const filterCatalogSlice = createSlice({
     rooms: [],
     manufacturers: [],
     collections: [],
-    сolor: [],
+    colour: [],
     sortBy: null,
     filterQuery: {},
     status: STATUS_IDLE,
     error: null,
   },
   reducers: {
-    getUniqueCategories: (state, action) => {
-      state.categories = getUniqueValues(action.payload, 'item_category');
+    toggleFilter: (state, action) => {
+      const { category, value } = action.payload;
+
+      if (!state[category]) {
+        console.error(`Category ${category} not found in filter state.`);
+        return;
+      }
+
+      if (state[category].includes(value)) {
+        state[category] = state[category].filter((item) => item !== value);
+      } else {
+        state[category].push(value);
+      }
     },
-    getUniqueRooms: (state, action) => {
-      state.rooms = getUniqueValues(action.payload, 'room');
-    },
-    getUniqueManufacturers: (state, action) => {
-      state.manufacturers = getUniqueValues(action.payload, 'manufacturer');
-    },
-    getUniqueCollections: (state, action) => {
-      state.collections = getUniqueValues(action.payload, 'collection');
-    },
-    getUniqueColors: (state, action) => {
-      state.сolor = getUniqueValues(action.payload, 'colour');
+
+    resetFilters: (state) => {
+      state.categories = [];
+      state.rooms = [];
+      state.manufacturers = [];
+      state.collections = [];
+      state.colour = [];
     },
   },
 });
 
-export const {
-  getUniqueCategories,
-  getUniqueRooms,
-  getUniqueManufacturers,
-  getUniqueCollections,
-  getUniqueColors,
-} = filterCatalogSlice.actions;
+export const { toggleFilter, resetFilters } = filterCatalogSlice.actions;
 export default filterCatalogSlice.reducer;

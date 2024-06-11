@@ -30,7 +30,7 @@
     border-bottom-right-radius: 0;
     cursor: pointer;
 
-    img {
+    .card-image {
       transition: all 0.3s linear;
       width: 100%;
       height: 100%;
@@ -38,7 +38,7 @@
       object-position: center;
     }
 
-    &:hover img {
+    &:hover .card-image {
       transform: scale(1.1);
     }
   }

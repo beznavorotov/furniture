@@ -1,32 +1,42 @@
-// import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
+import { toggleFilter, resetFilters } from '@/store/slices/filterCatalogSlice';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 
 export const CatalogSidebar = () => {
-  const categories = useSelector((state: RootState) => state.filter.categories);
-  const rooms = useSelector((state: RootState) => state.filter.rooms);
+  const dispatch = useDispatch();
+
+  const categories = useSelector(
+    (state: RootState) => state.catalog.uniqueValues.categories,
+  );
+  const rooms = useSelector(
+    (state: RootState) => state.catalog.uniqueValues.rooms,
+  );
   const manufacturers = useSelector(
-    (state: RootState) => state.filter.manufacturers,
+    (state: RootState) => state.catalog.uniqueValues.manufacturers,
   );
   const collections = useSelector(
-    (state: RootState) => state.filter.collections,
+    (state: RootState) => state.catalog.uniqueValues.collections,
   );
-  const сolor = useSelector((state: RootState) => state.filter.сolor);
+  const colour = useSelector(
+    (state: RootState) => state.catalog.uniqueValues.colour,
+  );
 
-  // const [tmpFilterData, setTmpFilterData] = useState([]);
-
-  const handleChange = (arg) => {
-    console.log('value: ', arg.value);
-    console.log('isChecked: ', arg.checked);
-    // setTmpFilterData((prevState) => [...prevState, arg.value]);
-    // console.log(tmpFilterData);
+  const handleChange = (category, value) => {
+    dispatch(toggleFilter({ category, value }));
   };
 
   return (
     <aside className="catalog-sidebar">
       {/* Ціна */}
       <div className="catalog-sidebar__section">
+        <button
+          className="button button__white"
+          onClick={() => dispatch(resetFilters())}
+          style={{ marginBottom: '1rem' }}
+        >
+          Скинути фільтри
+        </button>
         <div className="catalog-sidebar__heading">
           <h4 className="catalog-sidebar__title">Ціна</h4>
         </div>
@@ -70,7 +80,14 @@ export const CatalogSidebar = () => {
             ) : (
               rooms.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="rooms" value={item} />
+                  <input
+                    type="checkbox"
+                    name="rooms"
+                    value={item}
+                    onChange={(e) => {
+                      handleChange(e.target.name, e.target.value);
+                    }}
+                  />
                   {item}
                 </label>
               ))
@@ -96,7 +113,7 @@ export const CatalogSidebar = () => {
                     name="categories"
                     value={item}
                     onChange={(e) => {
-                      handleChange(e.target);
+                      handleChange(e.target.name, e.target.value);
                     }}
                   />
                   {item}
@@ -124,7 +141,7 @@ export const CatalogSidebar = () => {
                     name="collections"
                     value={item}
                     onChange={(e) => {
-                      handleChange(e.target);
+                      handleChange(e.target.name, e.target.value);
                     }}
                   />
                   {item}
@@ -147,7 +164,14 @@ export const CatalogSidebar = () => {
             ) : (
               manufacturers.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="manufacturers" value={item} />
+                  <input
+                    type="checkbox"
+                    name="manufacturers"
+                    value={item}
+                    onChange={(e) => {
+                      handleChange(e.target.name, e.target.value);
+                    }}
+                  />
                   {item}
                 </label>
               ))
@@ -163,12 +187,19 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-            {!сolor ? (
+            {!colour ? (
               <IsLoading text="..." />
             ) : (
-              сolor.map((item) => (
+              colour.map((item) => (
                 <label key={crypto.randomUUID()}>
-                  <input type="checkbox" name="colour" value={item} />
+                  <input
+                    type="checkbox"
+                    name="colour"
+                    value={item}
+                    onChange={(e) => {
+                      handleChange(e.target.name, e.target.value);
+                    }}
+                  />
                   {item}
                 </label>
               ))

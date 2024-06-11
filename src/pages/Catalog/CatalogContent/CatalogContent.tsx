@@ -1,39 +1,85 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
-import { STATUS_LOADING, STATUS_SUCCEEDED } from '@/constants';
+import { resetFilters } from '@/store/slices/filterCatalogSlice';
 import scrollToTop from '@/utils/scrollToTop';
+import { STATUS_LOADING, STATUS_SUCCEEDED } from '@/constants';
 
 export const CatalogContent = ({ data, type }) => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ITEMS_PER_PAGE = 25;
   const categoryStatus = useSelector(
     (state: RootState) => state.catalog.status,
   );
+  const categoriesFilters = useSelector(
+    (state: RootState) => state.filter.categories,
+  );
+  const roomsFilters = useSelector((state: RootState) => state.filter.rooms);
+  const manufacturersFilters = useSelector(
+    (state: RootState) => state.filter.manufacturers,
+  );
+  const collectionsFilters = useSelector(
+    (state: RootState) => state.filter.collections,
+  );
+  const colourFilters = useSelector((state: RootState) => state.filter.colour);
 
   const searchStatus = useSelector((state: RootState) => state.search.status);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const filterCatalog = () => {
+    return data.filter((item) => {
+      const categoriesMatch =
+        categoriesFilters.lenght === 0 ||
+        categoriesFilters.includes(item.item_category);
+      const roomsMatch =
+        roomsFilters.lenght === 0 || roomsFilters.includes(item.room);
+      const manufacturersMatch =
+        manufacturersFilters.lenght === 0 ||
+        manufacturersFilters.includes(item.manufacturer);
+      const collectionsMatch =
+        collectionsFilters.lenght === 0 ||
+        collectionsFilters.includes(item.collection);
+      const colourMatch =
+        colourFilters.lenght === 0 || colourFilters.includes(item.colour);
+
+      return (
+        categoriesMatch ||
+        roomsMatch ||
+        manufacturersMatch ||
+        collectionsMatch ||
+        colourMatch
+      );
+    });
+  };
+  const filteredCatalog = filterCatalog();
+
   // pagination
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+
+  const currentItems =
+    filteredCatalog.length === 0
+      ? data.slice(indexOfFirstItem, indexOfLastItem)
+      : filteredCatalog.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages =
+    filteredCatalog.length === 0
+      ? Math.ceil(data.length / ITEMS_PER_PAGE)
+      : Math.ceil(filteredCatalog.length / ITEMS_PER_PAGE);
 
   const handlePageChange = (pageNumber) => {
+    scrollToTop('smooth');
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
     setCurrentPage(1);
+    dispatch(resetFilters());
   }, [pathname]);
-
-  useEffect(() => {
-    scrollToTop('smooth');
-  }, [currentPage]);
 
   return (
     <div className="catalog-content">

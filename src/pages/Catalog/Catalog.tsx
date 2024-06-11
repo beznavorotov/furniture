@@ -12,7 +12,7 @@ import {
   getUniqueManufacturers,
   getUniqueCollections,
   getUniqueColors,
-} from '@/store/slices/filterCatalogSlice';
+} from '@/store/slices/catalogSlice';
 
 export const Catalog = () => {
   const { id } = useParams();

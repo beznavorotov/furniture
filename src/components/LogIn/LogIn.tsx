@@ -14,27 +14,6 @@ export const LogIn = () => {
   const authError = useSelector((state: RootState) => state.auth.error);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
-  // login test subject
-  // id: 15
-  // name: mr.Test
-  // nameSecond: Testinson
-  // email: mrtest@test.io
-  // pass: someVerySmartHardPass
-
-  // login test subject #2
-  // id: 20
-  // name: subject12
-  // nameSecond: Smith
-  // email: subject12@test.io
-  // pass: subject123
-
-  // login test subject #3
-  // id: 20
-  // name: Java
-  // nameSecond: Script
-  // email: js@html.css
-  // pass: helloworld
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const credentials = { username, password };
