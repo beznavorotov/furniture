@@ -167,7 +167,7 @@
     border: none;
     background-color: $color-white-bg;
     height: 44px;
-    z-index: 1010;
+    z-index: 999;
   }
 
   &.show > .catalog__menu {
@@ -189,4 +189,8 @@
 
 .catalog-menu__dropdown:has(.show) .modal--overlay {
   display: block !important;
+}
+
+.catalog-menu__dropdown.show .catalog-link {
+  z-index: 1000;
 }
