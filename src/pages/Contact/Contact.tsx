@@ -1,7 +1,7 @@
-import map from '../../assets/map.jpg';
-import facebook from '../../assets/icons/facebook.png';
-import instagram from '../../assets/icons/instagram.png';
-import telegram from '../../assets/icons/telegram.png';
+import map from '@/assets/map.jpg';
+import facebook from '@/assets/icons/facebook.png';
+import instagram from '@/assets/icons/instagram.png';
+import telegram from '@/assets/icons/telegram.png';
 
 export const Contact = () => {
   return (
@@ -30,7 +30,7 @@ export const Contact = () => {
           </div>
           <div className="item">
             <h3>Ми в соціальних мережах:</h3>
-            <div className='icon'>
+            <div className="icon">
               <img src={telegram} alt="" />
               <img src={instagram} alt="" />
               <img src={facebook} alt="" />

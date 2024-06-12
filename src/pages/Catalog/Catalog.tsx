@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '@/store';
 import { CatalogSidebar } from './CatalogSidebar/CatalogSidebar';
 import { CatalogContent } from './CatalogContent/CatalogContent';
-import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
-import { fetchCategory } from '../../store/slices/catalogSlice';
+import { PageSectionWrapper } from '@/components/PageSectionWrapper/PageSectionWrapper';
+import { fetchCategory } from '@/store/slices/catalogSlice';
 import {
   getUniqueCategories,
   getUniqueRooms,
   getUniqueManufacturers,
   getUniqueCollections,
   getUniqueColors,
-} from '../../store/slices/filterCatalogSlice';
+} from '@/store/slices/catalogSlice';
 
 export const Catalog = () => {
   const { id } = useParams();
@@ -52,6 +52,7 @@ export const Catalog = () => {
           : category[+id]?.item_category
       }
       breadcrumbs={[category[+id]?.room, category[+id]?.item_category]}
+      sort="show"
     >
       <div className="catalog">
         <CatalogSidebar />

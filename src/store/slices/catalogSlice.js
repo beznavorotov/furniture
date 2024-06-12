@@ -8,8 +8,9 @@ import {
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
-} from '../../constants';
-import fetchData from '../../utils/fetchData';
+} from '@/constants';
+import fetchData from '@/utils/fetchData';
+import getUniqueValues from '@/utils/getUniqueValues';
 
 export const fetchCategory = createAsyncThunk(
   'catalog/category',
@@ -67,6 +68,14 @@ const catalogSlice = createSlice({
     bestsellers: [],
     sale: [],
     allProducts: [],
+    // category unique values for sidebar filter
+    uniqueValues: {
+      categories: [],
+      rooms: [],
+      manufacturers: [],
+      collections: [],
+      colour: [],
+    },
     status: STATUS_IDLE,
     error: null,
   },
@@ -76,6 +85,36 @@ const catalogSlice = createSlice({
     setSale: (state, action) => (state.sale = action.payload),
     setAllProducts: (state, action) => (state.allProducts = action.payload),
     setActiveState: (state, action) => (state.activeState = action.payload),
+
+    setUniqueData: (state, action) => {
+      const { data, name } = action.payload;
+      state.uniqueValues[name] = data;
+    },
+
+    getUniqueCategories: (state, action) => {
+      state.uniqueValues.categories = getUniqueValues(
+        action.payload,
+        'item_category',
+      );
+    },
+    getUniqueRooms: (state, action) => {
+      state.uniqueValues.rooms = getUniqueValues(action.payload, 'room');
+    },
+    getUniqueManufacturers: (state, action) => {
+      state.uniqueValues.manufacturers = getUniqueValues(
+        action.payload,
+        'manufacturer',
+      );
+    },
+    getUniqueCollections: (state, action) => {
+      state.uniqueValues.collections = getUniqueValues(
+        action.payload,
+        'collection',
+      );
+    },
+    getUniqueColors: (state, action) => {
+      state.uniqueValues.colour = getUniqueValues(action.payload, 'colour');
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -139,5 +178,10 @@ export const {
   setSale,
   setAllProducts,
   setActiveState,
+  getUniqueCategories,
+  getUniqueRooms,
+  getUniqueManufacturers,
+  getUniqueCollections,
+  getUniqueColors,
 } = catalogSlice.actions;
 export default catalogSlice.reducer;

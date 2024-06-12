@@ -1,4 +1,4 @@
-import { FormOrder } from '../../components/FormOrder/FormOrder';
+import { FormOrder } from '@/components/FormOrder/FormOrder';
 
 export const Order = () => {
   return (

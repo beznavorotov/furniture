@@ -1,4 +1,4 @@
-import { CartShop } from '../../components/CartShop/CartShop';
+import { CartShop } from '@/components/CartShop/CartShop';
 
 export const Cart = () => {
   return (

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setShowModal } from '../../store/slices/modalSlice';
-import { RootState } from '../../store';
-import closeIcon from '../../assets/icons/close.svg';
-import sofa from '../../assets/sofa_beige.png';
+import { setShowModal } from '@/store/slices/modalSlice';
+import { RootState } from '@/store';
+import closeIcon from '@/assets/icons/close.svg';
+import sofa from '@/assets/sofa_beige.png';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 

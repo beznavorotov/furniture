@@ -1,6 +1,6 @@
-import sofa from '../../../assets/seater-sofa.png';
-import starEmpty from '../../../assets/star_empty.svg';
-import starFull from '../../../assets/star_full.svg';
+import sofa from '@/assets/seater-sofa.png';
+import starEmpty from '@/assets/star_empty.svg';
+import starFull from '@/assets/star_full.svg';
 
 const reviewsData = [
   {

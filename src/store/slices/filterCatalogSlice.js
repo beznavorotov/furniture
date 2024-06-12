@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { STATUS_IDLE } from '../../constants';
-
-const getUniqueValues = (array, key) => {
-  return [...new Set(array.map((item) => item[key]))].sort();
-};
+import { STATUS_IDLE } from '@/constants';
 
 const filterCatalogSlice = createSlice({
   name: 'filter',
@@ -12,36 +8,39 @@ const filterCatalogSlice = createSlice({
     rooms: [],
     manufacturers: [],
     collections: [],
-    сolor: [],
+    colour: [],
     sortBy: null,
-    filterQuery: {},
     status: STATUS_IDLE,
     error: null,
   },
   reducers: {
-    getUniqueCategories: (state, action) => {
-      state.categories = getUniqueValues(action.payload, 'item_category');
+    toggleFilter: (state, action) => {
+      const { category, value } = action.payload;
+
+      if (!state[category]) {
+        console.error(`Category ${category} not found in filter state.`);
+        return;
+      }
+
+      if (state[category].includes(value)) {
+        state[category] = state[category].filter((item) => item !== value);
+      } else {
+        state[category].push(value);
+      }
     },
-    getUniqueRooms: (state, action) => {
-      state.rooms = getUniqueValues(action.payload, 'room');
+
+    resetFilters: (state) => {
+      state.categories = [];
+      state.rooms = [];
+      state.manufacturers = [];
+      state.collections = [];
+      state.colour = [];
     },
-    getUniqueManufacturers: (state, action) => {
-      state.manufacturers = getUniqueValues(action.payload, 'manufacturer');
-    },
-    getUniqueCollections: (state, action) => {
-      state.collections = getUniqueValues(action.payload, 'collection');
-    },
-    getUniqueColors: (state, action) => {
-      state.сolor = getUniqueValues(action.payload, 'colour');
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
     },
   },
 });
 
-export const {
-  getUniqueCategories,
-  getUniqueRooms,
-  getUniqueManufacturers,
-  getUniqueCollections,
-  getUniqueColors,
-} = filterCatalogSlice.actions;
+export const { toggleFilter, resetFilters,setSortBy } = filterCatalogSlice.actions;
 export default filterCatalogSlice.reducer;

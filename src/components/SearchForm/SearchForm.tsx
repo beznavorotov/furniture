@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { UserActionsNav } from '../UserActionsNav/UserActionsNav';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchSearch } from '../../store/slices/searchSlice';
+import { fetchSearch } from '@/store/slices/searchSlice';
+import { UserActionsNav } from '@/components/UserActionsNav/UserActionsNav';
 
 export const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,7 +19,7 @@ export const SearchForm = () => {
       setSearchQuery('');
     }
   };
-  
+
   return (
     <div className="header__search">
       <form

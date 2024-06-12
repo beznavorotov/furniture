@@ -1,7 +1,7 @@
-import delivery from '../../assets/delivery.svg';
-import wallet from '../../assets/wallet.svg';
-import mark from '../../assets/mark.svg';
-import question from '../../assets/question.svg';
+import delivery from '@/assets/delivery.svg';
+import wallet from '@/assets/wallet.svg';
+import mark from '@/assets/mark.svg';
+import question from '@/assets/question.svg';
 
 const advertisements = [
   {

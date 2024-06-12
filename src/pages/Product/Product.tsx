@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { PageSectionWrapper } from '../../components/PageSectionWrapper/PageSectionWrapper';
-import { StarsRating } from '../../components/StarsRating/StarsRating';
-import ProductCard from '../../components/ProductCard/ProductCard';
-import { IsLoading } from '../../components/IsLoading/IsLoading';
+import { RootState } from '@/store';
+import { PageSectionWrapper } from '@/components/PageSectionWrapper/PageSectionWrapper';
+import { StarsRating } from '@/components/StarsRating/StarsRating';
+import ProductCard from '@/components/ProductCard/ProductCard';
+import { IsLoading } from '@/components/IsLoading/IsLoading';
 
 interface ProductItemType {
   room: string;
@@ -161,7 +161,11 @@ export const Product = () => {
   }
 
   return (
-    <PageSectionWrapper title="" breadcrumbs={[room, item_category, title]}>
+    <PageSectionWrapper
+      title=""
+      sort=""
+      breadcrumbs={[room, item_category, title]}
+    >
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--main">

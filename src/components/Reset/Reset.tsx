@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import reset from '../../assets/authorize/reset_pass_bg.webp';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import reset from '@/assets/authorize/reset_pass_bg.webp';
 
 export const Reset = () => {
   const [resetEmail, setResetEmail] = useState('');

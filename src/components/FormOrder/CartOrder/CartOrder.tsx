@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import sofa from '../../../assets/seater-sofa.png';
+import sofa from '@/assets/seater-sofa.png';
 
 export const CartOrder = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -122,10 +122,9 @@ export const CartOrder = () => {
             <span className="text_all">{getTotalPrice() - discount} грн</span>
           </div>
         </div>
-        <div className='order'>
-        <button className="button button__order">Оформити замовлення</button>
+        <div className="order">
+          <button className="button button__order">Оформити замовлення</button>
         </div>
-
       </div>
     </div>
   );

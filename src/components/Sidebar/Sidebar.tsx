@@ -1,4 +1,4 @@
-import { CatalogMenu } from '../CatalogMenu/CatalogMenu';
+import { CatalogMenu } from '@/components/CatalogMenu/CatalogMenu';
 
 export const Sidebar = () => {
   return (

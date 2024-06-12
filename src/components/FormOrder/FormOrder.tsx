@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CartOrder } from './CartOrder/CartOrder';
-import { useNovaPoshtaApi } from '../UseNovaPoshtaApi/UseNovaPoshtaApi';
+import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
 
 export const FormOrder = () => {
   const { regions, cities, departments } = useNovaPoshtaApi();

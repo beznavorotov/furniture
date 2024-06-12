@@ -1,7 +1,7 @@
-import livingRoom from '../../assets/living-room-interior.jpg';
-import modernRoom from '../../assets/modern-interior-room.jpg';
-import modernYellow from '../../assets/modern-yellow.jpg';
-import greySofa from '../../assets/grey-sofa-coffee.jpg';
+import livingRoom from '@/assets/living-room-interior.jpg';
+import modernRoom from '@/assets/modern-interior-room.jpg';
+import modernYellow from '@/assets/modern-yellow.jpg';
+import greySofa from '@/assets/grey-sofa-coffee.jpg';
 
 export const Collection = () => {
   return (

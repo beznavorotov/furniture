@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import sofaGreen from '../../assets/sofa_green.jpg';
-import close from '../../assets/icons/close.svg';
+import sofaGreen from '@/assets/sofa_green.jpg';
+import close from '@/assets/icons/close.svg';
 
 const CartProducts = [
   {

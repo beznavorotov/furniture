@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { login } from '../../store/slices/authSlice';
-import loginImg from '../../assets/authorize/login__bg.webp';
+import { RootState } from '@/store';
+import { login } from '@/store/slices/authSlice';
+import loginImg from '@/assets/authorize/login__bg.webp';
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -13,27 +13,6 @@ export const LogIn = () => {
   const authStatus = useSelector((state: RootState) => state.auth.status);
   const authError = useSelector((state: RootState) => state.auth.error);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-
-  // login test subject
-  // id: 15
-  // name: mr.Test
-  // nameSecond: Testinson
-  // email: mrtest@test.io
-  // pass: someVerySmartHardPass
-
-  // login test subject #2
-  // id: 20
-  // name: subject12
-  // nameSecond: Smith
-  // email: subject12@test.io
-  // pass: subject123
-
-  // login test subject #3
-  // id: 20
-  // name: Java
-  // nameSecond: Script
-  // email: js@html.css
-  // pass: helloworld
 
   const handleSubmit = (event) => {
     event.preventDefault();

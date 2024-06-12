@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { StarsRating } from '../StarsRating/StarsRating';
-import { setShowModal } from '../../store/slices/modalSlice';
-import heart from '../../assets/heart.svg';
+import { StarsRating } from '@/components/StarsRating/StarsRating';
+import { setShowModal } from '@/store/slices/modalSlice';
+import heart from '@/assets/heart.svg';
 
 const ProductCard = ({
   img,
@@ -23,7 +23,7 @@ const ProductCard = ({
         to={`/product/${id}?from=${stateType}`}
         className="product-card__img"
       >
-        <img src={img} alt="chair" className="chair" loading="lazy" />
+        <img src={img} alt={name} className="card-image" loading="lazy" />
       </Link>
 
       <div className="product-card__info">
