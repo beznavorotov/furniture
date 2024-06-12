@@ -2,12 +2,20 @@ import { useState } from 'react';
 import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
 
-export const FormOrder = () => {
-  const { regions, cities, departments } = useNovaPoshtaApi();
 
-  const [selectedRegion, setSelectedRegion] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('');
+export const FormOrder = () => {
+  const {
+    regions,
+    cities,
+    departments,
+   
+    setSelectedRegion,
+    setSelectedCity,
+  } = useNovaPoshtaApi();
+
+  const [selectedRegion, selectRegion] = useState('');
+  const [selectedCity, selectCity] = useState('');
+  const [selectedDepartment, selectDepartment] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
@@ -18,18 +26,23 @@ export const FormOrder = () => {
   const [noCall, setNoCall] = useState(false);
 
   const handleRegionChange = (e) => {
-    setSelectedRegion(e.target.value);
-    setSelectedCity('');
-    setSelectedDepartment('');
+    const regionRef = e.target.value;
+    selectRegion(regionRef);
+    setSelectedRegion(regionRef);
+    selectCity('');
+    setSelectedCity(null);
+    selectDepartment('');
   };
 
   const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
-    setSelectedDepartment('');
+    const cityRef = e.target.value;
+    selectCity(cityRef);
+    setSelectedCity(cityRef);
+    selectDepartment('');
   };
 
   const handleDepartmentChange = (e) => {
-    setSelectedDepartment(e.target.value);
+    selectDepartment(e.target.value);
   };
 
   const handleOrderSubmit = async (e) => {
@@ -41,7 +54,9 @@ export const FormOrder = () => {
       email,
       region: regions.find((r) => r.Ref === selectedRegion)?.Description || '',
       city: cities.find((c) => c.Ref === selectedCity)?.Description || '',
-      department: departments.find((d) => d.Description === selectedDepartment)?.Description || '',
+      department:
+        departments.find((d) => d.Description === selectedDepartment)
+          ?.Description || '',
       paymentMethod,
       comment,
       termsAccepted,
@@ -72,9 +87,9 @@ export const FormOrder = () => {
     setLastName('');
     setPhone('');
     setEmail('');
-    setSelectedRegion('');
-    setSelectedCity('');
-    setSelectedDepartment('');
+    selectRegion('');
+    selectCity('');
+    selectDepartment('');
     setPaymentMethod('');
     setComment('');
     setTermsAccepted(false);
@@ -167,118 +182,117 @@ export const FormOrder = () => {
                     disabled={!selectedRegion}
                   >
                     <option value="" disabled>
-                    Оберіть місто
-                </option>
-                {cities.map((city) => (
-                  <option key={city.Ref} value={city.Ref}>
-                    {city.Description}
-                  </option>
-                ))}
-              </select>
+                      Оберіть місто
+                    </option>
+                    {cities.map((city) => (
+                      <option key={city.Ref} value={city.Ref}>
+                        {city.Description}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form_group">
+                  <select
+                    className="input_np"
+                    value={selectedDepartment}
+                    onChange={handleDepartmentChange}
+                    disabled={!selectedCity}
+                  >
+                    <option value="" disabled>
+                      Оберіть відділення
+                    </option>
+                    {departments.map((department) => (
+                      <option key={department.Ref} value={department.Description}>
+                        {department.Description}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="form_section">
+                <div className="title_border">
+                  <span className="form_section_title">03 Оплата</span>
+                </div>
+                <div className="form_group_payment">
+                  <label className="input_payment">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="gpay"
+                      checked={paymentMethod === 'gpay'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      required
+                    />{' '}
+                    Оплата картами Visa/Mastercard на сайті
+                  </label>
+                  <label className="input_payment">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="paypal"
+                      checked={paymentMethod === 'paypal'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      required
+                    />{' '}
+                    PayPal
+                  </label>
+                  <label className="input_payment">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="np"
+                      checked={paymentMethod === 'np'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      required
+                    />{' '}
+                    Під час отримання на НП
+                  </label>
+                </div>
+              </div>
+              <div className="form_section">
+                <div className="form_group">
+                  <textarea
+                    className="input_comment"
+                    name="comment"
+                    placeholder="Ваш коментар"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  ></textarea>
+                </div>
+                <div className="form_group row">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="terms"
+                      checked={termsAccepted}
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                      required
+                    />{' '}
+                    Я приймаю умови обслуговування
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="noCall"
+                      checked={noCall}
+                      onChange={(e) => setNoCall(e.target.checked)}
+                    />{' '}
+                    Не передзвонюйте мені, я впевнений у замовленні.
+                  </label>
+                </div>
+              </div>
+              <div className="form_section">
+                <button type="submit" className="button">
+                  Відправити замовлення
+                </button>
+              </div>
             </div>
-            <div className="form_group">
-              <select
-                className="input_np"
-                value={selectedDepartment}
-                onChange={handleDepartmentChange}
-                disabled={!selectedCity}
-              >
-                <option value="" disabled>
-                  Оберіть відділення
-                </option>
-                {departments.map((department) => (
-                  <option key={department.Ref} value={department.Description}>
-                    {department.Description}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="form_section">
-            <div className="title_border">
-              <span className="form_section_title">03 Оплата</span>
-            </div>
-            <div className="form_group_payment">
-              <label className="input_payment">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="gpay"
-                  checked={paymentMethod === 'gpay'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  required
-                />{' '}
-                Оплата картами Visa/Mastercard на сайті
-              </label>
-              <label className="input_payment">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="paypal"
-                  checked={paymentMethod === 'paypal'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  required
-                />{' '}
-                PayPal
-              </label>
-              <label className="input_payment">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="np"
-                  checked={paymentMethod === 'np'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  required
-                />{' '}
-                Під час отримання на НП
-              </label>
-            </div>
-          </div>
-          <div className="form_section">
-            <div className="form_group">
-              <textarea
-                className="input_comment"
-                name="comment"
-                placeholder="Ваш коментар"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="form_group row">
-              <label>
-                <input
-                  type="checkbox"
-                  name="terms"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  required
-                />{' '}
-                Я приймаю умови обслуговування
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="noCall"
-                  checked={noCall}
-                  onChange={(e) => setNoCall(e.target.checked)}
-                />{' '}
-                Не передзвонюйте мені, я впевнений у замовленні.
-              </label>
-            </div>
-          </div>
-          <div className="form_section">
-            <button type="submit" className="button">
-              Відправити замовлення
-            </button>
-          </div>
+          </form>
         </div>
-      </form>
-    </div>
-    <div className="basket">
-      <CartOrder />
-    </div>
-  </div>
-</>
-
-);
+        <div className="basket">
+          <CartOrder />
+        </div>
+      </div>
+    </>
+  );
 };
