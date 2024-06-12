@@ -52,6 +52,7 @@ export const Catalog = () => {
           : category[+id]?.item_category
       }
       breadcrumbs={[category[+id]?.room, category[+id]?.item_category]}
+      sort="show"
     >
       <div className="catalog">
         <CatalogSidebar />

@@ -10,7 +10,6 @@ const filterCatalogSlice = createSlice({
     collections: [],
     colour: [],
     sortBy: null,
-    filterQuery: {},
     status: STATUS_IDLE,
     error: null,
   },
@@ -37,8 +36,11 @@ const filterCatalogSlice = createSlice({
       state.collections = [];
       state.colour = [];
     },
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
+    },
   },
 });
 
-export const { toggleFilter, resetFilters } = filterCatalogSlice.actions;
+export const { toggleFilter, resetFilters,setSortBy } = filterCatalogSlice.actions;
 export default filterCatalogSlice.reducer;

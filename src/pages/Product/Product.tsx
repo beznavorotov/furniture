@@ -161,7 +161,11 @@ export const Product = () => {
   }
 
   return (
-    <PageSectionWrapper title="" breadcrumbs={[room, item_category, title]}>
+    <PageSectionWrapper
+      title=""
+      sort=""
+      breadcrumbs={[room, item_category, title]}
+    >
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--main">

@@ -79,6 +79,7 @@ export const CatalogContent = ({ data, type }) => {
   useEffect(() => {
     setCurrentPage(1);
     dispatch(resetFilters());
+    // eslint-disable-next-line
   }, [pathname]);
 
   return (
