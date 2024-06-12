@@ -9,7 +9,7 @@ const filterCatalogSlice = createSlice({
     manufacturers: [],
     collections: [],
     colour: [],
-    sortBy: null,
+    sortBy: 'rating',
     status: STATUS_IDLE,
     error: null,
   },
@@ -42,5 +42,6 @@ const filterCatalogSlice = createSlice({
   },
 });
 
-export const { toggleFilter, resetFilters,setSortBy } = filterCatalogSlice.actions;
+export const { toggleFilter, resetFilters, setSortBy } =
+  filterCatalogSlice.actions;
 export default filterCatalogSlice.reducer;

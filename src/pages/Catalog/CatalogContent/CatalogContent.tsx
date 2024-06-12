@@ -26,36 +26,34 @@ export const CatalogContent = ({ data, type }) => {
     (state: RootState) => state.filter.collections,
   );
   const colourFilters = useSelector((state: RootState) => state.filter.colour);
+  const sortBy = useSelector((state: RootState) => state.filter.sortBy);
 
   const searchStatus = useSelector((state: RootState) => state.search.status);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filterCatalog = () => {
-    return data.filter((item) => {
-      const categoriesMatch =
-        categoriesFilters.lenght === 0 ||
-        categoriesFilters.includes(item.item_category);
-      const roomsMatch =
-        roomsFilters.lenght === 0 || roomsFilters.includes(item.room);
-      const manufacturersMatch =
-        manufacturersFilters.lenght === 0 ||
-        manufacturersFilters.includes(item.manufacturer);
-      const collectionsMatch =
-        collectionsFilters.lenght === 0 ||
-        collectionsFilters.includes(item.collection);
-      const colourMatch =
-        colourFilters.lenght === 0 || colourFilters.includes(item.colour);
+  const filteredCatalog = data.filter((item) => {
+    const categoriesMatch =
+      categoriesFilters.lenght === 0 ||
+      categoriesFilters.includes(item.item_category);
+    const roomsMatch =
+      roomsFilters.lenght === 0 || roomsFilters.includes(item.room);
+    const manufacturersMatch =
+      manufacturersFilters.lenght === 0 ||
+      manufacturersFilters.includes(item.manufacturer);
+    const collectionsMatch =
+      collectionsFilters.lenght === 0 ||
+      collectionsFilters.includes(item.collection);
+    const colourMatch =
+      colourFilters.lenght === 0 || colourFilters.includes(item.colour);
 
-      return (
-        categoriesMatch ||
-        roomsMatch ||
-        manufacturersMatch ||
-        collectionsMatch ||
-        colourMatch
-      );
-    });
-  };
-  const filteredCatalog = filterCatalog();
+    return (
+      categoriesMatch ||
+      roomsMatch ||
+      manufacturersMatch ||
+      collectionsMatch ||
+      colourMatch
+    );
+  });
 
   // pagination
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
@@ -70,6 +68,27 @@ export const CatalogContent = ({ data, type }) => {
       ? Math.ceil(data.length / ITEMS_PER_PAGE)
       : Math.ceil(filteredCatalog.length / ITEMS_PER_PAGE);
 
+  const sortCatalog = () => {
+    const sorting = (a, b) => {
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      }
+      return 0;
+    };
+
+    if (sortBy === 'minMax') {
+      return currentItems.sort((a, b) => sorting(a.discount, b.discount));
+    } else if (sortBy === 'maxMin') {
+      return currentItems.sort((a, b) => sorting(b.discount, a.discount));
+    } else {
+      return currentItems.sort((a, b) => b.rating - a.rating);
+    }
+  };
+
+  const filteredAndSortedCatalog = sortCatalog();
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -82,7 +101,8 @@ export const CatalogContent = ({ data, type }) => {
 
   useEffect(() => {
     scrollToTop('smooth');
-  }, [currentPage]);
+    // eslint-disable-next-line
+  }, [currentPage, sortBy]);
 
   return (
     <div className="catalog-content">
@@ -91,7 +111,7 @@ export const CatalogContent = ({ data, type }) => {
         searchStatus === STATUS_LOADING ? (
           <IsLoading text="Заждіть секунду..." />
         ) : (
-          currentItems?.map(
+          filteredAndSortedCatalog?.map(
             ({ article_code, photo, title, price, discount, rating }) => (
               <ProductCard
                 key={article_code}

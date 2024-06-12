@@ -31,11 +31,10 @@ export const CatalogSidebar = () => {
       {/* Ціна */}
       <div className="catalog-sidebar__section">
         <button
-          className="button button__white"
+          className="button button__white button__clear"
           onClick={() => dispatch(resetFilters())}
-          style={{ marginBottom: '1rem' }}
         >
-          Скинути фільтри
+          Очистити фільтри
         </button>
         <div className="catalog-sidebar__heading">
           <h4 className="catalog-sidebar__title">Ціна</h4>
@@ -69,7 +68,11 @@ export const CatalogSidebar = () => {
 
       {/* Кімнати */}
 
-      <div className="catalog-sidebar__section">
+      <div
+        className={`catalog-sidebar__section ${
+          rooms.length <= 1 ? 'hide' : ''
+        }`}
+      >
         <div className="catalog-sidebar__heading">
           <h4 className="catalog-sidebar__title">Кімнати</h4>
         </div>
@@ -97,7 +100,11 @@ export const CatalogSidebar = () => {
       </div>
 
       {/* Категорії */}
-      <div className="catalog-sidebar__section">
+      <div
+        className={`catalog-sidebar__section ${
+          categories.length <= 1 ? 'hide' : ''
+        }`}
+      >
         <div className="catalog-sidebar__heading">
           <h4 className="catalog-sidebar__title">Категорії</h4>
         </div>

@@ -1,15 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Breadcrumbs = ({ breadcrumbs = [] }) => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <div className="breadcrumbs">
       <Link to="/">Головна</Link>
-      {breadcrumbs.map((item) => (
-        <span key={crypto.randomUUID()}>
+      {pathname.includes('search') ? (
+        <span>
           <span className="breadcrumbs-devider">/</span>
-          <span>{item}</span>
+          <span>Пошук</span>
         </span>
-      ))}
+      ) : (
+        breadcrumbs.map((item) => (
+          <span key={crypto.randomUUID()}>
+            <span className="breadcrumbs-devider">/</span>
+            <span>{item}</span>
+          </span>
+        ))
+      )}
     </div>
   );
 };
