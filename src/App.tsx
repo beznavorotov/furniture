@@ -17,7 +17,7 @@ import { LogIn } from '@/components/LogIn/LogIn';
 import { SignUp } from '@/components/SignUp/SignUp';
 import { Reset } from '@/components/Reset/Reset';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
-import scrollToTop from './utils/scrollToTop';
+import scrollToTop from '@/utils/scrollToTop';
 
 function Layout() {
   return (

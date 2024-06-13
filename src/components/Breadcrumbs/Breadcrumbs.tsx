@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Breadcrumbs = ({ breadcrumbs = [] }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <div className="breadcrumbs">
       <Link to="/">Головна</Link>
