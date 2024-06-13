@@ -1,9 +1,7 @@
-function scrollToTop(behavior) {
-  return window.scrollTo({
+export default function scrollToTop(behavior = 'smooth') {
+  window.scrollTo({
     top: 0,
     left: 0,
     behavior: behavior,
   });
 }
-
-export default scrollToTop;
