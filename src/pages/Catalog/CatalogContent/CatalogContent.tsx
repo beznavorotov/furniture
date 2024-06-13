@@ -6,7 +6,7 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { resetFilters } from '@/store/slices/filterCatalogSlice';
 import { STATUS_LOADING, STATUS_SUCCEEDED } from '@/constants';
-import  scrollToTop  from '@/utils/scrollToTop';
+import scrollToTop from '@/utils/scrollToTop';
 
 export const CatalogContent = ({ data, type }) => {
   const dispatch = useDispatch();
