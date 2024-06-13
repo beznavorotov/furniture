@@ -5,7 +5,7 @@ import { RootState } from '../../../store';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import { IsLoading } from '../../../components/IsLoading/IsLoading';
 import { STATUS_LOADING, STATUS_SUCCEEDED } from '../../../constants';
-import { scrollToTop } from './../../../utils/ScrollToTop';
+import scrollToTop from './../../../utils/ScrollToTop';
 
 export const CatalogContent = ({ data, type }) => {
   const { pathname } = useLocation();
