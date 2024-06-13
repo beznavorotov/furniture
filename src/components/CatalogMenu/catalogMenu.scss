@@ -5,17 +5,26 @@
     width: 100%;
   }
 }
+.grid_home .catalog__menu {
+  @include tablet {
+    display: none;
+  }
+}
 
 .catalog__menu {
   max-height: 574px;
   transition: all 0.5s ease-out;
+  width: 300px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+
   @include tablet {
     max-height: 100%;
   }
 
   &--title {
-    font-weight: 700;
     font-size: 20px;
+    font-weight: 700;
     color: $color-blue;
     @include tablet {
       width: 100%;

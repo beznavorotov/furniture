@@ -33,19 +33,19 @@ export const Slider = () => {
         ))}
       </div>
       <div className="carousel-inner">
-        {sliderItems.map((item, index) => (
+        {sliderItems.map(({ img, text, link }, index) => (
           <div
             key={crypto.randomUUID()}
             className={`carousel-item ${index === 0 ? 'active' : ''}`}
           >
             <img
-              src={item.img}
+              src={img}
               className="img-fluid d-block w-100"
               alt="furniture"
             />
             <div className="carousel-caption">
-              <h1 className="carousel-caption__title">{item.text}</h1>
-              <Link className="button" to={item.link}>
+              <h1 className="carousel-caption__title">{text}</h1>
+              <Link className="button" to={link}>
                 Переглянути
               </Link>
             </div>

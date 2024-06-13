@@ -25,9 +25,9 @@ export const SignUp = () => {
   const handleSubmit = (event: React.FormEvent) => {
     try {
       event.preventDefault();
-
       dispatch(signup(credentials));
       navigate('/profile');
+      
       // clear state
       setFirstName('');
       setLastname('');

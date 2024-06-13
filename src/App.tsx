@@ -9,13 +9,12 @@ import { Profile } from '@/pages/Profile/Profile';
 import { Cart } from '@/pages/Cart/Cart';
 import { Product } from '@/pages/Product/Product';
 import { Catalog } from '@/pages/Catalog/Catalog';
-import { Search } from '@/pages/Search/Search';
 import { Order } from '@/pages/Order/Order';
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
-import { LogIn } from '@/components/LogIn/LogIn';
-import { SignUp } from '@/components/SignUp/SignUp';
-import { Reset } from '@/components/Reset/Reset';
+import { LogIn } from '@/pages/Authorize/LogIn/LogIn';
+import { SignUp } from '@/pages/Authorize/SignUp/SignUp';
+import { Reset } from '@/pages/Authorize/Reset/Reset';
 import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
 import scrollToTop from '@/utils/scrollToTop';
 
@@ -52,7 +51,6 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="catalog/:id" element={<Catalog />} />
         <Route path="product/:id" element={<Product />} />
-        <Route path="search" element={<Search />} />
         <Route path="order" element={<Order />} />
       </Route>
     </Routes>

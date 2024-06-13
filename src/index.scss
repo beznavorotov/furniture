@@ -13,7 +13,6 @@
 @import './components/Collection/collection';
 @import './components/Footer/footer';
 @import './components/Header/header';
-@import './components/LogIn/login';
 
 @import './components/Profile/Favorites/favorites';
 @import './components/Profile/Menu/menu';
@@ -29,27 +28,25 @@
 @import './components/UserActionsNav/userActionsNav';
 @import './components/AddToCartModalWindow/addToCartModalWindow';
 @import './components/ProductCard/productCard';
-@import './components/Sidebar/sidebar';
 @import './components/CatalogMenu/catalogMenu';
 @import './components/Sale/sale';
-@import './components/SignUp/signup';
-@import './components/Reset/reset';
 @import './components/Carousel/carousel';
 @import './components/Static/static';
 @import './components/CartShop/cartShop';
 @import './components/Shares/shares';
-@import './components/SearchPage/searchPage';
-@import './components/FormOrder/formOrder'; 
+@import './components/FormOrder/formOrder';
 @import './components/FormOrder/CartOrder/cartOrder';
 
 @import './components/DeliveryPayment/MenuDP/menuDP';
 @import './components/DeliveryPayment/Delivery/delivery';
 @import './components/DeliveryPayment/Payment/payment';
 
-
 // pages
 @import './pages/About/about';
 @import './pages/Authorize/authorize';
+@import './pages/Authorize/LogIn/login';
+@import './pages/Authorize/SignUp/signup';
+@import './pages/Authorize/Reset/reset';
 @import './pages/Contact/contact';
 @import './pages/Catalog/catalog';
 @import './pages/Cart/cart';
@@ -57,5 +54,4 @@
 @import './pages/Home/home';
 @import './pages/Product/product';
 @import './pages/Promotions/promotions';
-@import './pages/Search/search';
 @import './pages/Order/order';
