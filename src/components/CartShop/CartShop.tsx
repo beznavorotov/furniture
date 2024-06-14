@@ -32,9 +32,8 @@ const CartProducts = [
 
 export const CartShop = () => {
   const [cartProducts, setCartProducts] = useState(CartProducts);
-  const [promoCode, setPromoCode] = useState('');
+
   const [discount, setDiscount] = useState(0);
-  const [appliedPromoCode, setAppliedPromoCode] = useState('');
 
   const removeProduct = (id) => {
     setCartProducts(cartProducts.filter((product) => product.id !== id));
@@ -75,20 +74,10 @@ export const CartShop = () => {
     return cartProducts.reduce((total, product) => total + product.quantity, 0);
   };
 
-  const applyPromoCode = () => {
-    if (promoCode === 'DISCOUNT10') {
-      setDiscount(0.1 * getTotalPrice());
-      setAppliedPromoCode(promoCode);
-    } else {
-      setDiscount(0);
-      setAppliedPromoCode('');
-    }
-  };
 
   const clearCart = () => {
     setCartProducts([]);
     setDiscount(0);
-    setAppliedPromoCode('');
   };
 
   return (
@@ -155,48 +144,29 @@ export const CartShop = () => {
             ))}
           </div>
           <div className="cart_summary">
-            <h2>Сума</h2>
+            <h2 className="title">Сума</h2>
             <div className="summary_details">
               <div className="summary_item">
                 <span>Товари: </span>
                 <span>{getTotalQuantity()}</span>
               </div>
-              <div className="summary_item">
-                <span>Сума товарів:</span>
-                <span>{getTotalPrice()} грн</span>
-              </div>
-
-              <div className="summary_item">
-                <input
-                  className="discount"
-                  type="text"
-                  value={promoCode}
-                  onChange={(e) => setPromoCode(e.target.value)}
-                  disabled={!!appliedPromoCode}
-                  placeholder="DISCOUNT10"
-                />
-                <button
-                  className="button button__white"
-                  onClick={applyPromoCode}
-                  disabled={!!appliedPromoCode}
-                >
-                  Застосувати
-                </button>
-              </div>
-              {appliedPromoCode && (
-                <div className="summary_item">
-                  <span>Знижка:</span>
-                  <span>-{discount} грн</span>
-                </div>
-              )}
               <div className="summary_item total">
                 <span>Всього:</span>
                 <span>{getTotalPrice() - discount} грн</span>
               </div>
             </div>
-            <button className="button button__order">
-              Оформити замовлення
-            </button>
+            <div className="d-flex justify-content-center align-items-center align-self-center flex-column ">
+              <Link to="/">
+                <button className="button button__white ">
+                  Продовжити покупки
+                </button>
+              </Link>
+              <Link to="/order">
+              <button className="button button__order ">
+                Оформити замовлення
+              </button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
