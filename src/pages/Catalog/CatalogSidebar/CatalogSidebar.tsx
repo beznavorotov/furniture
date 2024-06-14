@@ -1,27 +1,48 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
-import { toggleFilter, resetFilters } from '@/store/slices/filterCatalogSlice';
+import {
+  toggleFilter,
+  resetFilters,
+  selectCategories,
+  selectRooms,
+  selectManufacturers,
+  selectCollections,
+  selectColour,
+  selectAvaliability,
+  // selectLength,
+  // selectWidth,
+  // selectHeight,
+  // selectPrice,
+} from '@/store/slices/filterCatalogSlice';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 
 export const CatalogSidebar = () => {
   const dispatch = useDispatch();
 
-  const categories = useSelector(
-    (state: RootState) => state.catalog.uniqueValues.categories,
+  const uniqueValues = useSelector(
+    (state: RootState) => state.catalog.uniqueValues,
   );
-  const rooms = useSelector(
-    (state: RootState) => state.catalog.uniqueValues.rooms,
-  );
-  const manufacturers = useSelector(
-    (state: RootState) => state.catalog.uniqueValues.manufacturers,
-  );
-  const collections = useSelector(
-    (state: RootState) => state.catalog.uniqueValues.collections,
-  );
-  const colour = useSelector(
-    (state: RootState) => state.catalog.uniqueValues.colour,
-  );
+  const categories = uniqueValues.categories;
+  const rooms = uniqueValues.rooms;
+  const manufacturers = uniqueValues.manufacturers;
+  const collections = uniqueValues.collections;
+  const colour = uniqueValues.colour;
+  const avaliability = uniqueValues.avaliability;
+  // const length = uniqueValues.length;
+  // const width = uniqueValues.width;
+  // const height = uniqueValues.height;
+  // const price = uniqueValues.price;
 
+  const selectCategory: string[] = useSelector(selectCategories);
+  const selectRoom: string[] = useSelector(selectRooms);
+  const selectManufacturer: string[] = useSelector(selectManufacturers);
+  const selectCollection: string[] = useSelector(selectCollections);
+  const selectColor: string[] = useSelector(selectColour);
+  const selectProdAvaliability: boolean[] = useSelector(selectAvaliability);
+  // const selectProdLength: number[] = useSelector(selectLength);
+  // const selectProdWidth: number[] = useSelector(selectWidth);
+  // const selectProdHeight: number[] = useSelector(selectHeight);
+  // const selectProdPrice: number[] = useSelector(selectPrice);
   const handleChange = (category, value) => {
     dispatch(toggleFilter({ category, value }));
   };
@@ -87,8 +108,9 @@ export const CatalogSidebar = () => {
                     type="checkbox"
                     name="rooms"
                     value={item}
+                    checked={selectRoom.includes(item)}
                     onChange={(e) => {
-                      handleChange(e.target.name, e.target.value);
+                      handleChange(e.target.name, !e.target.value);
                     }}
                   />
                   {item}
@@ -119,6 +141,7 @@ export const CatalogSidebar = () => {
                     type="checkbox"
                     name="categories"
                     value={item}
+                    checked={selectCategory.includes(item)}
                     onChange={(e) => {
                       handleChange(e.target.name, e.target.value);
                     }}
@@ -147,6 +170,7 @@ export const CatalogSidebar = () => {
                     type="checkbox"
                     name="collections"
                     value={item}
+                    checked={selectCollection.includes(item)}
                     onChange={(e) => {
                       handleChange(e.target.name, e.target.value);
                     }}
@@ -175,6 +199,7 @@ export const CatalogSidebar = () => {
                     type="checkbox"
                     name="manufacturers"
                     value={item}
+                    checked={selectManufacturer.includes(item)}
                     onChange={(e) => {
                       handleChange(e.target.name, e.target.value);
                     }}
@@ -203,6 +228,7 @@ export const CatalogSidebar = () => {
                     type="checkbox"
                     name="colour"
                     value={item}
+                    checked={selectColor.includes(item)}
                     onChange={(e) => {
                       handleChange(e.target.name, e.target.value);
                     }}
@@ -222,13 +248,24 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-            <label>
-              <input type="checkbox" name="availability" />В наявності
-            </label>
-            <label>
-              <input type="checkbox" name="availability" />
-              Відсутні
-            </label>
+            {!avaliability ? (
+              <IsLoading text="..." />
+            ) : (
+              avaliability.map((item) => (
+                <label key={crypto.randomUUID()}>
+                  <input
+                    type="checkbox"
+                    name="avaliability"
+                    value={item.toString()}
+                    checked={selectProdAvaliability.includes(item)}
+                    onChange={(e) => {
+                      handleChange(e.target.name, e.target.value === 'true');
+                    }}
+                  />
+                  {item ? 'В наявності' : 'Відсутні'}
+                </label>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -330,7 +367,7 @@ export const CatalogSidebar = () => {
       </div>
 
       {/* Захист від кігтів */}
-      <div className="catalog-sidebar__section">
+      {/* <div className="catalog-sidebar__section">
         <div className="catalog-sidebar__heading">
           <h4 className="catalog-sidebar__title">Захист від кігтів</h4>
         </div>
@@ -342,7 +379,7 @@ export const CatalogSidebar = () => {
             </label>
           </div>
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 };

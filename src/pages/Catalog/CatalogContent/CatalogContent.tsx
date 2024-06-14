@@ -15,18 +15,18 @@ export const CatalogContent = ({ data, type }) => {
   const categoryStatus = useSelector(
     (state: RootState) => state.catalog.status,
   );
-  const categoriesFilters = useSelector(
-    (state: RootState) => state.filter.categories,
-  );
-  const roomsFilters = useSelector((state: RootState) => state.filter.rooms);
-  const manufacturersFilters = useSelector(
-    (state: RootState) => state.filter.manufacturers,
-  );
-  const collectionsFilters = useSelector(
-    (state: RootState) => state.filter.collections,
-  );
-  const colourFilters = useSelector((state: RootState) => state.filter.colour);
-  const sortBy = useSelector((state: RootState) => state.filter.sortBy);
+  const filter = useSelector((state: RootState) => state.filter);
+  const categoriesFilters = filter.categories;
+  const roomsFilters = filter.rooms;
+  const manufacturersFilters = filter.manufacturers;
+  const collectionsFilters = filter.collections;
+  const colourFilters = filter.colour;
+  const lengthFilters = filter.length;
+  const widthFilters = filter.width;
+  const heightFilters = filter.height;
+  const avaliabilityFilters = filter.avaliability;
+  const priceFilters = filter.price;
+  const sortBy = filter.sortBy;
 
   const searchStatus = useSelector((state: RootState) => state.search.status);
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,13 +45,29 @@ export const CatalogContent = ({ data, type }) => {
       collectionsFilters.includes(item.collection);
     const colourMatch =
       colourFilters.lenght === 0 || colourFilters.includes(item.colour);
+    const lengthMatch =
+      lengthFilters.lenght === 0 || lengthFilters.includes(item.length);
+    const widthMatch =
+      widthFilters.lenght === 0 || widthFilters.includes(item.width);
+    const heightMatch =
+      heightFilters.lenght === 0 || heightFilters.includes(item.height);
+    const avaliabilityMatch =
+      avaliabilityFilters.lenght === 0 ||
+      avaliabilityFilters.includes(item.avaliability);
+    const priceMatch =
+      priceFilters.lenght === 0 || priceFilters.includes(item.price);
 
     return (
       categoriesMatch ||
       roomsMatch ||
       manufacturersMatch ||
       collectionsMatch ||
-      colourMatch
+      colourMatch ||
+      lengthMatch ||
+      widthMatch ||
+      heightMatch ||
+      avaliabilityMatch ||
+      priceMatch
     );
   });
 

@@ -1,18 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { STATUS_IDLE } from '@/constants';
 
+const initialState = {
+  categories: [],
+  rooms: [],
+  manufacturers: [],
+  collections: [],
+  colour: [],
+  length: [],
+  width: [],
+  height: [],
+  avaliability: [],
+  price: [],
+  sortBy: 'rating',
+  status: STATUS_IDLE,
+  error: null,
+};
+
 const filterCatalogSlice = createSlice({
   name: 'filter',
-  initialState: {
-    categories: [],
-    rooms: [],
-    manufacturers: [],
-    collections: [],
-    colour: [],
-    sortBy: 'rating',
-    status: STATUS_IDLE,
-    error: null,
-  },
+  initialState,
   reducers: {
     toggleFilter: (state, action) => {
       const { category, value } = action.payload;
@@ -40,8 +47,34 @@ const filterCatalogSlice = createSlice({
       state.sortBy = action.payload;
     },
   },
+  selectors: {
+    selectCategories: (state) => state.categories,
+    selectRooms: (state) => state.rooms,
+    selectManufacturers: (state) => state.manufacturers,
+    selectCollections: (state) => state.collections,
+    selectColour: (state) => state.colour,
+    selectAvaliability: (state) => state.avaliability,
+    selectLength: (state) => state.length,
+    selectWidth: (state) => state.width,
+    selectHeight: (state) => state.height,
+    selectPrice: (state) => state.price,
+  },
 });
 
 export const { toggleFilter, resetFilters, setSortBy } =
   filterCatalogSlice.actions;
+
+export const {
+  selectCategories,
+  selectRooms,
+  selectManufacturers,
+  selectCollections,
+  selectColour,
+  selectAvaliability,
+  selectLength,
+  selectWidth,
+  selectHeight,
+  selectPrice,
+} = filterCatalogSlice.selectors;
+
 export default filterCatalogSlice.reducer;

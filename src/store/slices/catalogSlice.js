@@ -75,6 +75,11 @@ const catalogSlice = createSlice({
       manufacturers: [],
       collections: [],
       colour: [],
+      length: [],
+      width: [],
+      height: [],
+      avaliability: [],
+      price: [],
     },
     status: STATUS_IDLE,
     error: null,
@@ -114,6 +119,24 @@ const catalogSlice = createSlice({
     },
     getUniqueColors: (state, action) => {
       state.uniqueValues.colour = getUniqueValues(action.payload, 'colour');
+    },
+    getUniqueLength: (state, action) => {
+      state.uniqueValues.length = getUniqueValues(action.payload, 'length');
+    },
+    getUniqueWidth: (state, action) => {
+      state.uniqueValues.width = getUniqueValues(action.payload, 'width');
+    },
+    getUniqueHeight: (state, action) => {
+      state.uniqueValues.height = getUniqueValues(action.payload, 'height');
+    },
+    getUniquePrice: (state, action) => {
+      state.uniqueValues.price = getUniqueValues(action.payload, 'discount');
+    },
+    getUniqueAvaliability: (state, action) => {
+      state.uniqueValues.avaliability = getUniqueValues(
+        action.payload,
+        'avaliability',
+      );
     },
   },
   extraReducers: (builder) => {
@@ -183,5 +206,10 @@ export const {
   getUniqueManufacturers,
   getUniqueCollections,
   getUniqueColors,
+  getUniqueLength,
+  getUniqueWidth,
+  getUniqueHeight,
+  getUniqueAvaliability,
+  getUniquePrice,
 } = catalogSlice.actions;
 export default catalogSlice.reducer;

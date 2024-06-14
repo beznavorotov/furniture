@@ -12,6 +12,11 @@ import {
   getUniqueManufacturers,
   getUniqueCollections,
   getUniqueColors,
+  getUniqueLength,
+  getUniqueWidth,
+  getUniqueHeight,
+  getUniqueAvaliability,
+  getUniquePrice,
 } from '@/store/slices/catalogSlice';
 
 export const Catalog = () => {
@@ -42,6 +47,11 @@ export const Catalog = () => {
     dispatch(getUniqueManufacturers(properState));
     dispatch(getUniqueCollections(properState));
     dispatch(getUniqueColors(properState));
+    dispatch(getUniqueLength(properState));
+    dispatch(getUniqueWidth(properState));
+    dispatch(getUniqueHeight(properState));
+    dispatch(getUniqueAvaliability(properState));
+    dispatch(getUniquePrice(properState));
   }, [properState, dispatch]);
 
   return (
