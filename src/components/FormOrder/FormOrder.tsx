@@ -1,66 +1,27 @@
-import { useState } from 'react';
 import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
-
+import { useForm } from 'react-hook-form';
 
 export const FormOrder = () => {
+  const { regions, cities, departments, setSelectedRegion, setSelectedCity } =
+    useNovaPoshtaApi();
+
   const {
-    regions,
-    cities,
-    departments,
-   
-    setSelectedRegion,
-    setSelectedCity,
-  } = useNovaPoshtaApi();
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const [selectedRegion, selectRegion] = useState('');
-  const [selectedCity, selectCity] = useState('');
-  const [selectedDepartment, selectDepartment] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [comment, setComment] = useState('');
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [noCall, setNoCall] = useState(false);
-
-  const handleRegionChange = (e) => {
-    const regionRef = e.target.value;
-    selectRegion(regionRef);
-    setSelectedRegion(regionRef);
-    selectCity('');
-    setSelectedCity(null);
-    selectDepartment('');
-  };
-
-  const handleCityChange = (e) => {
-    const cityRef = e.target.value;
-    selectCity(cityRef);
-    setSelectedCity(cityRef);
-    selectDepartment('');
-  };
-
-  const handleDepartmentChange = (e) => {
-    selectDepartment(e.target.value);
-  };
-
-  const handleOrderSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     const orderData = {
-      firstName,
-      lastName,
-      phone,
-      email,
-      region: regions.find((r) => r.Ref === selectedRegion)?.Description || '',
-      city: cities.find((c) => c.Ref === selectedCity)?.Description || '',
+      ...data,
+      region:
+        regions.find((r) => r.Ref === data.selectedRegion)?.Description || '',
+      city: cities.find((c) => c.Ref === data.selectedCity)?.Description || '',
       department:
-        departments.find((d) => d.Description === selectedDepartment)
+        departments.find((d) => d.Description === data.selectedDepartment)
           ?.Description || '',
-      paymentMethod,
-      comment,
-      termsAccepted,
-      noCall,
     };
 
     try {
@@ -76,217 +37,245 @@ export const FormOrder = () => {
       }
       const responseData = await response.json();
       console.log('Order submitted successfully:', responseData);
-      resetForm();
+      reset();
     } catch (error) {
       console.error('Error submitting order:', error);
     }
   };
 
-  const resetForm = () => {
-    setFirstName('');
-    setLastName('');
-    setPhone('');
-    setEmail('');
-    selectRegion('');
-    selectCity('');
-    selectDepartment('');
-    setPaymentMethod('');
-    setComment('');
-    setTermsAccepted(false);
-    setNoCall(false);
+  const handleRegionChange = (e) => {
+    const regionRef = e.target.value;
+    setSelectedRegion(regionRef);
+    setSelectedCity(null);
+  };
+
+  const handleCityChange = (e) => {
+    const cityRef = e.target.value;
+    setSelectedCity(cityRef);
   };
 
   return (
     <>
       <div className="title">
-        <h1>Замовлення</h1>
+        <h1 className="title_ordet_text">Замовлення</h1>
       </div>
       <div className="order_page d-flex">
         <div className="form_order">
-          <form onSubmit={handleOrderSubmit}>
-            <div className="form_data">
-              <div className="form_section">
-                <div className="title_border">
-                  <span className="form_section_title">01 Контактні дані</span>
-                </div>
-                <div className="form_group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder="Ім'я"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                  <input
-                    className="input"
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="Прізвище"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form_group">
-                  <input
-                    className="input"
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    placeholder="+380"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                  />
-                  <input
-                    className="input"
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form_section">
+              <div className="title_border">
+                <span className="form_section_title">01 Контактні дані</span>
               </div>
-              <div className="form_section">
-                <div className="title_border">
-                  <span className="form_section_title">02 Доставка</span>
-                </div>
-                <div className="form_group">
-                  <select
-                    className="input_np"
-                    value={selectedRegion}
-                    onChange={handleRegionChange}
-                  >
-                    <option value="" disabled>
-                      Оберіть область
-                    </option>
-                    {regions.map((region) => (
-                      <option key={region.Ref} value={region.Ref}>
-                        {region.Description}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form_group">
-                  <select
-                    className="input_np"
-                    value={selectedCity}
-                    onChange={handleCityChange}
-                    disabled={!selectedRegion}
-                  >
-                    <option value="" disabled>
-                      Оберіть місто
-                    </option>
-                    {cities.map((city) => (
-                      <option key={city.Ref} value={city.Ref}>
-                        {city.Description}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form_group">
-                  <select
-                    className="input_np"
-                    value={selectedDepartment}
-                    onChange={handleDepartmentChange}
-                    disabled={!selectedCity}
-                  >
-                    <option value="" disabled>
-                      Оберіть відділення
-                    </option>
-                    {departments.map((department) => (
-                      <option key={department.Ref} value={department.Description}>
-                        {department.Description}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="form_group">
+                <input
+                  className="input"
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="Ім'я"
+                  {...register('firstName', {
+                    required: 'Це поле є обов`язковим',
+                  })}
+                />
+                {errors.firstName && <span>{errors.firstName.message}</span>}
+
+                <input
+                  className="input"
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Прізвище"
+                  {...register('lastName', {
+                    required: 'Це поле є обов`язковим',
+                  })}
+                />
+                {errors.lastName && <span>{errors.lastName.message}</span>}
               </div>
-              <div className="form_section">
-                <div className="title_border">
-                  <span className="form_section_title">03 Оплата</span>
-                </div>
-                <div className="form_group_payment">
-                  <label className="input_payment">
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="gpay"
-                      checked={paymentMethod === 'gpay'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      required
-                    />{' '}
-                    Оплата картами Visa/Mastercard на сайті
-                  </label>
-                  <label className="input_payment">
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="paypal"
-                      checked={paymentMethod === 'paypal'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      required
-                    />{' '}
-                    PayPal
-                  </label>
-                  <label className="input_payment">
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="np"
-                      checked={paymentMethod === 'np'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      required
-                    />{' '}
-                    Під час отримання на НП
-                  </label>
-                </div>
-              </div>
-              <div className="form_section">
-                <div className="form_group">
-                  <textarea
-                    className="input_comment"
-                    name="comment"
-                    placeholder="Ваш коментар"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                  ></textarea>
-                </div>
-                <div className="form_group row">
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      checked={termsAccepted}
-                      onChange={(e) => setTermsAccepted(e.target.checked)}
-                      required
-                    />{' '}
-                    Я приймаю умови обслуговування
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="noCall"
-                      checked={noCall}
-                      onChange={(e) => setNoCall(e.target.checked)}
-                    />{' '}
-                    Не передзвонюйте мені, я впевнений у замовленні.
-                  </label>
-                </div>
-              </div>
-              <div className="form_section">
-                <button type="submit" className="button">
-                  Відправити замовлення
-                </button>
+              <div className="form_group">
+                <input
+                  className="input"
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  placeholder="+380"
+                  {...register('phone', {
+                    required: 'Це поле є обов`язковим',
+                    pattern: {
+                      value: /^\+380\d{9}$/,
+                      message: 'Введіть правильний номер телефону',
+                    },
+                  })}
+                />
+                {errors.phone && <span>{errors.phone.message}</span>}
+
+                <input
+                  className="input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  {...register('email', {
+                    required: "Це поле є обов'язковим",
+                    pattern: {
+                      value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                      message: 'Введіть правильний email',
+                    },
+                  })}
+                />
+                {errors.email && <span>{errors.email.message}</span>}
               </div>
             </div>
+
+            <div className="form_section">
+              <div className="title_border">
+                <span className="form_section_title">02 Доставка</span>
+              </div>
+              <div className="form_group">
+                <select
+                  className="input"
+                  name="selectedRegion"
+                  {...register('selectedRegion', {
+                    required: 'Оберіть регіон',
+                  })}
+                  onChange={handleRegionChange}
+                >
+                  <option value="">Оберіть регіон</option>
+                  {regions.map((region) => (
+                    <option key={region.Ref} value={region.Ref}>
+                      {region.Description}
+                    </option>
+                  ))}
+                </select>
+                {errors.selectedRegion && (
+                  <span>{errors.selectedRegion.message}</span>
+                )}
+
+                <select
+                  className="input"
+                  name="selectedCity"
+                  {...register('selectedCity', { required: 'Оберіть місто' })}
+                  onChange={handleCityChange}
+                >
+                  <option value="">Оберіть місто</option>
+                  {cities.map((city) => (
+                    <option key={city.Ref} value={city.Ref}>
+                      {city.Description}
+                    </option>
+                  ))}
+                </select>
+                {errors.selectedCity && (
+                  <span>{errors.selectedCity.message}</span>
+                )}
+
+                <select
+                  className="input"
+                  name="selectedDepartment"
+                  {...register('selectedDepartment', {
+                    required: 'Оберіть відділення',
+                  })}
+                >
+                  <option value="">Оберіть відділення</option>
+                  {departments.map((department) => (
+                    <option
+                      key={department.Description}
+                      value={department.Description}
+                    >
+                      {department.Description}
+                    </option>
+                  ))}
+                </select>
+                {errors.selectedDepartment && (
+                  <span>{errors.selectedDepartment.message}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="form_section">
+              <div className="title_border">
+                <span className="form_section_title">03 Оплата</span>
+              </div>
+              <div className="form_group_payment">
+                <label className="input_payment">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="cash"
+                    {...register('paymentMethod', {
+                      required: 'Оберіть метод оплати',
+                    })}
+                  />
+                  Оплата картами Visa/Mastercard на сайті
+                </label>
+                {errors.paymentMethod && (
+                  <span>{errors.paymentMethod.message}</span>
+                )}
+                <label className="input_payment">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="cash"
+                    {...register('paymentMethod', {
+                      required: 'Оберіть метод оплати',
+                    })}
+                  />
+                  PayPal
+                </label>
+                {errors.paymentMethod && (
+                  <span>{errors.paymentMethod.message}</span>
+                )}
+                <label className="input_payment">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="card"
+                    {...register('paymentMethod', {
+                      required: 'Оберіть метод оплати',
+                    })}
+                  />
+                  Оплата під час отримання
+                </label>
+                {errors.paymentMethod && (
+                  <span>{errors.paymentMethod.message}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="form_section">
+              <div className="form_group">
+                <textarea
+                  className="input_comment"
+                  name="comment"
+                  placeholder="Коментар"
+                  {...register('comment')}
+                />
+              </div>
+              <div className="form_group_payment">
+                <label className="input_payment">
+                  <input
+                    type="checkbox"
+                    name="termsAccepted"
+                    {...register('termsAccepted', {
+                      required: 'Погодьтесь з умовами',
+                    })}
+                  />
+                  Я приймаю умови обслуговування
+                </label>
+                {errors.termsAccepted && (
+                  <span>{errors.termsAccepted.message}</span>
+                )}
+
+                <label className="input_payment">
+                  <input
+                    type="checkbox"
+                    name="noCall"
+                    {...register('noCall')}
+                  />
+                  Не передзвонюйте мені, я впевнений у замовленні.
+                </label>
+              </div>
+            </div>
+
+            <button type="button button__order">Відправити замовлення</button>
           </form>
         </div>
         <div className="basket">
