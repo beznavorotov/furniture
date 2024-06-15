@@ -78,7 +78,7 @@ const catalogSlice = createSlice({
       length: [],
       width: [],
       height: [],
-      avaliability: [],
+      availability: [],
       price: [],
     },
     status: STATUS_IDLE,
@@ -132,10 +132,10 @@ const catalogSlice = createSlice({
     getUniquePrice: (state, action) => {
       state.uniqueValues.price = getUniqueValues(action.payload, 'discount');
     },
-    getUniqueAvaliability: (state, action) => {
-      state.uniqueValues.avaliability = getUniqueValues(
+    getUniqueAvailability: (state, action) => {
+      state.uniqueValues.availability = getUniqueValues(
         action.payload,
-        'avaliability',
+        'availability',
       );
     },
   },
@@ -209,7 +209,7 @@ export const {
   getUniqueLength,
   getUniqueWidth,
   getUniqueHeight,
-  getUniqueAvaliability,
+  getUniqueAvailability,
   getUniquePrice,
 } = catalogSlice.actions;
 export default catalogSlice.reducer;

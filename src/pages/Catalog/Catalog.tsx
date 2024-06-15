@@ -15,7 +15,7 @@ import {
   getUniqueLength,
   getUniqueWidth,
   getUniqueHeight,
-  getUniqueAvaliability,
+  getUniqueAvailability,
   getUniquePrice,
 } from '@/store/slices/catalogSlice';
 
@@ -50,7 +50,7 @@ export const Catalog = () => {
     dispatch(getUniqueLength(properState));
     dispatch(getUniqueWidth(properState));
     dispatch(getUniqueHeight(properState));
-    dispatch(getUniqueAvaliability(properState));
+    dispatch(getUniqueAvailability(properState));
     dispatch(getUniquePrice(properState));
   }, [properState, dispatch]);
 

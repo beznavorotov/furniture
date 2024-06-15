@@ -24,7 +24,7 @@ export const CatalogContent = ({ data, type }) => {
   const lengthFilters = filter.length;
   const widthFilters = filter.width;
   const heightFilters = filter.height;
-  const avaliabilityFilters = filter.avaliability;
+  const availabilityFilters = filter.availability;
   const priceFilters = filter.price;
   const sortBy = filter.sortBy;
 
@@ -51,9 +51,9 @@ export const CatalogContent = ({ data, type }) => {
       widthFilters.lenght === 0 || widthFilters.includes(item.width);
     const heightMatch =
       heightFilters.lenght === 0 || heightFilters.includes(item.height);
-    const avaliabilityMatch =
-      avaliabilityFilters.lenght === 0 ||
-      avaliabilityFilters.includes(item.avaliability);
+    const availabilityMatch =
+      availabilityFilters.lenght === 0 ||
+      availabilityFilters.includes(item.availability);
     const priceMatch =
       priceFilters.lenght === 0 || priceFilters.includes(item.price);
 
@@ -66,7 +66,7 @@ export const CatalogContent = ({ data, type }) => {
       lengthMatch ||
       widthMatch ||
       heightMatch ||
-      avaliabilityMatch ||
+      availabilityMatch ||
       priceMatch
     );
   });

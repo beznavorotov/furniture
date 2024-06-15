@@ -8,7 +8,7 @@ import {
   selectManufacturers,
   selectCollections,
   selectColour,
-  selectAvaliability,
+  selectAvailability,
   // selectLength,
   // selectWidth,
   // selectHeight,
@@ -27,7 +27,7 @@ export const CatalogSidebar = () => {
   const manufacturers = uniqueValues.manufacturers;
   const collections = uniqueValues.collections;
   const colour = uniqueValues.colour;
-  const avaliability = uniqueValues.avaliability;
+  const availability = uniqueValues.availability;
   // const length = uniqueValues.length;
   // const width = uniqueValues.width;
   // const height = uniqueValues.height;
@@ -38,7 +38,7 @@ export const CatalogSidebar = () => {
   const selectManufacturer: string[] = useSelector(selectManufacturers);
   const selectCollection: string[] = useSelector(selectCollections);
   const selectColor: string[] = useSelector(selectColour);
-  const selectProdAvaliability: boolean[] = useSelector(selectAvaliability);
+  const selectProdAvailability: boolean[] = useSelector(selectAvailability);
   // const selectProdLength: number[] = useSelector(selectLength);
   // const selectProdWidth: number[] = useSelector(selectWidth);
   // const selectProdHeight: number[] = useSelector(selectHeight);
@@ -248,16 +248,16 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__check-list">
-            {!avaliability ? (
+            {!availability ? (
               <IsLoading text="..." />
             ) : (
-              avaliability.map((item) => (
+              availability.map((item) => (
                 <label key={crypto.randomUUID()}>
                   <input
                     type="checkbox"
-                    name="avaliability"
+                    name="availability"
                     value={item.toString()}
-                    checked={selectProdAvaliability.includes(item)}
+                    checked={selectProdAvailability.includes(item)}
                     onChange={(e) => {
                       handleChange(e.target.name, e.target.value === 'true');
                     }}
