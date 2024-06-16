@@ -12,9 +12,7 @@ export const CatalogContent = ({ data, type }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ITEMS_PER_PAGE = 25;
-  const categoryStatus = useSelector(
-    (state: RootState) => state.catalog.status,
-  );
+  const catelogStatus = useSelector((state: RootState) => state.catalog.status);
   const filter = useSelector((state: RootState) => state.filter);
   const categoriesFilters = filter.categories;
   const roomsFilters = filter.rooms;
@@ -31,7 +29,7 @@ export const CatalogContent = ({ data, type }) => {
   const searchStatus = useSelector((state: RootState) => state.search.status);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredCatalog = data.filter((item) => {
+  const filteredCatalog = data?.filter((item) => {
     const categoriesMatch =
       categoriesFilters.lenght === 0 ||
       categoriesFilters.includes(item.item_category);
@@ -123,8 +121,7 @@ export const CatalogContent = ({ data, type }) => {
   return (
     <div className="catalog-content">
       <div className="catalog-content__wrapper">
-        {categoryStatus === STATUS_LOADING ||
-        searchStatus === STATUS_LOADING ? (
+        {catelogStatus === STATUS_LOADING || searchStatus === STATUS_LOADING ? (
           <IsLoading text="Заждіть секунду..." />
         ) : (
           filteredAndSortedCatalog?.map(
@@ -147,7 +144,7 @@ export const CatalogContent = ({ data, type }) => {
 
       <div
         className={`pagination ${
-          categoryStatus === STATUS_SUCCEEDED ||
+          catelogStatus === STATUS_SUCCEEDED ||
           searchStatus === STATUS_SUCCEEDED
             ? 'show'
             : ''

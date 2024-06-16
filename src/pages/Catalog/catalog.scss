@@ -108,10 +108,10 @@
     gap: 10px;
     input[type='range'] {
       width: 100%;
-      margin-bottom: 20px;
     }
 
     .filter__input-wrapper {
+      margin-top: 20px;
       @include flex(space-between);
     }
 
@@ -157,4 +157,39 @@
       height: 20px;
     }
   }
+}
+
+// mutli range slider styles
+.multi-range-slider {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.multi-range-slider .thumb {
+  background-color: $color-blue;
+}
+.multi-range-slider .thumb::before {
+  border: none;
+  box-shadow: none;
+}
+
+.multi-range-slider .bar-inner {
+  background-color: $color-blue;
+  border: none;
+  box-shadow: none;
+}
+
+.multi-range-slider .caption {
+  display: none !important;
+}
+
+.multi-range-slider .bar-left {
+  padding: 2px 0px;
+}
+.multi-range-slider .bar-left,
+.multi-range-slider .bar-right {
+  background-color: $color-grey-light;
+  box-shadow: none;
 }

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import MultiRangeSlider from 'multi-range-slider-react';
 import { RootState } from '@/store';
 import {
   toggleFilter,
@@ -62,12 +63,14 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__input-range">
-            <input
-              type="range"
-              name="priceRange"
-              id="price"
-              min="0"
-              max="100000"
+            <MultiRangeSlider
+              min={0}
+              minValue={2500}
+              maxValue={7500}
+              max={10000}
+              step={5}
+              ruler={false}
+              label={false}
             />
             <div className="filter__input-wrapper">
               <input
@@ -110,7 +113,7 @@ export const CatalogSidebar = () => {
                     value={item}
                     checked={selectRoom.includes(item)}
                     onChange={(e) => {
-                      handleChange(e.target.name, !e.target.value);
+                      handleChange(e.target.name, e.target.value);
                     }}
                   />
                   {item}
@@ -277,12 +280,14 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__input-range">
-            <input
-              type="range"
-              name="priceRange"
-              id="price"
-              min="0"
-              max="100000"
+            <MultiRangeSlider
+              min={0}
+              minValue={2500}
+              maxValue={7500}
+              max={10000}
+              step={5}
+              ruler={false}
+              label={false}
             />
             <div className="filter__input-wrapper">
               <input
@@ -309,12 +314,14 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__input-range">
-            <input
-              type="range"
-              name="priceRange"
-              id="price"
-              min="0"
-              max="100000"
+            <MultiRangeSlider
+              min={0}
+              minValue={2500}
+              maxValue={7500}
+              max={10000}
+              step={5}
+              ruler={false}
+              label={false}
             />
             <div className="filter__input-wrapper">
               <input
@@ -341,12 +348,14 @@ export const CatalogSidebar = () => {
         </div>
         <div className="catalog-sidebar__content">
           <div className="filter filter__input-range">
-            <input
-              type="range"
-              name="priceRange"
-              id="price"
-              min="0"
-              max="100000"
+            <MultiRangeSlider
+              min={0}
+              minValue={2500}
+              maxValue={7500}
+              max={10000}
+              step={5}
+              ruler={false}
+              label={false}
             />
             <div className="filter__input-wrapper">
               <input
