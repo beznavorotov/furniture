@@ -11,9 +11,6 @@ import {
   selectCollections,
   selectColour,
   selectAvailability,
-  // selectLength,
-  // selectWidth,
-  // selectHeight,
 } from '@/store/slices/filterCatalogSlice';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { useState } from 'react';
@@ -60,28 +57,17 @@ export const CatalogSidebar = () => {
   ) => {
     e.preventDefault();
 
-    if (type === 'price') {
-      const value = price.filter((item) => {
-        return item >= data[0] && item <= data[1];
-      });
-      dispatch(setInputRangeData({ type, value }));
-    }
-    if (type === 'length') {
-      const value = lengthData.filter((item) => {
-        return item >= data[0] && item <= data[1];
-      });
-      dispatch(setInputRangeData({ type, value }));
-    }
-    if (type === 'width') {
-      const value = widthData.filter((item) => {
-        return item >= data[0] && item <= data[1];
-      });
-      dispatch(setInputRangeData({ type, value }));
-    }
-    if (type === 'height') {
-      const value = heightData.filter((item) => {
-        return item >= data[0] && item <= data[1];
-      });
+    const dataMap: { [key: string]: number[] } = {
+      price: price,
+      length: lengthData,
+      width: widthData,
+      height: heightData,
+    };
+
+    if (dataMap[type]) {
+      const value = dataMap[type].filter(
+        (item) => item >= data[0] && item <= data[1],
+      );
       dispatch(setInputRangeData({ type, value }));
     }
   };
