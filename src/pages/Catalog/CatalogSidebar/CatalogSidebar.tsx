@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import MultiRangeSlider from 'multi-range-slider-react';
+import MultiRangeSlider, { ChangeResult } from 'multi-range-slider-react';
 import { RootState } from '@/store';
 import {
   toggleFilter,
@@ -16,6 +16,7 @@ import {
   // selectPrice,
 } from '@/store/slices/filterCatalogSlice';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
+import { useState } from 'react';
 
 export const CatalogSidebar = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,9 @@ export const CatalogSidebar = () => {
   // const width = uniqueValues.width;
   // const height = uniqueValues.height;
   // const price = uniqueValues.price;
-
+  const [minValue, setMinValue] = useState(2500);
+  const [maxValue, setMaxValue] = useState(7500);
+  console.log('min: ', minValue, 'max: ', maxValue);
   const selectCategory: string[] = useSelector(selectCategories);
   const selectRoom: string[] = useSelector(selectRooms);
   const selectManufacturer: string[] = useSelector(selectManufacturers);
@@ -65,12 +68,16 @@ export const CatalogSidebar = () => {
           <div className="filter filter__input-range">
             <MultiRangeSlider
               min={0}
-              minValue={2500}
-              maxValue={7500}
+              minValue={minValue}
+              maxValue={maxValue}
               max={10000}
               step={5}
               ruler={false}
               label={false}
+              onChange={(e: ChangeResult) => {
+                setMinValue(e.minValue);
+                setMaxValue(e.maxValue);
+              }}
             />
             <div className="filter__input-wrapper">
               <input
@@ -78,12 +85,14 @@ export const CatalogSidebar = () => {
                 name="minPrice"
                 id="minPrice"
                 placeholder="0"
+                value={minValue}
               />
               <input
                 type="number"
                 name="maxPrice"
                 id="maxPrice"
                 placeholder="100000"
+                value={maxValue}
               />
             </div>
           </div>
