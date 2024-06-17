@@ -275,7 +275,9 @@ export const FormOrder = () => {
               </div>
             </div>
 
-            <button type="button button__order">Відправити замовлення</button>
+            <button type="submit" className="button button__order">
+              Відправити замовлення
+            </button>
           </form>
         </div>
         <div className="basket">

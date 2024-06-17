@@ -36,15 +36,31 @@ const filterCatalogSlice = createSlice({
       }
     },
 
+    setInputRangeData: (state, action) => {
+      const { type, value } = action.payload;
+
+      if (!state[type]) {
+        console.error(`Input type category ${type} not found in filter state.`);
+        return;
+      }
+      state[type] = value;
+    },
+
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
+    },
+
     resetFilters: (state) => {
       state.categories = [];
       state.rooms = [];
       state.manufacturers = [];
       state.collections = [];
       state.colour = [];
-    },
-    setSortBy: (state, action) => {
-      state.sortBy = action.payload;
+      state.price = [];
+      state.length = [];
+      state.width = [];
+      state.height = [];
+      state.availability = [];
     },
   },
   selectors: {
@@ -61,7 +77,7 @@ const filterCatalogSlice = createSlice({
   },
 });
 
-export const { toggleFilter, resetFilters, setSortBy } =
+export const { toggleFilter, setInputRangeData, resetFilters, setSortBy } =
   filterCatalogSlice.actions;
 
 export const {

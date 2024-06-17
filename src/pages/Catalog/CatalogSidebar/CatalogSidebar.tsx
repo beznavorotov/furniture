@@ -3,6 +3,7 @@ import MultiRangeSlider, { ChangeResult } from 'multi-range-slider-react';
 import { RootState } from '@/store';
 import {
   toggleFilter,
+  setInputRangeData,
   resetFilters,
   selectCategories,
   selectRooms,
@@ -13,14 +14,12 @@ import {
   // selectLength,
   // selectWidth,
   // selectHeight,
-  // selectPrice,
 } from '@/store/slices/filterCatalogSlice';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { useState } from 'react';
 
 export const CatalogSidebar = () => {
   const dispatch = useDispatch();
-
   const uniqueValues = useSelector(
     (state: RootState) => state.catalog.uniqueValues,
   );
@@ -30,25 +29,61 @@ export const CatalogSidebar = () => {
   const collections = uniqueValues.collections;
   const colour = uniqueValues.colour;
   const availability = uniqueValues.availability;
-  // const length = uniqueValues.length;
-  // const width = uniqueValues.width;
-  // const height = uniqueValues.height;
-  // const price = uniqueValues.price;
-  const [minValue, setMinValue] = useState(2500);
-  const [maxValue, setMaxValue] = useState(7500);
-  console.log('min: ', minValue, 'max: ', maxValue);
+  const price = uniqueValues.price;
+  const lengthData = uniqueValues.length;
+  const widthData = uniqueValues.width;
+  const heightData = uniqueValues.height;
+
   const selectCategory: string[] = useSelector(selectCategories);
   const selectRoom: string[] = useSelector(selectRooms);
   const selectManufacturer: string[] = useSelector(selectManufacturers);
   const selectCollection: string[] = useSelector(selectCollections);
   const selectColor: string[] = useSelector(selectColour);
   const selectProdAvailability: boolean[] = useSelector(selectAvailability);
-  // const selectProdLength: number[] = useSelector(selectLength);
-  // const selectProdWidth: number[] = useSelector(selectWidth);
-  // const selectProdHeight: number[] = useSelector(selectHeight);
-  // const selectProdPrice: number[] = useSelector(selectPrice);
-  const handleChange = (category, value) => {
+  const [minPrice, setMinPrice] = useState(2500);
+  const [maxPrice, setMaxPrice] = useState(27500);
+  const [minLength, setMinLength] = useState(50);
+  const [maxLength, setMaxLength] = useState(450);
+  const [minWidth, setMinWidth] = useState(50);
+  const [maxWidth, setMaxWidth] = useState(450);
+  const [minHeight, setMinHeight] = useState(50);
+  const [maxHeight, setMaxHeight] = useState(450);
+
+  const handleChange = (category: string, value: string | boolean) => {
     dispatch(toggleFilter({ category, value }));
+  };
+
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    type: string,
+    data: number[],
+  ) => {
+    e.preventDefault();
+
+    if (type === 'price') {
+      const value = price.filter((item) => {
+        return item >= data[0] && item <= data[1];
+      });
+      dispatch(setInputRangeData({ type, value }));
+    }
+    if (type === 'length') {
+      const value = lengthData.filter((item) => {
+        return item >= data[0] && item <= data[1];
+      });
+      dispatch(setInputRangeData({ type, value }));
+    }
+    if (type === 'width') {
+      const value = widthData.filter((item) => {
+        return item >= data[0] && item <= data[1];
+      });
+      dispatch(setInputRangeData({ type, value }));
+    }
+    if (type === 'height') {
+      const value = heightData.filter((item) => {
+        return item >= data[0] && item <= data[1];
+      });
+      dispatch(setInputRangeData({ type, value }));
+    }
   };
 
   return (
@@ -57,7 +92,17 @@ export const CatalogSidebar = () => {
       <div className="catalog-sidebar__section">
         <button
           className="button button__white button__clear"
-          onClick={() => dispatch(resetFilters())}
+          onClick={() => {
+            setMinPrice(2500);
+            setMaxPrice(27500);
+            setMinLength(50);
+            setMaxLength(450);
+            setMinWidth(50);
+            setMaxWidth(450);
+            setMinHeight(50);
+            setMaxHeight(450);
+            dispatch(resetFilters());
+          }}
         >
           Очистити фільтри
         </button>
@@ -65,18 +110,21 @@ export const CatalogSidebar = () => {
           <h4 className="catalog-sidebar__title">Ціна</h4>
         </div>
         <div className="catalog-sidebar__content">
-          <div className="filter filter__input-range">
+          <form
+            onSubmit={(e) => handleSubmit(e, 'price', [minPrice, maxPrice])}
+            className="filter filter__input-range"
+          >
             <MultiRangeSlider
               min={0}
-              minValue={minValue}
-              maxValue={maxValue}
-              max={10000}
+              minValue={minPrice}
+              maxValue={maxPrice}
+              max={30000}
               step={5}
               ruler={false}
               label={false}
               onChange={(e: ChangeResult) => {
-                setMinValue(e.minValue);
-                setMaxValue(e.maxValue);
+                setMinPrice(e.minValue);
+                setMaxPrice(e.maxValue);
               }}
             />
             <div className="filter__input-wrapper">
@@ -85,17 +133,28 @@ export const CatalogSidebar = () => {
                 name="minPrice"
                 id="minPrice"
                 placeholder="0"
-                value={minValue}
+                value={minPrice}
+                onChange={(e) => {
+                  setMinPrice(+e.target.value);
+                }}
               />
               <input
                 type="number"
                 name="maxPrice"
                 id="maxPrice"
-                placeholder="100000"
-                value={maxValue}
+                placeholder="50000"
+                onChange={(e) => {
+                  +e.target.value < minPrice
+                    ? setMaxPrice(minPrice + 1)
+                    : setMaxPrice(+e.target.value);
+                }}
+                value={maxPrice}
               />
+              <button className="button button__input-range" type="submit">
+                ok
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -288,15 +347,22 @@ export const CatalogSidebar = () => {
           <h4 className="catalog-sidebar__title">Довжина</h4>
         </div>
         <div className="catalog-sidebar__content">
-          <div className="filter filter__input-range">
+          <form
+            onSubmit={(e) => handleSubmit(e, 'length', [minLength, maxLength])}
+            className="filter filter__input-range"
+          >
             <MultiRangeSlider
               min={0}
-              minValue={2500}
-              maxValue={7500}
-              max={10000}
+              minValue={minLength}
+              maxValue={maxLength}
+              max={500}
               step={5}
               ruler={false}
               label={false}
+              onChange={(e: ChangeResult) => {
+                setMinLength(e.minValue);
+                setMaxLength(e.maxValue);
+              }}
             />
             <div className="filter__input-wrapper">
               <input
@@ -304,15 +370,28 @@ export const CatalogSidebar = () => {
                 name="minLength"
                 id="minLength"
                 placeholder="0"
+                value={minLength}
+                onChange={(e) => {
+                  setMinLength(+e.target.value);
+                }}
               />
               <input
                 type="number"
                 name="maxLength"
                 id="maxLength"
-                placeholder="100000"
+                placeholder="500"
+                onChange={(e) => {
+                  +e.target.value < minLength
+                    ? setMaxLength(minLength + 1)
+                    : setMaxLength(+e.target.value);
+                }}
+                value={maxLength}
               />
+              <button className="button button__input-range" type="submit">
+                ok
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -322,15 +401,22 @@ export const CatalogSidebar = () => {
           <h4 className="catalog-sidebar__title">Ширина</h4>
         </div>
         <div className="catalog-sidebar__content">
-          <div className="filter filter__input-range">
+          <form
+            onSubmit={(e) => handleSubmit(e, 'width', [minWidth, maxWidth])}
+            className="filter filter__input-range"
+          >
             <MultiRangeSlider
               min={0}
-              minValue={2500}
-              maxValue={7500}
-              max={10000}
+              minValue={minWidth}
+              maxValue={maxWidth}
+              max={500}
               step={5}
               ruler={false}
               label={false}
+              onChange={(e: ChangeResult) => {
+                setMinWidth(e.minValue);
+                setMaxWidth(e.maxValue);
+              }}
             />
             <div className="filter__input-wrapper">
               <input
@@ -338,15 +424,28 @@ export const CatalogSidebar = () => {
                 name="minWidth"
                 id="minWidth"
                 placeholder="0"
+                value={minWidth}
+                onChange={(e) => {
+                  setMinWidth(+e.target.value);
+                }}
               />
               <input
                 type="number"
                 name="maxWidth"
                 id="maxWidth"
-                placeholder="100000"
+                placeholder="500"
+                onChange={(e) => {
+                  +e.target.value < minWidth
+                    ? setMaxWidth(minWidth + 1)
+                    : setMaxWidth(+e.target.value);
+                }}
+                value={maxWidth}
               />
+              <button className="button button__input-range" type="submit">
+                ok
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -356,15 +455,22 @@ export const CatalogSidebar = () => {
           <h4 className="catalog-sidebar__title">Висота</h4>
         </div>
         <div className="catalog-sidebar__content">
-          <div className="filter filter__input-range">
+          <form
+            onSubmit={(e) => handleSubmit(e, 'height', [minHeight, maxHeight])}
+            className="filter filter__input-range"
+          >
             <MultiRangeSlider
               min={0}
-              minValue={2500}
-              maxValue={7500}
-              max={10000}
+              minValue={minHeight}
+              maxValue={maxHeight}
+              max={500}
               step={5}
               ruler={false}
               label={false}
+              onChange={(e: ChangeResult) => {
+                setMinHeight(e.minValue);
+                setMaxHeight(e.maxValue);
+              }}
             />
             <div className="filter__input-wrapper">
               <input
@@ -372,15 +478,28 @@ export const CatalogSidebar = () => {
                 name="minHeight"
                 id="minHeight"
                 placeholder="0"
+                value={minHeight}
+                onChange={(e) => {
+                  setMinHeight(+e.target.value);
+                }}
               />
               <input
                 type="number"
                 name="maxHeight"
                 id="maxHeight"
-                placeholder="100000"
+                placeholder="500"
+                onChange={(e) => {
+                  +e.target.value < minHeight
+                    ? setMaxHeight(minHeight + 1)
+                    : setMaxHeight(+e.target.value);
+                }}
+                value={maxHeight}
               />
+              <button className="button button__input-range" type="submit">
+                ok
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 

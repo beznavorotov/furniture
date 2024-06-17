@@ -53,7 +53,7 @@ export const CatalogContent = ({ data, type }) => {
       availabilityFilters.lenght === 0 ||
       availabilityFilters.includes(item.availability);
     const priceMatch =
-      priceFilters.lenght === 0 || priceFilters.includes(item.price);
+      priceFilters.lenght === 0 || priceFilters.includes(item.discount);
 
     return (
       categoriesMatch ||

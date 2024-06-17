@@ -18,12 +18,10 @@
     background-color: $color-lightblue;
     border-color: $color-lightblue;
   }
-
   &:active {
     background-color: $color-darkblue;
     border-color: $color-darkblue;
   }
-
   &:focus {
     border: 2px solid $color-lightblue-border;
     background-color: $color-darkblue;
@@ -138,4 +136,11 @@
       fill: $color-lightblue-border;
     }
   }
+}
+
+#root .button__input-range {
+  font-size: 14px;
+  height: 24px;
+  width: 45px;
+  text-transform: uppercase;
 }
