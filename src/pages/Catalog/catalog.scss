@@ -3,12 +3,21 @@
   @include flex(space-between, flex-start);
   gap: 20px;
 
+  @include tablet {
+    flex-direction: column;
+  }
+
   // sidebar
   &-sidebar {
     @include flex-column(flex-start, flex-start);
     flex: 1;
     gap: 10px;
     max-width: 246px;
+    width: 100%;
+
+    @include tablet {
+      max-width: 100%;
+    }
 
     &__section {
       border-bottom: 1px solid $color-black;
@@ -22,12 +31,30 @@
         display: none;
       }
     }
-
+    &__heading {
+      @include flex(space-between, center);
+      margin-bottom: 16px;
+      height: 50px;
+      padding-right: 5px;
+    }
     &__title {
       font-size: 16px;
       font-weight: 400;
       line-height: 20px;
-      margin-bottom: 16px;
+      margin-bottom: 0;
+    }
+    &__icon {
+      font-size: 30px;
+      line-height: 20px;
+      font-weight: 200;
+      width: 20px;
+      text-align: center;
+      color: $color-blue;
+    }
+    &__content {
+      &.hide {
+        display: none;
+      }
     }
   }
 
@@ -43,11 +70,12 @@
       gap: 20px;
       @include tablet {
         grid-template-columns: repeat(3, 190px);
+        justify-content: center;
         gap: 10px;
       }
 
       @include tablet-sm {
-        grid-template-columns: repeat(2, 190px);
+        grid-template-columns: repeat(2, 170px);
       }
     }
 
@@ -129,7 +157,7 @@
     }
 
     input[type='number'] {
-      width: 75px;
+      width: 65px;
       border: 1px solid $color-blue;
       color: $color-black;
       border-radius: 3px;

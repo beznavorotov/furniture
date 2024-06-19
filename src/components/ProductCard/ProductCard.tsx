@@ -17,7 +17,7 @@ const ProductCard = ({
   const dispatch = useDispatch();
 
   return (
-    <div className={`col-12 col-md-3 product-card ${cardSize}`}>
+    <div className={`product-card ${cardSize}`}>
       <img src={heart} alt="heart" className="heart" />
       <Link
         to={`/product/${id}?from=${stateType}`}
