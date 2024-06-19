@@ -9,13 +9,23 @@
     @include flex(space-between, center);
     margin-bottom: 24px;
 
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .page-section--title {
       margin-bottom: 0;
     }
 
     .select-sort {
       border: none;
+      color: $color-grey;
       background-color: $color-white-bg;
+      @include tablet {
+        margin-top: 16px;
+        align-self: flex-end;
+      }
     }
   }
 }

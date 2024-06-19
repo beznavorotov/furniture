@@ -212,9 +212,7 @@ export const Product = () => {
 
           <div className="product__price">
             <div className="product__price--heading">
-              <h3 className="product__price--price">
-                {Math.floor(price)} грн.
-              </h3>
+              <h3 className="product__price--price">{price.toFixed()} грн.</h3>
               <span>
                 <svg
                   width="32"

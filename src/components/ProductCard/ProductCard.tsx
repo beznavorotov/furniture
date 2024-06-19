@@ -33,12 +33,12 @@ const ProductCard = ({
         <StarsRating ratingNumber={rating} />
         <div className="card_price">
           {price === discountPrice ? (
-            <span className="price">{Math.floor(price)} грн</span>
+            <span className="price">{price.toFixed()} грн</span>
           ) : (
             <>
-              <span className="price price--sale">{Math.floor(price)} грн</span>
+              <span className="price price--sale">{price.toFixed()} грн</span>
               <span className="price price--new">
-                {Math.floor(discountPrice)} грн
+                {discountPrice.toFixed()} грн
               </span>
             </>
           )}
