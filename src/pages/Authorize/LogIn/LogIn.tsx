@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { login } from '@/store/slices/authSlice';
+import { login, setAuth } from '@/store/slices/authSlice';
 import loginImg from '@/assets/authorize/login__bg.webp';
 
 export const LogIn = () => {
@@ -16,12 +16,16 @@ export const LogIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const credentials = { username, password };
-    dispatch(login(credentials));
-
-    // clear form state
-    setUsername('');
-    setPassword('');
+    try {
+      const credentials = { username, password };
+      dispatch(login(credentials));
+      dispatch(setAuth(true));
+      // clear form state
+      setUsername('');
+      setPassword('');
+    } catch (error) {
+      console.error(error, 'in login proccess');
+    }
   };
 
   useEffect(() => {

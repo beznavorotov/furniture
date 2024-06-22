@@ -6,37 +6,94 @@ import { signup } from '@/store/slices/authSlice';
 import singupImg from '@/assets/authorize/signup__bg.webp';
 
 export const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastname] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [userPasswordConfirm, setUserPasswordConfirm] = useState('');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const initialState = {
+    firstName: '',
+    lastName: '',
+    userEmail: '',
+    userPassword: '',
+    userPasswordConfirm: '',
+  };
   const authError = useSelector((state: RootState) => state.auth.error);
+  const [userState, setUserState] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
+  const [policyCheck, setPolicyCheck] = useState(false);
 
   const credentials = {
-    first_name: firstName,
-    last_name: lastName,
-    email: userEmail,
-    password: userPassword,
+    first_name: userState.firstName,
+    last_name: userState.lastName,
+    email: userState.userEmail,
+    password: userState.userPassword,
+  };
+
+  const updateState = (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const { name, value } = target;
+    setUserState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const validateForm = (data) => {
+    const errors = {
+      firstName: '',
+      lastName: '',
+      userEmail: '',
+      userPassword: '',
+      userPasswordConfirm: '',
+      policyConfirmCheckbox: '',
+    };
+
+    if (!data.firstName.trim()) {
+      errors.firstName = 'firstName is required!';
+    }
+
+    if (!data.lastName.trim()) {
+      errors.lastName = 'lastName is required!';
+    }
+
+    if (!data.userEmail.trim()) {
+      errors.userEmail = 'userEmail is required!';
+    } else if (
+      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(data.userEmail)
+    ) {
+      errors.userEmail = 'Incorrect email';
+    }
+
+    if (!data.userPassword) {
+      errors.userPassword = 'userPassword is required!';
+    } else if (data.userPassword.length < 8) {
+      errors.userPassword = 'Password must be at least 8 characters long';
+    }
+
+    if (data.userPasswordConfirm !== data.userPassword) {
+      errors.userPasswordConfirm = 'Passwords do not match';
+    }
+
+    if (policyCheck === false) {
+      errors.policyConfirmCheckbox = 'Policy must be checked';
+    }
+
+    return errors;
   };
 
   const handleSubmit = (event: React.FormEvent) => {
-    try {
-      event.preventDefault();
+    event.preventDefault();
+    const newErrors = validateForm(userState);
+    setFormErrors(newErrors);
+
+    if (
+      Object.values(newErrors).every((value) => value === '') &&
+      policyCheck
+    ) {
       dispatch(signup(credentials));
-      navigate('/profile');
-      
-      // clear state
-      setFirstName('');
-      setLastname('');
-      setUserEmail('');
-      setUserPassword('');
-      setUserPasswordConfirm('');
+      setUserState(initialState);
       console.log(JSON.stringify(credentials));
-    } catch (error) {
-      console.error(authError);
+      navigate('/login');
+    } else {
+      console.log('Form submit error', newErrors);
     }
   };
 
@@ -59,12 +116,11 @@ export const SignUp = () => {
               <span className="input__required">
                 <input
                   type="text"
-                  name="name"
+                  name="firstName"
                   id="firstNameInput"
                   placeholder="Ім’я"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
+                  value={userState.firstName}
+                  onChange={updateState}
                 />
               </span>
               <span className="input__required">
@@ -73,42 +129,39 @@ export const SignUp = () => {
                   name="lastName"
                   id="lastNameInput"
                   placeholder="Прізвище"
-                  value={lastName}
-                  onChange={(e) => setLastname(e.target.value)}
-                  required
+                  value={userState.lastName}
+                  onChange={updateState}
                 />
               </span>
               <span className="input__required">
                 <input
                   type="email"
-                  name="email"
+                  name="userEmail"
                   id="loginEmail"
                   placeholder="Електронна адреса"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                  required
+                  value={userState.userEmail}
+                  onChange={updateState}
                 />
               </span>
 
               <span className="input__required">
                 <input
                   type="password"
-                  name="newPassword"
+                  name="userPassword"
                   id="newPasswordInput"
                   placeholder="Пароль"
-                  value={userPassword}
-                  onChange={(e) => setUserPassword(e.target.value)}
-                  required
+                  value={userState.userPassword}
+                  onChange={updateState}
                 />
               </span>
               <span className="input__required">
                 <input
                   type="password"
-                  name="confirmPassword"
+                  name="userPasswordConfirm"
                   id="confirmPasswordInput"
                   placeholder="Підтвердити пароль"
-                  value={userPasswordConfirm}
-                  onChange={(e) => setUserPasswordConfirm(e.target.value)}
+                  value={userState.userPasswordConfirm}
+                  onChange={updateState}
                 />
               </span>
               <div className="policy-confirm">
@@ -116,10 +169,12 @@ export const SignUp = () => {
                   type="checkbox"
                   name="policyConfirmCheckbox"
                   id="policyConfirmCheckbox"
+                  checked={policyCheck}
+                  onChange={() => setPolicyCheck(!policyCheck)}
                 />
                 <span>
                   Підтвердьте, що ви прочитали та прийміть його{' '}
-                  <a className="/" href="/">
+                  <a className="#" href="/">
                     політика конфіденційності
                   </a>
                 </span>

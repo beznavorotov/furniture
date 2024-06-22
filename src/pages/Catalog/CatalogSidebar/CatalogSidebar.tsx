@@ -61,11 +61,7 @@ export const CatalogSidebar = () => {
     dispatch(toggleFilter({ category, value }));
   };
 
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-    type: string,
-    data: number[],
-  ) => {
+  const handleSubmit = (e: React.FormEvent, type: string, data: number[]) => {
     e.preventDefault();
 
     const dataMap: { [key: string]: number[] } = {

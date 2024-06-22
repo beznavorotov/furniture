@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowModal } from '@/store/slices/modalSlice';
 import { RootState } from '@/store';
-import closeIcon from '@/assets/icons/close.svg';
 import sofa from '@/assets/sofa_beige.png';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -53,7 +52,7 @@ export const AddToCartModalWindow = () => {
         <div className="modal__heading">
           <h2 className="modal__title">Додати в кошик</h2>
           <span className="modal__close" onClick={closeModal}>
-            <img src={closeIcon} alt="close modal" />
+            &times;
           </span>
         </div>
 

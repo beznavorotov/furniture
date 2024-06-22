@@ -9,7 +9,7 @@ export const SearchForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim() === '') {
       alert('Введіть коректний пошуковий запит');
