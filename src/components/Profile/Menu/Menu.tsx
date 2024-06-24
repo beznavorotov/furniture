@@ -13,6 +13,7 @@ import { logout } from '@/store/slices/authSlice';
 export const Menu = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const userMail = useSelector((state: RootState) => state.auth.user);
   const [menuItem, setMenuItem] = useState('orders');
   const navigate = useNavigate();
 
@@ -42,9 +43,7 @@ export const Menu = () => {
 
             <div className="name">
               <h2 className="name_user">Користувач</h2>
-              <a href="/">
-                {isAuth ? localStorage.getItem('user') : 'Авторизуйтесь'}
-              </a>
+              <a href="/">{isAuth ? userMail : 'Авторизуйтесь'}</a>
             </div>
           </div>
 

@@ -38,14 +38,11 @@ export const signup = createAsyncThunk(
     try {
       const response = await fetchData(BACKEND_CREATE_USER_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: credentials,
       });
-      console.log(response);
       return response;
     } catch (error) {
+      console.error('Signup error: ', error.message);
       return rejectWithValue(error.message);
     }
   },
@@ -80,8 +77,10 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // login
       .addCase(login.pending, (state) => {
         state.status = STATUS_LOADING;
+        state.error = null;
       })
       .addCase(login.fulfilled, (state) => {
         state.status = STATUS_SUCCEEDED;
@@ -93,11 +92,25 @@ const authSlice = createSlice({
         state.status = STATUS_FAILD;
         state.error = action.payload;
       })
+      // logOut
       .addCase(logout.fulfilled, (state) => {
         state.status = STATUS_IDLE;
         state.user = null;
         state.accessToken = null;
         state.isAuth = false;
+      })
+      // signUp
+      .addCase(signup.pending, (state) => {
+        state.status = STATUS_LOADING;
+        state.error = null;
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.status = STATUS_SUCCEEDED;
+        state.user = action.payload;
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.status = STATUS_FAILD;
+        state.error = action.payload;
       });
   },
 });

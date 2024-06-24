@@ -3,10 +3,11 @@
   gap: 20px;
 
   .policy-confirm {
-    @include flex(flex-start, flex-start);
+    @include flex(flex-start, center);
     gap: 8px;
     max-width: 295px;
     margin: 8px auto 24px;
+    padding-bottom: 5px;
 
     span,
     a {
@@ -26,6 +27,10 @@
 
     a {
       text-decoration: underline;
+    }
+    &.error {
+      border: none;
+      border-bottom: 1px solid $color-red;
     }
   }
 }

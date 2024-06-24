@@ -6,6 +6,7 @@
     margin-bottom: 24px;
     .banner {
       max-width: 400px;
+      width: 100%;
 
       img {
         width: 100%;
@@ -42,7 +43,6 @@
 
 @media screen and (max-width: 480px) {
   .shares {
-
     .share {
       display: flex;
       flex-direction: column;
@@ -54,7 +54,7 @@
         position: relative;
 
         .text {
-            margin-bottom: 30px;
+          margin-bottom: 30px;
           h2 {
             font-size: 20px;
             font-weight: 500;
@@ -66,15 +66,15 @@
           }
         }
         .date {
-            position: absolute;
-                        top: auto;
-            left:  0px;
-            p {
-              font-size: 16px;
-              font-weight: 400;
-              color: $color-blue;
-            }
+          position: absolute;
+          top: auto;
+          left: 0px;
+          p {
+            font-size: 16px;
+            font-weight: 400;
+            color: $color-blue;
           }
+        }
       }
     }
   }

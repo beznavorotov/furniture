@@ -19,7 +19,10 @@ const fetchData = async (url, options = {}) => {
     const response = await fetch(url, requestOptions);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Message: ${errorText}`,
+      );
     }
     return await response.json();
   } catch (error) {

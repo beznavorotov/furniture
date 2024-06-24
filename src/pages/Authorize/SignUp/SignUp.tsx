@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-// import { RootState } from '@/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import { signup } from '@/store/slices/authSlice';
 import singupImg from '@/assets/authorize/signup__bg.webp';
 
@@ -15,9 +15,13 @@ export const SignUp = () => {
     userPassword: '',
     userPasswordConfirm: '',
   };
-  // const authError = useSelector((state: RootState) => state.auth.error);
+  const authError = useSelector((state: RootState) => state.auth.error);
+  const authErrorStatus = useSelector((state: RootState) => state.auth.status);
   const [userState, setUserState] = useState(initialState);
-  // const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({
+    ...initialState,
+    policyConfirmCheckbox: '',
+  });
   const [policyCheck, setPolicyCheck] = useState(false);
 
   const credentials = {
@@ -47,33 +51,33 @@ export const SignUp = () => {
     };
 
     if (!data.firstName.trim()) {
-      errors.firstName = 'firstName is required!';
+      errors.firstName = 'Ім’я не вказано!';
     }
 
     if (!data.lastName.trim()) {
-      errors.lastName = 'lastName is required!';
+      errors.lastName = 'Прізвище не вказано!';
     }
 
     if (!data.userEmail.trim()) {
-      errors.userEmail = 'userEmail is required!';
+      errors.userEmail = 'Email не вказано!';
     } else if (
       !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(data.userEmail)
     ) {
-      errors.userEmail = 'Incorrect email';
+      errors.userEmail = 'Некоректний Email';
     }
 
     if (!data.userPassword) {
-      errors.userPassword = 'userPassword is required!';
+      errors.userPassword = 'Пароль не вказано!';
     } else if (data.userPassword.length < 8) {
-      errors.userPassword = 'Password must be at least 8 characters long';
+      errors.userPassword = 'Пароль повинен бути не менше 8 символів!';
     }
 
     if (data.userPasswordConfirm !== data.userPassword) {
-      errors.userPasswordConfirm = 'Passwords do not match';
+      errors.userPasswordConfirm = 'Паролі не збігаються!';
     }
 
     if (policyCheck === false) {
-      errors.policyConfirmCheckbox = 'Policy must be checked';
+      errors.policyConfirmCheckbox = 'Політика конфіденційності не відмічена!';
     }
 
     return errors;
@@ -82,16 +86,19 @@ export const SignUp = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const newErrors = validateForm(userState);
-    // setFormErrors(newErrors);
+    setFormErrors(newErrors);
 
     if (
       Object.values(newErrors).every((value) => value === '') &&
       policyCheck
     ) {
       dispatch(signup(credentials));
+
       setUserState(initialState);
       console.log(JSON.stringify(credentials));
-      navigate('/login');
+      if (authErrorStatus === 'succeeded' && authError === null) {
+        navigate('/login');
+      }
     } else {
       console.log('Form submit error', newErrors);
     }
@@ -115,6 +122,7 @@ export const SignUp = () => {
               <h2 className="form__authorize--heading">Створити аккаунт</h2>
               <span className="input__required">
                 <input
+                  className={formErrors?.firstName === '' ? '' : 'error'}
                   type="text"
                   name="firstName"
                   id="firstNameInput"
@@ -125,6 +133,7 @@ export const SignUp = () => {
               </span>
               <span className="input__required">
                 <input
+                  className={formErrors?.lastName === '' ? '' : 'error'}
                   type="text"
                   name="lastName"
                   id="lastNameInput"
@@ -135,6 +144,7 @@ export const SignUp = () => {
               </span>
               <span className="input__required">
                 <input
+                  className={formErrors?.userEmail === '' ? '' : 'error'}
                   type="email"
                   name="userEmail"
                   id="loginEmail"
@@ -146,6 +156,7 @@ export const SignUp = () => {
 
               <span className="input__required">
                 <input
+                  className={formErrors?.userPassword === '' ? '' : 'error'}
                   type="password"
                   name="userPassword"
                   id="newPasswordInput"
@@ -156,6 +167,9 @@ export const SignUp = () => {
               </span>
               <span className="input__required">
                 <input
+                  className={
+                    formErrors?.userPasswordConfirm === '' ? '' : 'error'
+                  }
                   type="password"
                   name="userPasswordConfirm"
                   id="confirmPasswordInput"
@@ -164,7 +178,11 @@ export const SignUp = () => {
                   onChange={updateState}
                 />
               </span>
-              <div className="policy-confirm">
+              <label
+                className={`policy-confirm ${
+                  formErrors?.policyConfirmCheckbox === '' ? '' : 'error'
+                }`}
+              >
                 <input
                   type="checkbox"
                   name="policyConfirmCheckbox"
@@ -178,7 +196,7 @@ export const SignUp = () => {
                     політика конфіденційності
                   </a>
                 </span>
-              </div>
+              </label>
               <button type="submit" className="button">
                 Зареєструватися
               </button>
