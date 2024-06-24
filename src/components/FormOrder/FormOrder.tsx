@@ -1,7 +1,7 @@
 import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
 import { useForm } from 'react-hook-form';
-import './FormOrder.scss';
+
 
 export const FormOrder = () => {
   const { regions, cities, departments, setSelectedRegion, setSelectedCity } =
