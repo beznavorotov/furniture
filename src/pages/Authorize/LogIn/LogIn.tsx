@@ -14,7 +14,7 @@ export const LogIn = () => {
   const authError = useSelector((state: RootState) => state.auth.error);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const credentials = { username, password };
@@ -53,9 +53,9 @@ export const LogIn = () => {
                   name="email"
                   id="loginEmail"
                   placeholder="Електронна адреса"
-                  required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  required
                 />
               </span>
               <span className="input__required">
@@ -64,9 +64,9 @@ export const LogIn = () => {
                   name="password"
                   id="loginPassword"
                   placeholder="Пароль"
-                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </span>
               <Link className="password__lost" to="/reset">
