@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import { useDispatch, useSelector } from 'react-redux';
 // import { RootState } from '@/store';
 import { signup } from '@/store/slices/authSlice';
 import singupImg from '@/assets/authorize/signup__bg.webp';
@@ -139,7 +138,7 @@ export const SignUp = () => {
                   type="email"
                   name="userEmail"
                   id="loginEmail"
-                  placeholder="Електронна адреса"
+                  placeholder="Електронна пошта"
                   value={userState.userEmail}
                   onChange={updateState}
                 />

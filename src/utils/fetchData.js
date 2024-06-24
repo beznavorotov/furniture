@@ -5,6 +5,8 @@ const fetchData = async (url, options = {}) => {
     method: method,
     headers: {
       'Content-Type': 'application/json',
+      // post
+      // 'Authorization': 'Bearer ' + token,
       ...headers,
     },
   };

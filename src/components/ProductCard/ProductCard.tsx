@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import { StarsRating } from '@/components/StarsRating/StarsRating';
 import { setShowModal } from '@/store/slices/modalSlice';
 import heart from '@/assets/heart.svg';
@@ -15,10 +16,13 @@ const ProductCard = ({
   rating,
 }) => {
   const dispatch = useDispatch();
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   return (
     <div className={`product-card ${cardSize}`}>
-      <img src={heart} alt="heart" className="heart" />
+      <Link to={isAuth ? '/profile' : '/login'}>
+        <img src={heart} alt="heart" className="heart" />
+      </Link>
       <Link
         to={`/product/${id}?from=${stateType}`}
         className="product-card__img"
