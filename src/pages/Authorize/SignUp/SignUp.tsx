@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useDispatch } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from '@/store';
 import { signup } from '@/store/slices/authSlice';
 import singupImg from '@/assets/authorize/signup__bg.webp';
 
@@ -15,9 +16,9 @@ export const SignUp = () => {
     userPassword: '',
     userPasswordConfirm: '',
   };
-  const authError = useSelector((state: RootState) => state.auth.error);
+  // const authError = useSelector((state: RootState) => state.auth.error);
   const [userState, setUserState] = useState(initialState);
-  const [formErrors, setFormErrors] = useState({});
+  // const [formErrors, setFormErrors] = useState({});
   const [policyCheck, setPolicyCheck] = useState(false);
 
   const credentials = {
@@ -82,7 +83,7 @@ export const SignUp = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const newErrors = validateForm(userState);
-    setFormErrors(newErrors);
+    // setFormErrors(newErrors);
 
     if (
       Object.values(newErrors).every((value) => value === '') &&

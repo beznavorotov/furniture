@@ -1,6 +1,7 @@
 import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
 import { useForm } from 'react-hook-form';
+import './FormOrder.scss';
 
 export const FormOrder = () => {
   const { regions, cities, departments, setSelectedRegion, setSelectedCity } =
@@ -77,7 +78,9 @@ export const FormOrder = () => {
                     required: 'Це поле є обов`язковим',
                   })}
                 />
-                {errors.firstName && <span>{errors.firstName.message}</span>}
+                {errors.firstName && (
+                  <span>{(errors.firstName.message as string)}</span>
+                )}
 
                 <input
                   className="input"
@@ -89,7 +92,9 @@ export const FormOrder = () => {
                     required: 'Це поле є обов`язковим',
                   })}
                 />
-                {errors.lastName && <span>{errors.lastName.message}</span>}
+                {errors.lastName && (
+                  <span>{(errors.lastName.message as string)}</span>
+                )}
               </div>
               <div className="form_group">
                 <input
@@ -106,7 +111,7 @@ export const FormOrder = () => {
                     },
                   })}
                 />
-                {errors.phone && <span>{errors.phone.message}</span>}
+                {errors.phone && <span>{(errors.phone.message as string)}</span>}
 
                 <input
                   className="input"
@@ -122,7 +127,7 @@ export const FormOrder = () => {
                     },
                   })}
                 />
-                {errors.email && <span>{errors.email.message}</span>}
+                {errors.email && <span>{(errors.email.message as string)}</span>}
               </div>
             </div>
 
@@ -147,7 +152,7 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedRegion && (
-                  <span>{errors.selectedRegion.message}</span>
+                  <span>{(errors.selectedRegion.message as string)}</span>
                 )}
 
                 <select
@@ -164,7 +169,7 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedCity && (
-                  <span>{errors.selectedCity.message}</span>
+                  <span>{(errors.selectedCity.message as string)}</span>
                 )}
 
                 <select
@@ -185,7 +190,7 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedDepartment && (
-                  <span>{errors.selectedDepartment.message}</span>
+                  <span>{(errors.selectedDepartment.message as string)}</span>
                 )}
               </div>
             </div>
@@ -207,7 +212,7 @@ export const FormOrder = () => {
                   Оплата картами Visa/Mastercard на сайті
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message}</span>
+                  <span>{(errors.paymentMethod.message as string)}</span>
                 )}
                 <label className="input_payment">
                   <input
@@ -221,7 +226,7 @@ export const FormOrder = () => {
                   PayPal
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message}</span>
+                  <span>{(errors.paymentMethod.message as string)}</span>
                 )}
                 <label className="input_payment">
                   <input
@@ -235,7 +240,7 @@ export const FormOrder = () => {
                   Оплата під час отримання
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message}</span>
+                  <span>{(errors.paymentMethod.message as string)}</span>
                 )}
               </div>
             </div>
@@ -261,7 +266,7 @@ export const FormOrder = () => {
                   Я приймаю умови обслуговування
                 </label>
                 {errors.termsAccepted && (
-                  <span>{errors.termsAccepted.message}</span>
+                  <span>{(errors.termsAccepted.message as string)}</span>
                 )}
 
                 <label className="input_payment">
