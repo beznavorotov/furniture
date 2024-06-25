@@ -12,6 +12,9 @@ export const Header = () => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const catalogDropDownRef = useRef(null);
+  const catalogMenuRef = useRef(null);
+
+  console.log(location.pathname);
 
   useEffect(() => {
     const handleClick = handleClickOutside(catalogDropDownRef, () => {
@@ -26,9 +29,16 @@ export const Header = () => {
     // eslint-disable-next-line
   }, []);
 
+  const element = catalogMenuRef.current;
+
   useEffect(() => {
+    if (element && element.classList.contains('show')) {
+      element.classList.remove('show');
+    }
+
     setShowMenu(false);
     dispatch(setShowOverlay(false));
+
     // eslint-disable-next-line
   }, [location]);
 
@@ -52,6 +62,7 @@ export const Header = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div
+              ref={catalogMenuRef}
               className="flex-column collapse navbar-collapse"
               id="navbarSupportedContent"
             >

@@ -17,6 +17,13 @@
 
     @include tablet {
       max-width: 100%;
+      margin-bottom: 24px;
+    }
+
+    &__buttons {
+      @include flex(space-between, center);
+      gap: 36px;
+      width: 100%;
     }
 
     &__wrapper {
@@ -24,6 +31,13 @@
 
       @include tablet {
         max-width: 100%;
+      }
+
+      &.hide {
+        display: none;
+      }
+      &.show {
+        display: flex-column;
       }
     }
 

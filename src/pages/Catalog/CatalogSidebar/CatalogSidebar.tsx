@@ -49,6 +49,7 @@ export const CatalogSidebar = () => {
   const selectColor: string[] = useSelector(selectColour);
   const selectProdAvailability: boolean[] = useSelector(selectAvailability);
   const [state, setState] = useState(initialState);
+  const [showFilters, setShowFilters] = useState(false);
 
   const updateState = (key: string, value: number) => {
     setState((prevState) => ({
@@ -81,16 +82,24 @@ export const CatalogSidebar = () => {
 
   return (
     <aside className="catalog-sidebar">
-      <button
-        className="button button__white button__clear"
-        onClick={() => {
-          setState(initialState);
-          dispatch(resetFilters());
-        }}
-      >
-        Очистити фільтри
-      </button>
-      <div className="catalog-sidebar__wrapper">
+      <div className="catalog-sidebar__buttons">
+        <button
+          className="button button__show-filters"
+          onClick={() => setShowFilters(!showFilters)}
+        >
+          Фільтри
+        </button>
+        <button
+          className="button button__white button__clear"
+          onClick={() => {
+            setState(initialState);
+            dispatch(resetFilters());
+          }}
+        >
+          Очистити фільтри
+        </button>
+      </div>
+      <div className={`catalog-sidebar__wrapper ${showFilters?'hide':'show'}`}>
         {/* Ціна */}
         <CatalogSidebarSection type="price" title="Ціна">
           <form

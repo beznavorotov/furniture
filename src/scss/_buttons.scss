@@ -1,5 +1,5 @@
 // buttons
-#root .button {
+.button {
   @include flex();
   background-color: $color-blue;
   border: 1px solid $color-blue;
@@ -28,7 +28,7 @@
   }
 }
 
-#root .button__white {
+.button__white {
   background-color: $color-white-bg;
   color: $color-blue;
   border: 1px solid $color-blue;
@@ -50,7 +50,7 @@
   }
 }
 
-#root .button__social {
+.button__social {
   @include flex();
   gap: 4px;
   font-family: $font-family-inter;
@@ -87,11 +87,11 @@
   }
 }
 
-#root .button__logout {
+.button__logout {
   color: $color-red;
 }
 
-#root .button__search {
+.button__search {
   @include flex();
   height: 16px;
   width: 16px;
@@ -101,7 +101,7 @@
 }
 
 // PRODUCT CARD CART button
-#root .button__cart {
+.button__cart {
   border: 1px solid $color-blue;
   width: 44px;
   height: 44px;
@@ -138,9 +138,19 @@
   }
 }
 
-#root .button__input-range {
+.button__input-range {
   font-size: 14px;
   height: 24px;
   width: 45px;
   text-transform: uppercase;
+}
+
+.button__show-filters {
+  display: none;
+  @include tablet {
+    display: flex;
+  }
+}
+
+.button__clear {
 }
