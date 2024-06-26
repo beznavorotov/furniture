@@ -99,7 +99,9 @@ export const CatalogSidebar = () => {
           Очистити фільтри
         </button>
       </div>
-      <div className={`catalog-sidebar__wrapper ${showFilters?'hide':'show'}`}>
+      <div
+        className={`catalog-sidebar__wrapper ${showFilters ? 'hide' : 'show'}`}
+      >
         {/* Ціна */}
         <CatalogSidebarSection type="price" title="Ціна">
           <form

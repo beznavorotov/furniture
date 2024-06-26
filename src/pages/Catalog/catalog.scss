@@ -31,13 +31,15 @@
 
       @include tablet {
         max-width: 100%;
+        display: flex;
       }
 
       &.hide {
         display: none;
       }
       &.show {
-        display: flex-column;
+        flex-direction: column;
+        display: flex;
       }
     }
 

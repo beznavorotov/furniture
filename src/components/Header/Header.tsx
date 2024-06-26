@@ -14,8 +14,6 @@ export const Header = () => {
   const catalogDropDownRef = useRef(null);
   const catalogMenuRef = useRef(null);
 
-  console.log(location.pathname);
-
   useEffect(() => {
     const handleClick = handleClickOutside(catalogDropDownRef, () => {
       setShowMenu(false);
