@@ -1,15 +1,17 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
 import { NavLink, useLocation } from 'react-router-dom';
+import { RootState } from '@/store';
 
 export const UserActionsNav = () => {
   const { pathname } = useLocation();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+
   const setLinkActive = () => {
     return ['/profile', '/login', '/reset', '/signup'].includes(pathname)
       ? 'active'
       : '';
   };
+
   return (
     <nav className="user__actions">
       <NavLink to="/cart">

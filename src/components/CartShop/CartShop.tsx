@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import sofaGreen from '@/assets/sofa_green.jpg';
 import close from '@/assets/icons/close.svg';
+import { getCartItems } from '@/store/slices/cartSlice';
 
 const CartProducts = [
   {
@@ -31,6 +33,7 @@ const CartProducts = [
 ];
 
 export const CartShop = () => {
+  const dispatch = useDispatch();
   const [cartProducts, setCartProducts] = useState(CartProducts);
 
   const [discount, setDiscount] = useState(0);
@@ -74,7 +77,6 @@ export const CartShop = () => {
     return cartProducts.reduce((total, product) => total + product.quantity, 0);
   };
 
-
   const clearCart = () => {
     setCartProducts([]);
     setDiscount(0);
@@ -83,7 +85,7 @@ export const CartShop = () => {
   return (
     <div className="cart">
       <div className="title_cart">
-        <h1>Кошик</h1>
+        <h1 onClick={() => dispatch(getCartItems())}>Кошик</h1>
         {cartProducts.length > 0 && (
           <button className="clear_cart" onClick={clearCart}>
             Очистити кошик
@@ -162,9 +164,9 @@ export const CartShop = () => {
                 </button>
               </Link>
               <Link to="/order">
-              <button className="button button__order ">
-                Оформити замовлення
-              </button>
+                <button className="button button__order ">
+                  Оформити замовлення
+                </button>
               </Link>
             </div>
           </div>

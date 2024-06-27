@@ -93,14 +93,14 @@ export const SignUp = () => {
       policyCheck
     ) {
       dispatch(signup(credentials));
-
+      setPolicyCheck(false);
       setUserState(initialState);
       console.log(JSON.stringify(credentials));
       if (authErrorStatus === 'succeeded' && authError === null) {
         navigate('/login');
       }
     } else {
-      console.log('Form submit error', newErrors);
+      console.error('Errors on submit: ', newErrors);
     }
   };
 

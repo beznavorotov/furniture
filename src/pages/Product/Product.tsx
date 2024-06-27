@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -66,7 +66,6 @@ const REVIEWS = 'reviews';
 export const Product = () => {
   const { id } = useParams();
   const location = useLocation();
-  const galleryMainImgRef = useRef(null);
   const searchParams = new URLSearchParams(location.search);
   const stateType = searchParams.get('from');
 

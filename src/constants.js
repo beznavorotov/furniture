@@ -20,6 +20,9 @@ export const BACKEND_BESTSELLERS_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/
 export const BACKEND_SALE_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/sales`;
 export const BACKEND_SEARCH = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/search/`;
 
+export const CART_URL = `${BACKEND_BASE_URL}orders/cart/`;
+export const ORDER_URL = `${BACKEND_BASE_URL}orders/all/`;
+
 // MESSAGES
 export const REQUIRED_INPUT_MSG = "Це поле обов'язкове для заповнення";
 
