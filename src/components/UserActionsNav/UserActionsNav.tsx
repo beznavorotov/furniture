@@ -1,13 +1,16 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import { NavLink, useLocation } from 'react-router-dom';
 
 export const UserActionsNav = () => {
   const { pathname } = useLocation();
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const setLinkActive = () => {
     return ['/profile', '/login', '/reset', '/signup'].includes(pathname)
       ? 'active'
       : '';
   };
-
+console.log(pathname)
   return (
     <nav className="user__actions">
       <NavLink to="/cart">
@@ -24,7 +27,7 @@ export const UserActionsNav = () => {
           />
         </svg>
       </NavLink>
-      <NavLink to="/favorites">
+      <NavLink to={isAuth ? '/favorites' : '/login'}>
         <svg
           width="24"
           height="24"
@@ -38,7 +41,7 @@ export const UserActionsNav = () => {
           />
         </svg>
       </NavLink>
-      <NavLink to="/login" className={setLinkActive}>
+      <NavLink to={isAuth ? '/profile' : '/login'} className={setLinkActive}>
         <svg
           width="24"
           height="24"
