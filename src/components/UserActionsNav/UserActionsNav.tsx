@@ -10,7 +10,6 @@ export const UserActionsNav = () => {
       ? 'active'
       : '';
   };
-console.log(pathname)
   return (
     <nav className="user__actions">
       <NavLink to="/cart">

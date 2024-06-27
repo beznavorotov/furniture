@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -56,16 +56,17 @@ interface BodyMaterial {
   photo: string;
 }
 
-export const Product = () => {
-  const CATEGORY = 'category';
-  const BESTSELLERS = 'bestsellers';
-  const SALE = 'sale';
-  const DESCRIPTION = 'description';
-  const SPECS = 'specs';
-  const REVIEWS = 'reviews';
+const CATEGORY = 'category';
+const BESTSELLERS = 'bestsellers';
+const SALE = 'sale';
+const DESCRIPTION = 'description';
+const SPECS = 'specs';
+const REVIEWS = 'reviews';
 
+export const Product = () => {
   const { id } = useParams();
   const location = useLocation();
+  const galleryMainImgRef = useRef(null);
   const searchParams = new URLSearchParams(location.search);
   const stateType = searchParams.get('from');
 
@@ -131,8 +132,6 @@ export const Product = () => {
   const changeActiveTab = (tabName: string) => {
     return activeTab === tabName ? 'active' : null;
   };
-  // const handleMaterialClick = (index: number) => setActiveMaterial(index);
-  const handleGalleryImgClick = (index: number) => setGalleryImgIndex(index);
 
   const getDate = () => {
     const date = new Date();
@@ -159,6 +158,24 @@ export const Product = () => {
   if (!product || !photo || photo.length === 0) {
     return <IsLoading text="Заждіть секунду..." />;
   }
+  const galleryImgClickHandler = (index: number) => setGalleryImgIndex(index);
+
+  const galleryArrowsClickHandler = (arg) => {
+    console.log(photo);
+
+    const photoArrLength = photo.length;
+    if (galleryImgIndex < 0) {
+      setGalleryImgIndex(photoArrLength - 1);
+    }
+    if (galleryImgIndex >= photoArrLength) {
+      setGalleryImgIndex(0);
+    }
+    setGalleryImgIndex((prevState) => prevState + +arg.dataset.action);
+    console.log('photo.length: ', photo.length);
+    console.log('photoArrLength: ', photoArrLength);
+    console.log('galleryImgIndex:', galleryImgIndex);
+    console.log(photo[galleryImgIndex]);
+  };
 
   return (
     <PageSectionWrapper
@@ -169,13 +186,31 @@ export const Product = () => {
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--main">
-            <img src={photo[galleryImgIndex]} alt="main img" />
+            <img
+              ref={galleryMainImgRef}
+              src={photo[galleryImgIndex]}
+              alt="main img"
+            />
+            <span
+              className="product__gallery--arrow product__gallery--arrow-left"
+              data-action="-1"
+              onClick={(e) => galleryArrowsClickHandler(e.target)}
+            >
+              &lsaquo;
+            </span>
+            <span
+              className="product__gallery--arrow product__gallery--arrow-right"
+              data-action="1"
+              onClick={(e) => galleryArrowsClickHandler(e.target)}
+            >
+              &rsaquo;
+            </span>
           </div>
           <div className="product__gallery--collection">
             {photo.map((img, index) => (
               <div
                 key={crypto.randomUUID()}
-                onClick={() => handleGalleryImgClick(index)}
+                onClick={() => galleryImgClickHandler(index)}
                 className="product__gallery--item"
               >
                 <img src={img} alt="" />

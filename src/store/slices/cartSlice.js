@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-const initialState = {};
+import { STATUS_IDLE } from '@/constants';
+
+const initialState = {
+  basket: [],
+  totalItems: 0,
+  totalPrice: 0,
+  status: STATUS_IDLE,
+  error: null,
+};
 
 const cartSlice = createSlice({ name: 'cart', initialState });
 
