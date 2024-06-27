@@ -161,20 +161,17 @@ export const Product = () => {
   const galleryImgClickHandler = (index: number) => setGalleryImgIndex(index);
 
   const galleryArrowsClickHandler = (arg) => {
-    console.log(photo);
+    setGalleryImgIndex((prevState) => {
+      const photoArrLength = photo.length;
+      let newIndex = prevState + Number(arg.dataset.action);
 
-    const photoArrLength = photo.length;
-    if (galleryImgIndex < 0) {
-      setGalleryImgIndex(photoArrLength - 1);
-    }
-    if (galleryImgIndex >= photoArrLength) {
-      setGalleryImgIndex(0);
-    }
-    setGalleryImgIndex((prevState) => prevState + +arg.dataset.action);
-    console.log('photo.length: ', photo.length);
-    console.log('photoArrLength: ', photoArrLength);
-    console.log('galleryImgIndex:', galleryImgIndex);
-    console.log(photo[galleryImgIndex]);
+      if (newIndex < 0) {
+        newIndex = photoArrLength - 1;
+      } else if (newIndex >= photoArrLength) {
+        newIndex = 0;
+      }
+      return newIndex;
+    });
   };
 
   return (
@@ -186,11 +183,7 @@ export const Product = () => {
       <div className="product product--container">
         <div className="product__gallery">
           <div className="product__gallery--main">
-            <img
-              ref={galleryMainImgRef}
-              src={photo[galleryImgIndex]}
-              alt="main img"
-            />
+            <img src={photo[galleryImgIndex]} alt="main img" />
             <span
               className="product__gallery--arrow product__gallery--arrow-left"
               data-action="-1"
@@ -211,7 +204,9 @@ export const Product = () => {
               <div
                 key={crypto.randomUUID()}
                 onClick={() => galleryImgClickHandler(index)}
-                className="product__gallery--item"
+                className={`product__gallery--item ${
+                  galleryImgIndex === index ? 'active' : ''
+                }`}
               >
                 <img src={img} alt="" />
               </div>
