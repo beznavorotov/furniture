@@ -70,9 +70,14 @@
           color: $color-black;
           padding: 8px 0px;
         }
+        .discount {
+          width: 68%;
+          border: none;
+          border-bottom: 1px solid $color-black;
+        }
 
         .total {
-          font-size: 14px;
+          font-size: 18px;
           font-weight: 500;
         }
       }

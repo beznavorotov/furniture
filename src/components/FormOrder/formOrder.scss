@@ -56,7 +56,7 @@
           .input_np {
             max-width: 600px;
             height: 46px;
-            color: #000000;
+            color: #acabab;
           }
 
           .input_comment {
@@ -78,9 +78,11 @@
             margin-left: 70px;
             padding: 5px;
 
-            input {
+
+            .input_ok {
               width: 20px;
               height: 20px;
+
             }
           }
         }

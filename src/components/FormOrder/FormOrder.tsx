@@ -1,7 +1,6 @@
-import { CartOrder } from './CartOrder/CartOrder';
 import { useNovaPoshtaApi } from '@/components/UseNovaPoshtaApi/UseNovaPoshtaApi';
 import { useForm } from 'react-hook-form';
-
+import { CartOrder } from './CartOrder/CartOrder';
 
 export const FormOrder = () => {
   const { regions, cities, departments, setSelectedRegion, setSelectedCity } =
@@ -79,7 +78,7 @@ export const FormOrder = () => {
                   })}
                 />
                 {errors.firstName && (
-                  <span>{(errors.firstName.message as string)}</span>
+                  <span>{errors.firstName.message as string}</span>
                 )}
 
                 <input
@@ -93,7 +92,7 @@ export const FormOrder = () => {
                   })}
                 />
                 {errors.lastName && (
-                  <span>{(errors.lastName.message as string)}</span>
+                  <span>{errors.lastName.message as string}</span>
                 )}
               </div>
               <div className="form_group">
@@ -111,7 +110,7 @@ export const FormOrder = () => {
                     },
                   })}
                 />
-                {errors.phone && <span>{(errors.phone.message as string)}</span>}
+                {errors.phone && <span>{errors.phone.message as string}</span>}
 
                 <input
                   className="input"
@@ -127,7 +126,7 @@ export const FormOrder = () => {
                     },
                   })}
                 />
-                {errors.email && <span>{(errors.email.message as string)}</span>}
+                {errors.email && <span>{errors.email.message as string}</span>}
               </div>
             </div>
 
@@ -135,9 +134,9 @@ export const FormOrder = () => {
               <div className="title_border">
                 <span className="form_section_title">02 Доставка</span>
               </div>
-              <div className="form_group">
+              <div className="form_group justify-content-center flex-wrap ">
                 <select
-                  className="input"
+                  className="input_np "
                   name="selectedRegion"
                   {...register('selectedRegion', {
                     required: 'Оберіть регіон',
@@ -152,11 +151,11 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedRegion && (
-                  <span>{(errors.selectedRegion.message as string)}</span>
+                  <span>{errors.selectedRegion.message as string}</span>
                 )}
 
                 <select
-                  className="input"
+                  className="input_np"
                   name="selectedCity"
                   {...register('selectedCity', { required: 'Оберіть місто' })}
                   onChange={handleCityChange}
@@ -169,11 +168,11 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedCity && (
-                  <span>{(errors.selectedCity.message as string)}</span>
+                  <span>{errors.selectedCity.message as string}</span>
                 )}
 
                 <select
-                  className="input"
+                  className="input_np"
                   name="selectedDepartment"
                   {...register('selectedDepartment', {
                     required: 'Оберіть відділення',
@@ -190,7 +189,7 @@ export const FormOrder = () => {
                   ))}
                 </select>
                 {errors.selectedDepartment && (
-                  <span>{(errors.selectedDepartment.message as string)}</span>
+                  <span>{errors.selectedDepartment.message as string}</span>
                 )}
               </div>
             </div>
@@ -200,8 +199,9 @@ export const FormOrder = () => {
                 <span className="form_section_title">03 Оплата</span>
               </div>
               <div className="form_group_payment">
-                <label className="input_payment">
+                <label className="input_payment d-flex">
                   <input
+                    className="input_ok"
                     type="radio"
                     name="paymentMethod"
                     value="cash"
@@ -209,13 +209,14 @@ export const FormOrder = () => {
                       required: 'Оберіть метод оплати',
                     })}
                   />
-                  Оплата картами Visa/Mastercard на сайті
+                 <span className="ps-1 ">Оплата картами Visa/Mastercard на сайті</span> 
                 </label>
                 {errors.paymentMethod && (
-                  <span>{(errors.paymentMethod.message as string)}</span>
+                  <span>{errors.paymentMethod.message as string}</span>
                 )}
-                <label className="input_payment">
+                <label className="input_payment d-flex">
                   <input
+                    className="input_ok"
                     type="radio"
                     name="paymentMethod"
                     value="cash"
@@ -223,13 +224,14 @@ export const FormOrder = () => {
                       required: 'Оберіть метод оплати',
                     })}
                   />
-                  PayPal
+                 <span className="ps-1 ">PayPal</span> 
                 </label>
                 {errors.paymentMethod && (
-                  <span>{(errors.paymentMethod.message as string)}</span>
+                  <span>{errors.paymentMethod.message as string}</span>
                 )}
-                <label className="input_payment">
+                <label className="input_payment d-flex">
                   <input
+                    className="input_ok"
                     type="radio"
                     name="paymentMethod"
                     value="card"
@@ -237,10 +239,10 @@ export const FormOrder = () => {
                       required: 'Оберіть метод оплати',
                     })}
                   />
-                  Оплата під час отримання
+                  <span className="ps-1 ">Оплата під час отримання</span>
                 </label>
                 {errors.paymentMethod && (
-                  <span>{(errors.paymentMethod.message as string)}</span>
+                  <span>{errors.paymentMethod.message as string}</span>
                 )}
               </div>
             </div>
@@ -255,27 +257,31 @@ export const FormOrder = () => {
                 />
               </div>
               <div className="form_group_payment">
-                <label className="input_payment">
+                <label className="input_payment d-flex">
                   <input
+                    className="input_ok"
                     type="checkbox"
                     name="termsAccepted"
                     {...register('termsAccepted', {
                       required: 'Погодьтесь з умовами',
                     })}
                   />
-                  Я приймаю умови обслуговування
+                  <span className="ps-1 ">Я приймаю умови обслуговування</span>
                 </label>
                 {errors.termsAccepted && (
-                  <span>{(errors.termsAccepted.message as string)}</span>
+                  <span>{errors.termsAccepted.message as string}</span>
                 )}
 
-                <label className="input_payment">
+                <label className="input_payment d-flex">
                   <input
+                    className="input_ok"
                     type="checkbox"
                     name="noCall"
                     {...register('noCall')}
                   />
-                  Не передзвонюйте мені, я впевнений у замовленні.
+                  <span className="ps-1 ">
+                    Не передзвонюйте мені, я впевнений у замовленні.
+                  </span>
                 </label>
               </div>
             </div>

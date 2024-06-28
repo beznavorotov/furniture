@@ -1,82 +1,26 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import sofa from '@/assets/seater-sofa.png';
 
 export const CartOrder = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [promoCode, setPromoCode] = useState('');
-  const [discount, setDiscount] = useState(0);
-  const [appliedPromoCode, setAppliedPromoCode] = useState('');
+  const location = useLocation();
+  const { cartData } = location.state || { cartData: { cartProducts: [], totalQuantity: 0, totalPrice: 0 } };
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const cartData = [
-          {
-            article_code: '12345',
-            photo: [sofa],
-            title: 'Диван Софа',
-            price: 10000,
-            quantity: 2,
-          },
-          {
-            article_code: '12346',
-            photo: [sofa],
-            title: 'Диван Софа',
-            price: 20000,
-            quantity: 1,
-          },
-        ];
-        setCartItems(cartData);
-      } catch (error) {
-        console.error('Error fetching cart items:', error);
-      }
-    };
-
-    fetchCartItems();
-  }, []);
-
-  const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
-  };
-
-  const getTotalQuantity = () => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  };
-
-  const applyPromoCode = () => {
-    if (promoCode === 'DISCOUNT10') {
-      setDiscount(0.1 * getTotalPrice());
-      setAppliedPromoCode(promoCode);
-    } else {
-      setDiscount(0);
-      setAppliedPromoCode('');
-    }
-  };
+  const { cartProducts, totalQuantity, totalPrice } = cartData;
 
   return (
     <div className="cart_summary">
-      {cartItems.length > 0 ? (
-        cartItems.map((item) => (
-          <div key={item.article_code} className="product_details">
-            <img
-              src={item.photo[0]}
-              alt={item.title}
-              className="icon_product"
-            />
+      {cartProducts.length > 0 ? (
+        cartProducts.map((product) => (
+          <div key={product.article} className="product_details">
+            <img src={product.image} alt={product.name} className="icon_product" />
             <div className="cart_details">
-              <span className="name_product">{item.title}</span>
-              <span className="article_product">
-                Артикул: {item.article_code}
-              </span>
+              <span className="name_product">{product.name}</span>
+              <span className="article_product">Код товару: {product.article}</span>
             </div>
             <div className="quantity_details">
-              <span className="quantity_product">
-                Кількість: {item.quantity}
-              </span>
-              <span className="product_price">{item.price} грн</span>
+              <span className="quantity_product">Кількість: {product.quantity}</span>
+              <span className="product_price">{product.price} грн</span>
             </div>
           </div>
         ))
@@ -87,45 +31,20 @@ export const CartOrder = () => {
         <div className="summary_details">
           <div className="summary_item">
             <span className="text">Товарів: </span>
-            <span className="text">{getTotalQuantity()}</span>
+            <span className="text">{totalQuantity}</span>
           </div>
           <div className="summary_item">
             <span className="text">Сума товарів:</span>
-            <span className="text">{getTotalPrice()} грн</span>
+            <span className="text">{totalPrice} грн</span>
           </div>
-
-          <div className="summary_item">
-            <input
-              className="discount"
-              type="text"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value)}
-              disabled={!!appliedPromoCode}
-              placeholder="DISCOUNT10"
-            />
-            <button
-              className="button button__white btn"
-              onClick={applyPromoCode}
-              disabled={!!appliedPromoCode}
-            >
-              Застосувати
-            </button>
-          </div>
-          {appliedPromoCode && (
-            <div className="summary_item">
-              <span className="text">Знижка:</span>
-              <span className="text">-{discount} грн</span>
-            </div>
-          )}
           <div className="summary_item">
             <span className="text_all">Всього:</span>
-            <span className="text_all">{getTotalPrice() - discount} грн</span>
+            <span className="text_all">{totalPrice} грн</span>
           </div>
-        </div>
-        <div className="order">
-          <button className="button button__order">Оформити замовлення</button>
         </div>
       </div>
     </div>
   );
 };
+
+export default CartOrder;

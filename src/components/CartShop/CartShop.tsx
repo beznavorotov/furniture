@@ -1,18 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import sofaGreen from '@/assets/sofa_green.jpg';
-import close from '@/assets/icons/close.svg';
-import { getCartItems } from '@/store/slices/cartSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import sofa from '../../assets/seater-sofa.png';
+import close from '../../assets/icons/close.svg';
 
-const CartProducts = [
+const initialCartProducts = [
   {
     id: 1,
     name: 'Диван Софа',
     article: 12345,
     price: 25000,
     quantity: 1,
-    image: sofaGreen,
+    image: sofa,
   },
   {
     id: 2,
@@ -20,7 +18,7 @@ const CartProducts = [
     article: 12346,
     price: 10000,
     quantity: 2,
-    image: sofaGreen,
+    image: sofa,
   },
   {
     id: 3,
@@ -28,15 +26,16 @@ const CartProducts = [
     article: 12347,
     price: 20000,
     quantity: 3,
-    image: sofaGreen,
+    image: sofa,
   },
 ];
 
 export const CartShop = () => {
-  const dispatch = useDispatch();
-  const [cartProducts, setCartProducts] = useState(CartProducts);
-
+  const [cartProducts, setCartProducts] = useState(initialCartProducts);
+  const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
+  const [appliedPromoCode, setAppliedPromoCode] = useState('');
+  const navigate = useNavigate();
 
   const removeProduct = (id) => {
     setCartProducts(cartProducts.filter((product) => product.id !== id));
@@ -77,15 +76,35 @@ export const CartShop = () => {
     return cartProducts.reduce((total, product) => total + product.quantity, 0);
   };
 
+  const applyPromoCode = () => {
+    if (promoCode === 'DISCOUNT10') {
+      setDiscount(0.1 * getTotalPrice());
+      setAppliedPromoCode(promoCode);
+    } else {
+      setDiscount(0);
+      setAppliedPromoCode('');
+    }
+  };
+
   const clearCart = () => {
     setCartProducts([]);
     setDiscount(0);
+    setAppliedPromoCode('');
+  };
+
+  const handleOrder = () => {
+    const cartData = {
+      cartProducts,
+      totalQuantity: getTotalQuantity(),
+      totalPrice: getTotalPrice() - discount,
+    };
+    navigate('/order', { state: { cartData } });
   };
 
   return (
     <div className="cart">
       <div className="title_cart">
-        <h1 onClick={() => dispatch(getCartItems())}>Кошик</h1>
+        <h1>Кошик</h1>
         {cartProducts.length > 0 && (
           <button className="clear_cart" onClick={clearCart}>
             Очистити кошик
@@ -95,7 +114,7 @@ export const CartShop = () => {
       {cartProducts.length === 0 ? (
         <div className="empty_cart_message">
           <h1>Ваш кошик порожній</h1>
-          <Link to="/" className="button">
+          <Link to="/" className="button button__white">
             До покупок
           </Link>
         </div>
@@ -146,28 +165,53 @@ export const CartShop = () => {
             ))}
           </div>
           <div className="cart_summary">
-            <h2 className="title">Сума</h2>
+            <h2>Сума</h2>
             <div className="summary_details">
               <div className="summary_item">
                 <span>Товари: </span>
                 <span>{getTotalQuantity()}</span>
               </div>
+              <div className="summary_item">
+                <span>Сума товарів:</span>
+                <span>{getTotalPrice()} грн</span>
+              </div>
+
+              <div className="summary_item">
+                <input
+                  className="discount"
+                  type="text"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  disabled={!!appliedPromoCode}
+                  placeholder="DISCOUNT10"
+                />
+                <button
+                  className="button button__white btn_discount"
+                  onClick={applyPromoCode}
+                  disabled={!!appliedPromoCode}
+                >
+                  Застосувати
+                </button>
+              </div>
+              {appliedPromoCode && (
+                <div className="summary_item">
+                  <span>Знижка:</span>
+                  <span>-{discount} грн</span>
+                </div>
+              )}
               <div className="summary_item total">
                 <span>Всього:</span>
                 <span>{getTotalPrice() - discount} грн</span>
               </div>
             </div>
-            <div className="d-flex justify-content-center align-items-center align-self-center flex-column ">
+            <div className='d-flex justify-content-center flex-wrap'>
               <Link to="/">
-                <button className="button button__white ">
-                  Продовжити покупки
-                </button>
+                <button className="button button__white btn">Продовжити покупки</button>
               </Link>
-              <Link to="/order">
-                <button className="button button__order ">
-                  Оформити замовлення
-                </button>
-              </Link>
+
+              <button className="button button__order btn" onClick={handleOrder}>
+                Оформити замовлення
+              </button>
             </div>
           </div>
         </div>
@@ -175,3 +219,4 @@ export const CartShop = () => {
     </div>
   );
 };
+
