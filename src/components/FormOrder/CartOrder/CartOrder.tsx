@@ -1,10 +1,10 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
-import sofa from '@/assets/seater-sofa.png';
 
 export const CartOrder = () => {
   const location = useLocation();
-  const { cartData } = location.state || { cartData: { cartProducts: [], totalQuantity: 0, totalPrice: 0 } };
+  const { cartData } = location.state || {
+    cartData: { cartProducts: [], totalQuantity: 0, totalPrice: 0 },
+  };
 
   const { cartProducts, totalQuantity, totalPrice } = cartData;
 
@@ -13,13 +13,21 @@ export const CartOrder = () => {
       {cartProducts.length > 0 ? (
         cartProducts.map((product) => (
           <div key={product.article} className="product_details">
-            <img src={product.image} alt={product.name} className="icon_product" />
+            <img
+              src={product.image}
+              alt={product.name}
+              className="icon_product"
+            />
             <div className="cart_details">
               <span className="name_product">{product.name}</span>
-              <span className="article_product">Код товару: {product.article}</span>
+              <span className="article_product">
+                Код товару: {product.article}
+              </span>
             </div>
             <div className="quantity_details">
-              <span className="quantity_product">Кількість: {product.quantity}</span>
+              <span className="quantity_product">
+                Кількість: {product.quantity}
+              </span>
               <span className="product_price">{product.price} грн</span>
             </div>
           </div>
