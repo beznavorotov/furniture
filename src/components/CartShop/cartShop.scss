@@ -233,3 +233,27 @@
     }
   }
 }
+
+
+@media screen and (max-width: 600px) {
+  .cart {
+    .cart_content{
+      display: flex;
+      flex-direction: column;
+      .cart_details_block{
+        width: 100%;
+        .cart_details{
+          display: flex;
+          flex-direction: column;
+          .quantity_controls {
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .cart_summary{
+        width: 100%;
+      }
+
+    }
+  }
+}

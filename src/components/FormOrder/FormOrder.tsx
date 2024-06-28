@@ -55,7 +55,7 @@ export const FormOrder = () => {
   };
 
   return (
-    <>
+    <div className="box_order">
       <div className="title">
         <h1 className="title_ordet_text">Замовлення</h1>
       </div>
@@ -67,66 +67,84 @@ export const FormOrder = () => {
                 <span className="form_section_title">01 Контактні дані</span>
               </div>
               <div className="form_group">
-                <input
-                  className="input"
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  placeholder="Ім'я"
-                  {...register('firstName', {
-                    required: 'Це поле є обов`язковим',
-                  })}
-                />
-                {errors.firstName && (
-                  <span>{errors.firstName.message as string}</span>
-                )}
-
-                <input
-                  className="input"
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  placeholder="Прізвище"
-                  {...register('lastName', {
-                    required: 'Це поле є обов`язковим',
-                  })}
-                />
-                {errors.lastName && (
-                  <span>{errors.lastName.message as string}</span>
-                )}
+                <div className="d-flex justify-content-center flex-wrap box_input">
+                  <input
+                    className="input"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="Ім'я"
+                    {...register('firstName', {
+                      required: 'Це поле є обов`язковим',
+                    })}
+                  />
+                  {errors.firstName && (
+                    <span className="error_message">
+                      {errors.firstName.message as string}
+                    </span>
+                  )}
+                </div>
+                <div className="d-flex justify-content-center flex-wrap box_input">
+                  <input
+                    className="input"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Прізвище"
+                    {...register('lastName', {
+                      required: 'Це поле є обов`язковим',
+                    })}
+                  />
+                  {errors.lastName && (
+                    <span className="error_message">
+                      {errors.lastName.message as string}
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="form_group">
-                <input
-                  className="input"
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  placeholder="+380"
-                  {...register('phone', {
-                    required: 'Це поле є обов`язковим',
-                    pattern: {
-                      value: /^\+380\d{9}$/,
-                      message: 'Введіть правильний номер телефону',
-                    },
-                  })}
-                />
-                {errors.phone && <span>{errors.phone.message as string}</span>}
-
-                <input
-                  className="input"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  {...register('email', {
-                    required: "Це поле є обов'язковим",
-                    pattern: {
-                      value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                      message: 'Введіть правильний email',
-                    },
-                  })}
-                />
-                {errors.email && <span>{errors.email.message as string}</span>}
+                <div className="d-flex justify-content-center flex-wrap box_input">
+                  <input
+                    className="input"
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    placeholder="+380"
+                    {...register('phone', {
+                      required: 'Це поле є обов`язковим',
+                      pattern: {
+                        value: /^\+380\d{9}$/,
+                        message: 'Введіть правильний номер телефону',
+                      },
+                    })}
+                  />
+                  {errors.phone && (
+                    <span className="error_message">
+                      {errors.phone.message as string}
+                    </span>
+                  )}
+                </div>
+                <div className="d-flex justify-content-center flex-wrap box_input">
+                  <input
+                    className="input"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    {...register('email', {
+                      required: "Це поле є обов'язковим",
+                      pattern: {
+                        value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                        message: 'Введіть правильний email',
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <span className="error_message">
+                      {errors.email.message as string}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -134,62 +152,72 @@ export const FormOrder = () => {
               <div className="title_border">
                 <span className="form_section_title">02 Доставка</span>
               </div>
-              <div className="form_group justify-content-center flex-wrap ">
-                <select
-                  className="input_np "
-                  name="selectedRegion"
-                  {...register('selectedRegion', {
-                    required: 'Оберіть регіон',
-                  })}
-                  onChange={handleRegionChange}
-                >
-                  <option value="">Оберіть регіон</option>
-                  {regions.map((region) => (
-                    <option key={region.Ref} value={region.Ref}>
-                      {region.Description}
-                    </option>
-                  ))}
-                </select>
+              <div className="form_group flex-column ">
+                <div className="d-flex justify-content-center">
+                  <select
+                    className="input_np "
+                    name="selectedRegion"
+                    {...register('selectedRegion', {
+                      required: 'Оберіть регіон',
+                    })}
+                    onChange={handleRegionChange}
+                  >
+                    <option value="">Оберіть регіон</option>
+                    {regions.map((region) => (
+                      <option key={region.Ref} value={region.Ref}>
+                        {region.Description}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {errors.selectedRegion && (
-                  <span>{errors.selectedRegion.message as string}</span>
+                  <span className="error_message_delivery ">
+                    {errors.selectedRegion.message as string}
+                  </span>
                 )}
-
-                <select
-                  className="input_np"
-                  name="selectedCity"
-                  {...register('selectedCity', { required: 'Оберіть місто' })}
-                  onChange={handleCityChange}
-                >
-                  <option value="">Оберіть місто</option>
-                  {cities.map((city) => (
-                    <option key={city.Ref} value={city.Ref}>
-                      {city.Description}
-                    </option>
-                  ))}
-                </select>
+                <div className="d-flex justify-content-center ">
+                  <select
+                    className="input_np"
+                    name="selectedCity"
+                    {...register('selectedCity', { required: 'Оберіть місто' })}
+                    onChange={handleCityChange}
+                  >
+                    <option value="">Оберіть місто</option>
+                    {cities.map((city) => (
+                      <option key={city.Ref} value={city.Ref}>
+                        {city.Description}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {errors.selectedCity && (
-                  <span>{errors.selectedCity.message as string}</span>
+                  <span className="error_message_delivery ">
+                    {errors.selectedCity.message as string}
+                  </span>
                 )}
-
-                <select
-                  className="input_np"
-                  name="selectedDepartment"
-                  {...register('selectedDepartment', {
-                    required: 'Оберіть відділення',
-                  })}
-                >
-                  <option value="">Оберіть відділення</option>
-                  {departments.map((department) => (
-                    <option
-                      key={department.Description}
-                      value={department.Description}
-                    >
-                      {department.Description}
-                    </option>
-                  ))}
-                </select>
+                <div className="d-flex justify-content-center ">
+                  <select
+                    className="input_np"
+                    name="selectedDepartment"
+                    {...register('selectedDepartment', {
+                      required: 'Оберіть відділення',
+                    })}
+                  >
+                    <option value="">Оберіть відділення</option>
+                    {departments.map((department) => (
+                      <option
+                        key={department.Description}
+                        value={department.Description}
+                      >
+                        {department.Description}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {errors.selectedDepartment && (
-                  <span>{errors.selectedDepartment.message as string}</span>
+                  <span className="error_message_delivery ">
+                    {errors.selectedDepartment.message as string}
+                  </span>
                 )}
               </div>
             </div>
@@ -198,7 +226,7 @@ export const FormOrder = () => {
               <div className="title_border">
                 <span className="form_section_title">03 Оплата</span>
               </div>
-              <div className="form_group_payment">
+              <div className="form_group_payment d-flex flex-column">
                 <label className="input_payment d-flex">
                   <input
                     className="input_ok"
@@ -209,10 +237,14 @@ export const FormOrder = () => {
                       required: 'Оберіть метод оплати',
                     })}
                   />
-                 <span className="ps-1 ">Оплата картами Visa/Mastercard на сайті</span> 
+                  <span className="ps-1 ">
+                    Оплата картами Visa/Mastercard на сайті
+                  </span>
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message as string}</span>
+                  <span className="error_message_payment">
+                    {errors.paymentMethod.message as string}
+                  </span>
                 )}
                 <label className="input_payment d-flex">
                   <input
@@ -224,10 +256,12 @@ export const FormOrder = () => {
                       required: 'Оберіть метод оплати',
                     })}
                   />
-                 <span className="ps-1 ">PayPal</span> 
+                  <span className="ps-1 ">PayPal</span>
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message as string}</span>
+                  <span className="error_message_payment">
+                    {errors.paymentMethod.message as string}
+                  </span>
                 )}
                 <label className="input_payment d-flex">
                   <input
@@ -242,7 +276,9 @@ export const FormOrder = () => {
                   <span className="ps-1 ">Оплата під час отримання</span>
                 </label>
                 {errors.paymentMethod && (
-                  <span>{errors.paymentMethod.message as string}</span>
+                  <span className="error_message_payment">
+                    {errors.paymentMethod.message as string}
+                  </span>
                 )}
               </div>
             </div>
@@ -269,7 +305,9 @@ export const FormOrder = () => {
                   <span className="ps-1 ">Я приймаю умови обслуговування</span>
                 </label>
                 {errors.termsAccepted && (
-                  <span>{errors.termsAccepted.message as string}</span>
+                  <span className="error_message_payment">
+                    {errors.termsAccepted.message as string}
+                  </span>
                 )}
 
                 <label className="input_payment d-flex">
@@ -285,16 +323,17 @@ export const FormOrder = () => {
                 </label>
               </div>
             </div>
-
-            <button type="submit" className="button button__order">
-              Відправити замовлення
-            </button>
+            <div className=" d-flex justify-content-center">
+              <button type="submit" className="button button__order">
+                Відправити замовлення
+              </button>
+            </div>
           </form>
         </div>
         <div className="basket">
           <CartOrder />
         </div>
       </div>
-    </>
+    </div>
   );
 };

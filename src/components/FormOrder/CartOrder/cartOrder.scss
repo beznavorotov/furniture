@@ -66,10 +66,14 @@
         }
       }
 
-      // .order {
-      //   display: flex;
-      //   align-items: center;
-      // }
+
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cart_summary{
+    width: 100%;
+    
   }
 }
