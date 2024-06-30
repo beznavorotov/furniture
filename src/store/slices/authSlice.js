@@ -57,7 +57,12 @@ export const refreshToken = createAsyncThunk(
         method: 'POST',
         credentials: 'include',
       });
-      return response.access;
+      if (response.ok) {
+        localStorage.setItem('accessToken', response.access);
+        return response.access;
+      } else {
+        return rejectWithValue(response);
+      }
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -110,8 +115,9 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.status = STATUS_IDLE;
         state.user = null;
-        state.accessToken = null;
         state.isAuth = false;
+        state.accessToken = null;
+        localStorage.removeItem('accessToken');
       })
       // signUp
       .addCase(signup.pending, (state) => {
@@ -125,6 +131,10 @@ const authSlice = createSlice({
       .addCase(signup.rejected, (state, action) => {
         state.status = STATUS_FAILD;
         state.error = action.payload;
+      })
+      // refresh
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.accessToken = action.payload;
       });
   },
 });

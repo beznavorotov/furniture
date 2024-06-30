@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getCartItems } from '@/store/slices/cartSlice';
+import { refreshToken } from '@/store/slices/authSlice';
 import sofa from '../../assets/seater-sofa.png';
 import close from '../../assets/icons/close.svg';
 
@@ -108,6 +109,7 @@ export const CartShop = () => {
     <div className="cart">
       <div className="title_cart">
         <h1 onClick={() => dispatch(getCartItems())}>Кошик</h1>
+        <h1 onClick={() => dispatch(refreshToken())}>Refresh</h1>
         {cartProducts.length > 0 && (
           <button className="clear_cart" onClick={clearCart}>
             Очистити кошик
