@@ -41,7 +41,9 @@ export const AddToCartModalWindow = () => {
   const newPrice = price === discount ? price?.toFixed() : discount?.toFixed();
 
   useEffect(() => {
-    setDemoTotalPrice(itemsQuantity * newPrice);
+    if (!isNaN(newPrice)) {
+      setDemoTotalPrice(itemsQuantity * newPrice);
+    }
   }, [itemsQuantity, newPrice]);
 
   return (
