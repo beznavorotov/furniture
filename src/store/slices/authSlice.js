@@ -9,6 +9,7 @@ import {
   STATUS_SUCCEEDED,
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
+import { BACKEND_JWT_REFRESH_URL } from '../../constants';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -48,14 +49,27 @@ export const signup = createAsyncThunk(
   },
 );
 
+export const refreshToken = createAsyncThunk(
+  'auth/resresh',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchData(BACKEND_JWT_REFRESH_URL, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      return response.access;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 export const logout = createAsyncThunk('auth/logout', () => {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('user');
   Cookies.remove('refreshToken');
   return {};
 });
-
-export const refreshToken = createAsyncThunk('auth/resresh', async () => {});
 
 const authSlice = createSlice({
   name: 'auth',

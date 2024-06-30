@@ -124,21 +124,14 @@ export const CatalogContent = ({ data, type }) => {
         {catelogStatus === STATUS_LOADING || searchStatus === STATUS_LOADING ? (
           <IsLoading text="Заждіть секунду..." />
         ) : (
-          filteredAndSortedCatalog?.map(
-            ({ article_code, photo, title, price, discount, rating }) => (
-              <ProductCard
-                key={article_code}
-                img={photo.find((item) => item.includes('MAIN_photo_image_'))}
-                name={title}
-                price={price}
-                discountPrice={discount}
-                cardSize="small"
-                id={article_code}
-                stateType={type}
-                rating={rating}
-              />
-            ),
-          )
+          filteredAndSortedCatalog?.map((item) => (
+            <ProductCard
+              key={item.article_code}
+              cardSize="small"
+              stateType={type}
+              props={item}
+            />
+          ))
         )}
       </div>
 

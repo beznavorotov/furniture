@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowModal } from '@/store/slices/modalSlice';
 import { RootState } from '@/store';
-import sofa from '@/assets/sofa_beige.png';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const AddToCartModalWindow = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state: RootState) => state.modal.showModal);
+  const modalData = useSelector((state: RootState) => state.modal.data);
+  const { title, article_code, price, discount, colour, photo } = modalData;
   const isOverlayOpen = useSelector(
     (state: RootState) => state.modal.showOverlay,
   );
@@ -26,8 +27,9 @@ export const AddToCartModalWindow = () => {
   const decrementQuantity = () => {
     setItemsQuantity((prevState) => (prevState - 1 ? prevState - 1 : 1));
   };
-  const handleInputChange = (e) => {
-    const minValue = parseInt(e.target.value, 10);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const minValue = parseInt(value, 10);
 
     if (minValue >= 1) {
       setItemsQuantity(minValue);
@@ -36,9 +38,11 @@ export const AddToCartModalWindow = () => {
     }
   };
 
+  const newPrice = price === discount ? price?.toFixed() : discount?.toFixed();
+
   useEffect(() => {
-    setDemoTotalPrice(itemsQuantity * 25000);
-  }, [itemsQuantity]);
+    setDemoTotalPrice(itemsQuantity * newPrice);
+  }, [itemsQuantity, newPrice]);
 
   return (
     <>
@@ -59,21 +63,25 @@ export const AddToCartModalWindow = () => {
         <div className="modal__content">
           <div className="modal__details">
             <div className="modal__media">
-              <img src={sofa} alt="product" />
+              <img
+                src={photo?.find((item) => item.includes('MAIN_photo_image_'))}
+                alt="product"
+              />
             </div>
 
             <ul className="modal__details-list">
               <li className="details-list__item details-list__title">
-                Диван not Basic Red шкіра ретро вінтаж MKII страус
+                {title}
               </li>
               <li className="details-list__item details-list__color">
-                Колір: Червоний
+                Колір: {colour}
               </li>
               <li className="details-list__item details-list__code">
-                Код товару: 9567
+                Код товару: {article_code}
               </li>
               <li className="details-list__item details-list__price">
-                <span>25 000</span>грн.
+                <span>{newPrice}</span>
+                грн.
               </li>
             </ul>
           </div>
@@ -89,14 +97,11 @@ export const AddToCartModalWindow = () => {
             <button onClick={decrementQuantity}>-</button>
           </div>
           <div className="modal__total-info">
-            <p className="modal__total-info--item">
-              Загальна сума:<span>{demoTotalPrice}</span>
-            </p>
-            <p className="modal__total-info--item">
+            {/* <p className="modal__total-info--item">
               Доставка:<span>2 000</span>
-            </p>
+            </p> */}
             <p className="modal__total-info--item modal__total-info--total-sum">
-              Всього:<span>{demoTotalPrice + 2000}</span>
+              Всього:<span>{demoTotalPrice}</span>
             </p>
             <Link className="button" to="/cart" onClick={closeModal}>
               Перейти до кошика

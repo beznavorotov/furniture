@@ -26,7 +26,7 @@ export const getCartItems = createAsyncThunk(
       return await fetchData(ORDER_URL, {
         method: 'GET',
         headers: {
-          // Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + token,
         },
       });
     } catch (error) {
@@ -41,7 +41,7 @@ export const addCartItems = createAsyncThunk(
       return await fetchData(ORDER_URL, {
         method: 'POST',
         headers: {
-          // Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + token,
         },
       });
     } catch (error) {

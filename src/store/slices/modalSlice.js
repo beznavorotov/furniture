@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     showModal: false,
     showOverlay: false,
+    data: {},
   },
 
   reducers: {
@@ -14,8 +15,12 @@ const modalSlice = createSlice({
     setShowOverlay: (state, action) => {
       state.showOverlay = action.payload;
     },
+    setModalData: (state, action) => {
+      state.data = action.payload;
+    },
   },
 });
 
-export const { setShowModal, setShowOverlay } = modalSlice.actions;
+export const { setShowModal, setShowOverlay, setModalData } =
+  modalSlice.actions;
 export default modalSlice.reducer;

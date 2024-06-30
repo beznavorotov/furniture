@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { getCartItems } from '@/store/slices/cartSlice';
 import sofa from '../../assets/seater-sofa.png';
 import close from '../../assets/icons/close.svg';
 
@@ -31,6 +33,7 @@ const initialCartProducts = [
 ];
 
 export const CartShop = () => {
+  const dispatch = useDispatch();
   const [cartProducts, setCartProducts] = useState(initialCartProducts);
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -104,7 +107,7 @@ export const CartShop = () => {
   return (
     <div className="cart">
       <div className="title_cart">
-        <h1>Кошик</h1>
+        <h1 onClick={() => dispatch(getCartItems())}>Кошик</h1>
         {cartProducts.length > 0 && (
           <button className="clear_cart" onClick={clearCart}>
             Очистити кошик
@@ -204,12 +207,17 @@ export const CartShop = () => {
                 <span>{getTotalPrice() - discount} грн</span>
               </div>
             </div>
-            <div className='d-flex justify-content-center flex-wrap'>
+            <div className="d-flex justify-content-center flex-wrap">
               <Link to="/">
-                <button className="button button__white btn">Продовжити покупки</button>
+                <button className="button button__white btn">
+                  Продовжити покупки
+                </button>
               </Link>
 
-              <button className="button button__order btn" onClick={handleOrder}>
+              <button
+                className="button button__order btn"
+                onClick={handleOrder}
+              >
                 Оформити замовлення
               </button>
             </div>
@@ -219,4 +227,3 @@ export const CartShop = () => {
     </div>
   );
 };
-

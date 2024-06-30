@@ -381,21 +381,14 @@ export const Product = () => {
           <h1 className="recommended-products__title">Рекомендовані товари</h1>
         </div>
         <div className="recommended-products__list">
-          {shuffleArray.map(
-            ({ article_code, title, price, discount, photo, rating }) => (
-              <ProductCard
-                key={article_code}
-                name={title}
-                price={price}
-                discountPrice={discount}
-                cardSize={null}
-                img={photo.find((img) => img.includes('MAIN_photo_image_'))}
-                stateType={stateType}
-                id={article_code}
-                rating={rating}
-              />
-            ),
-          )}
+          {shuffleArray.map((item) => (
+            <ProductCard
+              key={item.article_code}
+              props={item}
+              cardSize={null}
+              stateType={stateType}
+            />
+          ))}
         </div>
       </section>
     </PageSectionWrapper>
