@@ -6,6 +6,7 @@ import catalogSlice from './slices/catalogSlice';
 import searchSlice from './slices/searchSlice';
 import filterCatalogSlice from './slices/filterCatalogSlice';
 import cartSlice from './slices/cartSlice';
+import favoritesReducer from './slices/favoritesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     search: searchSlice,
     filter: filterCatalogSlice,
     cart: cartSlice,
+    favorites: favoritesReducer,
   },
 });

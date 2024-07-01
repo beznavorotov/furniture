@@ -33,6 +33,11 @@
           display: flex;
 
           .icon_product {
+            .photo{
+              width: 100px;
+              height: 100px;
+            }
+
           }
           .name_product {
             display: flex;
@@ -53,6 +58,7 @@
               font-weight: 500;
               color: $color-blue;
               padding-top: 5px;
+
             }
           }
         }

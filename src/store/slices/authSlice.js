@@ -1,3 +1,4 @@
+// authSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import {
@@ -7,26 +8,26 @@ import {
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
+  BACKEND_JWT_REFRESH_URL,
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
-import { BACKEND_JWT_REFRESH_URL } from '../../constants';
+import { getAccessToken, setAccessToken, removeTokens } from '@/utils/tokenUtils';
+
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      // send data to server
       const response = await fetchData(BACKEND_LOGIN_URL, {
         method: 'POST',
         body: credentials,
       });
 
-      const data = response;
-      // save data from server to localStorage and cookies
-      localStorage.setItem('accessToken', data.access);
-      localStorage.setItem('user', credentials.username);
-      Cookies.set('refreshToken', data.refresh, { httpOnly: true });
-      return data;
+      const { access, refresh } = response;
+      localStorage.setItem('accessToken', access);
+      Cookies.set('refreshToken', refresh, { httpOnly: true });
+      
+      return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -43,14 +44,13 @@ export const signup = createAsyncThunk(
       });
       return response;
     } catch (error) {
-      console.error('Signup error: ', error.message);
       return rejectWithValue(error.message);
     }
   },
 );
 
 export const refreshToken = createAsyncThunk(
-  'auth/resresh',
+  'auth/refreshToken',
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetchData(BACKEND_JWT_REFRESH_URL, {
@@ -58,10 +58,11 @@ export const refreshToken = createAsyncThunk(
         credentials: 'include',
       });
       if (response.ok) {
-        localStorage.setItem('accessToken', response.access);
-        return response.access;
+        const { access } = response;
+        setAccessToken(access);
+        return access;
       } else {
-        return rejectWithValue(response);
+        return rejectWithValue('Failed to refresh token');
       }
     } catch (error) {
       return rejectWithValue(error.message);
@@ -69,23 +70,19 @@ export const refreshToken = createAsyncThunk(
   },
 );
 
-export const logout = createAsyncThunk('auth/logout', () => {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('user');
-  Cookies.remove('refreshToken');
-  return {};
+export const logout = createAsyncThunk('auth/logout', async () => {
+  removeTokens();
 });
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
-    accessToken: null,
-    isAuth: false,
+    user: localStorage.getItem('user') || null,
+    accessToken: getAccessToken(),
+    isAuth: !!getAccessToken(),
     status: STATUS_IDLE,
     error: null,
   },
-
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
@@ -105,7 +102,7 @@ const authSlice = createSlice({
         state.status = STATUS_SUCCEEDED;
         state.isAuth = true;
         state.user = localStorage.getItem('user');
-        state.accessToken = localStorage.getItem('accessToken');
+        state.accessToken = getAccessToken();
       })
       .addCase(login.rejected, (state, action) => {
         state.status = STATUS_FAILD;
@@ -117,7 +114,6 @@ const authSlice = createSlice({
         state.user = null;
         state.isAuth = false;
         state.accessToken = null;
-        localStorage.removeItem('accessToken');
       })
       // signUp
       .addCase(signup.pending, (state) => {

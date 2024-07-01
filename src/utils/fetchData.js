@@ -1,32 +1,35 @@
+import { getAccessToken, removeTokens } from './tokenUtils';
+import { refreshAccessToken } from './refreshToken';
+
 const fetchData = async (url, options = {}) => {
-  const { method = 'GET', body = null, headers = {} } = options;
+  const token = getAccessToken();
 
-  const requestOptions = {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
-  };
-
-  if (body) {
-    requestOptions.body = JSON.stringify(body);
+  if (token) {
+    if (!options.headers) options.headers = {};
+    options.headers['Authorization'] = 'Bearer ' + token;
   }
 
-  try {
-    const response = await fetch(url, requestOptions);
+  let response = await fetch(url, options);
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        `HTTP error! Status: ${response.status}, Message: ${errorText}`,
-      );
+  if (response.status === 401) {
+    const newToken = await refreshAccessToken();
+    if (newToken) {
+      if (!options.headers) options.headers = {};
+      options.headers['Authorization'] = 'Bearer ' + newToken;
+      response = await fetch(url, options);
+    } else {
+      removeTokens();
+      window.location.href = '/login';
+      throw new Error('Не вдалося оновити доступ. Перенаправлення на сторінку входу.');
     }
-    return await response.json();
-  } catch (error) {
-    console.error('Fetch error: ', error);
-    throw error;
   }
+
+  if (!response.ok) {
+    const message = await response.json();
+    throw new Error(`HTTP error! Status: ${response.status}, Message: ${JSON.stringify(message)}`);
+  }
+
+  return response.json();
 };
 
 export default fetchData;

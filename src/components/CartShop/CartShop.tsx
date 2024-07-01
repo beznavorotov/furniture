@@ -1,72 +1,46 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCartItems } from '@/store/slices/cartSlice';
-import { refreshToken } from '@/store/slices/authSlice';
-import sofa from '../../assets/seater-sofa.png';
+import {
+  getCartItems,
+  removeFromCart,
+  setCart,
+  updateQuantity,
+} from '@/store/slices/cartSlice';
 import close from '../../assets/icons/close.svg';
-
-const initialCartProducts = [
-  {
-    id: 1,
-    name: 'Диван Софа',
-    article: 12345,
-    price: 25000,
-    quantity: 1,
-    image: sofa,
-  },
-  {
-    id: 2,
-    name: 'Диван Софа',
-    article: 12346,
-    price: 10000,
-    quantity: 2,
-    image: sofa,
-  },
-  {
-    id: 3,
-    name: 'Диван Софа',
-    article: 12347,
-    price: 20000,
-    quantity: 3,
-    image: sofa,
-  },
-];
 
 export const CartShop = () => {
   const dispatch = useDispatch();
-  const [cartProducts, setCartProducts] = useState(initialCartProducts);
+  const cartProducts = useSelector((state) => state.cart.cart);
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [appliedPromoCode, setAppliedPromoCode] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(getCartItems());
+  }, [dispatch]);
+
   const removeProduct = (id) => {
-    setCartProducts(cartProducts.filter((product) => product.id !== id));
+    dispatch(removeFromCart(id));
   };
 
   const handleQuantityChange = (id, quantity) => {
-    setCartProducts(
-      cartProducts.map((product) =>
-        product.id === id
-          ? { ...product, quantity: Math.max(1, parseInt(quantity)) }
-          : product,
-      ),
-    );
+    dispatch(updateQuantity({ id, quantity: Math.max(1, quantity) }));
   };
 
   const incrementQuantity = (id) => {
-    handleQuantityChange(
-      id,
-      cartProducts.find((product) => product.id === id).quantity + 1,
-    );
+    const product = cartProducts.find((product) => product.id === id);
+    if (product) {
+      handleQuantityChange(id, product.quantity + 1);
+    }
   };
 
   const decrementQuantity = (id) => {
-    handleQuantityChange(
-      id,
-      cartProducts.find((product) => product.id === id).quantity - 1,
-    );
+    const product = cartProducts.find((product) => product.id === id);
+    if (product) {
+      handleQuantityChange(id, product.quantity - 1);
+    }
   };
 
   const getTotalPrice = () => {
@@ -91,7 +65,7 @@ export const CartShop = () => {
   };
 
   const clearCart = () => {
-    setCartProducts([]);
+    dispatch(setCart([]));
     setDiscount(0);
     setAppliedPromoCode('');
   };
@@ -108,8 +82,8 @@ export const CartShop = () => {
   return (
     <div className="cart">
       <div className="title_cart">
-        <h1 onClick={() => dispatch(getCartItems())}>Кошик</h1>
-        <h1 onClick={() => dispatch(refreshToken())}>Refresh</h1>
+        <h1>Кошик</h1>
+
         {cartProducts.length > 0 && (
           <button className="clear_cart" onClick={clearCart}>
             Очистити кошик
@@ -131,16 +105,16 @@ export const CartShop = () => {
                 <div className="product_details">
                   <div className="img_name">
                     <div className="icon_product">
-                      <img src={product.image} alt={product.name} />
+                      <img src={product.photo[0]} alt={product.title} />
                     </div>
                     <div className="name_product">
-                      <h3>{product.name}</h3>
+                      <h3>{product.title}</h3>
                       <span className="article_product">
-                        Код товару: <span>{product.article}</span>
+                        Код товару: <span>{product.article_code}</span>
                       </span>
                       <span className="order_product_price">
                         <span className="product_price">
-                          {product.price} грн
+                          {product.price?.toFixed()} грн
                         </span>
                       </span>
                     </div>
@@ -150,14 +124,14 @@ export const CartShop = () => {
                   <button onClick={() => decrementQuantity(product.id)}>
                     -
                   </button>
-                  <span>{product.quantity}</span>
+                  <span>{product.quantity || 1}</span>
                   <button onClick={() => incrementQuantity(product.id)}>
                     +
                   </button>
                 </div>
                 <div className="order_price">
                   <span className="total_price">
-                    {product.price * product.quantity} грн
+                    {(product.price * (product.quantity || 1)).toFixed()} грн
                   </span>
                 </div>
                 <div
@@ -178,7 +152,7 @@ export const CartShop = () => {
               </div>
               <div className="summary_item">
                 <span>Сума товарів:</span>
-                <span>{getTotalPrice()} грн</span>
+                <span>{getTotalPrice().toFixed()} грн</span>
               </div>
 
               <div className="summary_item">
@@ -201,12 +175,12 @@ export const CartShop = () => {
               {appliedPromoCode && (
                 <div className="summary_item">
                   <span>Знижка:</span>
-                  <span>-{discount} грн</span>
+                  <span>-{discount.toFixed()} грн</span>
                 </div>
               )}
               <div className="summary_item total">
                 <span>Всього:</span>
-                <span>{getTotalPrice() - discount} грн</span>
+                <span>{(getTotalPrice() - discount).toFixed()} грн</span>
               </div>
             </div>
             <div className="d-flex justify-content-center flex-wrap">
