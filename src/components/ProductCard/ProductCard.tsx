@@ -9,7 +9,6 @@ import heartBlue from '@/assets/heart_blue.png';
 
 const ProductCard = ({ props, stateType, cardSize }) => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
   const favorites = useSelector((state: RootState) => state.favorites.items);
   const { title, price, discount, id, rating, photo } = props;
 

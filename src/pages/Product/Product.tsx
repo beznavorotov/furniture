@@ -105,16 +105,16 @@ export const Product = () => {
   const selectProductState = (type) => {
     if (type === CATEGORY) {
       setRecommended(category);
-      return category.find((item) => item.article_code === +id);
+      return category.find((item) => item.id === +id);
     } else if (type === BESTSELLERS) {
       setRecommended(bestsellers);
-      return bestsellers.find((item) => item.article_code === +id);
+      return bestsellers.find((item) => item.id === +id);
     } else if (type === SALE) {
       setRecommended(sale);
-      return sale.find((item) => item.article_code === +id);
+      return sale.find((item) => item.id === +id);
     } else {
       setRecommended(search);
-      return search.find((item) => item.article_code === +id);
+      return search.find((item) => item.id === +id);
     }
   };
 

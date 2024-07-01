@@ -7,11 +7,12 @@ import {
   setCart,
   updateQuantity,
 } from '@/store/slices/cartSlice';
+import { RootState } from '@/store';
 import close from '../../assets/icons/close.svg';
 
 export const CartShop = () => {
   const dispatch = useDispatch();
-  const cartProducts = useSelector((state) => state.cart.cart);
+  const cartProducts = useSelector((state: RootState) => state.cart.cart);
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [appliedPromoCode, setAppliedPromoCode] = useState('');
