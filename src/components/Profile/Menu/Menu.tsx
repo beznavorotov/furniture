@@ -12,10 +12,9 @@ import { logout } from '@/store/slices/authSlice';
 
 export const Menu = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-  const userMail = useSelector((state: RootState) => state.auth.user);
-  const [menuItem, setMenuItem] = useState('orders');
   const navigate = useNavigate();
+  const userMail = useSelector((state: RootState) => state.auth.user?.email || 'Авторизуйтесь');
+  const [menuItem, setMenuItem] = useState('orders');
 
   const renderComponent = () => {
     switch (menuItem) {
@@ -32,6 +31,11 @@ export const Menu = () => {
     }
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
   return (
     <div className="container">
       <div className="page">
@@ -40,10 +44,9 @@ export const Menu = () => {
             <div className="photo">
               <img src={photoUser} alt="icon user" className="icon_user" />
             </div>
-
             <div className="name">
               <h2 className="name_user">Користувач</h2>
-              <a href="/">{isAuth ? userMail : 'Авторизуйтесь'}</a>
+              <a href="/">{userMail}</a>
             </div>
           </div>
 
@@ -52,13 +55,13 @@ export const Menu = () => {
               className={`button_menu ${menuItem === 'orders' ? 'active' : ''}`}
               onClick={() => setMenuItem('orders')}
             >
-              Мої замовлення <img src={arrow} alt="" className="arrow" />
+              Мої замовлення <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
               className={`button_menu ${menuItem === 'myData' ? 'active' : ''}`}
               onClick={() => setMenuItem('myData')}
             >
-              Персональні дані <img src={arrow} alt="" className="arrow" />
+              Персональні дані <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
               className={`button_menu ${
@@ -66,7 +69,7 @@ export const Menu = () => {
               }`}
               onClick={() => setMenuItem('favorites')}
             >
-              Список обраного <img src={arrow} alt="" className="arrow" />
+              Список обраного <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
               className={`button_menu ${
@@ -74,14 +77,11 @@ export const Menu = () => {
               }`}
               onClick={() => setMenuItem('reviews')}
             >
-              Мої відгуки <img src={arrow} alt="" className="arrow" />
+              Мої відгуки <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
-              className={`button_menu button__logout`}
-              onClick={() => {
-                dispatch(logout());
-                navigate('/login');
-              }}
+              className="button_menu button__logout"
+              onClick={handleLogout}
             >
               Вихід
             </li>

@@ -18,6 +18,7 @@ export const CartShop = () => {
   const [appliedPromoCode, setAppliedPromoCode] = useState('');
   const navigate = useNavigate();
 
+
   useEffect(() => {
     dispatch(getCartItems());
   }, [dispatch]);

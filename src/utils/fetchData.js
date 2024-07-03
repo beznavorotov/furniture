@@ -4,8 +4,10 @@ import { refreshAccessToken } from './refreshToken';
 const fetchData = async (url, options = {}) => {
   const token = getAccessToken();
 
+  if (!options.headers) options.headers = {};
+  options.headers['Content-Type'] = 'application/json';
+  
   if (token) {
-    if (!options.headers) options.headers = {};
     options.headers['Authorization'] = 'Bearer ' + token;
   }
 
@@ -14,7 +16,6 @@ const fetchData = async (url, options = {}) => {
   if (response.status === 401) {
     const newToken = await refreshAccessToken();
     if (newToken) {
-      if (!options.headers) options.headers = {};
       options.headers['Authorization'] = 'Bearer ' + newToken;
       response = await fetch(url, options);
     } else {
@@ -25,8 +26,14 @@ const fetchData = async (url, options = {}) => {
   }
 
   if (!response.ok) {
-    const message = await response.json();
-    throw new Error(`HTTP error! Status: ${response.status}, Message: ${JSON.stringify(message)}`);
+    let errorMessage = `HTTP error! Status: ${response.status}`;
+    try {
+      const errorData = await response.json();
+      errorMessage += `, Message: ${JSON.stringify(errorData)}`;
+    } catch (jsonError) {
+      errorMessage += ', Unable to parse error message.';
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();

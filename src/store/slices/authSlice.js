@@ -1,6 +1,4 @@
-// authSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import Cookies from 'js-cookie';
 import {
   BACKEND_CREATE_USER_URL,
   BACKEND_LOGIN_URL,
@@ -11,8 +9,17 @@ import {
   BACKEND_JWT_REFRESH_URL,
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
-import { getAccessToken, setAccessToken, removeTokens } from '@/utils/tokenUtils';
+import { getAccessToken, setAccessToken, removeTokens, setRefreshToken } from '@/utils/tokenUtils';
 
+// Helper function to safely parse JSON
+const safeJSONParse = (item) => {
+  try {
+    return JSON.parse(item);
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+    return null;
+  }
+};
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -20,12 +27,16 @@ export const login = createAsyncThunk(
     try {
       const response = await fetchData(BACKEND_LOGIN_URL, {
         method: 'POST',
-        body: credentials,
+        body: JSON.stringify(credentials),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
-      const { access, refresh } = response;
-      localStorage.setItem('accessToken', access);
-      Cookies.set('refreshToken', refresh, { httpOnly: true });
+      const { access, refresh, user } = response;
+      setAccessToken(access);
+      setRefreshToken(refresh);
+      localStorage.setItem('user', JSON.stringify(user));
       
       return response;
     } catch (error) {
@@ -40,7 +51,10 @@ export const signup = createAsyncThunk(
     try {
       const response = await fetchData(BACKEND_CREATE_USER_URL, {
         method: 'POST',
-        body: credentials,
+        body: JSON.stringify(credentials),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       return response;
     } catch (error) {
@@ -72,12 +86,13 @@ export const refreshToken = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   removeTokens();
+  localStorage.removeItem('user');
 });
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: localStorage.getItem('user') || null,
+    user: safeJSONParse(localStorage.getItem('user')) || null,
     accessToken: getAccessToken(),
     isAuth: !!getAccessToken(),
     status: STATUS_IDLE,
@@ -98,11 +113,11 @@ const authSlice = createSlice({
         state.status = STATUS_LOADING;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.status = STATUS_SUCCEEDED;
         state.isAuth = true;
-        state.user = localStorage.getItem('user');
-        state.accessToken = getAccessToken();
+        state.user = action.payload.user;
+        state.accessToken = action.payload.access;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = STATUS_FAILD;
