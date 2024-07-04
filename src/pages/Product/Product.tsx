@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useParams } from 'react-router-dom';
 import { PageSectionWrapper } from '@/components/PageSectionWrapper/PageSectionWrapper';
 import { StarsRating } from '@/components/StarsRating/StarsRating';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
+import { BACKEND_SINGLE_PRODUCT_URL, DATA_LOADING_MSG } from '@/constants';
 
 interface ProductItemType {
   room: string;
@@ -56,27 +55,86 @@ interface BodyMaterial {
   photo: string;
 }
 
-const CATEGORY = 'category';
-const BESTSELLERS = 'bestsellers';
-const SALE = 'sale';
 const DESCRIPTION = 'description';
 const SPECS = 'specs';
 const REVIEWS = 'reviews';
 
 export const Product = () => {
   const { id } = useParams();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const stateType = searchParams.get('from');
+  const newId = Number(id);
 
-  const category = useSelector((state: RootState) => state.catalog.category);
-  const bestsellers = useSelector(
-    (state: RootState) => state.catalog.bestsellers,
-  );
-  const sale = useSelector((state: RootState) => state.catalog.sale);
-  const search = useSelector((state: RootState) => state.search.searchResults);
+  const [product, setProduct] = useState<ProductItemType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [recommended, setRecommended] = useState([]);
+  const [galleryImgIndex, setGalleryImgIndex] = useState(0);
 
-  const [product, setProduct] = useState({} as ProductItemType);
+  const handleFetch = async (productId: number) => {
+    try {
+      const response = await fetch(`${BACKEND_SINGLE_PRODUCT_URL}${productId}`);
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error('Помилка отримання данних по продукту: ', error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      setIsLoading(true);
+      const result = await handleFetch(newId);
+      setProduct(result);
+
+      // fetch recommended products
+      const recommendedId = [newId + 1, newId + 2, newId + 3, newId + 4];
+      const fetchPromises = recommendedId.map(handleFetch);
+      const resultFromPromises = await Promise.all(fetchPromises);
+      const validResults = resultFromPromises.filter((item) => item !== null);
+      setRecommended(validResults);
+      setIsLoading(false);
+    };
+
+    fetchProduct();
+    // eslint-disable-next-line
+  }, [id]);
+
+  const [activeTab, setActiveTab] = useState(DESCRIPTION);
+  // const [activeMaterial, setActiveMaterial] = useState(0);
+  // const handleMaterialClick = (index: number) => setActiveMaterial(index);
+
+  const handleTabClick = (tabName: string) => setActiveTab(tabName);
+  const changeActiveTab = (tabName: string) => {
+    return activeTab === tabName ? 'active' : null;
+  };
+
+  const getDate = () => {
+    const date = new Date();
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  };
+
+  const galleryImgClickHandler = (index: number) => setGalleryImgIndex(index);
+  const galleryArrowsClickHandler = (arg) => {
+    setGalleryImgIndex((prevState) => {
+      const photoArrLength = photo.length;
+      let newIndex = prevState + Number(arg.dataset.action);
+
+      if (newIndex < 0) {
+        newIndex = photoArrLength - 1;
+      } else if (newIndex >= photoArrLength) {
+        newIndex = 0;
+      }
+      return newIndex;
+    });
+  };
+
+  if (isLoading) {
+    return <IsLoading text={DATA_LOADING_MSG} />;
+  }
+
+  if (!product || !product.photo || product.photo.length === 0) {
+    return <IsLoading text={DATA_LOADING_MSG} />;
+  }
+
   const {
     room,
     item_category,
@@ -92,50 +150,12 @@ export const Product = () => {
     article_code,
     avaliability,
     price,
-    // discount,
     description,
     rating,
     reviews,
     // hard_body,
     // soft_body,
   } = product;
-  const [recommended, setRecommended] = useState([]);
-  const [galleryImgIndex, setGalleryImgIndex] = useState(0);
-
-  const selectProductState = (type) => {
-    if (type === CATEGORY) {
-      setRecommended(category);
-      return category.find((item) => item.id === +id);
-    } else if (type === BESTSELLERS) {
-      setRecommended(bestsellers);
-      return bestsellers.find((item) => item.id === +id);
-    } else if (type === SALE) {
-      setRecommended(sale);
-      return sale.find((item) => item.id === +id);
-    } else {
-      setRecommended(search);
-      return search.find((item) => item.id === +id);
-    }
-  };
-
-  useEffect(() => {
-    const result = selectProductState(stateType);
-    setProduct(result);
-    // eslint-disable-next-line
-  }, [id, stateType]);
-
-  const [activeTab, setActiveTab] = useState(DESCRIPTION);
-  // const [activeMaterial, setActiveMaterial] = useState(0);
-
-  const handleTabClick = (tabName: string) => setActiveTab(tabName);
-  const changeActiveTab = (tabName: string) => {
-    return activeTab === tabName ? 'active' : null;
-  };
-
-  const getDate = () => {
-    const date = new Date();
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  };
 
   const specTableData = [
     { Кімната: room },
@@ -145,33 +165,9 @@ export const Product = () => {
     { Ширина: width },
     { Глибина: length },
     { Форма: form },
-    // 'Глибина сидіння': '90',
-    // 'Захист від кігтів': 'Так',
     { Колекція: collection },
     { Виробник: manufacturer },
   ];
-  const shuffleArray = [...recommended]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
-
-  if (!product || !photo || photo.length === 0) {
-    return <IsLoading text="Заждіть секунду..." />;
-  }
-  const galleryImgClickHandler = (index: number) => setGalleryImgIndex(index);
-
-  const galleryArrowsClickHandler = (arg) => {
-    setGalleryImgIndex((prevState) => {
-      const photoArrLength = photo.length;
-      let newIndex = prevState + Number(arg.dataset.action);
-
-      if (newIndex < 0) {
-        newIndex = photoArrLength - 1;
-      } else if (newIndex >= photoArrLength) {
-        newIndex = 0;
-      }
-      return newIndex;
-    });
-  };
 
   return (
     <PageSectionWrapper
@@ -199,7 +195,7 @@ export const Product = () => {
             </span>
           </div>
           <div className="product__gallery--collection">
-            {photo.map((img, index) => (
+            {photo?.map((img, index) => (
               <div
                 key={crypto.randomUUID()}
                 onClick={() => galleryImgClickHandler(index)}
@@ -220,7 +216,6 @@ export const Product = () => {
               Код товару: {article_code}
             </span>
           </div>
-
           <div className="product__rating">
             <div className="product__rating--stars">
               <StarsRating ratingNumber={rating} />
@@ -266,14 +261,13 @@ export const Product = () => {
           <div className="product__materials">
             <p>Матеріал:</p>
             <div className="product__materials-samples">
-              {/* f**k ts */}
               {/* {product?.hard_body?.map((item, index) => (
                 <span
                   key={crypto.randomUUID()}
                   className={`material-sample ${
                     activeMaterial === index ? 'active' : ''
                   }`}
-                  // onClick={() => handleMaterialClick(index)}
+                  onClick={() => handleMaterialClick(index)}
                 >
                   {item.body_material.map((materialItem) => (
                     <img
@@ -381,13 +375,8 @@ export const Product = () => {
           <h1 className="recommended-products__title">Рекомендовані товари</h1>
         </div>
         <div className="recommended-products__list">
-          {shuffleArray.map((item) => (
-            <ProductCard
-              key={item.article_code}
-              props={item}
-              cardSize={null}
-              stateType={stateType}
-            />
+          {recommended.map((item) => (
+            <ProductCard key={item.article_code} props={item} cardSize={null} />
           ))}
         </div>
       </section>

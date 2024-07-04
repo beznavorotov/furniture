@@ -5,10 +5,14 @@ import { RootState } from '@/store';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { resetFilters } from '@/store/slices/filterCatalogSlice';
-import { STATUS_LOADING, STATUS_SUCCEEDED } from '@/constants';
+import {
+  STATUS_LOADING,
+  STATUS_SUCCEEDED,
+  DATA_LOADING_MSG,
+} from '@/constants';
 import scrollToTop from '@/utils/scrollToTop';
 
-export const CatalogContent = ({ data, type }) => {
+export const CatalogContent = ({ data }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ITEMS_PER_PAGE = 25;
@@ -122,13 +126,12 @@ export const CatalogContent = ({ data, type }) => {
     <div className="catalog-content">
       <div className="catalog-content__wrapper">
         {catelogStatus === STATUS_LOADING || searchStatus === STATUS_LOADING ? (
-          <IsLoading text="Заждіть секунду..." />
+          <IsLoading text={DATA_LOADING_MSG} />
         ) : (
           filteredAndSortedCatalog?.map((item) => (
             <ProductCard
               key={item.article_code}
               cardSize="small"
-              stateType={type}
               props={item}
             />
           ))

@@ -27,12 +27,7 @@ export const Sale = () => {
       </div>
       <div className="sale--wrapper">
         {shuffleArray.map((item) => (
-          <ProductCard
-            key={item.article_code}
-            cardSize={null}
-            stateType="sale"
-            props={item}
-          />
+          <ProductCard key={item.article_code} cardSize={null} props={item} />
         ))}
       </div>
     </section>

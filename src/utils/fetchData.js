@@ -6,7 +6,7 @@ const fetchData = async (url, options = {}) => {
 
   if (!options.headers) options.headers = {};
   options.headers['Content-Type'] = 'application/json';
-  
+
   if (token) {
     options.headers['Authorization'] = 'Bearer ' + token;
   }
@@ -36,7 +36,7 @@ const fetchData = async (url, options = {}) => {
     throw new Error(errorMessage);
   }
 
-  return response.json();
+  return await response.json();
 };
 
 export default fetchData;

@@ -16,6 +16,7 @@ export const BACKEND_CATEGORIES_URL =
 export const BACKEND_CATEGORIES_PRODUCTS_URL =
   'https://furnishop-back.pp.ua/items/room/category/';
 export const BACKEND_ALL_PRODUCTS_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/`;
+export const BACKEND_SINGLE_PRODUCT_URL = `${BACKEND_BASE_URL}items/item/`;
 export const BACKEND_BESTSELLERS_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/bestsellers`;
 export const BACKEND_SALE_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/sales`;
 export const BACKEND_SEARCH = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/search/`;
@@ -25,6 +26,7 @@ export const ORDER_URL = `${BACKEND_BASE_URL}orders/all/`;
 
 // MESSAGES
 export const REQUIRED_INPUT_MSG = "Це поле обов'язкове для заповнення";
+export const DATA_LOADING_MSG = 'Заждіть секунду...';
 
 // STATUS
 export const STATUS_LOADING = 'loading';

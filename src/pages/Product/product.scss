@@ -386,7 +386,7 @@
   }
 
   &__list {
-    @include flex(space-between, stretch);
+    @include flex(center, stretch);
     flex-wrap: wrap;
     gap: 20px;
     @include tablet {

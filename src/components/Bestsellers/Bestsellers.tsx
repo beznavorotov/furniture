@@ -36,7 +36,6 @@ export const Bestsellers = () => {
           <ProductCard
             key={item.article_code}
             cardSize={null}
-            stateType="bestsellers"
             props={item}
           />
         ))}

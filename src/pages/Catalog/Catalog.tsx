@@ -27,7 +27,7 @@ export const Catalog = () => {
   const search = useSelector((state: RootState) => state.search.searchResults);
 
   const [properState, setProperState] = useState([]);
-  const [properCardType, setProperCardType] = useState('');
+  // const [properCardType, setProperCardType] = useState('');
 
   useEffect(() => {
     if (id !== 'search') {
@@ -37,8 +37,8 @@ export const Catalog = () => {
 
   useEffect(() => {
     pathname.includes('/search')
-      ? (setProperState(search), setProperCardType('search'))
-      : (setProperState(category), setProperCardType('category'));
+      ? setProperState(search)
+      : setProperState(category);
   }, [pathname, search, category]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const Catalog = () => {
     >
       <div className="catalog">
         <CatalogSidebar />
-        <CatalogContent data={properState} type={properCardType} />
+        <CatalogContent data={properState} />
       </div>
     </PageSectionWrapper>
   );
