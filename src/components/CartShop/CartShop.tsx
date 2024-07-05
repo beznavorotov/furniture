@@ -18,7 +18,6 @@ export const CartShop = () => {
   const [appliedPromoCode, setAppliedPromoCode] = useState('');
   const navigate = useNavigate();
 
-
   useEffect(() => {
     dispatch(getCartItems());
   }, [dispatch]);
@@ -48,7 +47,7 @@ export const CartShop = () => {
   const getTotalPrice = () => {
     return cartProducts.reduce(
       (total, product) => total + product.price * product.quantity,
-      0,
+      0
     );
   };
 

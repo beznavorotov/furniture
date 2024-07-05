@@ -110,7 +110,6 @@ export const SignUp = () => {
         <div className="authorize__img-block">
           <img src={singupImg} alt="singup bg" />
         </div>
-
         <div className="authorize__functional-block">
           <div className="wrapper">
             <form
@@ -153,7 +152,6 @@ export const SignUp = () => {
                   onChange={updateState}
                 />
               </span>
-
               <span className="input__required">
                 <input
                   className={formErrors?.userPassword === '' ? '' : 'error'}
@@ -172,8 +170,8 @@ export const SignUp = () => {
                   }
                   type="password"
                   name="userPasswordConfirm"
-                  id="confirmPasswordInput"
-                  placeholder="Підтвердити пароль"
+                  id="passwordConfirmInput"
+                  placeholder="Повторіть пароль"
                   value={userState.userPasswordConfirm}
                   onChange={updateState}
                 />
@@ -200,6 +198,19 @@ export const SignUp = () => {
               <button type="submit" className="button">
                 Зареєструватися
               </button>
+              {Object.values(formErrors).some((error) => error !== '') && (
+                <div className="error-messages">
+                  {Object.entries(formErrors).map(
+                    ([key, error]) =>
+                      error && (
+                        <p key={key} className="error-message">
+                          {error}
+                        </p>
+                      )
+                  )}
+                </div>
+              )}
+              {authErrorStatus === 'failed' && <p>Помилка: {authError}</p>}
             </form>
           </div>
 

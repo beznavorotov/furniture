@@ -29,10 +29,10 @@ export const LogIn = () => {
           setPassword('');
         })
         .catch((error) => {
-          console.error(error, 'in login process');
+          console.error('Login process error:', error);
         });
     } catch (error) {
-      console.error(error, 'in login process');
+      console.error('Unexpected error in login process:', error);
     }
   };
 
@@ -46,7 +46,6 @@ export const LogIn = () => {
         <div className="authorize__img-block">
           <img src={loginImg} alt="login bg" />
         </div>
-
         <div className="authorize__functional-block">
           <div className="wrapper">
             <form
@@ -91,7 +90,7 @@ export const LogIn = () => {
             </form>
             <h2 className="form__authorize--heading t-small">або</h2>
             <a href="/" className="button button__social button__fb">
-            <img src={facebook} alt="google" />
+              <img src={facebook} alt="facebook" />
               Facebook
             </a>
             <a href="/" className="button button__social button__google">
@@ -99,7 +98,6 @@ export const LogIn = () => {
               Google
             </a>
           </div>
-
           <div className="new-user">
             <span>Ви тут новенький? </span>
             <Link to="/signup">Створити аккаунт</Link>

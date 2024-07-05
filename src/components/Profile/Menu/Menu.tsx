@@ -13,7 +13,8 @@ import { logout } from '@/store/slices/authSlice';
 export const Menu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userMail = useSelector((state: RootState) => state.auth.user?.email || 'Авторизуйтесь');
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const username = useSelector((state: RootState) => state.auth.user?.username || 'Авторизуйтесь');
   const [menuItem, setMenuItem] = useState('orders');
 
   const renderComponent = () => {
@@ -31,8 +32,8 @@ export const Menu = () => {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout());
     navigate('/login');
   };
 
@@ -45,8 +46,8 @@ export const Menu = () => {
               <img src={photoUser} alt="icon user" className="icon_user" />
             </div>
             <div className="name">
-              <h2 className="name_user">Користувач</h2>
-              <a href="/">{userMail}</a>
+              <h2 className="name_user">{isAuth ? username : 'Авторизуйтесь'}</h2>
+              <a href="/">{isAuth ? username : 'Авторизуйтесь'}</a>
             </div>
           </div>
 
@@ -64,17 +65,13 @@ export const Menu = () => {
               Персональні дані <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
-              className={`button_menu ${
-                menuItem === 'favorites' ? 'active' : ''
-              }`}
+              className={`button_menu ${menuItem === 'favorites' ? 'active' : ''}`}
               onClick={() => setMenuItem('favorites')}
             >
               Список обраного <img src={arrow} alt="arrow" className="arrow" />
             </li>
             <li
-              className={`button_menu ${
-                menuItem === 'reviews' ? 'active' : ''
-              }`}
+              className={`button_menu ${menuItem === 'reviews' ? 'active' : ''}`}
               onClick={() => setMenuItem('reviews')}
             >
               Мої відгуки <img src={arrow} alt="arrow" className="arrow" />
