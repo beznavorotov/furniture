@@ -40,24 +40,6 @@
     }
   }
 
-  .heart-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .heart {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 100;
-    cursor: pointer;
-
-    &.favorite {
-      fill: red;
-    }
-  }
-
   &__info {
     @include flex-column(center, flex-start);
     gap: 8px;
@@ -146,9 +128,9 @@
       }
     }
 
-    .heart {
-      width: 18px;
-      height: 15px;
+    .add-favorite {
+      width: 24px;
+      height: 24px;
     }
   }
 }

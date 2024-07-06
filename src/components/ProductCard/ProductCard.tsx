@@ -1,55 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { useDispatch } from 'react-redux';
 import { StarsRating } from '@/components/StarsRating/StarsRating';
+import { AddToFavorites } from '../AddToFavorites/AddToFavorites';
 import { setShowModal, setModalData } from '@/store/slices/modalSlice';
-import { addFavorite, removeFavorite } from '@/store/slices/favoritesSlice';
-import heart from '@/assets/heart.svg';
-import heartBlue from '@/assets/heart_blue.png';
 
 const ProductCard = ({ props, cardSize }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector((state: RootState) => state.favorites.items);
   const { title, price, discount, id, rating, photo } = props;
-
-  const isFavorite = favorites.some((favItem) => favItem.id === id);
-
-  const toggleFavorite = () => {
-    if (isFavorite) {
-      dispatch(removeFavorite(id));
-    } else {
-      const {
-        id,
-        title,
-        photo,
-        colour,
-        price,
-        discount,
-        article_code,
-        quantity,
-      } = props;
-      dispatch(
-        addFavorite({
-          id,
-          title,
-          photo,
-          colour,
-          price,
-          discount,
-          article_code,
-          quantity,
-        }),
-      );
-    }
-  };
-
-  const heartIcon = isFavorite ? heartBlue : heart;
 
   return (
     <div className={`product-card ${cardSize}`}>
-      <button onClick={toggleFavorite} className="heart-button">
-        <img src={heartIcon} alt="heart" className="heart" />
-      </button>
+      <AddToFavorites props={props} id={id} />
       <Link to={`/product/${id}`} className="product-card__img">
         <img
           src={photo.find((item) => item.includes('MAIN_photo_image_'))}

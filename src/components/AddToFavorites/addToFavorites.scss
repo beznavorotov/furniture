@@ -1,0 +1,27 @@
+.button__favorites {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  .add-favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  .heart {
+    fill: transparent;
+    stroke-width: 2px;
+    stroke: $color-blue;
+
+    &__fill {
+      fill: $color-blue;
+    }
+  }
+}
+
+.product__price--heading .add-favorite {
+  position: static;
+}
