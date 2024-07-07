@@ -6,15 +6,31 @@
     @include flex();
     width: 24px;
     height: 24px;
+  }
 
-    & path {
-      fill: $color-blue;
-    }
-
+  .icon-cart,
+  .icon-profile {
+    fill: $color-blue;
     &.active {
-      path {
-        fill: $color-black;
-      }
+      fill: $color-black;
+    }
+  }
+  .icon-favorites {
+    fill: transparent;
+    stroke-width: 1.5px;
+    stroke: $color-blue;
+  }
+
+  .active {
+    .icon-favorites,
+    .icon-cart,
+    .icon-profile {
+
+      fill: $color-black;
+    }
+    .icon-favorites{
+      stroke: $color-black;
+
     }
   }
 }

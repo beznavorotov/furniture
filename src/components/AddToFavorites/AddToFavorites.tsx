@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '@/store/slices/favoritesSlice';
 import { RootState } from '@/store';
-import iconsSVGSprite from '@/assets/icons_sprite.svg';
+import iconsSprite from '@/assets/icons_sprite.svg';
 
 export const AddToFavorites = ({ props, id }) => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ export const AddToFavorites = ({ props, id }) => {
       <svg width="28" height="28" className="add-favorite">
         <use
           className={`${isFavorite ? 'heart heart__fill' : 'heart'}`}
-          href={`${iconsSVGSprite}#fillHearth`}
+          xlinkHref={`${iconsSprite}#fillHearth`}
         />
       </svg>
     </button>
