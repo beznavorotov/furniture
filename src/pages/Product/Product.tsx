@@ -375,17 +375,24 @@ export const Product = () => {
           </div>
         </div>
       </div>
-
-      <section className="recommended-products">
-        <div className="recommended-products__heading">
-          <h1 className="recommended-products__title">Рекомендовані товари</h1>
-        </div>
-        <div className="recommended-products__list">
-          {recommended.map((item) => (
-            <ProductCard key={item.article_code} props={item} cardSize={null} />
-          ))}
-        </div>
-      </section>
+      {recommended.length === 0 ? null : (
+        <section className="recommended-products">
+          <div className="recommended-products__heading">
+            <h1 className="recommended-products__title">
+              Рекомендовані товари
+            </h1>
+          </div>
+          <div className="recommended-products__list">
+            {recommended.map((item) => (
+              <ProductCard
+                key={item.article_code}
+                props={item}
+                cardSize={null}
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </PageSectionWrapper>
   );
 };
