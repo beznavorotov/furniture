@@ -4,7 +4,7 @@ import {
   BACKEND_BESTSELLERS_URL,
   BACKEND_CATEGORIES_PRODUCTS_URL,
   BACKEND_SALE_URL,
-  STATUS_FAILD,
+  STATUS_FAILED,
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
@@ -150,7 +150,7 @@ const catalogSlice = createSlice({
         state.category = action.payload;
       })
       .addCase(fetchCategory.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       })
 
@@ -163,7 +163,7 @@ const catalogSlice = createSlice({
         state.bestsellers = action.payload;
       })
       .addCase(fetchBestsellers.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       })
 
@@ -176,7 +176,7 @@ const catalogSlice = createSlice({
         state.sale = action.payload;
       })
       .addCase(fetchSale.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       })
 
@@ -189,7 +189,7 @@ const catalogSlice = createSlice({
         state.catalog = action.payload;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       });
   },

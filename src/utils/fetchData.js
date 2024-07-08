@@ -11,32 +11,39 @@ const fetchData = async (url, options = {}) => {
     options.headers['Authorization'] = 'Bearer ' + token;
   }
 
-  let response = await fetch(url, options);
+  try {
+    let response = await fetch(url, options);
 
-  if (response.status === 401) {
-    const newToken = await refreshAccessToken();
-    if (newToken) {
-      options.headers['Authorization'] = 'Bearer ' + newToken;
-      response = await fetch(url, options);
-    } else {
-      removeTokens();
-      window.location.href = '/login';
-      throw new Error('Не вдалося оновити доступ. Перенаправлення на сторінку входу.');
+    if (response.status === 401) {
+      const newToken = await refreshAccessToken();
+      if (newToken) {
+        options.headers['Authorization'] = 'Bearer ' + newToken;
+        response = await fetch(url, options);
+      } else {
+        removeTokens();
+        window.location.href = '/login';
+        throw new Error('Не вдалося оновити доступ. Перенаправлення на сторінку входу.');
+      }
     }
-  }
 
-  if (!response.ok) {
-    let errorMessage = `HTTP error! Status: ${response.status}`;
-    try {
-      const errorData = await response.json();
-      errorMessage += `, Message: ${JSON.stringify(errorData)}`;
-    } catch (jsonError) {
-      errorMessage += ', Unable to parse error message.';
+    if (!response.ok) {
+      let errorMessage = `HTTP error! Status: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        errorMessage += `, Message: ${JSON.stringify(errorData)}`;
+      } catch (jsonError) {
+        errorMessage += ', Unable to parse error message.';
+      }
+      throw new Error(errorMessage);
     }
-    throw new Error(errorMessage);
-  }
 
-  return await response.json();
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error('Fetch data error:', error);
+    throw error;
+  }
 };
 
 export default fetchData;

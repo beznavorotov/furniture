@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   BACKEND_CREATE_USER_URL,
   BACKEND_LOGIN_URL,
-  STATUS_FAILD,
+  STATUS_FAILED,
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
@@ -10,16 +10,6 @@ import {
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
 import { getAccessToken, setAccessToken, removeTokens, setRefreshToken } from '@/utils/tokenUtils';
-
-// Helper function to safely parse JSON
-const safeJSONParse = (item) => {
-  try {
-    return JSON.parse(item);
-  } catch (error) {
-    console.error("Error parsing JSON:", error);
-    return null;
-  }
-};
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -33,12 +23,11 @@ export const login = createAsyncThunk(
         },
       });
 
-      const { access, refresh, user } = response;
+      const { access, refresh } = response;
       setAccessToken(access);
       setRefreshToken(refresh);
-      localStorage.setItem('user', JSON.stringify(user));
-      
-      return response;
+
+      return { access };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -92,16 +81,12 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: safeJSONParse(localStorage.getItem('user')) || null,
     accessToken: getAccessToken(),
     isAuth: !!getAccessToken(),
     status: STATUS_IDLE,
     error: null,
   },
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
     setAuth: (state, action) => {
       state.isAuth = action.payload;
     },
@@ -116,17 +101,15 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.status = STATUS_SUCCEEDED;
         state.isAuth = true;
-        state.user = action.payload.user;
         state.accessToken = action.payload.access;
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.payload;
       })
       // logOut
       .addCase(logout.fulfilled, (state) => {
         state.status = STATUS_IDLE;
-        state.user = null;
         state.isAuth = false;
         state.accessToken = null;
       })
@@ -135,12 +118,11 @@ const authSlice = createSlice({
         state.status = STATUS_LOADING;
         state.error = null;
       })
-      .addCase(signup.fulfilled, (state, action) => {
+      .addCase(signup.fulfilled, (state) => {
         state.status = STATUS_SUCCEEDED;
-        state.user = action.payload;
       })
       .addCase(signup.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.payload;
       })
       // refresh
@@ -150,5 +132,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, setAuth } = authSlice.actions;
+export const { setAuth } = authSlice.actions;
 export default authSlice.reducer;

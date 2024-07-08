@@ -3,7 +3,7 @@ import fetchData from '@/utils/fetchData';
 import {
   STATUS_IDLE,
   ORDER_URL,
-  STATUS_FAILD,
+  STATUS_FAILED,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
 } from '@/constants';
@@ -78,7 +78,7 @@ const cartSlice = createSlice({
         state.cart = action.payload;
       })
       .addCase(getCartItems.rejected, (state, action) => {
-        state.status = STATUS_FAILD; 
+        state.status = STATUS_FAILED; 
         state.error = action.error.message;
       });
   },

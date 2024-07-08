@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import fetchData from '@/utils/fetchData';
 import {
   BACKEND_SEARCH,
-  STATUS_FAILD,
+  STATUS_FAILED,
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
@@ -40,7 +40,7 @@ const searchSlice = createSlice({
         state.searchResults = action.payload;
       })
       .addCase(fetchSearch.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       });
   },

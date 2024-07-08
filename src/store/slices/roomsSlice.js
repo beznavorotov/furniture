@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   BACKEND_CATEGORIES_URL,
-  STATUS_FAILD,
+  STATUS_FAILED,
   STATUS_IDLE,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
@@ -38,7 +38,7 @@ const roomsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(fetchRooms.rejected, (state, action) => {
-        state.status = STATUS_FAILD;
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
       });
   },
