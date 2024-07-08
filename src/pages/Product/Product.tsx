@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { PageSectionWrapper } from '@/components/PageSectionWrapper/PageSectionWrapper';
 import { StarsRating } from '@/components/StarsRating/StarsRating';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
-import { BACKEND_SINGLE_PRODUCT_URL, DATA_LOADING_MSG } from '@/constants';
 import { AddToFavorites } from '@/components/AddToFavorites/AddToFavorites';
+import { addCartItems } from '@/store/slices/cartSlice';
+import { BACKEND_SINGLE_PRODUCT_URL, DATA_LOADING_MSG } from '@/constants';
 
 interface ProductItemType {
   room: string;
@@ -63,6 +65,7 @@ const REVIEWS = 'reviews';
 export const Product = () => {
   const { id } = useParams();
   const newId = Number(id);
+  const dispatch = useDispatch();
 
   const [product, setProduct] = useState<ProductItemType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -154,8 +157,8 @@ export const Product = () => {
     description,
     rating,
     reviews,
-    hard_body,
-    soft_body,
+    // hard_body,
+    // soft_body,
   } = product;
 
   const specTableData = [
@@ -170,8 +173,17 @@ export const Product = () => {
     { Виробник: manufacturer },
   ];
 
-  console.log('hard_body', hard_body);
-  console.log('soft_body', soft_body);
+  const credentials = {
+    related_item: newId,
+    quantity: 1,
+  };
+
+  const addToCart = () => {
+    dispatch(addCartItems(credentials));
+  };
+
+  // console.log('hard_body', hard_body);
+  // console.log('soft_body', soft_body);
 
   return (
     <PageSectionWrapper
@@ -245,7 +257,9 @@ export const Product = () => {
               <AddToFavorites props={product} id={newId} />
             </div>
             <div className="product__price--buttons">
-              <button className="button button__white">У кошик</button>
+              <button className="button button__white" onClick={addToCart}>
+                У кошик
+              </button>
               <button className="button">Оплата частинами</button>
             </div>
           </div>

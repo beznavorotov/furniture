@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   getCartItems,
   removeFromCart,
-  setCart,
   updateQuantity,
+  clearCart,
 } from '@/store/slices/cartSlice';
 import { RootState } from '@/store';
 import close from '../../assets/icons/close.svg';
@@ -31,14 +31,14 @@ export const CartShop = () => {
   };
 
   const incrementQuantity = (id) => {
-    const product = cartProducts.find((product) => product.id === id);
+    const product = cartProducts.find((product) => product.item.id === id);
     if (product) {
       handleQuantityChange(id, product.quantity + 1);
     }
   };
 
   const decrementQuantity = (id) => {
-    const product = cartProducts.find((product) => product.id === id);
+    const product = cartProducts.find((product) => product.item.id === id);
     if (product) {
       handleQuantityChange(id, product.quantity - 1);
     }
@@ -46,8 +46,8 @@ export const CartShop = () => {
 
   const getTotalPrice = () => {
     return cartProducts.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
+      (total, product) => total + product.item.price * product.quantity,
+      0,
     );
   };
 
@@ -65,12 +65,6 @@ export const CartShop = () => {
     }
   };
 
-  const clearCart = () => {
-    dispatch(setCart([]));
-    setDiscount(0);
-    setAppliedPromoCode('');
-  };
-
   const handleOrder = () => {
     const cartData = {
       cartProducts,
@@ -80,13 +74,19 @@ export const CartShop = () => {
     navigate('/order', { state: { cartData } });
   };
 
+  const clearCartHandler = () => {
+    dispatch(clearCart());
+    setDiscount(0);
+    setAppliedPromoCode('');
+  };
+
   return (
     <div className="cart">
       <div className="title_cart">
         <h1>Кошик</h1>
 
         {cartProducts.length > 0 && (
-          <button className="clear_cart" onClick={clearCart}>
+          <button className="clear_cart" onClick={clearCartHandler}>
             Очистити кошик
           </button>
         )}
@@ -101,43 +101,44 @@ export const CartShop = () => {
       ) : (
         <div className="cart_content">
           <div className="cart_details_block">
-            {cartProducts.map((product) => (
-              <div className="cart_details" key={product.id}>
+            {cartProducts?.map((product) => (
+              <div className="cart_details" key={crypto.randomUUID()}>
                 <div className="product_details">
                   <div className="img_name">
                     <div className="icon_product">
-                      <img src={product.photo[0]} alt={product.title} />
+                      {/* <img src={product?.item.photo[0]} alt={product?.item.title} /> */}
                     </div>
                     <div className="name_product">
-                      <h3>{product.title}</h3>
+                      <h3>{product?.item.title}</h3>
                       <span className="article_product">
-                        Код товару: <span>{product.article_code}</span>
+                        Код товару: <span>{product?.item.article_code}</span>
                       </span>
                       <span className="order_product_price">
                         <span className="product_price">
-                          {product.price?.toFixed()} грн
+                          {product?.item.price?.toFixed()} грн
                         </span>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="quantity_controls">
-                  <button onClick={() => decrementQuantity(product.id)}>
+                  <button onClick={() => decrementQuantity(product.item.id)}>
                     -
                   </button>
                   <span>{product.quantity || 1}</span>
-                  <button onClick={() => incrementQuantity(product.id)}>
+                  <button onClick={() => incrementQuantity(product.item.id)}>
                     +
                   </button>
                 </div>
                 <div className="order_price">
                   <span className="total_price">
-                    {(product.price * (product.quantity || 1)).toFixed()} грн
+                    {(product.item.price * (product.quantity || 1)).toFixed()}{' '}
+                    грн
                   </span>
                 </div>
                 <div
                   className="remove_product"
-                  onClick={() => removeProduct(product.id)}
+                  onClick={() => removeProduct(product.item.id)}
                 >
                   <img src={close} alt="Remove" />
                 </div>

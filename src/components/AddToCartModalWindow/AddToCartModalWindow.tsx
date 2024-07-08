@@ -1,14 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { setShowModal } from '@/store/slices/modalSlice';
-import { RootState } from '@/store';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setShowModal } from '@/store/slices/modalSlice';
+import { addCartItems } from '@/store/slices/cartSlice';
 
 export const AddToCartModalWindow = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state: RootState) => state.modal.showModal);
   const modalData = useSelector((state: RootState) => state.modal.data);
-  const { title, article_code, price, discount, colour, photo } = modalData;
+  const { id, title, article_code, price, discount, colour, photo } = modalData;
   const isOverlayOpen = useSelector(
     (state: RootState) => state.modal.showOverlay,
   );
@@ -45,6 +46,21 @@ export const AddToCartModalWindow = () => {
       setDemoTotalPrice(itemsQuantity * newPrice);
     }
   }, [itemsQuantity, newPrice]);
+
+  const credentials = {
+    related_item: id,
+    quantity: itemsQuantity,
+  };
+
+  const addToCart = () => {
+    dispatch(addCartItems(credentials));
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      addToCart();
+    }
+  }, [isModalOpen, itemsQuantity]);
 
   return (
     <>

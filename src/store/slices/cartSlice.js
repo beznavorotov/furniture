@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import fetchData from '@/utils/fetchData';
 import {
   STATUS_IDLE,
-  ORDER_URL,
+  CART_URL,
   STATUS_FAILED,
   STATUS_LOADING,
   STATUS_SUCCEEDED,
@@ -10,7 +10,6 @@ import {
 
 const initialState = {
   cart: [],
-  favorites: [],
   order: [],
   totalCartItems: 0,
   totalCartPrice: 0,
@@ -22,7 +21,7 @@ export const getCartItems = createAsyncThunk(
   'cart/getCartItems',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetchData(ORDER_URL, { method: 'GET' });
+      const response = await fetchData(CART_URL, { method: 'GET' });
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -32,12 +31,43 @@ export const getCartItems = createAsyncThunk(
 
 export const addCartItems = createAsyncThunk(
   'cart/addCartItems',
-  async (product, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
-      const response = await fetchData(ORDER_URL, {
+      const response = await fetchData(CART_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
+        body: JSON.stringify(credentials),
+      });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const delCartItem = createAsyncThunk(
+  'cart/delCartItem',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await fetchData(CART_URL, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(id),
+      });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const clearCart = createAsyncThunk(
+  'cart/clearCart',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchData(CART_URL, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
       });
       return response;
     } catch (error) {
@@ -78,8 +108,14 @@ const cartSlice = createSlice({
         state.cart = action.payload;
       })
       .addCase(getCartItems.rejected, (state, action) => {
-        state.status = STATUS_FAILED; 
+        state.status = STATUS_FAILED;
         state.error = action.error.message;
+      })
+      .addCase(clearCart.fulfilled, (state) => {
+        state.cart = [];
+        state.totalCartItems = 0;
+        state.totalCartPrice = 0;
+        state.status = STATUS_IDLE;
       });
   },
 });
