@@ -29,12 +29,12 @@ const ProductCard = ({ props, cardSize }) => {
           {price === discount ? (
             <span className="price">{price?.toFixed()} грн</span>
           ) : (
-            <>
+            <div className='card_price--wrapper'>
               <span className="price price--sale">{price?.toFixed()} грн</span>
               <span className="price price--new">
                 {discount?.toFixed()} грн
               </span>
-            </>
+            </div>
           )}
           <button
             className="button button__cart"

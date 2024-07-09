@@ -61,6 +61,11 @@
     width: 100%;
     gap: 16px;
 
+    &--wrapper {
+      @include flex-column(center, flex-start);
+      gap: 5px;
+    }
+
     .price {
       color: $color-blue;
       font-weight: 700;
@@ -68,6 +73,8 @@
       align-self: flex-end;
 
       &.price--sale {
+        align-self: flex-start;
+        font-size: 14px;
         text-decoration: line-through;
       }
       &.price--new {
