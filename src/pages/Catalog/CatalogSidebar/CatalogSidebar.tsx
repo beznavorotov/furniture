@@ -18,16 +18,10 @@ import {
 
 export const CatalogSidebar = () => {
   const dispatch = useDispatch();
-  const initialState = {
-    minPrice: 2500,
-    maxPrice: 27500,
-    minLength: 50,
-    maxLength: 450,
-    minWidth: 50,
-    maxWidth: 450,
-    minHeight: 50,
-    maxHeight: 450,
-  };
+
+  // const catalogStatus = useSelector(
+  //   (inputState: RootState) => inputState.catalog.status,
+  // );
   const uniqueValues = useSelector(
     (inputState: RootState) => inputState.catalog.uniqueValues,
   );
@@ -41,6 +35,17 @@ export const CatalogSidebar = () => {
   const lengthData = uniqueValues.length;
   const widthData = uniqueValues.width;
   const heightData = uniqueValues.height;
+
+  const initialState = {
+    minPrice: 2500,
+    maxPrice: 27500,
+    minLength: 50,
+    maxLength: 450,
+    minWidth: 50,
+    maxWidth: 450,
+    minHeight: 50,
+    maxHeight: 450,
+  };
 
   const selectCategory: string[] = useSelector(selectCategories);
   const selectRoom: string[] = useSelector(selectRooms);
@@ -79,6 +84,18 @@ export const CatalogSidebar = () => {
       dispatch(setInputRangeData({ type, value }));
     }
   };
+
+  // console.log(catalogStatus);
+  // useEffect(() => {
+  //   if (catalogStatus === 'succeeded') {
+  //     updateState('minLength', lengthData[0]);
+  //     updateState('maxLength', lengthData[lengthData.length - 1]);
+  //     updateState('minWidth', widthData[0]);
+  //     updateState('maxWidth', widthData[widthData.length - 1]);
+  //     updateState('minHeight', heightData[0]);
+  //     updateState('maxHeight', heightData[heightData.length - 1]);
+  //   }
+  // }, [catalogStatus, lengthData, widthData, heightData]);
 
   useEffect(() => {
     const handleResize = () => {
