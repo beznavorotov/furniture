@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MultiRangeSlider, { ChangeResult } from 'multi-range-slider-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CatalogSidebarSection } from './CatalogSidebarSection';
@@ -29,7 +29,7 @@ export const CatalogSidebar = () => {
     maxHeight: 450,
   };
   const uniqueValues = useSelector(
-    (state: RootState) => state.catalog.uniqueValues,
+    (inputState: RootState) => inputState.catalog.uniqueValues,
   );
   const categories = uniqueValues.categories;
   const rooms = uniqueValues.rooms;
@@ -48,11 +48,11 @@ export const CatalogSidebar = () => {
   const selectCollection: string[] = useSelector(selectCollections);
   const selectColor: string[] = useSelector(selectColour);
   const selectProdAvailability: boolean[] = useSelector(selectAvailability);
-  const [state, setState] = useState(initialState);
-  const [showFilters, setShowFilters] = useState(false);
+  const [inputState, setInputState] = useState(initialState);
+  const [showFilters, setShowFilters] = useState(window.innerWidth <= 993);
 
   const updateState = (key: string, value: number) => {
-    setState((prevState) => ({
+    setInputState((prevState) => ({
       ...prevState,
       [key]: value,
     }));
@@ -80,6 +80,20 @@ export const CatalogSidebar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 993) {
+        setShowFilters(true);
+      } else {
+        setShowFilters(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <aside className="catalog-sidebar">
       <div className="catalog-sidebar__buttons">
@@ -92,7 +106,7 @@ export const CatalogSidebar = () => {
         <button
           className="button button__white button__clear"
           onClick={() => {
-            setState(initialState);
+            setInputState(initialState);
             dispatch(resetFilters());
           }}
         >
@@ -107,13 +121,16 @@ export const CatalogSidebar = () => {
           <form
             className="filter filter__input-range"
             onSubmit={(e) =>
-              handleSubmit(e, 'price', [state.minPrice, state.maxPrice])
+              handleSubmit(e, 'price', [
+                inputState.minPrice,
+                inputState.maxPrice,
+              ])
             }
           >
             <MultiRangeSlider
               min={0}
-              minValue={state.minPrice}
-              maxValue={state.maxPrice}
+              minValue={inputState.minPrice}
+              maxValue={inputState.maxPrice}
               max={30000}
               step={5}
               ruler={false}
@@ -129,7 +146,7 @@ export const CatalogSidebar = () => {
                 name="minPrice"
                 id="minPrice"
                 placeholder="0"
-                value={state.minPrice}
+                value={inputState.minPrice}
                 onChange={(e) => {
                   updateState('minPrice', +e.target.value);
                 }}
@@ -140,11 +157,11 @@ export const CatalogSidebar = () => {
                 id="maxPrice"
                 placeholder="50000"
                 onChange={(e) => {
-                  +e.target.value < state.minPrice
-                    ? updateState('maxPrice', state.minPrice + 1)
+                  +e.target.value < inputState.minPrice
+                    ? updateState('maxPrice', inputState.minPrice + 1)
                     : updateState('maxPrice', +e.target.value);
                 }}
-                value={state.maxPrice}
+                value={inputState.maxPrice}
               />
               <button className="button button__input-range" type="submit">
                 ok
@@ -302,13 +319,16 @@ export const CatalogSidebar = () => {
           <form
             className="filter filter__input-range"
             onSubmit={(e) =>
-              handleSubmit(e, 'length', [state.minLength, state.maxLength])
+              handleSubmit(e, 'length', [
+                inputState.minLength,
+                inputState.maxLength,
+              ])
             }
           >
             <MultiRangeSlider
               min={0}
-              minValue={state.minLength}
-              maxValue={state.maxLength}
+              minValue={inputState.minLength}
+              maxValue={inputState.maxLength}
               max={500}
               step={5}
               ruler={false}
@@ -324,7 +344,7 @@ export const CatalogSidebar = () => {
                 name="minLength"
                 id="minLength"
                 placeholder="0"
-                value={state.minLength}
+                value={inputState.minLength}
                 onChange={(e) => {
                   updateState('minLength', +e.target.value);
                 }}
@@ -335,11 +355,11 @@ export const CatalogSidebar = () => {
                 id="maxLength"
                 placeholder="500"
                 onChange={(e) => {
-                  +e.target.value < state.minLength
-                    ? updateState('maxLength', state.minLength + 1)
+                  +e.target.value < inputState.minLength
+                    ? updateState('maxLength', inputState.minLength + 1)
                     : updateState('maxLength', +e.target.value);
                 }}
-                value={state.maxLength}
+                value={inputState.maxLength}
               />
               <button className="button button__input-range" type="submit">
                 ok
@@ -352,14 +372,17 @@ export const CatalogSidebar = () => {
         <CatalogSidebarSection type={widthData} title="Ширина">
           <form
             onSubmit={(e) =>
-              handleSubmit(e, 'width', [state.minWidth, state.maxWidth])
+              handleSubmit(e, 'width', [
+                inputState.minWidth,
+                inputState.maxWidth,
+              ])
             }
             className="filter filter__input-range"
           >
             <MultiRangeSlider
               min={0}
-              minValue={state.minWidth}
-              maxValue={state.maxWidth}
+              minValue={inputState.minWidth}
+              maxValue={inputState.maxWidth}
               max={500}
               step={5}
               ruler={false}
@@ -375,7 +398,7 @@ export const CatalogSidebar = () => {
                 name="minWidth"
                 id="minWidth"
                 placeholder="0"
-                value={state.minWidth}
+                value={inputState.minWidth}
                 onChange={(e) => {
                   updateState('minWidth', +e.target.value);
                 }}
@@ -386,11 +409,11 @@ export const CatalogSidebar = () => {
                 id="maxWidth"
                 placeholder="500"
                 onChange={(e) => {
-                  +e.target.value < state.minWidth
-                    ? updateState('maxWidth', state.minWidth + 1)
+                  +e.target.value < inputState.minWidth
+                    ? updateState('maxWidth', inputState.minWidth + 1)
                     : updateState('maxWidth', +e.target.value);
                 }}
-                value={state.maxWidth}
+                value={inputState.maxWidth}
               />
               <button className="button button__input-range" type="submit">
                 ok
@@ -404,13 +427,16 @@ export const CatalogSidebar = () => {
           <form
             className="filter filter__input-range"
             onSubmit={(e) =>
-              handleSubmit(e, 'height', [state.minHeight, state.maxHeight])
+              handleSubmit(e, 'height', [
+                inputState.minHeight,
+                inputState.maxHeight,
+              ])
             }
           >
             <MultiRangeSlider
               min={0}
-              minValue={state.minHeight}
-              maxValue={state.maxHeight}
+              minValue={inputState.minHeight}
+              maxValue={inputState.maxHeight}
               max={500}
               step={5}
               ruler={false}
@@ -426,7 +452,7 @@ export const CatalogSidebar = () => {
                 name="minHeight"
                 id="minHeight"
                 placeholder="0"
-                value={state.minHeight}
+                value={inputState.minHeight}
                 onChange={(e) => {
                   updateState('minHeight', +e.target.value);
                 }}
@@ -437,11 +463,11 @@ export const CatalogSidebar = () => {
                 id="maxHeight"
                 placeholder="500"
                 onChange={(e) => {
-                  +e.target.value < state.minHeight
-                    ? updateState('maxHeight', state.minHeight + 1)
+                  +e.target.value < inputState.minHeight
+                    ? updateState('maxHeight', inputState.minHeight + 1)
                     : updateState('maxHeight', +e.target.value);
                 }}
-                value={state.maxHeight}
+                value={inputState.maxHeight}
               />
               <button className="button button__input-range" type="submit">
                 ok
