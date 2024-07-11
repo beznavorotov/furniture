@@ -33,11 +33,7 @@ export const Bestsellers = () => {
       </div>
       <div className="bestsellers--wrapper">
         {shuffleArray.map((item) => (
-          <ProductCard
-            key={item.article_code}
-            cardSize={null}
-            props={item}
-          />
+          <ProductCard key={item.article_code} cardSize={null} props={item} />
         ))}
       </div>
     </div>

@@ -21,7 +21,7 @@ const fetchData = async (url, options = {}) => {
         response = await fetch(url, options);
       } else {
         removeTokens();
-        window.location.href = '/login';
+        // window.location.href = '/login';
         throw new Error('Не вдалося оновити доступ. Перенаправлення на сторінку входу.');
       }
     }

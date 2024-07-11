@@ -19,11 +19,8 @@ import {
 export const CatalogSidebar = () => {
   const dispatch = useDispatch();
 
-  // const catalogStatus = useSelector(
-  //   (inputState: RootState) => inputState.catalog.status,
-  // );
   const uniqueValues = useSelector(
-    (inputState: RootState) => inputState.catalog.uniqueValues,
+    (state: RootState) => state.catalog.uniqueValues,
   );
   const categories = uniqueValues.categories;
   const rooms = uniqueValues.rooms;
@@ -55,6 +52,19 @@ export const CatalogSidebar = () => {
   const selectProdAvailability: boolean[] = useSelector(selectAvailability);
   const [inputState, setInputState] = useState(initialState);
   const [showFilters, setShowFilters] = useState(window.innerWidth <= 993);
+  const [isInputDataLoading, setIsInputDataLoading] = useState(false);
+  const [dynamicMinMaxLength, setDynamicMinMaxLength] = useState([
+    inputState.minLength,
+    initialState.maxLength,
+  ]);
+  const [dynamicMinMaxWidth, setDynamicMinMaxWidth] = useState([
+    inputState.minWidth,
+    inputState.maxWidth,
+  ]);
+  const [dynamicMinMaxHeight, setDynamicMinMaxHeight] = useState([
+    inputState.minHeight,
+    inputState.maxWidth,
+  ]);
 
   const updateState = (key: string, value: number) => {
     setInputState((prevState) => ({
@@ -62,6 +72,9 @@ export const CatalogSidebar = () => {
       [key]: value,
     }));
   };
+
+  const sortNumericArray = (data: []) =>
+    data.length ? [...data].sort((a, b) => a - b) : null;
 
   const handleChange = (category: string, value: string | boolean) => {
     dispatch(toggleFilter({ category, value }));
@@ -85,17 +98,44 @@ export const CatalogSidebar = () => {
     }
   };
 
-  // console.log(catalogStatus);
-  // useEffect(() => {
-  //   if (catalogStatus === 'succeeded') {
-  //     updateState('minLength', lengthData[0]);
-  //     updateState('maxLength', lengthData[lengthData.length - 1]);
-  //     updateState('minWidth', widthData[0]);
-  //     updateState('maxWidth', widthData[widthData.length - 1]);
-  //     updateState('minHeight', heightData[0]);
-  //     updateState('maxHeight', heightData[heightData.length - 1]);
-  //   }
-  // }, [catalogStatus, lengthData, widthData, heightData]);
+  useEffect(() => {
+    if (
+      heightData.length === 0 ||
+      lengthData.length === 0 ||
+      widthData.length === 0
+    ) {
+      setIsInputDataLoading(true);
+    } else {
+      const sortedLength = sortNumericArray(lengthData);
+      const sortedWidth = sortNumericArray(widthData);
+      const sortedHeight = sortNumericArray(heightData);
+
+      setInputState((prevState) => ({
+        ...prevState,
+        minLength: sortedLength[0],
+        maxLength: sortedLength[sortedLength.length - 1],
+        minWidth: sortedWidth[0],
+        maxWidth: sortedWidth[sortedWidth.length - 1],
+        minHeight: sortedHeight[0],
+        maxHeight: sortedHeight[sortedHeight.length - 1],
+      }));
+
+      setDynamicMinMaxLength([
+        sortedLength[0] - 10,
+        sortedLength[sortedLength.length - 1] + 10,
+      ]);
+      setDynamicMinMaxWidth([
+        sortedWidth[0] - 10,
+        sortedWidth[sortedWidth.length - 1] + 10,
+      ]);
+      setDynamicMinMaxHeight([
+        sortedHeight[0] - 10,
+        sortedHeight[sortedHeight.length - 1] + 10,
+      ]);
+
+      setIsInputDataLoading(false);
+    }
+  }, [heightData, lengthData, widthData]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -146,10 +186,10 @@ export const CatalogSidebar = () => {
           >
             <MultiRangeSlider
               min={0}
+              max={30000}
               minValue={inputState.minPrice}
               maxValue={inputState.maxPrice}
-              max={30000}
-              step={5}
+              step={1}
               ruler={false}
               label={false}
               onChange={(e: ChangeResult) => {
@@ -332,166 +372,175 @@ export const CatalogSidebar = () => {
         </CatalogSidebarSection>
 
         {/* Довжина */}
-        <CatalogSidebarSection type={lengthData} title="Довжина">
-          <form
-            className="filter filter__input-range"
-            onSubmit={(e) =>
-              handleSubmit(e, 'length', [
-                inputState.minLength,
-                inputState.maxLength,
-              ])
-            }
-          >
-            <MultiRangeSlider
-              min={0}
-              minValue={inputState.minLength}
-              maxValue={inputState.maxLength}
-              max={500}
-              step={5}
-              ruler={false}
-              label={false}
-              onChange={(e: ChangeResult) => {
-                updateState('minLength', e.minValue);
-                updateState('maxLength', e.maxValue);
-              }}
-            />
-            <div className="filter__input-wrapper">
-              <input
-                type="number"
-                name="minLength"
-                id="minLength"
-                placeholder="0"
-                value={inputState.minLength}
-                onChange={(e) => {
-                  updateState('minLength', +e.target.value);
-                }}
-              />
-              <input
-                type="number"
-                name="maxLength"
-                id="maxLength"
-                placeholder="500"
-                onChange={(e) => {
-                  +e.target.value < inputState.minLength
-                    ? updateState('maxLength', inputState.minLength + 1)
-                    : updateState('maxLength', +e.target.value);
-                }}
-                value={inputState.maxLength}
-              />
-              <button className="button button__input-range" type="submit">
-                ok
-              </button>
-            </div>
-          </form>
-        </CatalogSidebarSection>
+
+        {isInputDataLoading ? null : (
+          <CatalogSidebarSection type={lengthData} title="Довжина">
+            <form
+              className="filter filter__input-range"
+              onSubmit={(e) =>
+                handleSubmit(e, 'length', [
+                  inputState.minLength,
+                  inputState.maxLength,
+                ])
+              }
+            >
+              {inputState.minLength < inputState.maxLength && (
+                <MultiRangeSlider
+                  min={dynamicMinMaxLength[0]}
+                  max={dynamicMinMaxLength[1]}
+                  minValue={inputState.minLength}
+                  maxValue={inputState.maxLength}
+                  step={1}
+                  ruler={false}
+                  label={false}
+                  onChange={(e: ChangeResult) => {
+                    updateState('minLength', e.minValue);
+                    updateState('maxLength', e.maxValue);
+                  }}
+                />
+              )}
+              <div className="filter__input-wrapper">
+                <input
+                  type="number"
+                  name="minLength"
+                  id="minLength"
+                  placeholder="0"
+                  value={inputState.minLength}
+                  onChange={(e) => {
+                    updateState('minLength', +e.target.value);
+                  }}
+                />
+                <input
+                  type="number"
+                  name="maxLength"
+                  id="maxLength"
+                  placeholder="500"
+                  onChange={(e) => {
+                    +e.target.value < inputState.minLength
+                      ? updateState('maxLength', inputState.minLength + 1)
+                      : updateState('maxLength', +e.target.value);
+                  }}
+                  value={inputState.maxLength}
+                />
+                <button className="button button__input-range" type="submit">
+                  ok
+                </button>
+              </div>
+            </form>
+          </CatalogSidebarSection>
+        )}
 
         {/* Ширина */}
-        <CatalogSidebarSection type={widthData} title="Ширина">
-          <form
-            onSubmit={(e) =>
-              handleSubmit(e, 'width', [
-                inputState.minWidth,
-                inputState.maxWidth,
-              ])
-            }
-            className="filter filter__input-range"
-          >
-            <MultiRangeSlider
-              min={0}
-              minValue={inputState.minWidth}
-              maxValue={inputState.maxWidth}
-              max={500}
-              step={5}
-              ruler={false}
-              label={false}
-              onChange={(e: ChangeResult) => {
-                updateState('minWidth', e.minValue);
-                updateState('maxWidth', e.maxValue);
-              }}
-            />
-            <div className="filter__input-wrapper">
-              <input
-                type="number"
-                name="minWidth"
-                id="minWidth"
-                placeholder="0"
-                value={inputState.minWidth}
-                onChange={(e) => {
-                  updateState('minWidth', +e.target.value);
-                }}
-              />
-              <input
-                type="number"
-                name="maxWidth"
-                id="maxWidth"
-                placeholder="500"
-                onChange={(e) => {
-                  +e.target.value < inputState.minWidth
-                    ? updateState('maxWidth', inputState.minWidth + 1)
-                    : updateState('maxWidth', +e.target.value);
-                }}
-                value={inputState.maxWidth}
-              />
-              <button className="button button__input-range" type="submit">
-                ok
-              </button>
-            </div>
-          </form>
-        </CatalogSidebarSection>
 
+        {isInputDataLoading ? null : (
+          <CatalogSidebarSection type={widthData} title="Ширина">
+            <form
+              onSubmit={(e) =>
+                handleSubmit(e, 'width', [
+                  inputState.minWidth,
+                  inputState.maxWidth,
+                ])
+              }
+              className="filter filter__input-range"
+            >
+              <MultiRangeSlider
+                min={dynamicMinMaxWidth[0]}
+                max={dynamicMinMaxWidth[1]}
+                minValue={inputState.minWidth}
+                maxValue={inputState.maxWidth}
+                step={1}
+                ruler={false}
+                label={false}
+                onChange={(e: ChangeResult) => {
+                  updateState('minWidth', e.minValue);
+                  updateState('maxWidth', e.maxValue);
+                }}
+              />
+              <div className="filter__input-wrapper">
+                <input
+                  type="number"
+                  name="minWidth"
+                  id="minWidth"
+                  placeholder="0"
+                  value={inputState.minWidth}
+                  onChange={(e) => {
+                    updateState('minWidth', +e.target.value);
+                  }}
+                />
+                <input
+                  type="number"
+                  name="maxWidth"
+                  id="maxWidth"
+                  placeholder="500"
+                  onChange={(e) => {
+                    +e.target.value < inputState.minWidth
+                      ? updateState('maxWidth', inputState.minWidth + 1)
+                      : updateState('maxWidth', +e.target.value);
+                  }}
+                  value={inputState.maxWidth}
+                />
+                <button className="button button__input-range" type="submit">
+                  ok
+                </button>
+              </div>
+            </form>
+          </CatalogSidebarSection>
+        )}
         {/* Висота */}
-        <CatalogSidebarSection type={heightData} title="Висота">
-          <form
-            className="filter filter__input-range"
-            onSubmit={(e) =>
-              handleSubmit(e, 'height', [
-                inputState.minHeight,
-                inputState.maxHeight,
-              ])
-            }
-          >
-            <MultiRangeSlider
-              min={0}
-              minValue={inputState.minHeight}
-              maxValue={inputState.maxHeight}
-              max={500}
-              step={5}
-              ruler={false}
-              label={false}
-              onChange={(e: ChangeResult) => {
-                updateState('minHeight', e.minValue);
-                updateState('maxHeight', e.maxValue);
-              }}
-            />
-            <div className="filter__input-wrapper">
-              <input
-                type="number"
-                name="minHeight"
-                id="minHeight"
-                placeholder="0"
-                value={inputState.minHeight}
-                onChange={(e) => {
-                  updateState('minHeight', +e.target.value);
+        {isInputDataLoading ? null : (
+          <CatalogSidebarSection type={heightData} title="Висота">
+            <form
+              className="filter filter__input-range"
+              onSubmit={(e) =>
+                handleSubmit(e, 'height', [
+                  inputState.minHeight,
+                  inputState.maxHeight,
+                ])
+              }
+            >
+              <MultiRangeSlider
+                min={dynamicMinMaxHeight[0]}
+                max={dynamicMinMaxHeight[1]}
+                minValue={inputState.minHeight}
+                maxValue={inputState.maxHeight}
+                step={1}
+                ruler={false}
+                label={false}
+                onChange={(e: ChangeResult) => {
+                  updateState('minHeight', e.minValue);
+                  updateState('maxHeight', e.maxValue);
                 }}
               />
-              <input
-                type="number"
-                name="maxHeight"
-                id="maxHeight"
-                placeholder="500"
-                onChange={(e) => {
-                  +e.target.value < inputState.minHeight
-                    ? updateState('maxHeight', inputState.minHeight + 1)
-                    : updateState('maxHeight', +e.target.value);
-                }}
-                value={inputState.maxHeight}
-              />
-              <button className="button button__input-range" type="submit">
-                ok
-              </button>
-            </div>
-          </form>
-        </CatalogSidebarSection>
+              <div className="filter__input-wrapper">
+                <input
+                  type="number"
+                  name="minHeight"
+                  id="minHeight"
+                  placeholder="0"
+                  value={inputState.minHeight}
+                  onChange={(e) => {
+                    updateState('minHeight', +e.target.value);
+                  }}
+                />
+                <input
+                  type="number"
+                  name="maxHeight"
+                  id="maxHeight"
+                  placeholder="500"
+                  onChange={(e) => {
+                    +e.target.value < inputState.minHeight
+                      ? updateState('maxHeight', inputState.minHeight + 1)
+                      : updateState('maxHeight', +e.target.value);
+                  }}
+                  value={inputState.maxHeight}
+                />
+                <button className="button button__input-range" type="submit">
+                  ok
+                </button>
+              </div>
+            </form>
+          </CatalogSidebarSection>
+        )}
       </div>
     </aside>
   );
