@@ -46,8 +46,8 @@ interface BodyType {
   colour: string;
   photo: string;
   filler: string;
-  body_material: BodyMaterial[];
-  tabletop_material: BodyMaterial[];
+  body_material: BodyMaterial;
+  tabletop_material: BodyMaterial;
 }
 
 interface BodyMaterial {
@@ -103,8 +103,8 @@ export const Product = () => {
   }, [id]);
 
   const [activeTab, setActiveTab] = useState(DESCRIPTION);
-  // const [activeMaterial, setActiveMaterial] = useState(0);
-  // const handleMaterialClick = (index: number) => setActiveMaterial(index);
+  const [activeMaterial, setActiveMaterial] = useState(0);
+  const handleMaterialClick = (index: number) => setActiveMaterial(index);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
   const changeActiveTab = (tabName: string) => {
@@ -157,21 +157,21 @@ export const Product = () => {
     description,
     rating,
     reviews,
-    // hard_body,
+    hard_body,
     // soft_body,
   } = product;
 
-  const specTableData = [
-    { Кімната: room },
-    { 'Категорія товару': item_category },
-    { Матеріал: colour },
-    { Висота: height },
-    { Ширина: width },
-    { Глибина: length },
-    { Форма: form },
-    { Колекція: collection },
-    { Виробник: manufacturer },
-  ];
+  const specTableData = {
+    Кімната: room,
+    'Категорія товару': item_category,
+    Матеріал: colour,
+    Висота: height,
+    Ширина: width,
+    Глибина: length,
+    Форма: form,
+    Колекція: collection,
+    Виробник: manufacturer,
+  };
 
   const credentials = {
     related_item: newId,
@@ -181,9 +181,6 @@ export const Product = () => {
   const addToCart = () => {
     dispatch(addCartItems(credentials));
   };
-
-  // console.log('hard_body', hard_body);
-  // console.log('soft_body', soft_body);
 
   return (
     <PageSectionWrapper
@@ -264,28 +261,28 @@ export const Product = () => {
             </div>
           </div>
 
-          <div className="product__materials">
-            <p>Матеріал:</p>
-            <div className="product__materials-samples">
-              {/* {product?.hard_body?.map((item, index) => (
-                <span
-                  key={crypto.randomUUID()}
-                  className={`material-sample ${
-                    activeMaterial === index ? 'active' : ''
-                  }`}
-                  onClick={() => handleMaterialClick(index)}
-                >
-                  {item.body_material.map((materialItem) => (
+          {hard_body.length !== 0 ? (
+            <div className="product__materials">
+              <p>Матеріал:</p>
+              <div className="product__materials-samples">
+                {hard_body?.map((item, index) => (
+                  <span
+                    key={crypto.randomUUID()}
+                    className={`material-sample ${
+                      activeMaterial === index ? 'active' : ''
+                    }`}
+                    onClick={() => handleMaterialClick(index)}
+                  >
                     <img
                       key={crypto.randomUUID()}
-                      src={materialItem.photo}
-                      alt={materialItem.title}
+                      src={item.body_material.photo}
+                      alt={item.body_material.title}
                     />
-                  ))}
-                </span>
-              ))} */}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
 
         <div className="product__info">
@@ -330,10 +327,10 @@ export const Product = () => {
               <div className="tab__specs--table">
                 <table>
                   <tbody>
-                    {specTableData.map((element) => (
+                    {Object.entries(specTableData).map(([key, value]) => (
                       <tr key={crypto.randomUUID()}>
-                        <th>{Object.keys(element)}</th>
-                        <td>{Object.values(element)}</td>
+                        <th>{key}</th>
+                        <td>{value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -362,11 +359,6 @@ export const Product = () => {
                     </div>
                   </li>
                 ))}
-                {/* <p className="review__text"></p>
-                <div className="review__proscons">
-                  <p className="review__pros"></p>
-                  <p className="review__cons"></p>
-                </div> */}
                 <button type="button" className="button">
                   Написати відгук
                 </button>
