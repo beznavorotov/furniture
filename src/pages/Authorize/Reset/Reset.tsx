@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MESSAGES } from '@/constants';
 import reset from '@/assets/authorize/reset_pass_bg.webp';
 
 export const Reset = () => {
@@ -49,7 +50,7 @@ export const Reset = () => {
 
           <div className="new-user">
             <span>Ви тут новенький? </span>
-            <Link to="/login">Створити аккаунт</Link>
+            <Link to="/login">{MESSAGES.CREATE_USER}</Link>
           </div>
         </div>
       </section>

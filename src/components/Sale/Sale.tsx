@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { fetchSale } from '@/store/slices/catalogSlice';
-import { STATUS_IDLE } from '@/constants';
+import { STATUS } from '@/constants';
 
 export const Sale = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const Sale = () => {
   const saleStatus = useSelector((state: RootState) => state.catalog.status);
 
   useEffect(() => {
-    if (saleStatus === STATUS_IDLE) {
+    if (saleStatus === STATUS.IDLE) {
       dispatch(fetchSale());
     }
   }, [saleStatus, dispatch, pathname]);

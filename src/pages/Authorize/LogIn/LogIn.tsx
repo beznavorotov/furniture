@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { login, setAuth } from '@/store/slices/authSlice';
+import { MESSAGES } from '@/constants';
 import loginImg from '@/assets/authorize/login__bg.webp';
 import google from '@/assets/icons/google.svg';
 import facebook from '@/assets/icons/facebook.svg';
@@ -100,7 +101,7 @@ export const LogIn = () => {
           </div>
           <div className="new-user">
             <span>Ви тут новенький? </span>
-            <Link to="/signup">Створити аккаунт</Link>
+            <Link to="/signup">{MESSAGES.CREATE_USER}</Link>
           </div>
         </div>
       </section>

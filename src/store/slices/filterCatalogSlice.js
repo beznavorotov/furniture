@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { STATUS_IDLE } from '@/constants';
+import { STATUS } from '@/constants';
 
 const initialState = {
   categories: [],
@@ -13,7 +13,7 @@ const initialState = {
   availability: [],
   price: [],
   sortBy: 'rating',
-  status: STATUS_IDLE,
+  status: STATUS.IDLE,
   error: null,
 };
 

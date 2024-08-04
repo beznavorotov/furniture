@@ -5,11 +5,7 @@ import { RootState } from '@/store';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { resetFilters } from '@/store/slices/filterCatalogSlice';
-import {
-  STATUS_LOADING,
-  STATUS_SUCCEEDED,
-  DATA_LOADING_MSG,
-} from '@/constants';
+import { STATUS, MESSAGES } from '@/constants';
 import scrollToTop from '@/utils/scrollToTop';
 
 export const CatalogContent = ({ data }) => {
@@ -125,8 +121,8 @@ export const CatalogContent = ({ data }) => {
   return (
     <div className="catalog-content">
       <div className="catalog-content__wrapper">
-        {catelogStatus === STATUS_LOADING || searchStatus === STATUS_LOADING ? (
-          <IsLoading text={DATA_LOADING_MSG} />
+        {catelogStatus === STATUS.LOADING || searchStatus === STATUS.LOADING ? (
+          <IsLoading text={MESSAGES.DATA_IS_LOADING} />
         ) : (
           filteredAndSortedCatalog?.map((item) => (
             <ProductCard
@@ -140,8 +136,8 @@ export const CatalogContent = ({ data }) => {
 
       <div
         className={`pagination ${
-          catelogStatus === STATUS_SUCCEEDED ||
-          searchStatus === STATUS_SUCCEEDED
+          catelogStatus === STATUS.SUCCEEDED ||
+          searchStatus === STATUS.SUCCEEDED
             ? 'show'
             : ''
         }`}

@@ -7,10 +7,11 @@ import iconsSprite from '@/assets/icons_sprite.svg';
 
 const ProductCard = ({ props, cardSize }) => {
   const dispatch = useDispatch();
-  const { title, price, discount, id, rating, photo } = props;
+  const { title, price, discount, id, rating, photo, availability } = props;
+  const isAvailable = availability === false ? 'unavailable' : 'available';
 
   return (
-    <div className={`product-card ${cardSize}`}>
+    <div className={`product-card ${cardSize} ${isAvailable}`}>
       <AddToFavorites props={props} id={id} />
       <Link to={`/product/${id}`} className="product-card__img">
         <img
@@ -22,14 +23,14 @@ const ProductCard = ({ props, cardSize }) => {
       </Link>
       <div className="product-card__info">
         <Link to={`/product/${id}`} className="text_card">
-          {title?.length > 24 ? title.slice(0, 25) + '...' : title}
+          {title?.length > 24 ? title.slice(0, 20) + '...' : title}
         </Link>
         <StarsRating ratingNumber={rating} />
         <div className="card_price">
           {price === discount ? (
             <span className="price">{price?.toFixed()} грн</span>
           ) : (
-            <div className='card_price--wrapper'>
+            <div className="card_price--wrapper">
               <span className="price price--sale">{price?.toFixed()} грн</span>
               <span className="price price--new">
                 {discount?.toFixed()} грн

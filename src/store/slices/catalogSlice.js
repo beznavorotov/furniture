@@ -4,10 +4,7 @@ import {
   BACKEND_BESTSELLERS_URL,
   BACKEND_CATEGORIES_PRODUCTS_URL,
   BACKEND_SALE_URL,
-  STATUS_FAILED,
-  STATUS_IDLE,
-  STATUS_LOADING,
-  STATUS_SUCCEEDED,
+  STATUS,
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
 import getUniqueValues from '@/utils/getUniqueValues';
@@ -81,7 +78,7 @@ const catalogSlice = createSlice({
       availability: [],
       price: [],
     },
-    status: STATUS_IDLE,
+    status: STATUS.IDLE,
     error: null,
   },
   reducers: {
@@ -143,53 +140,53 @@ const catalogSlice = createSlice({
     builder
       // fetchCategory
       .addCase(fetchCategory.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchCategory.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.category = action.payload;
       })
       .addCase(fetchCategory.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       })
 
       // fetchBestsellers
       .addCase(fetchBestsellers.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchBestsellers.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.bestsellers = action.payload;
       })
       .addCase(fetchBestsellers.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       })
 
       // fetchSale
       .addCase(fetchSale.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchSale.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.sale = action.payload;
       })
       .addCase(fetchSale.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       })
 
       // fetchAllProducts
       .addCase(fetchAllProducts.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.catalog = action.payload;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       });
   },

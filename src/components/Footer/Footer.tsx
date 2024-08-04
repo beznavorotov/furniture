@@ -1,23 +1,22 @@
 import { Link } from 'react-router-dom';
 import logo from '@/assets/logo.webp';
-
+import { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import scrollToTop from '@/utils/scrollToTop';
 export const Footer = () => {
-  const catalogLinks = [
-    { title: 'Передпокій', path: '/product' },
-    { title: 'Вітальні', path: '/' },
-    { title: 'Спальні', path: '/' },
-    { title: 'Кухоні меблі', path: '/' },
-    { title: 'Дитячі меблі', path: '/' },
-    { title: 'Офісні меблі', path: '/' },
-    { title: 'Ванна кімната', path: '/' },
-    { title: 'Гардеробні', path: '/' },
-  ];
+  const rooms = useSelector((state: RootState) => state.rooms.items);
 
   return (
     <div className="container">
       <footer className="footer row">
         <div className="col-12 col-md-3 logo">
-          <Link to="/" className="footer-logo">
+          <Link
+            to="/"
+            className="footer-logo"
+            onClick={() => {
+              scrollToTop('instant');
+            }}
+          >
             <img src={logo} className="img-fluid d-block " alt="furniture" />
           </Link>
         </div>
@@ -35,7 +34,7 @@ export const Footer = () => {
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <h4>Каталог</h4>
-          {catalogLinks.map((link) => (
+          {rooms.map((link) => (
             <Link key={crypto.randomUUID()} to={link.path} className="text">
               {link.title}
             </Link>

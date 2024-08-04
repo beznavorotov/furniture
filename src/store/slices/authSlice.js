@@ -2,14 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   BACKEND_CREATE_USER_URL,
   BACKEND_LOGIN_URL,
-  STATUS_FAILED,
-  STATUS_IDLE,
-  STATUS_LOADING,
-  STATUS_SUCCEEDED,
+  STATUS,
   BACKEND_JWT_REFRESH_URL,
 } from '@/constants';
 import fetchData from '@/utils/fetchData';
-import { getAccessToken, setAccessToken, removeTokens, setRefreshToken } from '@/utils/tokenUtils';
+import {
+  getAccessToken,
+  setAccessToken,
+  removeTokens,
+  setRefreshToken,
+} from '@/utils/tokenUtils';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -83,7 +85,7 @@ const authSlice = createSlice({
   initialState: {
     accessToken: getAccessToken(),
     isAuth: !!getAccessToken(),
-    status: STATUS_IDLE,
+    status: STATUS.IDLE,
     error: null,
   },
   reducers: {
@@ -95,34 +97,34 @@ const authSlice = createSlice({
     builder
       // login
       .addCase(login.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.isAuth = true;
         state.accessToken = action.payload.access;
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.payload;
       })
       // logOut
       .addCase(logout.fulfilled, (state) => {
-        state.status = STATUS_IDLE;
+        state.status = STATUS.IDLE;
         state.isAuth = false;
         state.accessToken = null;
       })
       // signUp
       .addCase(signup.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
         state.error = null;
       })
       .addCase(signup.fulfilled, (state) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
       })
       .addCase(signup.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.payload;
       })
       // refresh

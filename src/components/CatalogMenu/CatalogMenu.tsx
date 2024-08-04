@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '@/store';
 import { fetchRooms } from '@/store/slices/roomsSlice';
-import { STATUS_IDLE } from '@/constants';
+import { STATUS } from '@/constants';
 import { handleClickOutside } from '@/utils/handleClickOutside';
 
 export const CatalogMenu = () => {
@@ -18,7 +18,7 @@ export const CatalogMenu = () => {
   };
 
   useEffect(() => {
-    if (roomStatus === STATUS_IDLE) {
+    if (roomStatus === STATUS.IDLE) {
       dispatch(fetchRooms());
     }
   }, [roomStatus, dispatch]);

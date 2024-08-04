@@ -1,19 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import fetchData from '@/utils/fetchData';
-import {
-  STATUS_IDLE,
-  CART_URL,
-  STATUS_FAILED,
-  STATUS_LOADING,
-  STATUS_SUCCEEDED,
-} from '@/constants';
+import { CART_URL, STATUS } from '@/constants';
 
 const initialState = {
   cart: [],
   order: [],
   totalCartItems: 0,
   totalCartPrice: 0,
-  status: STATUS_IDLE,
+  status: STATUS.IDLE,
   error: null,
 };
 
@@ -100,15 +94,15 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCartItems.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
         state.error = null;
       })
       .addCase(getCartItems.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.cart = action.payload;
       })
       .addCase(getCartItems.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       })
       .addCase(clearCart.fulfilled, (state) => {

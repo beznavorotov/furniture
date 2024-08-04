@@ -1,12 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import fetchData from '@/utils/fetchData';
-import {
-  BACKEND_SEARCH,
-  STATUS_FAILED,
-  STATUS_IDLE,
-  STATUS_LOADING,
-  STATUS_SUCCEEDED,
-} from '@/constants';
+import { BACKEND_SEARCH, STATUS } from '@/constants';
 
 export const fetchSearch = createAsyncThunk(
   'search/getData',
@@ -24,7 +18,7 @@ const searchSlice = createSlice({
   name: 'search',
   initialState: {
     searchResults: [],
-    status: STATUS_IDLE,
+    status: STATUS.IDLE,
     error: null,
   },
   reducers: {
@@ -33,14 +27,14 @@ const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchSearch.pending, (state) => {
-        state.status = STATUS_LOADING;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchSearch.fulfilled, (state, action) => {
-        state.status = STATUS_SUCCEEDED;
+        state.status = STATUS.SUCCEEDED;
         state.searchResults = action.payload;
       })
       .addCase(fetchSearch.rejected, (state, action) => {
-        state.status = STATUS_FAILED;
+        state.status = STATUS.FAILED;
         state.error = action.error.message;
       });
   },

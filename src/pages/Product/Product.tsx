@@ -7,56 +7,8 @@ import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { AddToFavorites } from '@/components/AddToFavorites/AddToFavorites';
 import { addCartItems } from '@/store/slices/cartSlice';
-import { BACKEND_SINGLE_PRODUCT_URL, DATA_LOADING_MSG } from '@/constants';
-
-interface ProductItemType {
-  room: string;
-  item_category: string;
-  colour: string;
-  height: number;
-  width: number;
-  length: number;
-  form: string;
-  collection: string;
-  manufacturer: string;
-  photo: [];
-  title: string;
-  article_code: number;
-  avaliability: boolean;
-  price: number;
-  discount: number;
-  description: string;
-  rating: number;
-  reviews: Review[];
-  hard_body: BodyType[];
-  soft_body: BodyType[];
-}
-
-interface Review {
-  first_name: string;
-  last_name: string;
-  rating: number;
-  id: number;
-}
-
-interface BodyType {
-  material_type: string;
-  manufacturer: string;
-  title: string;
-  colour: string;
-  photo: string;
-  filler: string;
-  body_material: BodyMaterial;
-  tabletop_material: BodyMaterial;
-}
-
-interface BodyMaterial {
-  material_type: string;
-  manufacturer: string;
-  title: string;
-  colour: string;
-  photo: string;
-}
+import { BACKEND_SINGLE_PRODUCT_URL, MESSAGES } from '@/constants';
+import { ProductItemType } from '@/utils/types';
 
 const DESCRIPTION = 'description';
 const SPECS = 'specs';
@@ -132,11 +84,11 @@ export const Product = () => {
   };
 
   if (isLoading) {
-    return <IsLoading text={DATA_LOADING_MSG} />;
+    return <IsLoading text={MESSAGES.DATA_IS_LOADING} />;
   }
 
   if (!product || !product.photo || product.photo.length === 0) {
-    return <IsLoading text={DATA_LOADING_MSG} />;
+    return <IsLoading text={MESSAGES.DATA_IS_LOADING} />;
   }
 
   const {

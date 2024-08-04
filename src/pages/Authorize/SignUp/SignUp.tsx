@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { signup } from '@/store/slices/authSlice';
 import singupImg from '@/assets/authorize/signup__bg.webp';
+import { MESSAGES } from '@/constants';
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -51,33 +52,33 @@ export const SignUp = () => {
     };
 
     if (!data.firstName.trim()) {
-      errors.firstName = 'Ім’я не вказано!';
+      errors.firstName = MESSAGES.FIRSTNAME_IS_EMPTY;
     }
 
     if (!data.lastName.trim()) {
-      errors.lastName = 'Прізвище не вказано!';
+      errors.lastName = MESSAGES.LASTNAME_IS_EMPTY;
     }
 
     if (!data.userEmail.trim()) {
-      errors.userEmail = 'Email не вказано!';
+      errors.userEmail = MESSAGES.EMAIL_IS_EMPTY;
     } else if (
       !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(data.userEmail)
     ) {
-      errors.userEmail = 'Некоректний Email';
+      errors.userEmail = MESSAGES.EMAIL_IS_INCORRECT;
     }
 
     if (!data.userPassword) {
-      errors.userPassword = 'Пароль не вказано!';
+      errors.userPassword = MESSAGES.PASS_IS_EMPTY;
     } else if (data.userPassword.length < 8) {
-      errors.userPassword = 'Пароль повинен бути не менше 8 символів!';
+      errors.userPassword = MESSAGES.PASS_IS_INCORRECT;
     }
 
     if (data.userPasswordConfirm !== data.userPassword) {
-      errors.userPasswordConfirm = 'Паролі не збігаються!';
+      errors.userPasswordConfirm = MESSAGES.CONFIRM_PASS_IS_WRONG;
     }
 
     if (policyCheck === false) {
-      errors.policyConfirmCheckbox = 'Політика конфіденційності не відмічена!';
+      errors.policyConfirmCheckbox = MESSAGES.POLICY_NOT_CHECKED;
     }
 
     return errors;
@@ -118,7 +119,9 @@ export const SignUp = () => {
               id="formRegisterNewUser"
               onSubmit={handleSubmit}
             >
-              <h2 className="form__authorize--heading">Створити аккаунт</h2>
+              <h2 className="form__authorize--heading">
+                {MESSAGES.CREATE_USER}
+              </h2>
               <span className="input__required">
                 <input
                   className={formErrors?.firstName === '' ? '' : 'error'}
@@ -206,7 +209,7 @@ export const SignUp = () => {
                         <p key={key} className="error-message">
                           {error}
                         </p>
-                      )
+                      ),
                   )}
                 </div>
               )}
