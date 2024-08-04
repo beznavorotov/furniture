@@ -52,12 +52,20 @@ export const Footer = () => {
           </div>
           <div className="social">
             <h4>Соціальні мережі</h4>
-            <Link to={'/'} className="contacts">
+            <a
+              href="https://www.instagram.com/"
+              className="contacts"
+              target="_blank"
+            >
               Instagram
-            </Link>
-            <Link to={'/'} className="contacts">
+            </a>
+            <a
+              href="https://www.facebook.com/"
+              className="contacts"
+              target="_blank"
+            >
               Facebook
-            </Link>
+            </a>
           </div>
         </div>
       </footer>
