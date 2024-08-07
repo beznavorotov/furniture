@@ -32,11 +32,12 @@
     }
   }
 
-  &--cart {
+  &--cart,
+  &--favorites {
     position: relative;
   }
 
-  &--cart-counter {
+  &--counter {
     position: absolute;
     @include flex(center, center);
     border-radius: 100%;

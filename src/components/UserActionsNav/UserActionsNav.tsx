@@ -9,6 +9,9 @@ export const UserActionsNav = () => {
   const totalCartItems = useSelector(
     (state: RootState) => state.cart.totalCartItems,
   );
+  const totalFavorites = useSelector(
+    (state: RootState) => state.favorites.items,
+  );
 
   const setLinkActive = () => {
     return ['/profile', '/login', '/reset', '/signup'].includes(pathname)
@@ -28,9 +31,12 @@ export const UserActionsNav = () => {
         >
           <use className="icon-cart" xlinkHref={`${iconsSprite}#cart`} />
         </svg>
-        <span className="user__actions--cart-counter">{totalCartItems}</span>
+        <span className="user__actions--counter">{totalCartItems}</span>
       </NavLink>
-      <NavLink to={isAuth ? '/favorites' : '/login'}>
+      <NavLink
+        to={isAuth ? '/favorites' : '/login'}
+        className="user__actions--favorites"
+      >
         <svg
           width="24"
           height="24"
@@ -43,6 +49,7 @@ export const UserActionsNav = () => {
             xlinkHref={`${iconsSprite}#fillHearth`}
           />
         </svg>
+        <span className="user__actions--counter">{totalFavorites.length}</span>
       </NavLink>
       <NavLink to={isAuth ? '/profile' : '/login'} className={setLinkActive}>
         <svg
