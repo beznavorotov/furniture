@@ -11,7 +11,7 @@ export interface ProductItemType {
   photo: [];
   title: string;
   article_code: number;
-  avaliability: boolean;
+  availability: boolean;
   price: number;
   discount: number;
   description: string;

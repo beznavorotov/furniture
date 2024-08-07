@@ -23,6 +23,8 @@ export const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [recommended, setRecommended] = useState([]);
   const [galleryImgIndex, setGalleryImgIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState(DESCRIPTION);
+  const [activeMaterial, setActiveMaterial] = useState(0);
 
   const handleFetch = async (productId: number) => {
     try {
@@ -54,8 +56,6 @@ export const Product = () => {
     // eslint-disable-next-line
   }, [id]);
 
-  const [activeTab, setActiveTab] = useState(DESCRIPTION);
-  const [activeMaterial, setActiveMaterial] = useState(0);
   const handleMaterialClick = (index: number) => setActiveMaterial(index);
 
   const handleTabClick = (tabName: string) => setActiveTab(tabName);
@@ -104,7 +104,7 @@ export const Product = () => {
     photo,
     title,
     article_code,
-    avaliability,
+    availability,
     price,
     description,
     rating,
@@ -123,6 +123,7 @@ export const Product = () => {
     Форма: form,
     Колекція: collection,
     Виробник: manufacturer,
+    Наявність: availability ? 'В наявності' : 'Відсутній',
   };
 
   const credentials = {
@@ -196,7 +197,7 @@ export const Product = () => {
 
           <div className="product__addition-info">
             <p>Колекція: {collection}</p>
-            <p>Наявність: {avaliability ? 'В наявності' : 'Відсутні'}</p>
+            <p>Наявність: {availability ? 'В наявності' : 'Відсутні'}</p>
           </div>
 
           <div className="product__price">

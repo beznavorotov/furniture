@@ -6,6 +6,9 @@ import iconsSprite from '@/assets/icons_sprite.svg';
 export const UserActionsNav = () => {
   const { pathname } = useLocation();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const totalCartItems = useSelector(
+    (state: RootState) => state.cart.totalCartItems,
+  );
 
   const setLinkActive = () => {
     return ['/profile', '/login', '/reset', '/signup'].includes(pathname)
@@ -15,7 +18,7 @@ export const UserActionsNav = () => {
 
   return (
     <nav className="user__actions">
-      <NavLink to="/cart">
+      <NavLink to="/cart" className="user__actions--cart">
         <svg
           width="24"
           height="24"
@@ -23,8 +26,9 @@ export const UserActionsNav = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-         <use className="icon-cart" xlinkHref={`${iconsSprite}#cart`} />
+          <use className="icon-cart" xlinkHref={`${iconsSprite}#cart`} />
         </svg>
+        <span className="user__actions--cart-counter">{totalCartItems}</span>
       </NavLink>
       <NavLink to={isAuth ? '/favorites' : '/login'}>
         <svg
@@ -34,7 +38,10 @@ export const UserActionsNav = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-           <use className="icon-favorites" xlinkHref={`${iconsSprite}#fillHearth`} />
+          <use
+            className="icon-favorites"
+            xlinkHref={`${iconsSprite}#fillHearth`}
+          />
         </svg>
       </NavLink>
       <NavLink to={isAuth ? '/profile' : '/login'} className={setLinkActive}>

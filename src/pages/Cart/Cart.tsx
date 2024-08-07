@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {
+  addCartItems,
   getCartItems,
-  removeFromCart,
-  updateQuantity,
   clearCart,
+  delCartItem,
+  setTotalCartItems,
 } from '@/store/slices/cartSlice';
 import { RootState } from '@/store';
 import close from '../../assets/icons/close.svg';
@@ -22,26 +23,19 @@ export const Cart = () => {
     dispatch(getCartItems());
   }, [dispatch]);
 
-  const removeProduct = (id) => {
-    dispatch(removeFromCart(id));
+  const removeProduct = (id: number) => {
+    dispatch(delCartItem(id));
+    dispatch(getCartItems());
   };
 
-  const handleQuantityChange = (id, quantity) => {
-    dispatch(updateQuantity({ id, quantity: Math.max(1, quantity) }));
-  };
-
-  const incrementQuantity = (id) => {
-    const product = cartProducts.find((product) => product.item.id === id);
-    if (product) {
-      handleQuantityChange(id, product.quantity + 1);
-    }
-  };
-
-  const decrementQuantity = (id) => {
-    const product = cartProducts.find((product) => product.item.id === id);
-    if (product) {
-      handleQuantityChange(id, product.quantity - 1);
-    }
+  const handleQuantityChange = (id: number, quantity: number) => {
+    dispatch(
+      addCartItems({
+        related_item: id,
+        quantity: quantity,
+      }),
+    );
+    dispatch(getCartItems());
   };
 
   const getTotalPrice = () => {
@@ -52,6 +46,8 @@ export const Cart = () => {
   };
 
   const getTotalQuantity = () => {
+    const qty = cartProducts?.length;
+    dispatch(setTotalCartItems(qty));
     return cartProducts.reduce((total, product) => total + product.quantity, 0);
   };
 
@@ -104,7 +100,7 @@ export const Cart = () => {
         <div className="cart_content">
           <div className="cart_details_block">
             {cartProducts?.map((product) => (
-              <div className="cart_details" key={crypto.randomUUID()}>
+              <div className="cart_details" key={product?.item.id}>
                 <div className="product_details">
                   <div className="img_name">
                     <div className="icon_product">
@@ -124,11 +120,15 @@ export const Cart = () => {
                   </div>
                 </div>
                 <div className="quantity_controls">
-                  <button onClick={() => decrementQuantity(product.item.id)}>
+                  <button
+                    onClick={() => handleQuantityChange(product?.item.id, -1)}
+                  >
                     -
                   </button>
                   <span>{product.quantity || 1}</span>
-                  <button onClick={() => incrementQuantity(product.item.id)}>
+                  <button
+                    onClick={() => handleQuantityChange(product?.item.id, 1)}
+                  >
                     +
                   </button>
                 </div>
@@ -140,7 +140,7 @@ export const Cart = () => {
                 </div>
                 <div
                   className="remove_product"
-                  onClick={() => removeProduct(product.item.id)}
+                  onClick={() => removeProduct(product.item_cart_id)}
                 >
                   <img src={close} alt="Remove" />
                 </div>

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import scrollToTop from '@/utils/scrollToTop';
 export const Footer = () => {
   const rooms = useSelector((state: RootState) => state.rooms.items);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   return (
     <div className="container">
@@ -28,8 +29,9 @@ export const Footer = () => {
           <Link to={'/delivery'} className="text">
             Доставка і оплата
           </Link>
-          <Link to={'/profile'} className="text">
-            Кабінет (tmp)
+
+          <Link to={isAuth ? '/profile' : '/login'} className="text">
+            Кабінет
           </Link>
         </div>
         <div className="col-12 col-md-3 footer_groups">

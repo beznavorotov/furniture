@@ -201,7 +201,7 @@ export const SignUp = () => {
               <button type="submit" className="button">
                 Зареєструватися
               </button>
-              {Object.values(formErrors).some((error) => error !== '') && (
+              {/* {Object.values(formErrors).some((error) => error !== '') && (
                 <div className="error-messages">
                   {Object.entries(formErrors).map(
                     ([key, error]) =>
@@ -212,7 +212,7 @@ export const SignUp = () => {
                       ),
                   )}
                 </div>
-              )}
+              )} */}
               {authErrorStatus === 'failed' && <p>Помилка: {authError}</p>}
             </form>
           </div>

@@ -46,7 +46,7 @@ export const delCartItem = createAsyncThunk(
       const response = await fetchData(CART_URL, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(id),
+        body: JSON.stringify({ item_cart_id: id }),
       });
       return response;
     } catch (error) {
@@ -83,12 +83,8 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
-    updateQuantity: (state, action) => {
-      const { id, quantity } = action.payload;
-      const product = state.cart.find((product) => product.id === id);
-      if (product) {
-        product.quantity = quantity;
-      }
+    setTotalCartItems: (state, action) => {
+      state.totalCartItems = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -105,15 +101,25 @@ const cartSlice = createSlice({
         state.status = STATUS.FAILED;
         state.error = action.error.message;
       })
+      .addCase(addCartItems.fulfilled, (state, action) => {
+        // const { item_cart_id, item } = action.payload;
+        // state.cart = { item_cart_id: item_cart_id, item };
+        console.log(action);
+        // state.cart = action.payload.item;
+      })
+      .addCase(delCartItem.fulfilled, (state, action) => {
+        console.log(action.payload);
+        // state.cart = action.payload;
+      })
       .addCase(clearCart.fulfilled, (state) => {
         state.cart = [];
         state.totalCartItems = 0;
         state.totalCartPrice = 0;
-        state.status = STATUS_IDLE;
+        state.status = STATUS.IDLE;
       });
   },
 });
 
-export const { setCart, addToCart, removeFromCart, updateQuantity } =
+export const { setCart, addToCart, removeFromCart, setTotalCartItems } =
   cartSlice.actions;
 export default cartSlice.reducer;
