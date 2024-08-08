@@ -158,6 +158,10 @@
     padding-top: 12px;
     padding-bottom: 12px;
 
+    .button__favorites {
+      position: static;
+    }
+
     &--heading {
       @include flex(space-between);
     }

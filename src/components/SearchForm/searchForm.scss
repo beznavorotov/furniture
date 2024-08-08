@@ -17,13 +17,16 @@
     color: $color-grey;
   }
 
-  input[type='search'] {
+  .form-control {
     color: $color-grey;
     line-height: 20px;
     border: none;
     border-radius: 0 !important;
     padding: 0 !important;
     background-color: $color-white-bg;
+    &:focus {
+      box-shadow: none;
+    }
   }
 }
 

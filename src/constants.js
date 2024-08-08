@@ -47,3 +47,8 @@ export const MESSAGES = {
   CONFIRM_PASS_IS_WRONG: 'Паролі не збігаються!',
   POLICY_NOT_CHECKED: 'Політика конфіденційності не відмічена!',
 };
+
+// COLOR
+export const COLOR = {
+  BLUE: '#003ca6',
+};

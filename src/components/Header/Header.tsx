@@ -6,6 +6,7 @@ import { SearchForm } from '@/components/SearchForm/SearchForm';
 import { setShowOverlay } from '@/store/slices/modalSlice';
 import { handleClickOutside } from '@/utils/handleClickOutside';
 import logo from '@/assets/logo.webp';
+import { ShoppingBasket } from 'lucide-react';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -80,20 +81,7 @@ export const Header = () => {
                     )}
                   >
                     Каталог
-                    <svg
-                      width="15"
-                      height="12"
-                      viewBox="0 0 15 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9.49995 0.5L11.5 4M3.49995 4L5.49995 0.5M12.78 4H2.21995C2.06997 3.99696 1.92123 4.02771 1.78474 4.08996C1.64825 4.15221 1.52752 4.24437 1.43149 4.35961C1.33545 4.47485 1.26657 4.61023 1.22996 4.7557C1.19334 4.90118 1.18992 5.05302 1.21995 5.2L2.31995 10.7C2.3667 10.9293 2.49238 11.1349 2.6751 11.2811C2.85781 11.4272 3.08601 11.5047 3.31995 11.5H11.68C11.9139 11.5047 12.1421 11.4272 12.3248 11.2811C12.5075 11.1349 12.6332 10.9293 12.68 10.7L13.78 5.2C13.81 5.05302 13.8066 4.90118 13.77 4.7557C13.7333 4.61023 13.6645 4.47485 13.5684 4.35961C13.4724 4.24437 13.3517 4.15221 13.2152 4.08996C13.0787 4.02771 12.9299 3.99696 12.78 4Z"
-                        stroke="#003CA6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ShoppingBasket strokeWidth={1} color="#003CA6" size={15} />
                   </button>
 
                   <CatalogMenu />

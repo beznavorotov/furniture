@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setShowModal } from '@/store/slices/modalSlice';
 import { addCartItems } from '@/store/slices/cartSlice';
+import { X } from 'lucide-react';
 
 export const AddToCartModalWindow = () => {
   const dispatch = useDispatch();
@@ -73,9 +74,12 @@ export const AddToCartModalWindow = () => {
       <section className={`add-to-cart-modal ${isModalOpen ? 'show' : ''}`}>
         <div className="modal__heading">
           <h2 className="modal__title">Додати в кошик</h2>
-          <span className="modal__close" onClick={closeModal}>
-            &times;
-          </span>
+          <X
+            strokeWidth={1.5}
+            size={24}
+            onClick={closeModal}
+            className="modal__close"
+          />
         </div>
 
         <div className="modal__content">
@@ -115,9 +119,6 @@ export const AddToCartModalWindow = () => {
             <button onClick={decrementQuantity}>-</button>
           </div>
           <div className="modal__total-info">
-            {/* <p className="modal__total-info--item">
-              Доставка:<span>2 000</span>
-            </p> */}
             <p className="modal__total-info--item modal__total-info--total-sum">
               Всього:<span>{demoTotalPrice}</span>
             </p>

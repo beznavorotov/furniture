@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { StarsRating } from '@/components/StarsRating/StarsRating';
 import { AddToFavorites } from '@/components/AddToFavorites/AddToFavorites';
 import { setShowModal, setModalData } from '@/store/slices/modalSlice';
-import iconsSprite from '@/assets/icons_sprite.svg';
+import { COLOR } from '@/constants';
+import { ShoppingCart } from 'lucide-react';
 
 const ProductCard = ({ props, cardSize }) => {
   const dispatch = useDispatch();
@@ -44,18 +45,7 @@ const ProductCard = ({ props, cardSize }) => {
               dispatch(setModalData(props));
             }}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use
-                xlinkHref={`${iconsSprite}#cart`}
-                className="icon__svg-cart"
-              />
-            </svg>
+            <ShoppingCart color={COLOR.BLUE} size={24} strokeWidth={1.5} />
           </button>
         </div>
       </div>

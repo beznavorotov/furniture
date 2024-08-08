@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import close from '@/assets/icons/close.svg';
 import { removeFavorite } from '@/store/slices/favoritesSlice';
 import { addToCart } from '@/store/slices/cartSlice';
+import { X } from 'lucide-react';
 
 export const Favorites = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,9 @@ export const Favorites = () => {
 
   const removeProduct = (id) => {
     dispatch(removeFavorite(id));
-    setFavoriteProducts(favoriteProducts.filter((product) => product.id !== id));
+    setFavoriteProducts(
+      favoriteProducts.filter((product) => product.id !== id),
+    );
   };
 
   const addToCartFromFavorites = (product) => {
@@ -35,7 +37,11 @@ export const Favorites = () => {
             <div className="product_details">
               <div className="img_name">
                 <div className="icon_product">
-                  <img src={product.photo[0]} alt={product.title} className="photo" />
+                  <img
+                    src={product.photo[0]}
+                    alt={product.title}
+                    className="photo"
+                  />
                 </div>
                 <div className="name_product">
                   <h3>{product.title}</h3>
@@ -51,13 +57,19 @@ export const Favorites = () => {
                 <span className="order_article">
                   Код товару: {product.article_code}
                 </span>
-                <button className="button button__white d-none d-md-block" onClick={() => addToCartFromFavorites(product)}>
+                <button
+                  className="button button__white d-none d-md-block"
+                  onClick={() => addToCartFromFavorites(product)}
+                >
                   Додати в кошик
                 </button>
               </div>
             </div>
-            <div className="remove_product" onClick={() => removeProduct(product.id)}>
-              <img src={close} alt="Remove" />
+            <div
+              className="remove_product"
+              onClick={() => removeProduct(product.id)}
+            >
+              <X strokeWidth={1.5} size={24} />
             </div>
           </div>
         ))}

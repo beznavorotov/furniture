@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { RootState } from '@/store';
-import iconsSprite from '@/assets/icons_sprite.svg';
+import { Heart, ShoppingCart, SquareUserRound } from 'lucide-react';
+import { COLOR } from '@/constants';
 
 export const UserActionsNav = () => {
   const { pathname } = useLocation();
@@ -22,45 +23,18 @@ export const UserActionsNav = () => {
   return (
     <nav className="user__actions">
       <NavLink to="/cart" className="user__actions--cart">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <use className="icon-cart" xlinkHref={`${iconsSprite}#cart`} />
-        </svg>
+        <ShoppingCart color={COLOR.BLUE} size={24} strokeWidth={1.5} />
         <span className="user__actions--counter">{totalCartItems}</span>
       </NavLink>
       <NavLink
         to={isAuth ? '/favorites' : '/login'}
         className="user__actions--favorites"
       >
-        <svg
-          width="24"
-          height="24"
-          viewBox="-1 -2 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <use
-            className="icon-favorites"
-            xlinkHref={`${iconsSprite}#fillHearth`}
-          />
-        </svg>
+        <Heart color={COLOR.BLUE} strokeWidth={1.5} size={24} />
         <span className="user__actions--counter">{totalFavorites.length}</span>
       </NavLink>
       <NavLink to={isAuth ? '/profile' : '/login'} className={setLinkActive}>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <use className="icon-profile" xlinkHref={`${iconsSprite}#profile`} />
-        </svg>
+        <SquareUserRound color={COLOR.BLUE} strokeWidth={1.25} />
       </NavLink>
     </nav>
   );
