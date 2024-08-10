@@ -6,18 +6,20 @@ import {
   getCartItems,
   clearCart,
   delCartItem,
-  setTotalCartItems,
 } from '@/store/slices/cartSlice';
 import { RootState } from '@/store';
 import { X } from 'lucide-react';
+import { STATUS } from '@/constants';
 
 export const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartProducts = useSelector((state: RootState) => state.cart.cart);
+  const stateStatus = useSelector((state: RootState) => state.cart.status);
+
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const [appliedPromoCode, setAppliedPromoCode] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getCartItems());
@@ -25,7 +27,6 @@ export const Cart = () => {
 
   const removeProduct = (id: number) => {
     dispatch(delCartItem(id));
-    dispatch(getCartItems());
   };
 
   const handleQuantityChange = (id: number, quantity: number) => {
@@ -46,8 +47,6 @@ export const Cart = () => {
   };
 
   const getTotalQuantity = () => {
-    const qty = cartProducts?.length;
-    dispatch(setTotalCartItems(qty));
     return cartProducts.reduce((total, product) => total + product.quantity, 0);
   };
 
@@ -75,9 +74,6 @@ export const Cart = () => {
     setDiscount(0);
     setAppliedPromoCode('');
   };
-
-  console.log(cartProducts);
-
   return (
     <div className="cart">
       <div className="container">
@@ -123,12 +119,14 @@ export const Cart = () => {
                   <div className="quantity_controls">
                     <button
                       onClick={() => handleQuantityChange(product?.item.id, -1)}
+                      disabled={stateStatus === STATUS.LOADING ? true : false}
                     >
                       -
                     </button>
                     <span>{product.quantity || 1}</span>
                     <button
                       onClick={() => handleQuantityChange(product?.item.id, 1)}
+                      disabled={stateStatus === STATUS.LOADING ? true : false}
                     >
                       +
                     </button>

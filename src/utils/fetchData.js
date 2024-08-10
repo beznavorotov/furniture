@@ -22,8 +22,14 @@ const fetchData = async (url, options = {}) => {
       } else {
         removeTokens();
         // window.location.href = '/login';
-        throw new Error('Не вдалося оновити доступ. Перенаправлення на сторінку входу.');
+        throw new Error(
+          'Не вдалося оновити доступ. Перенаправлення на сторінку входу.',
+        );
       }
+    }
+
+    if (response.status === 404) {
+      return [];
     }
 
     if (!response.ok) {
@@ -39,7 +45,6 @@ const fetchData = async (url, options = {}) => {
 
     const data = await response.json();
     return data;
-
   } catch (error) {
     console.error('Fetch data error:', error);
     throw error;

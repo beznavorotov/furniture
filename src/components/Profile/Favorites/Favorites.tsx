@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { removeFavorite } from '@/store/slices/favoritesSlice';
-import { addToCart } from '@/store/slices/cartSlice';
+// import { addToCart } from '@/store/slices/cartSlice';
 import { X } from 'lucide-react';
 
 export const Favorites = () => {
@@ -22,7 +22,8 @@ export const Favorites = () => {
   };
 
   const addToCartFromFavorites = (product) => {
-    dispatch(addToCart(product));
+    // TODO: add product to cart
+    // dispatch(addToCart(product));
     removeProduct(product.id);
   };
 
