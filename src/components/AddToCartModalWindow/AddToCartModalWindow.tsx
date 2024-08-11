@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setShowModal } from '@/store/slices/modalSlice';
-import { addCartItems } from '@/store/slices/cartSlice';
+import { updateCartItemsQty, getCartItems } from '@/store/slices/cartSlice';
+import { STATUS } from '@/constants';
 import { X } from 'lucide-react';
 
 export const AddToCartModalWindow = () => {
@@ -16,11 +17,22 @@ export const AddToCartModalWindow = () => {
   );
   const [itemsQuantity, setItemsQuantity] = useState(1);
   const [demoTotalPrice, setDemoTotalPrice] = useState(0);
+  const stateStatus = useSelector((state: RootState) => state.cart.status);
 
   const closeModal = () => {
     dispatch(setShowModal(false));
     setItemsQuantity(1);
     setDemoTotalPrice(0);
+  };
+
+  const handleQuantityChange = (id: number, quantity: number) => {
+    dispatch(
+      updateCartItemsQty({
+        related_item: id,
+        quantity: quantity,
+      }),
+    );
+    dispatch(getCartItems());
   };
 
   const incrementQuantity = () => {
@@ -50,11 +62,11 @@ export const AddToCartModalWindow = () => {
 
   const credentials = {
     related_item: id,
-    quantity: itemsQuantity,
+    quantity: 1,
   };
 
   const addToCart = () => {
-    dispatch(addCartItems(credentials));
+    dispatch(updateCartItemsQty(credentials));
   };
 
   useEffect(() => {
@@ -108,7 +120,14 @@ export const AddToCartModalWindow = () => {
             </ul>
           </div>
           <div className="modal__actions">
-            <button onClick={incrementQuantity}>+</button>
+            <button
+              onClick={() => {
+                handleQuantityChange(id, 1), incrementQuantity();
+              }}
+              disabled={stateStatus === STATUS.LOADING ? true : false}
+            >
+              +
+            </button>
             <input
               type="text"
               name="counter"
@@ -116,7 +135,14 @@ export const AddToCartModalWindow = () => {
               onChange={handleInputChange}
               min={1}
             />
-            <button onClick={decrementQuantity}>-</button>
+            <button
+              onClick={() => {
+                handleQuantityChange(id, -1), decrementQuantity();
+              }}
+              disabled={stateStatus === STATUS.LOADING ? true : false}
+            >
+              -
+            </button>
           </div>
           <div className="modal__total-info">
             <p className="modal__total-info--item modal__total-info--total-sum">

@@ -127,14 +127,14 @@
 
       button {
         @include flex;
-        border: none;
-        color: $color-blue;
-        width: 30px;
-        height: 30px;
-        font-size: 26px;
-        line-height: 30px;
+        color: $color-black;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        line-height: 24px;
         border-radius: 3px;
-        background-color: $color-grey-light;
+        border: 1px solid #ddd;
+        background: none;
         &:active {
           color: $color-lightblue-border;
         }

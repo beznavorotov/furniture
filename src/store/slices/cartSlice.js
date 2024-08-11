@@ -36,8 +36,8 @@ export const getCartItems = createAsyncThunk(
   },
 );
 
-export const addCartItems = createAsyncThunk(
-  'cart/addCartItems',
+export const updateCartItemsQty = createAsyncThunk(
+  'cart/updateCartItemsQty',
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const response = await fetchData(CART_URL, {
@@ -98,11 +98,11 @@ const cartSlice = createSlice({
         state.cart = action.payload;
       })
       .addCase(getCartItems.rejected, handleRejected)
-      .addCase(addCartItems.pending, handlePending)
-      .addCase(addCartItems.fulfilled, (state) => {
+      .addCase(updateCartItemsQty.pending, handlePending)
+      .addCase(updateCartItemsQty.fulfilled, (state) => {
         state.status = STATUS.SUCCEEDED;
       })
-      .addCase(addCartItems.rejected, handleRejected)
+      .addCase(updateCartItemsQty.rejected, handleRejected)
       .addCase(delCartItem.fulfilled, (state) => {
         state.status = STATUS.SUCCEEDED;
       })

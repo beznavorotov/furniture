@@ -15,7 +15,7 @@ import { Footer } from '@/components/Footer/Footer';
 import { LogIn } from '@/pages/Authorize/LogIn/LogIn';
 import { SignUp } from '@/pages/Authorize/SignUp/SignUp';
 import { Reset } from '@/pages/Authorize/Reset/Reset';
-import { AddToCartModalWindow } from './components/AddToCartModalWindow/AddToCartModalWindow';
+import { AddToCartModalWindow } from '@/components/AddToCartModalWindow/AddToCartModalWindow';
 import scrollToTop from '@/utils/scrollToTop';
 
 function Layout() {

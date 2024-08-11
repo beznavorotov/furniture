@@ -6,7 +6,7 @@ import { StarsRating } from '@/components/StarsRating/StarsRating';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { IsLoading } from '@/components/IsLoading/IsLoading';
 import { AddToFavorites } from '@/components/AddToFavorites/AddToFavorites';
-import { addCartItems } from '@/store/slices/cartSlice';
+import { updateCartItemsQty } from '@/store/slices/cartSlice';
 import { BACKEND_SINGLE_PRODUCT_URL, MESSAGES } from '@/constants';
 import { ProductItemType } from '@/utils/types';
 
@@ -132,7 +132,7 @@ export const Product = () => {
   };
 
   const addToCart = () => {
-    dispatch(addCartItems(credentials));
+    dispatch(updateCartItemsQty(credentials));
   };
 
   return (
@@ -204,7 +204,7 @@ export const Product = () => {
             <div className="product__price--heading">
               <h3 className="product__price--price">{price.toFixed()} грн.</h3>
 
-              <AddToFavorites props={product} id={newId} />
+              <AddToFavorites id={newId} />
             </div>
             <div className="product__price--buttons">
               <button className="button button__white" onClick={addToCart}>

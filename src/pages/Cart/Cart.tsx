@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  addCartItems,
+  updateCartItemsQty,
   getCartItems,
   clearCart,
   delCartItem,
@@ -31,7 +31,7 @@ export const Cart = () => {
 
   const handleQuantityChange = (id: number, quantity: number) => {
     dispatch(
-      addCartItems({
+      updateCartItemsQty({
         related_item: id,
         quantity: quantity,
       }),

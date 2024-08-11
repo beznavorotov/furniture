@@ -13,7 +13,7 @@ const ProductCard = ({ props, cardSize }) => {
 
   return (
     <div className={`product-card ${cardSize} ${isAvailable}`}>
-      <AddToFavorites props={props} id={id} />
+      <AddToFavorites id={id} />
       <Link to={`/product/${id}`} className="product-card__img">
         <img
           src={photo.find((item) => item.includes('MAIN_photo_image_'))}

@@ -23,6 +23,7 @@ export const BACKEND_SEARCH = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/search/`;
 
 export const CART_URL = `${BACKEND_BASE_URL}orders/cart/`;
 export const ORDER_URL = `${BACKEND_BASE_URL}orders/all/`;
+export const FAVORITES_URL = `${BACKEND_BASE_URL}users/favorites/`;
 
 // STATUS
 export const STATUS = {

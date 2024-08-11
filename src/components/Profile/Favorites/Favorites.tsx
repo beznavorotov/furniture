@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { removeFavorite } from '@/store/slices/favoritesSlice';
-// import { addToCart } from '@/store/slices/cartSlice';
+import {
+  getFavoriteItems,
+  delFavoriteItem,
+} from '@/store/slices/favoritesSlice';
+import { updateCartItemsQty } from '@/store/slices/cartSlice';
 import { X } from 'lucide-react';
 
 export const Favorites = () => {
@@ -11,19 +14,24 @@ export const Favorites = () => {
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
   useEffect(() => {
+    dispatch(getFavoriteItems());
     setFavoriteProducts(favorites);
-  }, [favorites]);
+  }, [dispatch, favoriteProducts]);
 
   const removeProduct = (id) => {
-    dispatch(removeFavorite(id));
+    dispatch(delFavoriteItem(id));
     setFavoriteProducts(
       favoriteProducts.filter((product) => product.id !== id),
     );
   };
 
   const addToCartFromFavorites = (product) => {
-    // TODO: add product to cart
-    // dispatch(addToCart(product));
+    const credentials = {
+      related_item: product.id,
+      quantity: 1,
+    };
+    dispatch(updateCartItemsQty(credentials));
+    dispatch(delFavoriteItem(product.id));
     removeProduct(product.id);
   };
 
