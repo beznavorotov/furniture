@@ -14,12 +14,6 @@
 @import './components/Footer/footer';
 @import './components/Header/header';
 
-@import './components/Profile/Favorites/favorites';
-@import './components/Profile/Menu/menu';
-@import './components/Profile/MyData/myData';
-@import './components/Profile/Orders/orders';
-@import './components/Profile/Reviews/reviews';
-
 @import './components/AddToCartModalWindow/addToCartModalWindow';
 @import './components/AddToFavorites/addToFavorites';
 @import './components/Breadcrumbs/breadcrumbs';
@@ -53,4 +47,11 @@
 @import './pages/Home/home';
 @import './pages/Order/order';
 @import './pages/Product/product';
+
+@import './pages/Profile/profile';
+@import './pages/Profile/Favorites/favorites';
+@import './pages/Profile/UserInfo/userInfo';
+@import './pages/Profile/Orders/orders';
+@import './pages/Profile/Reviews/reviews';
+
 @import './pages/Promotions/promotions';

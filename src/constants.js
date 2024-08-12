@@ -1,29 +1,21 @@
 // API
-export const BACKEND_BASE_URL = 'https://furnishop-back.pp.ua/';
+export const BASE_URL = 'https://furnishop-back.pp.ua/';
 
-export const BACKEND_CREATE_USER_URL =
-  'https://furnishop-back.pp.ua/users/create-user/';
-
-export const BACKEND_LOGIN_URL =
-  'https://furnishop-back.pp.ua/users/get-token/';
-
-export const BACKEND_JWT_REFRESH_URL =
-  'https://furnishop-back.pp.ua/users/refresh-token/';
-
-export const BACKEND_CATEGORIES_URL =
-  'https://furnishop-back.pp.ua/items/room/';
-
-export const BACKEND_CATEGORIES_PRODUCTS_URL =
-  'https://furnishop-back.pp.ua/items/room/category/';
+export const BACKEND_CATEGORIES_PRODUCTS_URL = `${BASE_URL}items/room/category/`;
 export const BACKEND_ALL_PRODUCTS_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/`;
-export const BACKEND_SINGLE_PRODUCT_URL = `${BACKEND_BASE_URL}items/item/`;
 export const BACKEND_BESTSELLERS_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/bestsellers`;
+export const BACKEND_CATEGORIES_URL = `${BASE_URL}items/room/`;
+export const BACKEND_CREATE_USER_URL = `${BASE_URL}users/create-user/`;
+export const BACKEND_JWT_REFRESH_URL = `${BASE_URL}users/refresh-token/`;
+export const BACKEND_LOGIN_URL = `${BASE_URL}users/get-token/`;
 export const BACKEND_SALE_URL = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/sales`;
 export const BACKEND_SEARCH = `${BACKEND_CATEGORIES_PRODUCTS_URL}items/search/`;
+export const BACKEND_SINGLE_PRODUCT_URL = `${BASE_URL}items/item/`;
 
-export const CART_URL = `${BACKEND_BASE_URL}orders/cart/`;
-export const ORDER_URL = `${BACKEND_BASE_URL}orders/all/`;
-export const FAVORITES_URL = `${BACKEND_BASE_URL}users/favorites/`;
+export const CART_URL = `${BASE_URL}orders/cart/`;
+export const ORDER_URL = `${BASE_URL}orders/all/`;
+export const FAVORITES_URL = `${BASE_URL}users/favorites/`;
+export const USER_INFO_URL = `${BASE_URL}users/info/`;
 
 // STATUS
 export const STATUS = {

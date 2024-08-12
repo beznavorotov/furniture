@@ -27,7 +27,7 @@ export const UserActionsNav = () => {
         <span className="user__actions--counter">{totalCartItems}</span>
       </NavLink>
       <NavLink
-        to={isAuth ? '/favorites' : '/login'}
+        to={isAuth ? '/profile/favorites' : '/login'}
         className="user__actions--favorites"
       >
         <Heart color={COLOR.BLUE} strokeWidth={1.5} size={24} />
