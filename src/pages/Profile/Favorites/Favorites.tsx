@@ -16,9 +16,10 @@ export const Favorites = () => {
   useEffect(() => {
     dispatch(getFavoriteItems());
     setFavoriteProducts(favorites);
+    // eslint-disable-next-line
   }, [dispatch, favoriteProducts]);
 
-  const removeProduct = (id) => {
+  const removeProduct = (id: number) => {
     dispatch(delFavoriteItem(id));
     setFavoriteProducts(
       favoriteProducts.filter((product) => product.id !== id),

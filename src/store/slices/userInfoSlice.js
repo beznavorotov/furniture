@@ -40,7 +40,6 @@ const userInfoSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = STATUS.SUCCEEDED;
         state.items = action.payload;
-        console.log(action.payload);
       })
       .addCase(getUserInfo.rejected, handleRejected);
   },

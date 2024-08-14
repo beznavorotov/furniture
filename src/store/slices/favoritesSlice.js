@@ -84,19 +84,16 @@ const favoritesSlice = createSlice({
       .addCase(getFavoriteItems.fulfilled, (state, action) => {
         state.status = STATUS.SUCCEEDED;
         state.items = action.payload;
-        console.log(action);
       })
       .addCase(getFavoriteItems.rejected, handleRejected)
       .addCase(addFavoriteItem.pending, handlePending)
-      .addCase(addFavoriteItem.fulfilled, (state, action) => {
+      .addCase(addFavoriteItem.fulfilled, (state) => {
         state.status = STATUS.SUCCEEDED;
-        console.log(action);
       })
       .addCase(addFavoriteItem.rejected, handleRejected)
       .addCase(delFavoriteItem.pending, handlePending)
-      .addCase(delFavoriteItem.fulfilled, (state, action) => {
+      .addCase(delFavoriteItem.fulfilled, (state) => {
         state.status = STATUS.SUCCEEDED;
-        console.log(action);
       })
       .addCase(delFavoriteItem.rejected, handleRejected);
   },

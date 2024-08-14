@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/';
 import { Orders } from '@/pages/Profile/Orders/Orders';
@@ -18,20 +17,11 @@ export const Profile = () => {
   const username = useSelector(
     (state: RootState) => state.auth.user?.username || 'Авторизуйтесь',
   );
-  const [menuItem, setMenuItem] = useState('orders');
-
-  useEffect(() => {
-    const path = location.pathname.split('/').pop();
-    if (path) {
-      setMenuItem(path);
-    }
-    if (path === 'profile') {
-      setMenuItem('orders');
-    }
-  }, [location]);
 
   const renderComponent = () => {
-    switch (menuItem) {
+    switch (location.pathname.split('/').pop()) {
+      case 'profile':
+        return <Orders />;
       case 'orders':
         return <Orders />;
       case 'userInfo':
@@ -62,43 +52,47 @@ export const Profile = () => {
               <h2 className="name_user">
                 {isAuth ? username : 'Авторизуйтесь'}
               </h2>
-              <a href="/">{isAuth ? username : 'Авторизуйтесь'}</a>
+              <Link to="/">{isAuth ? username : 'Авторизуйтесь'}</Link>
             </div>
           </div>
 
-          <ul>
-            <li
-              className={`button_menu ${menuItem === 'orders' ? 'active' : ''}`}
-              onClick={() => setMenuItem('orders')}
+          <nav className="profile-navigation">
+            <NavLink
+              to="/profile/orders"
+              className={({ isActive }) =>
+                (isActive ? 'active' : '') + ' button_menu'
+              }
             >
               Мої замовлення <img src={arrow} alt="arrow" className="arrow" />
-            </li>
-            <li
-              className={`button_menu ${menuItem === 'userInfo' ? 'active' : ''}`}
-              onClick={() => setMenuItem('userInfo')}
+            </NavLink>
+            <NavLink
+              to="/profile/userInfo"
+              className={({ isActive }) =>
+                (isActive ? 'active' : '') + ' button_menu'
+              }
             >
               Персональні дані <img src={arrow} alt="arrow" className="arrow" />
-            </li>
-            <li
-              className={`button_menu ${
-                menuItem === 'favorites' ? 'active' : ''
-              }`}
-              onClick={() => setMenuItem('favorites')}
+            </NavLink>
+            <NavLink
+              to="/profile/favorites"
+              className={({ isActive }) =>
+                (isActive ? 'active' : '') + ' button_menu'
+              }
             >
               Список обраного <img src={arrow} alt="arrow" className="arrow" />
-            </li>
-            <li
-              className={`button_menu ${
-                menuItem === 'reviews' ? 'active' : ''
-              }`}
-              onClick={() => setMenuItem('reviews')}
+            </NavLink>
+            <NavLink
+              to="/profile/reviews"
+              className={({ isActive }) =>
+                (isActive ? 'active' : '') + ' button_menu'
+              }
             >
               Мої відгуки <img src={arrow} alt="arrow" className="arrow" />
-            </li>
-            <li className="button_menu button__logout" onClick={handleLogout}>
+            </NavLink>
+            <span className="button_menu button__logout" onClick={handleLogout}>
               Вихід
-            </li>
-          </ul>
+            </span>
+          </nav>
         </div>
         <div className="content">{renderComponent()}</div>
       </div>

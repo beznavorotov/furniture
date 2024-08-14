@@ -29,8 +29,6 @@ export const UserInfo = () => {
       email: userData.email,
     });
   }, [dispatch]);
-  console.log(userData);
-  console.log(formData);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 

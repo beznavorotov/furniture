@@ -65,7 +65,6 @@ export const Catalog = () => {
     }
 
     setProperState(result);
-
     setIsLoading(false);
   };
 
