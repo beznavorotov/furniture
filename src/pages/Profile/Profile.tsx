@@ -40,6 +40,29 @@ export const Profile = () => {
     navigate('/login');
   };
 
+  const NAV_LINKS_INFO = [
+    {
+      key: 'profileOrders',
+      path: '/profile/orders',
+      title: 'Мої замовлення',
+    },
+    {
+      key: 'profileUserInfo',
+      path: '/profile/userInfo',
+      title: 'Персональні дані',
+    },
+    {
+      key: 'profileFavorites',
+      path: '/profile/favorites',
+      title: 'Список обраного',
+    },
+    {
+      key: 'profileReviews',
+      path: '/profile/reviews',
+      title: 'Мої відгуки',
+    },
+  ];
+
   return (
     <div className="container">
       <div className="page">
@@ -57,38 +80,18 @@ export const Profile = () => {
           </div>
 
           <nav className="profile-navigation">
-            <NavLink
-              to="/profile/orders"
-              className={({ isActive }) =>
-                (isActive ? 'active' : '') + ' button_menu'
-              }
-            >
-              Мої замовлення <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
-            <NavLink
-              to="/profile/userInfo"
-              className={({ isActive }) =>
-                (isActive ? 'active' : '') + ' button_menu'
-              }
-            >
-              Персональні дані <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
-            <NavLink
-              to="/profile/favorites"
-              className={({ isActive }) =>
-                (isActive ? 'active' : '') + ' button_menu'
-              }
-            >
-              Список обраного <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
-            <NavLink
-              to="/profile/reviews"
-              className={({ isActive }) =>
-                (isActive ? 'active' : '') + ' button_menu'
-              }
-            >
-              Мої відгуки <img src={arrow} alt="arrow" className="arrow" />
-            </NavLink>
+            {NAV_LINKS_INFO.map(({ key, path, title }) => (
+              <NavLink
+                key={key}
+                to={path}
+                className={({ isActive }) =>
+                  (isActive ? 'active' : '') + ' button_menu'
+                }
+              >
+                {title} <img src={arrow} alt="arrow" className="arrow" />
+              </NavLink>
+            ))}
+
             <span className="button_menu button__logout" onClick={handleLogout}>
               Вихід
             </span>
