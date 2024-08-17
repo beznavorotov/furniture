@@ -12,9 +12,8 @@
   }
   .form_data {
     .input__required {
-      max-width: 320px;
       width: 100%;
-      margin-right: 10px;
+
       &.m-top {
         margin-top: 8px;
       }
@@ -35,6 +34,18 @@
     label {
       font-size: 16px;
       font-weight: 500;
+      max-width: 291px;
+      width: 100%;
+
+      ::placeholder {
+        color: $color-gray-input;
+        opacity: 1; /* Firefox */
+      }
+
+      ::-ms-input-placeholder {
+        /* Edge 12-18 */
+        color: $color-gray-input;
+      }
     }
     input {
       font-family: $font-family-inter;
@@ -44,10 +55,11 @@
       border: 1px solid $color-grey-light;
       border-radius: 5px;
       background-color: $color-white-input-bg;
-      color: $color-gray-input;
-      max-width: 295px;
+      color: $color-black;
+      height: 46px;
       width: 100%;
       padding: 13px 12px;
+      margin-top: 5px;
 
       &:active,
       &:focus {
@@ -96,16 +108,20 @@
     }
   }
   .mob {
-    display: flex;
+    @include flex(flex-start, center);
+    flex-wrap: wrap;
+    gap: 24px;
     margin-top: 14px;
   }
   .mob_bt {
-    display: flex;
-    margin-top: 14px;
-    max-width: 300px;
-
-    button {
-      margin-right: 10px;
+    @include flex(flex-start, center);
+    gap: 21px;
+    margin-top: 21px;
+    max-width: 291px;
+    align-items: center;
+    @include tablet-sm {
+      margin: 21px auto 0 !important;
+      gap: 12px;
     }
   }
 }
@@ -155,9 +171,7 @@
       }
     }
     .button {
-      min-width: 350px;
       width: 100%;
-      margin-top: 10px;
     }
   }
 }

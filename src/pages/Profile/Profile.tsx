@@ -64,22 +64,22 @@ export const Profile = () => {
   ];
 
   return (
-    <div className="container">
-      <div className="page">
-        <div className="sidebarMenu">
-          <div className="data">
-            <div className="photo">
-              <img src={photoUser} alt="icon user" className="icon_user" />
+    <div className='container'>
+      <div className='page'>
+        <div className='sidebarMenu'>
+          <div className='data'>
+            <div className='photo'>
+              <img src={photoUser} alt='icon user' className='icon_user' />
             </div>
-            <div className="name">
-              <h2 className="name_user">
+            <div className='name'>
+              <h2 className='name_user'>
                 {isAuth ? username : 'Авторизуйтесь'}
               </h2>
-              <Link to="/">{isAuth ? username : 'Авторизуйтесь'}</Link>
+              <Link to='/'>{isAuth ? username : 'Авторизуйтесь'}</Link>
             </div>
           </div>
 
-          <nav className="profile-navigation">
+          <nav className='profile-navigation'>
             {NAV_LINKS_INFO.map(({ key, path, title }) => (
               <NavLink
                 key={key}
@@ -88,16 +88,15 @@ export const Profile = () => {
                   (isActive ? 'active' : '') + ' button_menu'
                 }
               >
-                {title} <img src={arrow} alt="arrow" className="arrow" />
+                {title} <img src={arrow} alt='arrow' className='arrow' />
               </NavLink>
             ))}
-
-            <span className="button_menu button__logout" onClick={handleLogout}>
+            <span className='button_menu button__logout' onClick={handleLogout}>
               Вихід
             </span>
           </nav>
         </div>
-        <div className="content">{renderComponent()}</div>
+        <div className='content'>{renderComponent()}</div>
       </div>
     </div>
   );

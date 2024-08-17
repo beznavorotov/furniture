@@ -39,7 +39,7 @@ const userInfoSlice = createSlice({
       .addCase(getUserInfo.pending, handlePending)
       .addCase(getUserInfo.fulfilled, (state, action) => {
         state.status = STATUS.SUCCEEDED;
-        state.items = action.payload;
+        state.data = action.payload;
       })
       .addCase(getUserInfo.rejected, handleRejected);
   },

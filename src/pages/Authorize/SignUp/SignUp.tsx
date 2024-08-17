@@ -106,75 +106,75 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="page-authorize container">
-      <section className="singup">
-        <div className="authorize__img-block">
-          <img src={singupImg} alt="singup bg" />
+    <div className='page-authorize container'>
+      <section className='singup'>
+        <div className='authorize__img-block'>
+          <img src={singupImg} alt='singup bg' />
         </div>
-        <div className="authorize__functional-block">
-          <div className="wrapper">
+        <div className='authorize__functional-block'>
+          <div className='wrapper'>
             <form
-              className="form__authorize form__singup"
-              method="post"
-              id="formRegisterNewUser"
+              className='form__authorize form__singup'
+              method='post'
+              id='formRegisterNewUser'
               onSubmit={handleSubmit}
             >
-              <h2 className="form__authorize--heading">
+              <h2 className='form__authorize--heading'>
                 {MESSAGES.CREATE_USER}
               </h2>
-              <span className="input__required">
+              <span className='input__required'>
                 <input
                   className={formErrors?.firstName === '' ? '' : 'error'}
-                  type="text"
-                  name="firstName"
-                  id="firstNameInput"
-                  placeholder="Ім’я"
+                  type='text'
+                  name='firstName'
+                  id='firstNameInput'
+                  placeholder='Ім’я'
                   value={userState.firstName}
                   onChange={updateState}
                 />
               </span>
-              <span className="input__required">
+              <span className='input__required'>
                 <input
                   className={formErrors?.lastName === '' ? '' : 'error'}
-                  type="text"
-                  name="lastName"
-                  id="lastNameInput"
-                  placeholder="Прізвище"
+                  type='text'
+                  name='lastName'
+                  id='lastNameInput'
+                  placeholder='Прізвище'
                   value={userState.lastName}
                   onChange={updateState}
                 />
               </span>
-              <span className="input__required">
+              <span className='input__required'>
                 <input
                   className={formErrors?.userEmail === '' ? '' : 'error'}
-                  type="email"
-                  name="userEmail"
-                  id="loginEmail"
-                  placeholder="Електронна пошта"
+                  type='email'
+                  name='userEmail'
+                  id='loginEmail'
+                  placeholder='Електронна пошта'
                   value={userState.userEmail}
                   onChange={updateState}
                 />
               </span>
-              <span className="input__required">
+              <span className='input__required'>
                 <input
                   className={formErrors?.userPassword === '' ? '' : 'error'}
-                  type="password"
-                  name="userPassword"
-                  id="newPasswordInput"
-                  placeholder="Пароль"
+                  type='password'
+                  name='userPassword'
+                  id='newPasswordInput'
+                  placeholder='Пароль'
                   value={userState.userPassword}
                   onChange={updateState}
                 />
               </span>
-              <span className="input__required">
+              <span className='input__required'>
                 <input
                   className={
                     formErrors?.userPasswordConfirm === '' ? '' : 'error'
                   }
-                  type="password"
-                  name="userPasswordConfirm"
-                  id="passwordConfirmInput"
-                  placeholder="Повторіть пароль"
+                  type='password'
+                  name='userPasswordConfirm'
+                  id='passwordConfirmInput'
+                  placeholder='Повторіть пароль'
                   value={userState.userPasswordConfirm}
                   onChange={updateState}
                 />
@@ -185,20 +185,20 @@ export const SignUp = () => {
                 }`}
               >
                 <input
-                  type="checkbox"
-                  name="policyConfirmCheckbox"
-                  id="policyConfirmCheckbox"
+                  type='checkbox'
+                  name='policyConfirmCheckbox'
+                  id='policyConfirmCheckbox'
                   checked={policyCheck}
                   onChange={() => setPolicyCheck(!policyCheck)}
                 />
                 <span>
                   Підтвердьте, що ви прочитали та прийміть його{' '}
-                  <a className="#" href="/">
+                  <a className='#' href='/'>
                     політика конфіденційності
                   </a>
                 </span>
               </label>
-              <button type="submit" className="button">
+              <button type='submit' className='button'>
                 Зареєструватися
               </button>
               {/* {Object.values(formErrors).some((error) => error !== '') && (
@@ -217,9 +217,9 @@ export const SignUp = () => {
             </form>
           </div>
 
-          <div className="new-user">
+          <div className='new-user'>
             <span>Вже є аккаунт? </span>
-            <Link to="/login">Авторизуватися</Link>
+            <Link to='/login'>Авторизуватися</Link>
           </div>
         </div>
       </section>
