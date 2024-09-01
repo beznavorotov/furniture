@@ -35,12 +35,12 @@ export const Footer = () => {
           </Link>
         </div>
         <div className="col-12 col-md-3 footer_groups">
-          <h4>Каталог</h4>
+          {/* <h4>Каталог</h4>
           {rooms.map((link) => (
             <Link key={crypto.randomUUID()} to={link.path} className="text">
               {link.title}
             </Link>
-          ))}
+          ))} */}
         </div>
         <div className="col-12 col-md-3 footer_groups">
           <div className="phone">
