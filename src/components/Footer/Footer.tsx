@@ -4,7 +4,7 @@ import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import scrollToTop from '@/utils/scrollToTop';
 export const Footer = () => {
-  const rooms = useSelector((state: RootState) => state.rooms.items);
+  // const rooms = useSelector((state: RootState) => state.rooms.items);
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   return (
