@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, NavLink, Link } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/';
 import { Orders } from '@/pages/Profile/Orders/Orders';
@@ -14,9 +14,12 @@ export const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-  const username = useSelector(
-    (state: RootState) => state.auth.user?.username || 'Авторизуйтесь',
-  );
+
+  // Отримуємо firstName та email з userInfo
+  const { firstName, email } = useSelector((state: RootState) => ({
+    firstName: state.userInfo.data.first_name,
+    email: state.userInfo.data.email,
+  }));
 
   const renderComponent = () => {
     switch (location.pathname.split('/').pop()) {
@@ -73,9 +76,9 @@ export const Profile = () => {
             </div>
             <div className='name'>
               <h2 className='name_user'>
-                {isAuth ? username : 'Авторизуйтесь'}
+                {isAuth ? `${firstName}` : 'Авторизуйтесь'}
               </h2>
-              <Link to='/'>{isAuth ? username : 'Авторизуйтесь'}</Link>
+              <span className='email'>{`${email}`}</span>
             </div>
           </div>
 

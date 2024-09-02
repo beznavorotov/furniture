@@ -19,16 +19,21 @@
 
       .name {
         padding-left: 10px;
+        display: flex;
+        flex-direction: column;
         .name_user {
           font-size: 18px;
           font-weight: 700;
           color: $color-black;
           margin: 2px;
+
         }
-        .email_user {
-          font-size: 14px;
-          font-weight: 400;
+        .email{
+          font-size: 16px;
+          font-weight: 500;
           color: $color-black;
+          padding-top: 5px;
+          margin: 2px;
         }
       }
     }
