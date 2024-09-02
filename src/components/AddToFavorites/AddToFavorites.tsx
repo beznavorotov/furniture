@@ -21,7 +21,7 @@ export const AddToFavorites = ({ id }) => {
   };
 
   return (
-    <button onClick={toggleFavorite} className="button__favorites">
+    <button onClick={toggleFavorite} className='button__favorites'>
       {isFavorite ? (
         <Heart fill={COLOR.BLUE} color={COLOR.BLUE} size={24} />
       ) : (

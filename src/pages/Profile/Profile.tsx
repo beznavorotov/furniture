@@ -9,6 +9,29 @@ import { logout } from '@/store/slices/authSlice';
 import photoUser from '@/assets/photo_user.png';
 import arrow from '@/assets/arrow.svg';
 
+const NAV_LINKS_INFO = [
+  {
+    key: 'profileOrders',
+    path: '/profile/orders',
+    title: 'Мої замовлення',
+  },
+  {
+    key: 'profileUserInfo',
+    path: '/profile/userInfo',
+    title: 'Персональні дані',
+  },
+  {
+    key: 'profileFavorites',
+    path: '/profile/favorites',
+    title: 'Список обраного',
+  },
+  {
+    key: 'profileReviews',
+    path: '/profile/reviews',
+    title: 'Мої відгуки',
+  },
+];
+
 export const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,10 +39,9 @@ export const Profile = () => {
   const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   // Отримуємо firstName та email з userInfo
-  const { firstName, email } = useSelector((state: RootState) => ({
-    firstName: state.userInfo.data.first_name,
-    email: state.userInfo.data.email,
-  }));
+  const { first_name, email } = useSelector(
+    (state: RootState) => state.userInfo.data,
+  );
 
   const renderComponent = () => {
     switch (location.pathname.split('/').pop()) {
@@ -43,29 +65,6 @@ export const Profile = () => {
     navigate('/login');
   };
 
-  const NAV_LINKS_INFO = [
-    {
-      key: 'profileOrders',
-      path: '/profile/orders',
-      title: 'Мої замовлення',
-    },
-    {
-      key: 'profileUserInfo',
-      path: '/profile/userInfo',
-      title: 'Персональні дані',
-    },
-    {
-      key: 'profileFavorites',
-      path: '/profile/favorites',
-      title: 'Список обраного',
-    },
-    {
-      key: 'profileReviews',
-      path: '/profile/reviews',
-      title: 'Мої відгуки',
-    },
-  ];
-
   return (
     <div className='container'>
       <div className='page'>
@@ -76,7 +75,7 @@ export const Profile = () => {
             </div>
             <div className='name'>
               <h2 className='name_user'>
-                {isAuth ? `${firstName}` : 'Авторизуйтесь'}
+                {isAuth ? `${first_name}` : 'Авторизуйтесь'}
               </h2>
               <span className='email'>{`${email}`}</span>
             </div>
